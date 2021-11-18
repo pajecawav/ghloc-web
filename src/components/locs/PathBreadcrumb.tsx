@@ -32,7 +32,7 @@ const PathBreadcrumbEntry = ({
 
 export const PathBreadcrumb = ({ path, onSelect }: Props) => {
 	return (
-		<div className="flex gap-1">
+		<div className="flex gap-1 items-center whitespace-nowrap overflow-x-auto">
 			{path.map((name, index) => (
 				<Fragment key={index}>
 					<PathBreadcrumbEntry

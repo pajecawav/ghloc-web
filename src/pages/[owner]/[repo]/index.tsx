@@ -10,8 +10,17 @@ import DefaultErrorPage from "next/error";
 import { LoadingPlaceholder } from "../../../components/LoadingPlaceholder";
 import { BlockLoadingPlaceholder } from "../../../components/BlockLoadingPlaceholder";
 import { Block } from "../../../components/Block";
+import { Input } from "../../../components/Input";
+import { Spacer } from "../../../components/Spacer";
+import { useDebouncedState } from "../../../hooks/useDebouncedState";
 
 export const RepoStatsPage = () => {
+	const {
+		state: filter,
+		debounced: debouncedFilter,
+		setState: setFilter,
+	} = useDebouncedState("", 1000);
+
 	const router = useRouter();
 	const [path, setPath] = useState<string[]>([]);
 
@@ -21,10 +30,13 @@ export const RepoStatsPage = () => {
 	};
 
 	const locsQuery = useQuery<Locs, number>(
-		["stats", { owner, repo }],
+		["stats", { owner, repo, filter: debouncedFilter }],
 		async () => {
 			const response = await fetch(
-				`https://ghloc.bytes.pw/${owner}/${repo}`
+				`https://ghloc.bytes.pw/${owner}/${repo}` +
+					(debouncedFilter
+						? `?filter=${encodeURIComponent(debouncedFilter)}`
+						: "")
 			);
 
 			if (!response.ok) {
@@ -40,7 +52,7 @@ export const RepoStatsPage = () => {
 		return <DefaultErrorPage statusCode={locsQuery.error} />;
 	}
 
-	if (locsQuery.isLoading || !locsQuery.data) {
+	if (locsQuery.isLoading) {
 		// TODO: use skeletons
 		return (
 			<div className="w-screen h-screen grid place-items-center">
@@ -52,26 +64,35 @@ export const RepoStatsPage = () => {
 	let pathLocs = locsQuery.data;
 	for (const name of path) {
 		// TODO: check if children exist
-		pathLocs = pathLocs.children![name] as Locs;
+		pathLocs = pathLocs!.children![name] as Locs;
 	}
 
 	return (
 		<div className="max-w-3xl p-4 mx-auto flex flex-col gap-2">
-			<PathBreadcrumb
-				path={[repo, ...path]}
-				onSelect={index =>
-					setPath(index === 0 ? [] : path.slice(0, index))
-				}
-			/>
+			<div className="flex gap-2">
+				<PathBreadcrumb
+					path={[repo, ...path]}
+					onSelect={index =>
+						setPath(index === 0 ? [] : path.slice(0, index))
+					}
+				/>
+				<Spacer className="hidden sm:block" />
+				<Input
+					className="self-end w-40"
+					placeholder="Filter"
+					value={filter}
+					onChange={e => setFilter(e.target.value)}
+				/>
+			</div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<Block className="self-start order-last sm:order-first">
 					<LocsTree
-						locs={pathLocs}
+						locs={pathLocs!}
 						onSelect={name => setPath(prev => [...prev, name])}
 					/>
 				</Block>
 				<Block className="self-start">
-					<LocsStats locs={pathLocs} />
+					<LocsStats locs={pathLocs!} />
 				</Block>
 			</div>
 		</div>
