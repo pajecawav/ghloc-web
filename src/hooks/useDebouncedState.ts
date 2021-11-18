@@ -6,7 +6,6 @@ import {
 	useMemo,
 	useState,
 } from "react";
-import debounce from "lodash/debounce";
 
 export function useDebouncedState<S>(initialState: S | (() => S), ms: number) {
 	const [state, setState] = useState(initialState);
