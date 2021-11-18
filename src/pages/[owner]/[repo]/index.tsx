@@ -55,33 +55,6 @@ export const RepoStatsPage = () => {
 		pathLocs = pathLocs.children![name] as Locs;
 	}
 
-	// TODO: move sorting to LocsTree
-	if (pathLocs.children) {
-		const children = pathLocs.children;
-		const names = Object.keys(pathLocs.children);
-
-		names.sort((nameA, nameB) => {
-			const a = children[nameA] as Locs;
-			const b = children[nameB] as Locs;
-
-			const isDirA = a.children !== undefined;
-			const isDirB = b.children !== undefined;
-
-			if (isDirA !== isDirB) {
-				return Number(isDirB) - Number(isDirA);
-			}
-
-			return nameA < nameB ? -1 : 1;
-		});
-
-		let sortedChildren: Record<string, LocsChild> = {};
-		for (const name of names) {
-			sortedChildren[name] = children[name];
-		}
-
-		pathLocs.children = sortedChildren;
-	}
-
 	return (
 		<div className="max-w-3xl p-4 mx-auto flex flex-col gap-2">
 			<PathBreadcrumb

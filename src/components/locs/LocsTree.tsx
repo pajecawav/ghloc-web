@@ -3,10 +3,14 @@ import { Locs, LocsChild } from "../../types";
 import { Spacer } from "../Spacer";
 import { DocumentIcon } from "@heroicons/react/outline";
 import { FolderIcon } from "@heroicons/react/solid";
+import { useMemo } from "react";
+
+type SortOrder = "github" | "locs";
 
 type Props = {
 	locs: Locs;
 	className?: string;
+	order?: SortOrder;
 	onSelect?: (name: string) => void;
 };
 
@@ -28,7 +32,7 @@ const LocsTreeEntry = ({
 	const isFile = typeof node === "number";
 
 	return (
-		<li className="flex items-center px-2 py-1 gap-2">
+		<li className="flex items-center px-2 py-1 gap-2 hover:bg-gray-100">
 			<div className="w-5 h-5">
 				{isFile ? (
 					<DocumentIcon />
@@ -40,7 +44,7 @@ const LocsTreeEntry = ({
 				className={classNames(
 					"text-left truncate",
 					isFile
-						? "cursor-default"
+						? "cursor-text"
 						: "hover:underline hover:text-blue-700"
 				)}
 				onClick={() => {
@@ -48,7 +52,6 @@ const LocsTreeEntry = ({
 						onSelect?.(name);
 					}
 				}}
-				// TODO: repalce with 'a' tag which has automatic title
 				title={name}
 			>
 				{name}
@@ -63,19 +66,48 @@ const LocsTreeEntry = ({
 	);
 };
 
-export const LocsTree = ({ locs, className, onSelect }: Props) => {
-	if (!locs.children) {
-		return null;
-	}
+export const LocsTree = ({ locs, className, order, onSelect }: Props) => {
+	const children = useMemo(() => {
+		if (!locs.children) {
+			throw new Error("children are empty");
+		}
 
-	const totalLocs = Object.values(locs.children).reduce<number>(
+		if (order === "locs") {
+			return locs.children;
+		}
+
+		const names = Object.keys(locs.children);
+
+		names.sort((nameA, nameB) => {
+			const a = locs.children![nameA] as Locs;
+			const b = locs.children![nameB] as Locs;
+
+			const isDirA = a.children !== undefined;
+			const isDirB = b.children !== undefined;
+
+			if (isDirA !== isDirB) {
+				return Number(isDirB) - Number(isDirA);
+			}
+
+			return nameA < nameB ? -1 : 1;
+		});
+
+		let sortedChildren: Record<string, LocsChild> = {};
+		for (const name of names) {
+			sortedChildren[name] = locs.children[name];
+		}
+
+		return sortedChildren;
+	}, [locs, order]);
+
+	const totalLocs = Object.values(children).reduce<number>(
 		(sum, child) => sum + getValueOfChild(child),
 		0
 	);
 
 	return (
 		<ul className={classNames("divide-y", className)}>
-			{Object.entries(locs.children).map(([name, child]) => (
+			{Object.entries(children).map(([name, child]) => (
 				<LocsTreeEntry
 					name={name}
 					node={child}
