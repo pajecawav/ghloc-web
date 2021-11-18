@@ -1,0 +1,31 @@
+{
+	"name": "github-stats",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"lint:types": "tsc --noEmit",
+		"format": "prettier 'src/**/*.{css,js,jsx,ts,tsx}' --write"
+	},
+	"dependencies": {
+		"@heroicons/react": "^1.0.5",
+		"classnames": "^2.3.1",
+		"next": "12.0.4",
+		"react": "17.0.2",
+		"react-dom": "17.0.2",
+		"react-query": "^3.33.1"
+	},
+	"devDependencies": {
+		"@types/node": "16.11.7",
+		"@types/react": "17.0.35",
+		"autoprefixer": "^10.4.0",
+		"eslint": "7",
+		"eslint-config-next": "12.0.4",
+		"postcss": "^8.3.11",
+		"prettier": "^2.4.1",
+		"tailwindcss": "^2.2.19",
+		"typescript": "4.5.2"
+	}
+}
