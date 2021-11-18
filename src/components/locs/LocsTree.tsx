@@ -32,36 +32,38 @@ const LocsTreeEntry = ({
 	const isFile = typeof node === "number";
 
 	return (
-		<li className="flex items-center px-2 py-1 gap-2 hover:bg-gray-100">
-			<div className="w-5 h-5">
-				{isFile ? (
-					<DocumentIcon />
-				) : (
-					<FolderIcon className="text-blue-400" />
-				)}
-			</div>
-			<button
-				className={classNames(
-					"text-left truncate",
-					isFile
-						? "cursor-text"
-						: "hover:underline hover:text-blue-700"
-				)}
+		<li className="px-2 py-1 hover:bg-gray-100">
+			<a
+				className="flex items-center gap-2"
+				href={isFile ? undefined : "#"}
 				onClick={() => {
 					if (typeof node !== "number") {
 						onSelect?.(name);
 					}
 				}}
-				title={name}
 			>
-				{name}
-			</button>
-			<Spacer />
+				<div className="w-5 h-5">
+					{isFile ? (
+						<DocumentIcon />
+					) : (
+						<FolderIcon className="text-blue-400" />
+					)}
+				</div>
+				<span
+					className={classNames(
+						"text-left truncate",
+						!isFile && "hover:underline hover:text-blue-700"
+					)}
+				>
+					{name}
+				</span>
+				<Spacer />
 
-			<span className="whitespace-nowrap">
-				{getValueOfChild(node)} ({(100 * percentage).toFixed(2)}
-				%)
-			</span>
+				<span className="whitespace-nowrap">
+					{getValueOfChild(node)} ({(100 * percentage).toFixed(2)}
+					%)
+				</span>
+			</a>
 		</li>
 	);
 };
