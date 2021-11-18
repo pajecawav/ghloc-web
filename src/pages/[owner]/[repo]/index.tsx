@@ -52,7 +52,7 @@ export const RepoStatsPage = () => {
 		return <DefaultErrorPage statusCode={locsQuery.error} />;
 	}
 
-	if (locsQuery.isLoading) {
+	if (locsQuery.isLoading || locsQuery.isIdle) {
 		// TODO: use skeletons
 		return (
 			<div className="w-screen h-screen grid place-items-center">
@@ -64,7 +64,7 @@ export const RepoStatsPage = () => {
 	let pathLocs = locsQuery.data;
 	for (const name of path) {
 		// TODO: check if children exist
-		pathLocs = pathLocs!.children![name] as Locs;
+		pathLocs = pathLocs.children![name] as Locs;
 	}
 
 	return (
@@ -87,12 +87,12 @@ export const RepoStatsPage = () => {
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<Block className="self-start order-last sm:order-first">
 					<LocsTree
-						locs={pathLocs!}
+						locs={pathLocs}
 						onSelect={name => setPath(prev => [...prev, name])}
 					/>
 				</Block>
 				<Block className="self-start">
-					<LocsStats locs={pathLocs!} />
+					<LocsStats locs={pathLocs} />
 				</Block>
 			</div>
 		</div>
