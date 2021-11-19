@@ -3,7 +3,7 @@ import { RepoLocsSection } from "@/components/locs/RepoLocsSection";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { RepoResponse } from "@/types";
-import { formatRepoSize } from "@/utils";
+import { formatRepoSize, removeProtocol } from "@/utils";
 import { ExternalLinkIcon, LinkIcon } from "@heroicons/react/outline";
 import { EyeIcon, StarIcon } from "@heroicons/react/solid";
 import axios, { AxiosError } from "axios";
@@ -132,7 +132,7 @@ export const RepoStatsPage = ({ owner, repo: repoName, branch }: Props) => {
 							rel="noopener noreferrer"
 						>
 							<ExternalLinkIcon className="inline-block w-4 h-4" />{" "}
-							{repo.homepage}
+							{removeProtocol(repo.homepage)}
 						</a>
 					)}
 				</Skeleton>
