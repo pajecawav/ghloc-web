@@ -98,7 +98,7 @@ export const RepoStatsPage = ({ owner, repo: repoName, branch }: Props) => {
 					))}
 				</div>
 			) : (
-				repo.topics && (
+				repo.topics.length !== 0 && (
 					<div className="flex flex-wrap gap-2">
 						{repo.topics.map(topic => (
 							<Badge
