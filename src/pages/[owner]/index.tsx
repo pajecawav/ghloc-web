@@ -3,21 +3,23 @@ import { ReposList } from "@/components/repo/ReposList";
 import { Skeleton } from "@/components/Skeleton";
 import { UserResponse } from "@/types";
 import axios, { AxiosError } from "axios";
-import { GetServerSideProps } from "next";
+import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
 
-type Props = {
-	owner: string;
-};
+const UserReposPage = () => {
+	const router = useRouter();
+	const { owner } = router.query as {
+		owner: string;
+	};
 
-const UserReposPage = ({ owner }: Props) => {
 	const { data: user } = useQuery<UserResponse, AxiosError>(
 		["user", owner],
 		() =>
 			axios
 				.get(`https://api.github.com/users/${owner}`)
-				.then(response => response.data)
+				.then(response => response.data),
+		{ enabled: router.isReady }
 	);
 
 	return (
@@ -62,16 +64,6 @@ const UserReposPage = ({ owner }: Props) => {
 			</div>
 		</div>
 	);
-};
-
-export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
-	const { owner } = ctx.query as {
-		owner: string;
-	};
-
-	return {
-		props: { owner },
-	};
 };
 
 export default UserReposPage;

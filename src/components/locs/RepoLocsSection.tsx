@@ -15,19 +15,18 @@ import DefaultErrorPage from "next/error";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
 
-type Props = {
-	owner: string;
-	repo: string;
-	branch: string | null;
-};
-
 const sortOrders: Record<SortOrder, SelectOption> = {
 	type: { name: "Type" },
 	locs: { name: "Locs" },
 } as const;
 
-export const RepoLocsSection = ({ owner, repo, branch }: Props) => {
+export const RepoLocsSection = () => {
 	const router = useRouter();
+	const { owner, repo, branch } = router.query as {
+		owner: string;
+		repo: string;
+		branch?: string;
+	};
 
 	const {
 		state: filter,
@@ -71,7 +70,7 @@ export const RepoLocsSection = ({ owner, repo, branch }: Props) => {
 				})
 				.then(response => response.data);
 		},
-		{ keepPreviousData: true }
+		{ enabled: router.isReady, keepPreviousData: true }
 	);
 
 	if (locsQuery.isError) {
