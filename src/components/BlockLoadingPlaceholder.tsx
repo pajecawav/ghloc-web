@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import React from "react";
 import { Block } from "./Block";
 import { LoadingPlaceholder } from "./LoadingPlaceholder";
 

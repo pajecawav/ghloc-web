@@ -1,18 +1,16 @@
-import classNames from "classnames";
-import { useRouter } from "next/router";
-import { Fragment, useMemo, useState } from "react";
-import { useQuery } from "react-query";
-import { LocsStats } from "../../../components/locs/LocsStats";
-import { LocsTree } from "../../../components/locs/LocsTree";
-import { PathBreadcrumb } from "../../../components/locs/PathBreadcrumb";
-import { Locs, LocsChild } from "../../../types";
+import { Block } from "@/components/Block";
+import { Input } from "@/components/Input";
+import { LoadingPlaceholder } from "@/components/LoadingPlaceholder";
+import { LocsStats } from "@/components/locs/LocsStats";
+import { LocsTree } from "@/components/locs/LocsTree";
+import { PathBreadcrumb } from "@/components/locs/PathBreadcrumb";
+import { Spacer } from "@/components/Spacer";
+import { useDebouncedState } from "@/hooks/useDebouncedState";
+import { Locs } from "@/types";
 import DefaultErrorPage from "next/error";
-import { LoadingPlaceholder } from "../../../components/LoadingPlaceholder";
-import { BlockLoadingPlaceholder } from "../../../components/BlockLoadingPlaceholder";
-import { Block } from "../../../components/Block";
-import { Input } from "../../../components/Input";
-import { Spacer } from "../../../components/Spacer";
-import { useDebouncedState } from "../../../hooks/useDebouncedState";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
 
 export const RepoStatsPage = () => {
 	const {

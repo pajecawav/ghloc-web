@@ -1,5 +1,6 @@
+import { Locs } from "@/types";
 import classNames from "classnames";
-import { Locs } from "../../types";
+import React from "react";
 import { Spacer } from "../Spacer";
 
 export type Props = {

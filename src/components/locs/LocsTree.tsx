@@ -1,9 +1,9 @@
-import classNames from "classnames";
-import { Locs, LocsChild } from "../../types";
-import { Spacer } from "../Spacer";
+import { Locs, LocsChild } from "@/types";
 import { DocumentIcon } from "@heroicons/react/outline";
 import { FolderIcon } from "@heroicons/react/solid";
-import { useMemo } from "react";
+import classNames from "classnames";
+import React, { useMemo } from "react";
+import { Spacer } from "../Spacer";
 
 type SortOrder = "github" | "locs";
 
