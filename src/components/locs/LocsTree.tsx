@@ -42,7 +42,7 @@ const LocsTreeEntry = ({
 					}
 				}}
 			>
-				<div className="w-5 h-5">
+				<div className="w-5 h-5 flex-shrink-0">
 					{isFile ? (
 						<DocumentIcon />
 					) : (
