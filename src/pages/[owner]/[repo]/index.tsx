@@ -45,7 +45,7 @@ export const RepoStatsPage = () => {
 
 			return response.json();
 		},
-		{ enabled: router.isReady }
+		{ enabled: router.isReady, keepPreviousData: true }
 	);
 
 	if (locsQuery.isError) {
