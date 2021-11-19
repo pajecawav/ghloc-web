@@ -13,7 +13,14 @@ export const RepoCard = ({ repo }: Props) => {
 	return (
 		<Link href={`/${repo.owner.login}/${repo.name}`} key={repo.id}>
 			<a className="min-h-[8rem] flex flex-col gap-1 border rounded-md px-4 py-2 transition-colors duration-100 outline-none hover:border-black focus:border-black">
-				<div>{repo.name}</div>
+				<div className="flex gap-2">
+					<div className="flex-grow break-all">{repo.name}</div>
+					{repo.fork && (
+						<div className="self-start flex-shrink-0 text-xs text-gray-500 px-2 py-0.5 border rounded-full">
+							Fork
+						</div>
+					)}
+				</div>
 				{repo.description && (
 					<div className="text-sm text-gray-600 mb-1">
 						{repo.description}
