@@ -1,3 +1,5 @@
+const defaultTheme = require("tailwindcss/defaultTheme");
+
 module.exports = {
 	mode: "jit",
 	purge: [
@@ -10,6 +12,10 @@ module.exports = {
 			colors: {
 				"accent-fg": "#0969da",
 			},
+		},
+		screens: {
+			xs: "475px",
+			...defaultTheme.screens,
 		},
 	},
 	variants: {

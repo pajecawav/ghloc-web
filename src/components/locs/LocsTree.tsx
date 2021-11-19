@@ -5,7 +5,7 @@ import classNames from "classnames";
 import React, { useMemo } from "react";
 import { Spacer } from "../Spacer";
 
-type SortOrder = "github" | "locs";
+export type SortOrder = "type" | "locs";
 
 type Props = {
 	locs: Locs;

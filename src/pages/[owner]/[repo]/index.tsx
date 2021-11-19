@@ -2,8 +2,9 @@ import { Block } from "@/components/Block";
 import { Input } from "@/components/Input";
 import { Heading } from "@/components/locs/Heading";
 import { LocsStats } from "@/components/locs/LocsStats";
-import { LocsTree } from "@/components/locs/LocsTree";
+import { LocsTree, SortOrder } from "@/components/locs/LocsTree";
 import { PathBreadcrumb } from "@/components/locs/PathBreadcrumb";
+import { Select, SelectOption } from "@/components/Select";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useDebouncedState } from "@/hooks/useDebouncedState";
@@ -19,6 +20,11 @@ type Props = {
 	branch: string | null;
 };
 
+const sortOrders: Record<SortOrder, SelectOption> = {
+	type: { name: "Type" },
+	locs: { name: "Locs" },
+} as const;
+
 export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 	const {
 		state: filter,
@@ -26,6 +32,7 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 		setState: setFilter,
 	} = useDebouncedState("", 1000);
 
+	const [order, setOrder] = useState<keyof typeof sortOrders>("type");
 	const [path, setPath] = useState<string[]>([]);
 
 	const locsQuery = useQuery<Locs, number>(
@@ -69,15 +76,21 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 		<div className="max-w-3xl p-4 mx-auto flex flex-col gap-2">
 			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
 				<PathBreadcrumb
-					className="py-1"
+					className="py-1 xs:w-full"
 					path={[repo, ...path]}
 					onSelect={index =>
 						setPath(index === 0 ? [] : path.slice(0, index))
 					}
 				/>
 				<Spacer className="hidden sm:block" />
+				<Select
+					className="self-stretch sm:flex-shrink-0 w-full xs:flex-grow sm:flex-grow-0 xs:w-auto sm:w-28"
+					value={order}
+					options={sortOrders}
+					onChange={value => setOrder(value as SortOrder)}
+				/>
 				<Input
-					className="self-end flex-shrink-0 w-full sm:w-40"
+					className="self-stretch sm:flex-shrink-0 w-full xs:flex-grow-[4] sm:flex-grow-0 xs:w-auto sm:w-40"
 					placeholder="Filter"
 					value={filter}
 					onChange={e => setFilter(e.target.value)}
@@ -90,6 +103,7 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 						{pathLocs ? (
 							<LocsTree
 								locs={pathLocs}
+								order={order}
 								onSelect={name =>
 									setPath(prev => [...prev, name])
 								}
