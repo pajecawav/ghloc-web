@@ -1,7 +1,9 @@
 import { ReposResponse } from "@/types";
 import axios, { AxiosError } from "axios";
 import { useMemo } from "react";
-import { useQuery } from "react-query";
+import { useInfiniteQuery, useQuery } from "react-query";
+import { Button } from "../Button";
+import { LoadingPlaceholder } from "../LoadingPlaceholder";
 import { Skeleton } from "../Skeleton";
 import { RepoCard } from "./RepoCard";
 
@@ -9,14 +11,28 @@ type Props = {
 	user: string;
 };
 
+const REPOS_PER_PAGE = 18;
+
 export const ReposList = ({ user }: Props) => {
-	// TODO: use infinite query
-	const { data: reposData } = useQuery<ReposResponse, AxiosError>(
+	const {
+		data: reposData,
+		fetchNextPage,
+		hasNextPage,
+		isFetchingNextPage,
+	} = useInfiniteQuery<ReposResponse, AxiosError>(
 		["user", user, "repos"],
-		() =>
+		({ pageParam: page }) =>
 			axios
-				.get(`https://api.github.com/users/${user}/repos`)
-				.then(response => response.data)
+				.get(`https://api.github.com/users/${user}/repos`, {
+					params: { per_page: REPOS_PER_PAGE, page, sort: "updated" },
+				})
+				.then(response => response.data),
+		{
+			getNextPageParam: (lastPage, allPages) =>
+				lastPage.length === REPOS_PER_PAGE
+					? allPages.length + 1
+					: false,
+		}
 	);
 
 	const repos = useMemo(() => {
@@ -24,33 +40,40 @@ export const ReposList = ({ user }: Props) => {
 			return undefined;
 		}
 
-		const data = [...reposData];
-
-		data.sort((a, b) => {
-			if (a.updated_at < b.updated_at) return 1;
-			if (a.updated_at > b.updated_at) return -1;
-			return 0;
-		});
-
-		return data;
+		return reposData.pages.reduce((all, page) => [...all, ...page], []);
 	}, [reposData]);
 
 	return (
-		<div
-			className="grid gap-4"
-			style={{
-				gridTemplateColumns: "repeat(auto-fill, minmax(12rem, 1fr))",
-			}}
-		>
-			{!repos
-				? Array.from({ length: 6 }).map((_, index) => (
-						// TODO: proper RepoCard skeleton
-						<Skeleton
-							className="h-32 border rounded-md"
-							key={index}
-						/>
-				  ))
-				: repos.map(repo => <RepoCard repo={repo} key={repo.id} />)}
+		<div className="flex flex-col gap-4">
+			<div
+				className="grid gap-4"
+				style={{
+					gridTemplateColumns:
+						"repeat(auto-fill, minmax(12rem, 1fr))",
+				}}
+			>
+				{!repos
+					? Array.from({ length: 6 }).map((_, index) => (
+							// TODO: proper RepoCard skeleton
+							<Skeleton
+								className="h-32 border rounded-md"
+								key={index}
+							/>
+					  ))
+					: repos.map(repo => <RepoCard repo={repo} key={repo.id} />)}
+			</div>
+			{hasNextPage &&
+				(isFetchingNextPage ? (
+					<LoadingPlaceholder className="w-7 h-7 mx-auto" />
+				) : (
+					<Button
+						className="mx-auto"
+						isProcessing={isFetchingNextPage}
+						onClick={() => fetchNextPage()}
+					>
+						Load more
+					</Button>
+				))}
 		</div>
 	);
 };

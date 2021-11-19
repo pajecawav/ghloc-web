@@ -31,7 +31,9 @@ export const RepoCard = ({ repo }: Props) => {
 					Updated {dayjs(repo.updated_at).fromNow()}
 				</div>
 				<div className="flex items-center gap-2 text-sm text-gray-800">
-					<div className="mr-2">{repo.language}</div>
+					{repo.language && (
+						<div className="mr-2">{repo.language}</div>
+					)}
 					<div>
 						<StarIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
 						{repo.stargazers_count}
