@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useDebouncedState } from "@/hooks/useDebouncedState";
 import { Locs } from "@/types";
+import axios, { AxiosError } from "axios";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/dist/client/router";
 import DefaultErrorPage from "next/error";
@@ -56,28 +57,26 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 		);
 	};
 
-	const locsQuery = useQuery<Locs, number>(
+	const locsQuery = useQuery<Locs, AxiosError>(
 		["stats", { owner, repo, branch, filter: debouncedFilter }],
-		async () => {
-			const response = await fetch(
-				`https://ghloc.bytes.pw/${owner}/${repo}` +
-					(branch ? `/${branch}` : "") +
-					(debouncedFilter
-						? `?filter=${encodeURIComponent(debouncedFilter)}`
-						: "")
-			);
-
-			if (!response.ok) {
-				throw response.status;
+		() => {
+			let url = `https://ghloc.bytes.pw/${owner}/${repo}`;
+			if (branch) {
+				url += `/${branch}`;
 			}
-
-			return response.json();
+			return axios
+				.get<Locs>(url, {
+					params: {
+						...(filter && { filter: debouncedFilter }),
+					},
+				})
+				.then(response => response.data);
 		},
 		{ keepPreviousData: true }
 	);
 
 	if (locsQuery.isError) {
-		return <DefaultErrorPage statusCode={locsQuery.error} />;
+		return <DefaultErrorPage statusCode={404} />;
 	}
 
 	let pathLocs;
