@@ -78,7 +78,7 @@ export const RepoLocsSection = ({ owner, repo, branch }: Props) => {
 		return <DefaultErrorPage statusCode={404} />;
 	}
 
-	let pathLocs;
+	let pathLocs: Locs | undefined;
 	if (!(locsQuery.isLoading || locsQuery.isIdle)) {
 		pathLocs = locsQuery.data;
 		for (const name of path) {
@@ -119,25 +119,29 @@ export const RepoLocsSection = ({ owner, repo, branch }: Props) => {
 				<div className="flex flex-col gap-1 self-start order-last sm:order-first">
 					<Heading>Files</Heading>
 					<Block>
-						{pathLocs ? (
-							<LocsTree
-								locs={pathLocs}
-								order={order}
-								onSelect={name => setPath([...path, name])}
-							/>
-						) : (
-							<Skeleton className="h-80" />
-						)}
+						<Skeleton
+							className="h-80"
+							isLoading={pathLocs === undefined}
+						>
+							{() => (
+								<LocsTree
+									locs={pathLocs!}
+									order={order}
+									onSelect={name => setPath([...path, name])}
+								/>
+							)}
+						</Skeleton>
 					</Block>
 				</div>
 				<div className="flex flex-col gap-1 self-start">
 					<Heading>Lines of code</Heading>
 					<Block>
-						{pathLocs ? (
-							<LocsStats locs={pathLocs} />
-						) : (
-							<Skeleton className="h-80" />
-						)}
+						<Skeleton
+							className="h-80"
+							isLoading={pathLocs === undefined}
+						>
+							{() => <LocsStats locs={pathLocs!} />}
+						</Skeleton>
 					</Block>
 				</div>
 			</div>

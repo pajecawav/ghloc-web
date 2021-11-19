@@ -1,10 +1,11 @@
 import { Badge } from "@/components/Badge";
 import { RepoLocsSection } from "@/components/locs/RepoLocsSection";
+import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { RepoResponse } from "@/types";
 import { formatRepoSize } from "@/utils";
-import { EyeIcon } from "@heroicons/react/outline";
-import { StarIcon } from "@heroicons/react/solid";
+import { ExternalLinkIcon, LinkIcon } from "@heroicons/react/outline";
+import { EyeIcon, StarIcon } from "@heroicons/react/solid";
 import axios, { AxiosError } from "axios";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
@@ -46,10 +47,18 @@ export const RepoStatsPage = ({ owner, repo: repoName, branch }: Props) => {
 
 				{repo && (
 					<div className="flex flex-grow gap-2">
+						{repo.archived && (
+							<Badge
+								className="flex-shrink-0 text-xs"
+								title="Repo is archived"
+							>
+								Archived
+							</Badge>
+						)}
 						{repo.fork && (
 							<Badge
 								className="flex-shrink-0 text-xs"
-								title="Reps is a fork"
+								title="Repo is a fork"
 							>
 								Fork
 							</Badge>
@@ -77,6 +86,56 @@ export const RepoStatsPage = ({ owner, repo: repoName, branch }: Props) => {
 						</div>
 					</div>
 				)}
+			</div>
+
+			{!repo ? (
+				<div className="flex flex-wrap gap-2">
+					{Array.from({ length: 3 }).map((_, index) => (
+						<Skeleton
+							className="border rounded-full h-4 w-14"
+							key={index}
+						/>
+					))}
+				</div>
+			) : (
+				repo.topics && (
+					<div className="flex flex-wrap gap-2">
+						{repo.topics.map(topic => (
+							<Badge
+								className="px-3 bg-blue-100 text-gray-700 text-xs"
+								key={topic}
+							>
+								{topic}
+							</Badge>
+						))}
+					</div>
+				)
+			)}
+
+			<div className="flex flex-col gap-1">
+				<Skeleton
+					className="h-6 rounded-full sm:w-3/4"
+					isLoading={repo === undefined}
+				>
+					{repo?.description && <div>{repo.description}</div>}
+				</Skeleton>
+
+				<Skeleton
+					className="h-6 rounded-full sm:w-3/4"
+					isLoading={repo === undefined}
+				>
+					{repo?.homepage && (
+						<a
+							className="w-max text-accent-fg hover:underline"
+							href={repo.homepage}
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<ExternalLinkIcon className="inline-block w-4 h-4" />{" "}
+							{repo.homepage}
+						</a>
+					)}
+				</Skeleton>
 			</div>
 
 			<RepoLocsSection owner={owner} repo={repoName} branch={branch} />

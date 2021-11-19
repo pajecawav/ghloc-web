@@ -64,7 +64,7 @@ export interface ReposResponseItem {
 	private: boolean;
 	owner: RepoResponseOwner;
 	html_url: string;
-	description: string;
+	description: string | null;
 	fork: boolean;
 	url: string;
 	created_at: string;
