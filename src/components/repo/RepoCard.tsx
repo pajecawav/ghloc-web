@@ -3,6 +3,7 @@ import { StarIcon } from "@heroicons/react/solid";
 import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
+import { Badge } from "../Badge";
 import { Spacer } from "../Spacer";
 
 type Props = {
@@ -16,9 +17,9 @@ export const RepoCard = ({ repo }: Props) => {
 				<div className="flex gap-2">
 					<div className="flex-grow break-all">{repo.name}</div>
 					{repo.fork && (
-						<div className="self-start flex-shrink-0 text-xs text-gray-500 px-2 py-0.5 border rounded-full">
+						<Badge className="self-start flex-shrink-0 text-xs">
 							Fork
-						</div>
+						</Badge>
 					)}
 				</div>
 				{repo.description && (

@@ -8,13 +8,18 @@ import { Select, SelectOption } from "@/components/Select";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useDebouncedState } from "@/hooks/useDebouncedState";
-import { Locs } from "@/types";
+import { Locs, RepoResponse } from "@/types";
 import axios, { AxiosError } from "axios";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/dist/client/router";
 import DefaultErrorPage from "next/error";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import Link from "next/link";
+import { Badge } from "@/components/Badge";
+import { formatRepoSize } from "@/utils";
+import { EyeIcon } from "@heroicons/react/outline";
+import { StarIcon } from "@heroicons/react/solid";
 
 type Props = {
 	owner: string;
@@ -27,8 +32,17 @@ const sortOrders: Record<SortOrder, SelectOption> = {
 	locs: { name: "Locs" },
 } as const;
 
-export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
+export const RepoStatsPage = ({ owner, repo: repoName, branch }: Props) => {
 	const router = useRouter();
+
+	const repoQuery = useQuery<RepoResponse, AxiosError>(
+		["repos", repoName],
+		() =>
+			axios
+				.get(`https://api.github.com/repos/${owner}/${repoName}`)
+				.then(response => response.data)
+	);
+	const repo = repoQuery.data;
 
 	const {
 		state: filter,
@@ -58,9 +72,9 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 	};
 
 	const locsQuery = useQuery<Locs, AxiosError>(
-		["stats", { owner, repo, branch, filter: debouncedFilter }],
+		["stats", { owner, repo: repoName, branch, filter: debouncedFilter }],
 		() => {
-			let url = `https://ghloc.bytes.pw/${owner}/${repo}`;
+			let url = `https://ghloc.bytes.pw/${owner}/${repoName}`;
 			if (branch) {
 				url += `/${branch}`;
 			}
@@ -95,9 +109,57 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 	return (
 		<div className="max-w-3xl p-4 mx-auto flex flex-col gap-2">
 			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+				<div className="flex gap-1 items-center whitespace-nowrap overflow-x-auto text-xl w-full xs:w-auto">
+					<Link href={`/${owner}`}>
+						<a className="text-accent-fg hover:underline">
+							{owner}
+						</a>
+					</Link>{" "}
+					/{" "}
+					<Link href={`/${owner}/${repoName}`}>
+						<a className="text-accent-fg hover:underline">
+							{repoName}
+						</a>
+					</Link>
+				</div>
+				{repo && (
+					<div className="flex flex-grow gap-2">
+						{repo.fork && (
+							<Badge
+								className="flex-shrink-0 text-xs"
+								title="Reps is a fork"
+							>
+								Fork
+							</Badge>
+						)}
+						<Badge
+							className="flex-shrink-0 text-xs"
+							title="Repo size"
+						>
+							{formatRepoSize(repo.size)}
+						</Badge>
+						<Spacer className="hidden xs:block" />
+						<div
+							className="flex items-center gap-1 text-gray-700"
+							title="Watchers"
+						>
+							<EyeIcon className="w-4 h-4" />
+							<div>{repo.watchers_count}</div>
+						</div>
+						<div
+							className="flex items-center gap-1 text-gray-700"
+							title="Stars"
+						>
+							<StarIcon className="w-4 h-4" />
+							<div>{repo.stargazers_count}</div>
+						</div>
+					</div>
+				)}
+			</div>
+			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
 				<PathBreadcrumb
 					className="py-1 xs:w-full"
-					path={[repo, ...path]}
+					path={[repoName, ...path]}
 					onSelect={index =>
 						setPath(index === 0 ? [] : path.slice(0, index))
 					}

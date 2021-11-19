@@ -1,7 +1,7 @@
 import { ReposResponse } from "@/types";
 import axios, { AxiosError } from "axios";
 import { useMemo } from "react";
-import { useInfiniteQuery, useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import { Button } from "../Button";
 import { LoadingPlaceholder } from "../LoadingPlaceholder";
 import { Skeleton } from "../Skeleton";
