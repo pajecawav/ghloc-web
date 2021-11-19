@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
 import { Badge } from "../Badge";
+import { GitForkIcon } from "../icons/GitForkIcon";
 import { Spacer } from "../Spacer";
 
 type Props = {
@@ -35,9 +36,15 @@ export const RepoCard = ({ repo }: Props) => {
 					{repo.language && (
 						<div className="mr-2">{repo.language}</div>
 					)}
-					<div>
-						<StarIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
-						{repo.stargazers_count}
+					<div className="flex gap-2">
+						<div title="Stars">
+							<StarIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
+							{repo.stargazers_count}
+						</div>
+						<div title="Forks">
+							<GitForkIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
+							{repo.forks_count}
+						</div>
 					</div>
 				</div>
 			</a>

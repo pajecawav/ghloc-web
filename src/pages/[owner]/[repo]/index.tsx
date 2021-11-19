@@ -1,4 +1,5 @@
 import { Badge } from "@/components/Badge";
+import { GitForkIcon } from "@/components/icons/GitForkIcon";
 import { RepoLocsSection } from "@/components/locs/RepoLocsSection";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
@@ -83,6 +84,13 @@ export const RepoStatsPage = ({ owner, repo: repoName, branch }: Props) => {
 						>
 							<StarIcon className="w-4 h-4" />
 							<div>{repo.stargazers_count}</div>
+						</div>
+						<div
+							className="flex items-center gap-1 text-gray-700"
+							title="Forks"
+						>
+							<GitForkIcon className="w-4 h-4" />
+							<div>{repo.forks_count}</div>
 						</div>
 					</div>
 				)}
