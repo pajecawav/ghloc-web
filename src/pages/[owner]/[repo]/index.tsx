@@ -24,16 +24,18 @@ export const RepoStatsPage = () => {
 	const router = useRouter();
 	const [path, setPath] = useState<string[]>([]);
 
-	const { owner, repo } = router.query as {
+	const { owner, repo, branch } = router.query as {
 		owner: string;
 		repo: string;
+		branch?: string;
 	};
 
 	const locsQuery = useQuery<Locs, number>(
-		["stats", { owner, repo, filter: debouncedFilter }],
+		["stats", { owner, repo, branch, filter: debouncedFilter }],
 		async () => {
 			const response = await fetch(
 				`https://ghloc.bytes.pw/${owner}/${repo}` +
+					(branch ? `/${branch}` : "") +
 					(debouncedFilter
 						? `?filter=${encodeURIComponent(debouncedFilter)}`
 						: "")
