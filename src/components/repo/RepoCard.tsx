@@ -13,7 +13,13 @@ type Props = {
 
 export const RepoCard = ({ repo }: Props) => {
 	return (
-		<Link href={`/${repo.owner.login}/${repo.name}`} key={repo.id}>
+		<Link
+			href={{
+				pathname: `/${repo.owner.login}/${repo.name}`,
+				query: { branch: repo.default_branch },
+			}}
+			key={repo.id}
+		>
 			<a className="min-h-[8rem] flex flex-col gap-1 border rounded-md px-4 py-2 transition-colors duration-100 outline-none hover:border-black focus:border-black">
 				<div className="flex gap-2">
 					<div className="flex-grow break-all">{repo.name}</div>
