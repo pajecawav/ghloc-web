@@ -4,6 +4,7 @@ import { Fragment } from "react";
 type Props = {
 	path: string[];
 	onSelect: (index: number) => void;
+	className?: string;
 };
 
 const PathBreadcrumbEntry = ({
@@ -30,9 +31,14 @@ const PathBreadcrumbEntry = ({
 	);
 };
 
-export const PathBreadcrumb = ({ path, onSelect }: Props) => {
+export const PathBreadcrumb = ({ path, onSelect, className }: Props) => {
 	return (
-		<div className="flex gap-1 items-center whitespace-nowrap overflow-x-auto">
+		<div
+			className={classNames(
+				"flex gap-1 items-center whitespace-nowrap overflow-x-auto",
+				className
+			)}
+		>
 			{path.map((name, index) => (
 				<Fragment key={index}>
 					<PathBreadcrumbEntry
