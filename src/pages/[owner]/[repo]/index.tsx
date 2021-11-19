@@ -10,6 +10,7 @@ import { Spacer } from "@/components/Spacer";
 import { useDebouncedState } from "@/hooks/useDebouncedState";
 import { Locs } from "@/types";
 import { GetServerSideProps } from "next";
+import { useRouter } from "next/dist/client/router";
 import DefaultErrorPage from "next/error";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
@@ -26,14 +27,34 @@ const sortOrders: Record<SortOrder, SelectOption> = {
 } as const;
 
 export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
+	const router = useRouter();
+
 	const {
 		state: filter,
 		debounced: debouncedFilter,
 		setState: setFilter,
 	} = useDebouncedState("", 1000);
-
 	const [order, setOrder] = useState<keyof typeof sortOrders>("type");
-	const [path, setPath] = useState<string[]>([]);
+
+	let path: string[];
+	try {
+		path = JSON.parse(router.query.locs_path as string);
+	} catch (e) {
+		path = [];
+	}
+	const setPath = (newPath: string[]) => {
+		router.push(
+			{
+				pathname: router.pathname,
+				query: {
+					...router.query,
+					locs_path: JSON.stringify(newPath),
+				},
+			},
+			undefined,
+			{ scroll: false, shallow: true }
+		);
+	};
 
 	const locsQuery = useQuery<Locs, number>(
 		["stats", { owner, repo, branch, filter: debouncedFilter }],
@@ -104,9 +125,7 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 							<LocsTree
 								locs={pathLocs}
 								order={order}
-								onSelect={name =>
-									setPath(prev => [...prev, name])
-								}
+								onSelect={name => setPath([...path, name])}
 							/>
 						) : (
 							<Skeleton className="h-80" />

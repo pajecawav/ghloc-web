@@ -33,9 +33,9 @@ const LocsTreeEntry = ({
 
 	return (
 		<li className="px-2 py-1 hover:bg-gray-100">
-			<a
-				className="flex items-center gap-2"
-				href={isFile ? undefined : "#"}
+			<button
+				className="w-full flex items-center gap-2 disabled:cursor-text select-text"
+				disabled={isFile}
 				onClick={() => {
 					if (typeof node !== "number") {
 						onSelect?.(name);
@@ -63,7 +63,7 @@ const LocsTreeEntry = ({
 					{getValueOfChild(node)} ({(100 * percentage).toFixed(2)}
 					%)
 				</span>
-			</a>
+			</button>
 		</li>
 	);
 };
