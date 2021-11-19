@@ -1,5 +1,6 @@
 import { Block } from "@/components/Block";
 import { Input } from "@/components/Input";
+import { Heading } from "@/components/locs/Heading";
 import { LocsStats } from "@/components/locs/LocsStats";
 import { LocsTree } from "@/components/locs/LocsTree";
 import { PathBreadcrumb } from "@/components/locs/PathBreadcrumb";
@@ -83,23 +84,31 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 				/>
 			</div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-				<Block className="self-start order-last sm:order-first">
-					{pathLocs ? (
-						<LocsTree
-							locs={pathLocs}
-							onSelect={name => setPath(prev => [...prev, name])}
-						/>
-					) : (
-						<Skeleton className="h-80" />
-					)}
-				</Block>
-				<Block className="self-start">
-					{pathLocs ? (
-						<LocsStats locs={pathLocs} />
-					) : (
-						<Skeleton className="h-80" />
-					)}
-				</Block>
+				<div className="flex flex-col gap-1 self-start order-last sm:order-first">
+					<Heading text="Files" />
+					<Block>
+						{pathLocs ? (
+							<LocsTree
+								locs={pathLocs}
+								onSelect={name =>
+									setPath(prev => [...prev, name])
+								}
+							/>
+						) : (
+							<Skeleton className="h-80" />
+						)}
+					</Block>
+				</div>
+				<div className="flex flex-col gap-1 self-start">
+					<Heading text="Lines of code" />
+					<Block>
+						{pathLocs ? (
+							<LocsStats locs={pathLocs} />
+						) : (
+							<Skeleton className="h-80" />
+						)}
+					</Block>
+				</div>
 			</div>
 		</div>
 	);
