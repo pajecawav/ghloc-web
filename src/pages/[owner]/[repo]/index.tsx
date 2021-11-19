@@ -64,7 +64,12 @@ export const RepoStatsPage = () => {
 	let pathLocs = locsQuery.data;
 	for (const name of path) {
 		// TODO: check if children exist
-		pathLocs = pathLocs.children![name] as Locs;
+		if (pathLocs.children && name in pathLocs.children) {
+			pathLocs = pathLocs.children[name] as Locs;
+		} else {
+			pathLocs = { loc: 0, locByLangs: {}, children: {} };
+			break;
+		}
 	}
 
 	return (
