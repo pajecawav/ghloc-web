@@ -14,3 +14,11 @@ body {
 * {
 	box-sizing: border-box;
 }
+
+#nprogress .bar {
+	background: black;
+}
+
+#nprogress .spinner {
+	display: none;
+}

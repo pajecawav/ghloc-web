@@ -1,3 +1,4 @@
+import { NavigationProgressBar } from "@/components/NavigationProgressBar";
 import "@/styles/globals.css";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -19,6 +20,7 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<QueryClientProvider client={queryClient}>
+			<NavigationProgressBar />
 			<Component {...pageProps} />
 		</QueryClientProvider>
 	);
