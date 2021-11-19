@@ -14,9 +14,17 @@ export const LocsStats = ({ locs, className }: Props) => {
 		0
 	);
 
+	const entries = Object.entries(locs.locByLangs);
+
 	return (
-		<ul className={classNames("divide-y", className)}>
-			{Object.entries(locs.locByLangs).map(([lang, loc]) => (
+		<ul
+			className={classNames(
+				"divide-y",
+				className,
+				!entries.length && "h-40"
+			)}
+		>
+			{entries.map(([lang, loc]) => (
 				<li className="flex px-2 py-1 gap-2" key={lang}>
 					<span className="text-left truncate">{lang}</span>
 					<Spacer />

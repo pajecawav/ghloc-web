@@ -15,7 +15,7 @@ import { useQuery } from "react-query";
 type Props = {
 	owner: string;
 	repo: string;
-	branch?: string;
+	branch: string | null;
 };
 
 export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
@@ -66,7 +66,7 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 
 	return (
 		<div className="max-w-3xl p-4 mx-auto flex flex-col gap-2">
-			<div className="flex items-center gap-2">
+			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
 				<PathBreadcrumb
 					className="py-1"
 					path={[repo, ...path]}
@@ -74,9 +74,9 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 						setPath(index === 0 ? [] : path.slice(0, index))
 					}
 				/>
-				<Spacer />
+				<Spacer className="hidden sm:block" />
 				<Input
-					className="self-end w-40 flex-shrink-0"
+					className="self-end flex-shrink-0 w-full sm:w-40"
 					placeholder="Filter"
 					value={filter}
 					onChange={e => setFilter(e.target.value)}
@@ -113,7 +113,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
 	};
 
 	return {
-		props: { owner, repo, branch },
+		props: { owner, repo, branch: branch || null },
 	};
 };
 

@@ -107,9 +107,17 @@ export const LocsTree = ({ locs, className, order, onSelect }: Props) => {
 		0
 	);
 
+	const entries = Object.entries(children);
+
 	return (
-		<ul className={classNames("divide-y", className)}>
-			{Object.entries(children).map(([name, child]) => (
+		<ul
+			className={classNames(
+				"divide-y",
+				className,
+				!entries.length && "h-40"
+			)}
+		>
+			{entries.map(([name, child]) => (
 				<LocsTreeEntry
 					name={name}
 					node={child}
