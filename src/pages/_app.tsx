@@ -1,6 +1,10 @@
 import "@/styles/globals.css";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
+
+dayjs.extend(relativeTime);
 
 const queryClient = new QueryClient({
 	defaultOptions: {

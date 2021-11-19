@@ -118,7 +118,7 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 			</div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<div className="flex flex-col gap-1 self-start order-last sm:order-first">
-					<Heading text="Files" />
+					<Heading>Files</Heading>
 					<Block>
 						{pathLocs ? (
 							<LocsTree
@@ -132,7 +132,7 @@ export const RepoStatsPage = ({ owner, repo, branch }: Props) => {
 					</Block>
 				</div>
 				<div className="flex flex-col gap-1 self-start">
-					<Heading text="Lines of code" />
+					<Heading>Lines of code</Heading>
 					<Block>
 						{pathLocs ? (
 							<LocsStats locs={pathLocs} />

@@ -1,7 +1,15 @@
+import classNames from "classnames";
+import { ReactNode } from "react";
+
 type Props = {
-	text: string;
+	className?: string;
+	children: ReactNode;
 };
 
-export const Heading = ({ text }: Props) => {
-	return <h2 className="text-lg font-semibold">{text}</h2>;
+export const Heading = ({ className, children }: Props) => {
+	return (
+		<h2 className={classNames("text-lg font-semibold", className)}>
+			{children}
+		</h2>
+	);
 };
