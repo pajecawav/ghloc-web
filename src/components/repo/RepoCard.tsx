@@ -1,11 +1,8 @@
 import { ReposResponseItem } from "@/types";
-import { formatRepoStat } from "@/utils";
-import { StarIcon } from "@heroicons/react/solid";
 import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";
 import { Badge } from "../Badge";
-import { GitForkIcon } from "../icons/GitForkIcon";
 import { Spacer } from "../Spacer";
 import { RepoStats } from "./RepoStats";
 

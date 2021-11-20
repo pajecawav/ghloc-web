@@ -43,14 +43,20 @@ export const HomePage = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query]);
 
+	const showResults = query && results;
+
 	return (
 		<div className="w-screen h-screen">
 			<div className="max-w-xl w-full h-full mx-auto flex flex-col gap-4 p-4 group lg:justify-center">
-				<div className="flex-grow max-h-[20rem] hidden lg:block" />
+				<div className="flex-grow max-h-[4rem] hidden lg:block" />
+
+				<h1 className="text-gray-500 text-lg text-center">
+					See stats of a Github repository
+				</h1>
 
 				<div className="relative flex-shrink-0">
 					<Input
-						className="w-full !px-12 !py-3 text-2xl text-center rounded-lg shadow-sm border border-gray-300/80 font-light group-focus-withing:border-black"
+						className="w-full !px-12 !py-3 text-2xl text-center rounded-lg shadow-sm border border-gray-300/80 font-light group-focus-withing:border-black caret-blue-400"
 						value={query}
 						placeholder="Find repo"
 						autoFocus
@@ -59,18 +65,21 @@ export const HomePage = () => {
 						}}
 					/>
 					<div className="absolute top-0 bottom-0 right-2 m-auto w-8 h-8 text-gray-400 transition-colors duration-100 group-focus-within:text-gray-600">
-						<SearchIcon />
+						<SearchIcon className="heroicon-sw-1" />
 					</div>
 				</div>
 
-				<div className="flex-grow h-0 lg:max-h-[20rem]">
+				<div
+					className={classNames(
+						"flex-grow h-0 lg:max-h-[36rem] pointer-events-none group-focus-within:pointer-events-auto"
+					)}
+				>
 					<div
 						className={classNames(
 							"h-max max-h-full overflow-y-auto border border-gray-200 shadow-sm rounded-lg divide-y",
-							"transition duration-100 ease-out scale-95 opacity-0",
-							query &&
-								results &&
-								"group-focus-within:duration-75 group-focus-within:opacity-100 group-focus-within:scale-100"
+							"transition duration-75 ease-out scale-95 opacity-0",
+							showResults &&
+								"group-focus-within:duration-100 group-focus-within:opacity-100 group-focus-within:scale-100"
 						)}
 						tabIndex={-1}
 					>

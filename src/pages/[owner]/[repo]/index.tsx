@@ -41,13 +41,13 @@ export const RepoPage = () => {
 				>
 					<div className="flex gap-1 items-center whitespace-nowrap overflow-x-auto text-xl w-full xs:w-auto">
 						<Link href={`/${owner}`}>
-							<a className="text-accent-fg hover:underline">
+							<a className="text-blue-600 hover:underline">
 								{owner}
 							</a>
 						</Link>{" "}
 						/{" "}
 						<Link href={`/${owner}/${repoName}`}>
-							<a className="text-accent-fg hover:underline">
+							<a className="text-blue-600 hover:underline">
 								{repoName}
 							</a>
 						</Link>
@@ -104,7 +104,7 @@ export const RepoPage = () => {
 					<div className="flex flex-wrap gap-2">
 						{repo.topics.map(topic => (
 							<Badge
-								className="px-3 bg-blue-100 text-gray-700 text-xs"
+								className="px-3 bg-blue-100 text-gray-700 text-xs selection:bg-gray-400 selection:text-white"
 								key={topic}
 							>
 								{topic}
@@ -128,7 +128,7 @@ export const RepoPage = () => {
 				>
 					{repo?.homepage && (
 						<a
-							className="w-max text-accent-fg hover:underline"
+							className="w-max text-blue-600 hover:underline"
 							href={repo.homepage}
 							target="_blank"
 							rel="noopener noreferrer"

@@ -4,7 +4,7 @@
 
 body {
 	--scrollbar-color: #d1d5db; /* theme("colors.gray.300") */
-	@apply selection:bg-blue-100;
+	@apply caret-blue-600 selection:bg-blue-100;
 }
 
 html,
@@ -54,4 +54,22 @@ html,
 ::-webkit-scrollbar-thumb {
 	background-color: var(--scrollbar-color);
 	border-radius: 9px;
+}
+
+@layer utilities {
+	.heroicon-sw-2 path {
+		stroke-width: 2 !important;
+	}
+
+	.heroicon-sw-1\.75 path {
+		stroke-width: 1.75 !important;
+	}
+
+	.heroicon-sw-1\.5 path {
+		stroke-width: 1.5 !important;
+	}
+
+	.heroicon-sw-1 path {
+		stroke-width: 1 !important;
+	}
 }

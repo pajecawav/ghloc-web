@@ -8,11 +8,6 @@ module.exports = {
 	],
 	darkMode: false, // or 'media' or 'class'
 	theme: {
-		extend: {
-			colors: {
-				"accent-fg": "#0969da",
-			},
-		},
 		screens: {
 			xs: "475px",
 			...defaultTheme.screens,
