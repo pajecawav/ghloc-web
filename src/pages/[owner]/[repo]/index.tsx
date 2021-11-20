@@ -82,7 +82,7 @@ export const RepoStatsPage = () => {
 							title="Watchers"
 						>
 							<EyeIcon className="w-4 h-4" />
-							<div>{formatRepoStat(repo.watchers_count)}</div>
+							<div>{formatRepoStat(repo.subscribers_count)}</div>
 						</div>
 						<div
 							className="flex items-center gap-1 text-gray-700"
