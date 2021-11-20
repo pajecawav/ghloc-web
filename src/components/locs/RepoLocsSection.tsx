@@ -42,12 +42,17 @@ export const RepoLocsSection = () => {
 		path = [];
 	}
 	const setPath = (newPath: string[]) => {
+		const query = router.query;
+		delete query.locs_path;
+
 		router.push(
 			{
 				pathname: router.pathname,
 				query: {
-					...router.query,
-					locs_path: JSON.stringify(newPath),
+					...query,
+					...(newPath.length && {
+						locs_path: JSON.stringify(newPath),
+					}),
 				},
 			},
 			undefined,
