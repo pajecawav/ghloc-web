@@ -134,7 +134,9 @@ export const RepoLocsSection = () => {
 					</Block>
 				</div>
 				<div className="flex flex-col gap-1 self-start">
-					<Heading>Lines of code</Heading>
+					<Heading>
+						Lines of code {pathLocs?.loc && `(${pathLocs.loc})`}
+					</Heading>
 					<Block>
 						<Skeleton
 							className="h-80"
