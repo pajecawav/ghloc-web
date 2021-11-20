@@ -41,6 +41,7 @@ const LocsTreeEntry = ({
 						onSelect?.(name);
 					}
 				}}
+				title={name}
 			>
 				<div className="w-5 h-5 flex-shrink-0">
 					{isFile ? (

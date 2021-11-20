@@ -102,13 +102,13 @@ export const RepoLocsSection = () => {
 				/>
 				<Spacer className="hidden sm:block" />
 				<Select
-					className="self-stretch sm:flex-shrink-0 w-full xs:flex-grow sm:flex-grow-0 xs:w-auto sm:w-28"
+					className="sm:flex-shrink-0 w-full xs:flex-grow sm:flex-grow-0 xs:w-auto sm:w-28"
 					value={order}
 					options={sortOrders}
 					onChange={value => setOrder(value as SortOrder)}
 				/>
 				<Input
-					className="self-stretch sm:flex-shrink-0 w-full xs:flex-grow-[4] sm:flex-grow-0 xs:w-auto sm:w-40"
+					className="sm:flex-shrink-0 w-full xs:flex-grow-[4] sm:flex-grow-0 xs:w-auto sm:w-40"
 					placeholder="Filter"
 					value={filter}
 					onChange={e => setFilter(e.target.value)}

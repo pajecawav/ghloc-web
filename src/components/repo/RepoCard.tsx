@@ -1,4 +1,5 @@
 import { ReposResponseItem } from "@/types";
+import { formatRepoStat } from "@/utils";
 import { StarIcon } from "@heroicons/react/solid";
 import dayjs from "dayjs";
 import Link from "next/link";
@@ -34,22 +35,27 @@ export const RepoCard = ({ repo }: Props) => {
 						{repo.description}
 					</div>
 				)}
+
 				<Spacer />
+
 				<div className="text-xs text-gray-800">
 					Updated {dayjs(repo.updated_at).fromNow()}
 				</div>
+
 				<div className="flex items-center gap-2 text-sm text-gray-800">
 					{repo.language && (
-						<div className="mr-2">{repo.language}</div>
+						<div className="mr-2 truncate" title={repo.language}>
+							{repo.language}
+						</div>
 					)}
 					<div className="flex gap-2">
-						<div title="Stars">
+						<div className="whitespace-nowrap" title="Stars">
 							<StarIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
-							{repo.stargazers_count}
+							{formatRepoStat(repo.stargazers_count)}
 						</div>
-						<div title="Forks">
+						<div className="whitespace-nowrap" title="Forks">
 							<GitForkIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
-							{repo.forks_count}
+							{formatRepoStat(repo.forks_count)}
 						</div>
 					</div>
 				</div>

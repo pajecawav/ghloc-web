@@ -4,7 +4,7 @@ import { RepoLocsSection } from "@/components/locs/RepoLocsSection";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { RepoResponse } from "@/types";
-import { formatRepoSize, removeProtocol } from "@/utils";
+import { formatRepoSize, formatRepoStat, removeProtocol } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
 import { EyeIcon, StarIcon } from "@heroicons/react/solid";
 import axios, { AxiosError } from "axios";
@@ -82,21 +82,21 @@ export const RepoStatsPage = () => {
 							title="Watchers"
 						>
 							<EyeIcon className="w-4 h-4" />
-							<div>{repo.watchers_count}</div>
+							<div>{formatRepoStat(repo.watchers_count)}</div>
 						</div>
 						<div
 							className="flex items-center gap-1 text-gray-700"
 							title="Stars"
 						>
 							<StarIcon className="w-4 h-4" />
-							<div>{repo.stargazers_count}</div>
+							<div>{formatRepoStat(repo.stargazers_count)}</div>
 						</div>
 						<div
 							className="flex items-center gap-1 text-gray-700"
 							title="Forks"
 						>
 							<GitForkIcon className="w-4 h-4" />
-							<div>{repo.forks_count}</div>
+							<div>{formatRepoStat(repo.forks_count)}</div>
 						</div>
 					</div>
 				)}
