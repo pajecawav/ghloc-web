@@ -18,13 +18,21 @@ export const CommitsHeatmap = ({ data }: Props) => {
 	const weekDaysOffset = 35;
 	const randomLabelOffset = 10; // idk what this is
 
-	const getSquareOpacity = (value: number) =>
-		value ? 0.25 + 0.75 * Math.min(value / 10, 1) : 1;
+	const commitsLevelColors = {
+		0: "text-gray-200",
+		1: "text-green-300",
+		2: "text-green-500",
+		3: "text-green-700",
+		4: "text-green-900",
+	} as Record<number, string>;
+	const getSquareColor = (value: number) => {
+		const level = value ? Math.min(Math.floor(value / 5) + 1, 4) : 0;
+		return commitsLevelColors[level];
+	};
 
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 863 128">
 			<g
-				className="text-green-600"
 				fill="currentColor"
 				transform={`translate(${weekDaysOffset}, ${headerOffset})`}
 			>
@@ -37,14 +45,13 @@ export const CommitsHeatmap = ({ data }: Props) => {
 							<rect
 								className={classNames(
 									styles.cell,
-									!value && "text-gray-200"
+									getSquareColor(value)
 								)}
 								width="11"
 								height="11"
 								rx="2"
 								ry="2"
 								y={dayIndex * cellSize}
-								opacity={getSquareOpacity(value)}
 								key={dayIndex}
 							>
 								<title>

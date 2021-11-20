@@ -1,5 +1,5 @@
 .cell {
-	outline: 1px solid #e5e7eb10; /* theme("colors.gray.200") */
+	outline: 1px solid #6b728010; /* theme("colors.gray.500") */
 	outline-offset: -1px;
 	shape-rendering: geometricPrecision;
 }
