@@ -1,4 +1,5 @@
 import { Input } from "@/components/Input";
+import { RepoStats } from "@/components/repo/RepoStats";
 import { useDebouncedState } from "@/hooks/useDebouncedState";
 import { ReposSearchResponse } from "@/types";
 import { SearchIcon } from "@heroicons/react/outline";
@@ -94,6 +95,11 @@ export const HomePage = () => {
 											{result.description}
 										</div>
 									)}
+									<RepoStats
+										className="mt-1"
+										stars={result.stargazers_count}
+										forks={result.forks}
+									/>
 								</a>
 							</Link>
 						))}

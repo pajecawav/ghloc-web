@@ -7,6 +7,7 @@ import React from "react";
 import { Badge } from "../Badge";
 import { GitForkIcon } from "../icons/GitForkIcon";
 import { Spacer } from "../Spacer";
+import { RepoStats } from "./RepoStats";
 
 type Props = {
 	repo: ReposResponseItem;
@@ -49,14 +50,10 @@ export const RepoCard = ({ repo }: Props) => {
 						</div>
 					)}
 					<div className="flex gap-2">
-						<div className="whitespace-nowrap" title="Stars">
-							<StarIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
-							{formatRepoStat(repo.stargazers_count)}
-						</div>
-						<div className="whitespace-nowrap" title="Forks">
-							<GitForkIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
-							{formatRepoStat(repo.forks_count)}
-						</div>
+						<RepoStats
+							stars={repo.stargazers_count}
+							forks={repo.forks}
+						/>
 					</div>
 				</div>
 			</a>

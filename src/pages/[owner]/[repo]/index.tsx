@@ -1,21 +1,20 @@
 import { Badge } from "@/components/Badge";
-import { GitForkIcon } from "@/components/icons/GitForkIcon";
 import { RepoLocsSection } from "@/components/locs/RepoLocsSection";
 import { CommitsHeatmapSection } from "@/components/repo/CommitsHeatmapSection";
+import { RepoStats } from "@/components/repo/RepoStats";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { RepoResponse } from "@/types";
-import { formatRepoSize, formatRepoStat, removeProtocol } from "@/utils";
+import { formatRepoSize, removeProtocol } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
-import { EyeIcon, StarIcon } from "@heroicons/react/solid";
 import axios, { AxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 
-export const RepoStatsPage = () => {
+export const RepoPage = () => {
 	const router = useRouter();
 	const { owner, repo: repoName } = router.query as {
 		owner: string;
@@ -79,28 +78,14 @@ export const RepoStatsPage = () => {
 						>
 							{formatRepoSize(repo.size)}
 						</Badge>
+
 						<Spacer className="hidden xs:block" />
-						<div
-							className="flex items-center gap-1 text-gray-700"
-							title="Watchers"
-						>
-							<EyeIcon className="w-4 h-4" />
-							<div>{formatRepoStat(repo.subscribers_count)}</div>
-						</div>
-						<div
-							className="flex items-center gap-1 text-gray-700"
-							title="Stars"
-						>
-							<StarIcon className="w-4 h-4" />
-							<div>{formatRepoStat(repo.stargazers_count)}</div>
-						</div>
-						<div
-							className="flex items-center gap-1 text-gray-700"
-							title="Forks"
-						>
-							<GitForkIcon className="w-4 h-4" />
-							<div>{formatRepoStat(repo.forks_count)}</div>
-						</div>
+
+						<RepoStats
+							watchers={repo.subscribers_count}
+							stars={repo.stargazers_count}
+							forks={repo.forks}
+						/>
 					</div>
 				)}
 			</div>
@@ -134,7 +119,7 @@ export const RepoStatsPage = () => {
 					className="h-6 rounded-full sm:w-3/4"
 					isLoading={repo === undefined}
 				>
-					{repo?.description && <div>{repo.description}</div>}
+					{repo?.description && <p>{repo.description}</p>}
 				</Skeleton>
 
 				<Skeleton
@@ -164,4 +149,4 @@ export const RepoStatsPage = () => {
 	);
 };
 
-export default RepoStatsPage;
+export default RepoPage;
