@@ -4,6 +4,7 @@
 
 body {
 	--scrollbar-color: #d1d5db; /* theme("colors.gray.300") */
+	@apply selection:bg-blue-100;
 }
 
 html,

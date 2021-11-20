@@ -44,12 +44,12 @@ export const HomePage = () => {
 
 	return (
 		<div className="w-screen h-screen">
-			<div className="max-w-xl w-full h-full mx-auto flex flex-col gap-4 p-4 justify-center group">
-				<div className="flex-grow max-h-[20rem]" />
+			<div className="max-w-xl w-full h-full mx-auto flex flex-col gap-4 p-4 group lg:justify-center">
+				<div className="flex-grow max-h-[20rem] hidden lg:block" />
 
 				<div className="relative flex-shrink-0">
 					<Input
-						className="w-full !px-12 !py-3 text-2xl text-center rounded-lg shadow-sm border border-gray-300/80 font-light selection:bg-blue-100 group-focus-withing:border-black"
+						className="w-full !px-12 !py-3 text-2xl text-center rounded-lg shadow-sm border border-gray-300/80 font-light group-focus-withing:border-black"
 						value={query}
 						placeholder="Find repo"
 						autoFocus
@@ -62,12 +62,13 @@ export const HomePage = () => {
 					</div>
 				</div>
 
-				<div className="flex-grow max-h-[20rem]">
+				<div className="flex-grow h-0 lg:max-h-[20rem]">
 					<div
 						className={classNames(
 							"h-max max-h-full overflow-y-auto border border-gray-200 shadow-sm rounded-lg divide-y",
 							"transition duration-100 ease-out scale-95 opacity-0",
-							results &&
+							query &&
+								results &&
 								"group-focus-within:duration-75 group-focus-within:opacity-100 group-focus-within:scale-100"
 						)}
 						tabIndex={-1}
