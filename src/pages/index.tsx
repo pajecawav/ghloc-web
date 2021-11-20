@@ -37,7 +37,10 @@ export const HomePage = () => {
 	);
 
 	useEffect(() => {
-		router.replace({ pathname: "/", query: { q: query } });
+		router.replace({
+			pathname: "/",
+			query: { ...(query && { q: query }) },
+		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query]);
 
@@ -80,7 +83,12 @@ export const HomePage = () => {
 						>
 							{results?.items.map(result => (
 								<Link
-									href={`/${result.full_name}`}
+									href={{
+										pathname: `/${result.full_name}`,
+										query: {
+											branch: result.default_branch,
+										},
+									}}
 									key={result.id}
 								>
 									<a
