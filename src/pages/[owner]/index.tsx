@@ -1,4 +1,4 @@
-import { Heading } from "@/components/locs/Heading";
+import { Heading } from "@/components/Heading";
 import { ReposList } from "@/components/repo/ReposList";
 import { Skeleton } from "@/components/Skeleton";
 import { UserResponse } from "@/types";

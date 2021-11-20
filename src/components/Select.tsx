@@ -13,15 +13,25 @@ type Props = {
 	options: Record<string, SelectOption>;
 	onChange: (value: string) => void;
 	className?: string;
+	title?: string;
 };
 
-export const Select = ({ value, options, onChange, className }: Props) => {
+export const Select = ({
+	value,
+	options,
+	onChange,
+	className,
+	title,
+}: Props) => {
 	const selected = options[value as keyof typeof options];
 
 	return (
 		<Listbox value={value} onChange={onChange}>
 			<div className={classNames("relative rounded-md", className)}>
-				<Listbox.Button className="relative block w-full h-8 pl-3 pr-10 text-left rounded-md outline-none border-2 transition-colors duration-100 group focus:border-gray-600">
+				<Listbox.Button
+					className="relative block w-full h-8 pl-3 pr-10 text-left rounded-md outline-none border-2 transition-colors duration-100 group focus:border-gray-600"
+					title={title}
+				>
 					<span className="block truncate">{selected.name}</span>
 					<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 						<ChevronDownIcon

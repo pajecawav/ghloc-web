@@ -1,6 +1,7 @@
 import { Badge } from "@/components/Badge";
 import { GitForkIcon } from "@/components/icons/GitForkIcon";
 import { RepoLocsSection } from "@/components/locs/RepoLocsSection";
+import { CommitsHeatmapSection } from "@/components/repo/CommitsHeatmapSection";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { RepoResponse } from "@/types";
@@ -151,6 +152,8 @@ export const RepoStatsPage = () => {
 					)}
 				</Skeleton>
 			</div>
+
+			<CommitsHeatmapSection />
 
 			<RepoLocsSection />
 		</div>

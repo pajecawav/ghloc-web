@@ -146,3 +146,11 @@ export interface RepoResponse {
 	network_count: number;
 	subscribers_count: number;
 }
+
+export interface CommitActivityEntry {
+	total: number;
+	week: number;
+	days: number[];
+}
+
+export interface CommitActivity extends Array<CommitActivityEntry> {}

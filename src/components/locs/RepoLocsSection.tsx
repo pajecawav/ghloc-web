@@ -1,6 +1,5 @@
 import { Block } from "@/components/Block";
 import { Input } from "@/components/Input";
-import { Heading } from "@/components/locs/Heading";
 import { LocsStats } from "@/components/locs/LocsStats";
 import { LocsTree, SortOrder } from "@/components/locs/LocsTree";
 import { PathBreadcrumb } from "@/components/locs/PathBreadcrumb";
@@ -14,6 +13,7 @@ import { useRouter } from "next/dist/client/router";
 import DefaultErrorPage from "next/error";
 import React, { useState } from "react";
 import { useQuery } from "react-query";
+import { Heading } from "../Heading";
 
 const sortOrders: Record<SortOrder, SelectOption> = {
 	type: { name: "Type" },
@@ -106,6 +106,7 @@ export const RepoLocsSection = () => {
 					value={order}
 					options={sortOrders}
 					onChange={value => setOrder(value as SortOrder)}
+					title="Sort order"
 				/>
 				<Input
 					className="sm:flex-shrink-0 w-full xs:flex-grow-[4] sm:flex-grow-0 xs:w-auto sm:w-40"

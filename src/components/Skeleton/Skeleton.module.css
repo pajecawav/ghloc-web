@@ -1,6 +1,6 @@
 .skeleton {
-	--accent-1: #fafafa;
-	--accent-2: #eaeaea;
+	--accent-1: #fafafa; /* gradient line color */
+	--accent-2: #eaeaea; /* background color */
 
 	background-image: linear-gradient(
 		270deg,
