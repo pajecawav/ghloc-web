@@ -6,9 +6,7 @@ export function useDebouncedState<S>(initialState: S | (() => S), ms: number) {
 
 	useEffect(() => {
 		const timeoutId = setTimeout(() => setDebounced(state), ms);
-		return () => {
-			clearTimeout(timeoutId);
-		};
+		return () => clearTimeout(timeoutId);
 	}, [state, ms]);
 
 	return { state, debounced, setState };

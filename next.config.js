@@ -7,13 +7,4 @@ module.exports = {
 		config.resolve.alias["@"] = path.join(__dirname, "src");
 		return config;
 	},
-	async redirects() {
-		return [
-			{
-				source: "/",
-				destination: "/pajecawav/repo-stats?branch=master",
-				permanent: false,
-			},
-		];
-	},
 };

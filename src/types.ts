@@ -154,3 +154,9 @@ export interface CommitActivityEntry {
 }
 
 export interface CommitActivity extends Array<CommitActivityEntry> {}
+
+export interface ReposSearchResponse {
+	total_count: number;
+	incomplete_results: boolean;
+	items: ReposResponseItem[];
+}

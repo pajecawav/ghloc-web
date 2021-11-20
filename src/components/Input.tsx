@@ -1,9 +1,17 @@
 import classNames from "classnames";
-import { ComponentProps } from "react";
+import { ComponentPropsWithoutRef, useEffect, useRef } from "react";
 
-type Props = ComponentProps<"input">;
+type Props = ComponentPropsWithoutRef<"input">;
 
 export const Input = ({ className, ...props }: Props) => {
+	const ref = useRef<HTMLInputElement | null>(null);
+
+	useEffect(() => {
+		if (props.autoFocus) {
+			ref.current?.focus();
+		}
+	}, [props.autoFocus]);
+
 	return (
 		<input
 			className={classNames(
@@ -12,6 +20,7 @@ export const Input = ({ className, ...props }: Props) => {
 				className
 			)}
 			size={1}
+			ref={ref}
 			{...props}
 		/>
 	);

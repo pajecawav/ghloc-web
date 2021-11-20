@@ -5,6 +5,7 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
+import { Block } from "../Block";
 import { Heading } from "../Heading";
 import { CommitsHeatmap } from "./CommitsHeatmap";
 
@@ -37,7 +38,9 @@ export const CommitsHeatmapSection = ({ className }: Props) => {
 	return (
 		<div className={classNames("flex flex-col gap-1", className)}>
 			<Heading>Commits</Heading>
-			<CommitsHeatmap data={data} />
+			<Block className="p-4">
+				<CommitsHeatmap data={data} />
+			</Block>
 		</div>
 	);
 };
