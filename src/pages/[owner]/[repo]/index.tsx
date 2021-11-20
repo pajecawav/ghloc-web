@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 export const RepoStatsPage = () => {
 	const router = useRouter();
@@ -20,6 +21,7 @@ export const RepoStatsPage = () => {
 		owner: string;
 		repo: string;
 	};
+	const isSmallOrLarger = useMediaQuery("sm");
 
 	const repoQuery = useQuery<RepoResponse, AxiosError>(
 		["repos", repoName],
@@ -153,7 +155,9 @@ export const RepoStatsPage = () => {
 				</Skeleton>
 			</div>
 
-			<CommitsHeatmapSection />
+			{isSmallOrLarger && (
+				<CommitsHeatmapSection className="hidden sm:block" />
+			)}
 
 			<RepoLocsSection />
 		</div>
