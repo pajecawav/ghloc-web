@@ -156,7 +156,7 @@ export const RepoStatsPage = () => {
 			</div>
 
 			{isSmallOrLarger && (
-				<CommitsHeatmapSection className="hidden sm:block" />
+				<CommitsHeatmapSection className="hidden sm:flex" />
 			)}
 
 			<RepoLocsSection />
