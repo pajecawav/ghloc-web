@@ -75,7 +75,7 @@ export const HomePage = () => {
 						as={Fragment}
 					>
 						<div
-							className="h-full overflow-y-scroll border border-gray-200 shadow-sm rounded-lg divide-y"
+							className="h-max max-h-full overflow-y-auto border border-gray-200 shadow-sm rounded-lg divide-y"
 							tabIndex={-1}
 						>
 							{results?.items.map(result => (
@@ -85,7 +85,7 @@ export const HomePage = () => {
 								>
 									<a
 										className={classNames(
-											"block px-6 py-3 select-none relative py-1 px-3 cursor-pointer hover:bg-blue-50"
+											"block px-6 py-3 select-none relative cursor-pointer hover:bg-blue-50"
 										)}
 									>
 										<div>{result.full_name}</div>
