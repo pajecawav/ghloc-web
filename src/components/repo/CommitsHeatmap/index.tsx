@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const CommitsHeatmap = ({ data }: Props) => {
-	const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sut"];
+	const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 	const cellSize = 16;
 	const headerOffset = 17;
