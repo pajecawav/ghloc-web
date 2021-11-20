@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	--scrollbar-color: #d1d5db; /* theme("colors.gray.300") */
+}
+
 html,
 body {
 	padding: 0;
@@ -9,6 +13,11 @@ body {
 	font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
 		Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
 		sans-serif;
+}
+
+#__next {
+	height: 100vh;
+	overflow-y: auto;
 }
 
 * {
@@ -21,4 +30,27 @@ body {
 
 #nprogress .spinner {
 	display: none;
+}
+
+/* firefox scrollbar */
+html,
+* {
+	scrollbar-width: auto;
+	scrollbar-color: var(--scrollbar-color) transparent !important;
+}
+
+/* non-firefox scrollbar */
+::-webkit-scrollbar {
+	overflow: overlay;
+	height: 6px;
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	display: initial;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--scrollbar-color);
+	border-radius: 9px;
 }

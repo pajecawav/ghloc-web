@@ -94,7 +94,7 @@ export const RepoLocsSection = () => {
 		<div className="flex flex-col gap-2">
 			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
 				<PathBreadcrumb
-					className="py-1 xs:w-full"
+					className="xs:w-full"
 					path={[repo, ...path]}
 					onSelect={index =>
 						setPath(index === 0 ? [] : path.slice(0, index))
