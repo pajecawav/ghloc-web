@@ -20,7 +20,7 @@ const PathBreadcrumbEntry = ({
 		<button
 			className={classNames(
 				last
-					? "font-extrabold cursor-text"
+					? "font-medium cursor-text"
 					: "text-accent-fg hover:underline"
 			)}
 			onClick={onSelect}
