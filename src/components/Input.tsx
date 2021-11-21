@@ -21,6 +21,14 @@ export const Input = ({ className, ...props }: Props) => {
 			)}
 			size={1}
 			ref={ref}
+			{...(props.autoFocus && {
+				// HACK: trick to always place caret at the end of the text
+				onFocus: e =>
+					e.currentTarget.setSelectionRange(
+						e.currentTarget.value.length,
+						e.currentTarget.value.length
+					),
+			})}
 			{...props}
 		/>
 	);
