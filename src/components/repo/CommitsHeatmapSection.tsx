@@ -2,6 +2,7 @@ import { Skeleton } from "@/components/Skeleton";
 import { CommitActivity } from "@/types";
 import axios, { AxiosError } from "axios";
 import classNames from "classnames";
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
@@ -22,20 +23,36 @@ export const CommitsHeatmapSection = ({ className }: Props) => {
 
 	const { data } = useQuery<CommitActivity, AxiosError | Error>(
 		["commit_activity", { owner, repo }],
-		() =>
-			axios
-				.get<CommitActivity>(
-					`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`
-				)
-				.then(response => {
-					if (response.status === 202) {
-						throw new Error(
-							"Waiting for API to calculate commit activity"
-						);
-					}
-					return response.data;
-				}),
-		{ enabled: router.isReady, staleTime: 30 * 60 * 60 /* 30 minutes */ }
+		async () => {
+			const response = await axios.get<CommitActivity>(
+				`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`
+			);
+
+			if (response.status === 202) {
+				throw new Error("Waiting for API to calculate commit activity");
+			}
+
+			const data = response.data;
+
+			// remove future dates data
+			const now = new Date().getTime();
+			let lastWeek = data.pop()!;
+			lastWeek.days = lastWeek.days.filter((_, index) => {
+				const day =
+					lastWeek.week * 1000 + index * (1000 * 60 * 60 * 24);
+				return day <= now;
+			});
+			if (lastWeek.days.length) {
+				data.push(lastWeek);
+			}
+
+			return data;
+		},
+		{
+			enabled: router.isReady,
+			retry: true,
+			staleTime: 30 * 60 * 60 /* 30 minutes */,
+		}
 	);
 
 	return (
