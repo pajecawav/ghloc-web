@@ -33,7 +33,7 @@ export const RepoPage = () => {
 	const repo = repoQuery.data;
 
 	return (
-		<div className="max-w-3xl p-4 mx-auto flex flex-col gap-2">
+		<div className="max-w-3xl p-2 mx-auto flex flex-col gap-2">
 			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
 				<Skeleton
 					className="h-6 w-40 rounded-full"

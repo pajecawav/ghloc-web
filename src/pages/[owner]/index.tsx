@@ -23,7 +23,7 @@ const UserReposPage = () => {
 	);
 
 	return (
-		<div className="max-w-3xl p-4 mx-auto flex flex-col gap-5">
+		<div className="max-w-3xl p-2 mx-auto flex flex-col gap-5">
 			<div className="flex items-center">
 				<h1 className="text-2xl">
 					<a

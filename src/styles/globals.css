@@ -16,10 +16,27 @@ body {
 		sans-serif;
 }
 
+html,
+body,
 #__next {
+	/* fallback */
 	height: 100vh;
-	overflow-y: auto;
+	/* it's recommended to use 'stretch' and use postcss to add vendor prefixes
+	 * but '-moz-fill-available' doesn't work on desktop for some reason */
+	height: -webkit-fill-available;
 }
+
+.full-screen-height {
+	/* fallback */
+	min-height: 100vh;
+	/* it's recommended to use 'stretch' and use postcss to add vendor prefixes
+	 * but '-moz-fill-available' doesn't work on desktop for some reason */
+	min-height: -webkit-fill-available;
+}
+
+/* #__next {
+	overflow-y: auto;
+} */
 
 * {
 	box-sizing: border-box;
