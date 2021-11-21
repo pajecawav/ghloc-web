@@ -12,9 +12,10 @@ import { CommitsHeatmap } from "./CommitsHeatmap";
 
 type Props = {
 	className?: string;
+	enabled?: boolean;
 };
 
-export const CommitsHeatmapSection = ({ className }: Props) => {
+export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 	const router = useRouter();
 	const { owner, repo } = router.query as {
 		owner: string;
@@ -52,7 +53,7 @@ export const CommitsHeatmapSection = ({ className }: Props) => {
 			return data;
 		},
 		{
-			enabled: router.isReady,
+			enabled: enabled && router.isReady,
 			retry: true,
 			retryDelay: 7500,
 			staleTime: 30 * 60 * 60 * 1000, // 30 minutes

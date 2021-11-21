@@ -140,9 +140,10 @@ export const RepoPage = () => {
 				</Skeleton>
 			</div>
 
-			{isSmallOrLarger && (
-				<CommitsHeatmapSection className="hidden sm:flex" />
-			)}
+			<CommitsHeatmapSection
+				className="hidden sm:flex"
+				enabled={isSmallOrLarger}
+			/>
 
 			<RepoLocsSection />
 		</div>
