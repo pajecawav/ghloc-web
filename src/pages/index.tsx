@@ -5,19 +5,19 @@ import { ReposSearchResponse } from "@/types";
 import { SearchIcon } from "@heroicons/react/outline";
 import axios, { AxiosError } from "axios";
 import classNames from "classnames";
-import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 
-type Props = {
-	query: string;
-};
-
-export const HomePage = ({ query: queryParam }: Props) => {
+export const HomePage = () => {
 	const router = useRouter();
+	const queryParam =
+		typeof window !== "undefined"
+			? new URLSearchParams(window.location.search).get("q") || ""
+			: "";
+
 	const {
 		state: query,
 		debounced: debouncedQuery,
@@ -36,6 +36,7 @@ export const HomePage = ({ query: queryParam }: Props) => {
 				})
 				.then(response => response.data),
 		{
+			// enabled: !!debouncedQuery && router.isReady,
 			enabled: !!debouncedQuery,
 			staleTime: Infinity,
 			keepPreviousData: true,
@@ -43,10 +44,12 @@ export const HomePage = ({ query: queryParam }: Props) => {
 	);
 
 	useEffect(() => {
-		router.replace({
-			pathname: "/",
-			query: { ...(query && { q: query }) },
-		});
+		if (router.isReady) {
+			router.replace({
+				pathname: "/",
+				query: { ...(query && { q: query }) },
+			});
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query]);
 
@@ -72,9 +75,8 @@ export const HomePage = ({ query: queryParam }: Props) => {
 					value={query}
 					placeholder="Find repo"
 					autoFocus
-					onChange={event => {
-						setQuery(event.target.value);
-					}}
+					// onChange event doesn't detect when the input is cleared
+					onInput={event => setQuery(event.currentTarget.value)}
 				/>
 				<div className="absolute top-0 bottom-0 right-2 m-auto w-8 h-8 text-gray-400 transition-colors duration-100 group-focus-within:text-gray-600">
 					<SearchIcon className="heroicon-sw-1" />
@@ -128,18 +130,6 @@ export const HomePage = ({ query: queryParam }: Props) => {
 			</div>
 		</div>
 	);
-};
-
-// TODO: temporary used to avoid complexities of parsing query param client-side
-// (query params are not available in the router on mount)
-export const getServerSideProps: GetServerSideProps<Props> = async ctx => {
-	const query = typeof ctx.query.q === "string" ? ctx.query.q : "";
-
-	return {
-		props: {
-			query,
-		},
-	};
 };
 
 export default HomePage;

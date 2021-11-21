@@ -54,7 +54,7 @@ export const CommitsHeatmapSection = ({ className }: Props) => {
 		{
 			enabled: router.isReady,
 			retry: true,
-			retryDelay: 5000,
+			retryDelay: 7500,
 			staleTime: 30 * 60 * 60 * 1000, // 30 minutes
 		}
 	);
