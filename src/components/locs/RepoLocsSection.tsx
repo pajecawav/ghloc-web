@@ -27,12 +27,17 @@ export const RepoLocsSection = () => {
 		repo: string;
 		branch?: string;
 	};
+	// TODO: move this to useEffect and add 'setImmediateState' to 'useDebouncedState`?
+	const filterParam =
+		typeof window !== "undefined"
+			? new URLSearchParams(window.location.search).get("filter") || ""
+			: "";
 
 	const {
 		state: filter,
 		debounced: debouncedFilter,
 		setState: setFilter,
-	} = useDebouncedState("", 1000);
+	} = useDebouncedState(filterParam, 1000);
 	const [order, setOrder] = useState<keyof typeof sortOrders>("type");
 
 	let path: string[];
@@ -83,6 +88,22 @@ export const RepoLocsSection = () => {
 			toast.error("Failed to load LOC stats.");
 		}
 	}, [locsQuery.isLoadingError]);
+
+	useEffect(() => {
+		if (router.isReady) {
+			const query = router.query;
+			delete query.filter;
+
+			router.replace({
+				pathname: router.pathname,
+				query: {
+					...query,
+					...(debouncedFilter && { filter: debouncedFilter }),
+				},
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [debouncedFilter]);
 
 	let pathLocs: Locs | undefined;
 	if (locsQuery.data) {
