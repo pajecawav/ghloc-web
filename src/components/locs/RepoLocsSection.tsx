@@ -14,6 +14,7 @@ import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { Heading } from "../Heading";
+import { FilterHelpTooltip } from "./FilterHelpTooltip";
 
 const sortOrders: Record<SortOrder, SelectOption> = {
 	type: { name: "Type" },
@@ -128,20 +129,28 @@ export const RepoLocsSection = () => {
 						setPath(index === 0 ? [] : path.slice(0, index))
 					}
 				/>
+
 				<Spacer className="hidden sm:block" />
+
 				<Select
-					className="sm:flex-shrink-0 w-full xs:flex-grow sm:flex-grow-0 xs:w-auto sm:w-28"
+					className="sm:flex-shrink-0 w-full xs:flex-grow sm:flex-grow-0 xs:w-auto sm:w-40"
 					value={order}
 					options={sortOrders}
 					onChange={value => setOrder(value as SortOrder)}
+					label="Sort by "
 					title="Sort order"
 				/>
-				<Input
-					className="sm:flex-shrink-0 w-full xs:flex-grow-[4] sm:flex-grow-0 xs:w-auto sm:w-40"
-					placeholder="Filter"
-					value={filter}
-					onChange={e => setFilter(e.target.value)}
-				/>
+				<div className="flex items-center gap-2 sm:flex-shrink-0 w-full xs:flex-grow-[4] sm:flex-grow-0 xs:w-auto">
+					<Input
+						className="flex-grow sm:w-40"
+						placeholder="Filter"
+						value={filter}
+						onChange={e => setFilter(e.target.value)}
+						rightIcon={
+							<FilterHelpTooltip className="flex-shrink-0 pr-2" />
+						}
+					/>
+				</div>
 			</div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<div className="flex flex-col gap-1 self-start order-last sm:order-first">
