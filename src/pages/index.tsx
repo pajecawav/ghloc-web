@@ -8,6 +8,7 @@ import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 
 export const HomePage = () => {
@@ -20,7 +21,10 @@ export const HomePage = () => {
 		setState: setQuery,
 	} = useDebouncedState(queryParam, 750);
 
-	const { data: results } = useQuery<ReposSearchResponse, AxiosError>(
+	const { data: results, isLoadingError } = useQuery<
+		ReposSearchResponse,
+		AxiosError
+	>(
 		["search", debouncedQuery],
 		() =>
 			axios
@@ -42,6 +46,12 @@ export const HomePage = () => {
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [query]);
+
+	useEffect(() => {
+		if (isLoadingError) {
+			toast.error("Failed to load search results.");
+		}
+	}, [isLoadingError]);
 
 	const showResults = query && results;
 

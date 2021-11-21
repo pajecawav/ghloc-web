@@ -2,9 +2,9 @@ import { Skeleton } from "@/components/Skeleton";
 import { CommitActivity } from "@/types";
 import axios, { AxiosError } from "axios";
 import classNames from "classnames";
-import dayjs from "dayjs";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { Block } from "../Block";
 import { Heading } from "../Heading";
@@ -21,7 +21,10 @@ export const CommitsHeatmapSection = ({ className }: Props) => {
 		repo: string;
 	};
 
-	const { data } = useQuery<CommitActivity, AxiosError | Error>(
+	const { data, isLoadingError } = useQuery<
+		CommitActivity,
+		AxiosError | Error
+	>(
 		["commit_activity", { owner, repo }],
 		async () => {
 			const response = await axios.get<CommitActivity>(
@@ -51,9 +54,16 @@ export const CommitsHeatmapSection = ({ className }: Props) => {
 		{
 			enabled: router.isReady,
 			retry: true,
-			staleTime: 30 * 60 * 60 /* 30 minutes */,
+			retryDelay: 5000,
+			staleTime: 30 * 60 * 60 * 1000, // 30 minutes
 		}
 	);
+
+	useEffect(() => {
+		if (isLoadingError) {
+			toast.error("Failed to load commit activity.");
+		}
+	}, [isLoadingError]);
 
 	return (
 		<div className={classNames("flex flex-col gap-1", className)}>

@@ -55,7 +55,7 @@ export const RepoPage = () => {
 				</Skeleton>
 
 				{repo && (
-					<div className="flex flex-grow gap-2">
+					<div className="flex flex-grow gap-2 flex-wrap">
 						{repo.archived && (
 							<Badge
 								className="flex-shrink-0 text-xs"

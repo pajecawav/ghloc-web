@@ -10,8 +10,8 @@ import { useDebouncedState } from "@/hooks/useDebouncedState";
 import { Locs } from "@/types";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/dist/client/router";
-import DefaultErrorPage from "next/error";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { Heading } from "../Heading";
 
@@ -78,12 +78,14 @@ export const RepoLocsSection = () => {
 		{ enabled: router.isReady, keepPreviousData: true }
 	);
 
-	if (locsQuery.isError) {
-		return <DefaultErrorPage statusCode={404} />;
-	}
+	useEffect(() => {
+		if (locsQuery.isLoadingError) {
+			toast.error("Failed to load LOC stats.");
+		}
+	}, [locsQuery.isLoadingError]);
 
 	let pathLocs: Locs | undefined;
-	if (!(locsQuery.isLoading || locsQuery.isIdle)) {
+	if (locsQuery.data) {
 		pathLocs = locsQuery.data;
 		for (const name of path) {
 			if (pathLocs.children && name in pathLocs.children) {

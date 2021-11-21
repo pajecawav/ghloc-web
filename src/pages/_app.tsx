@@ -1,4 +1,5 @@
 import { NavigationProgressBar } from "@/components/NavigationProgressBar";
+import { ToastsList } from "@/components/ToastsList";
 import "@/styles/globals.css";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -26,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<title>Github Stats</title>
 			</Head>
 			<NavigationProgressBar />
+			<ToastsList />
 			<Component {...pageProps} />
 		</QueryClientProvider>
 	);

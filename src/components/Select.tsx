@@ -52,24 +52,15 @@ export const Select = ({
 									key={optionValue}
 									className={({ active }) =>
 										classNames(
-											active && "bg-gray-200/80",
+											active && "bg-blue-100",
 											"select-none relative py-1 px-3 cursor-pointer"
 										)
 									}
 									value={optionValue}
 								>
-									{({ selected }) => (
-										<span
-											className={classNames(
-												selected
-													? "font-medium"
-													: "font-normal",
-												"block truncate"
-											)}
-										>
-											{option.name}
-										</span>
-									)}
+									<span className="block truncate">
+										{option.name}
+									</span>
 								</Listbox.Option>
 							)
 						)}
