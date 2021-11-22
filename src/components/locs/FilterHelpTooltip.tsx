@@ -17,14 +17,19 @@ const Code = ({ children }: { children: ReactNode }) => {
 
 export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 	return (
-		<div className={classNames("relative group", className)}>
-			<button className="w-5 h-5 align-middle transition-colors duration-75 text-gray-600 focus:text-black">
+		<div className={classNames("relative group grid", className)}>
+			<button
+				className={classNames(
+					"relative w-5 h-5 transition-colors duration-75 text-gray-600 focus:text-black",
+					"after:hidden group-focus-within:after:block group-hover:after:block after:h-4 after:absolute after:left-0 after:right-0 after:cursor-auto"
+				)}
+			>
 				<QuestionMarkCircleIcon />
 			</button>
 
 			<div
 				className={classNames(
-					"absolute top-0 mt-8 right-0 h-max w-96 max-w-[calc(100vw-1rem)] border border-gray-200 shadow-lg rounded-lg bg-white px-4 py-2 text-xs text-gray-700",
+					"absolute top-2 mt-8 right-0 h-max w-96 max-w-[calc(100vw-1rem)] border border-gray-200 shadow-lg rounded-lg bg-white px-4 py-2 text-xs text-gray-700",
 					"transition duration-75 ease-out scale-95 opacity-0",
 					"group-focus-within:duration-100 group-focus-within:opacity-100 group-focus-within:scale-100",
 					"group-hover:duration-100 group-hover:opacity-100 group-hover:scale-100",
