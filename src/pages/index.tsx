@@ -62,8 +62,8 @@ export const HomePage = () => {
 	const showResults = query && results;
 
 	return (
-		<div className="h-full max-w-xl w-full mx-auto flex flex-col gap-4 p-2 group lg:justify-center">
-			<div className="flex-grow max-h-[4rem] hidden lg:block" />
+		<div className="h-full max-w-xl w-full mx-auto flex flex-col gap-4 p-2 group md:justify-center">
+			<div className="flex-grow max-h-[4rem] hidden md:block" />
 
 			<h1 className="text-gray-500 text-lg text-center">
 				See stats of a Github repository
@@ -85,7 +85,7 @@ export const HomePage = () => {
 
 			<div
 				className={classNames(
-					"flex-grow h-0 lg:max-h-[36rem] pointer-events-none group-focus-within:pointer-events-auto"
+					"flex-grow h-0 md:max-h-[36rem] pointer-events-none group-focus-within:pointer-events-auto"
 				)}
 			>
 				<div

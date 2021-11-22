@@ -140,16 +140,16 @@ export const RepoLocsSection = () => {
 					label="Sort by "
 					title="Sort order"
 				/>
-				<div className="flex items-center gap-2 sm:flex-shrink-0 w-full xs:flex-grow-[4] sm:flex-grow-0 xs:w-auto">
+				<div className="relative w-full sm:flex-shrink-0 xs:flex-grow-[4] sm:flex-grow-0 xs:w-auto sm:w-40">
 					<Input
-						className="flex-grow sm:w-40"
+						className="w-full pr-6"
 						placeholder="Filter"
 						value={filter}
 						onChange={e => setFilter(e.target.value)}
-						rightIcon={
-							<FilterHelpTooltip className="flex-shrink-0 pr-2" />
-						}
 					/>
+					<div className="absolute top-0 bottom-0 right-1 m-auto">
+						<FilterHelpTooltip />
+					</div>
 				</div>
 			</div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
