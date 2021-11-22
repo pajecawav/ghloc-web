@@ -4,9 +4,7 @@ import { LoadingPlaceholder } from "./LoadingPlaceholder";
 
 const colorClassnames = {
 	default:
-		"text-gray-300 bg-black disabled:bg-opacity-50 hover:bg-opacity-75 active:bg-opacity-50",
-	outlined:
-		"border border-black bg-white hover:bg-gray-100 active:bg-gray-200 disabled:bg-gray-200",
+		"bg-btn-normal-bg text-btn-normal-text border border-normal-border",
 };
 
 type Props = ComponentProps<"button"> & {
@@ -24,7 +22,7 @@ export const Button = ({
 	return (
 		<button
 			className={classNames(
-				"relative px-6 py-1 transition-all duration-100 rounded-md disabled:cursor-auto",
+				"relative px-6 py-1 transition-all duration-100 rounded-md outline-none disabled:cursor-auto",
 				colorClassnames[color],
 				className
 			)}

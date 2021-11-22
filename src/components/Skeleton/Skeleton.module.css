@@ -2,6 +2,9 @@
 	--accent-1: #fafafa; /* gradient line color */
 	--accent-2: #eaeaea; /* background color */
 
+	--accent-1: var(--colors-accent-bg); /* gradient line color */
+	--accent-2: var(--colors-accent2-bg); /* background color */
+
 	background-image: linear-gradient(
 		270deg,
 		var(--accent-1),

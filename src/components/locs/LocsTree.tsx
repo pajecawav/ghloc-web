@@ -32,9 +32,9 @@ const LocsTreeEntry = ({
 	const isFile = typeof node === "number";
 
 	return (
-		<li className="px-2 py-1 hover:bg-gray-100">
+		<li className="hover:bg-accent-bg">
 			<button
-				className="w-full flex items-center gap-2 disabled:cursor-text select-text"
+				className="w-full px-2 py-1 flex items-center gap-2 disabled:cursor-text select-text"
 				disabled={isFile}
 				onClick={() => {
 					if (typeof node !== "number") {
@@ -53,7 +53,7 @@ const LocsTreeEntry = ({
 				<span
 					className={classNames(
 						"text-left truncate",
-						!isFile && "hover:underline hover:text-blue-700"
+						!isFile && "hover:underline hover:text-normal-link"
 					)}
 				>
 					{name}
@@ -113,7 +113,7 @@ export const LocsTree = ({ locs, className, order, onSelect }: Props) => {
 	return (
 		<ul
 			className={classNames(
-				"divide-y",
+				"divide-y divide-normal-border",
 				className,
 				!entries.length && "h-40"
 			)}

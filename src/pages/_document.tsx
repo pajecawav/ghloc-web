@@ -1,3 +1,4 @@
+import { ThemeScript } from "@/ThemeScript";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
 export default class MyDocument extends Document {
@@ -10,7 +11,9 @@ export default class MyDocument extends Document {
 						rel="stylesheet"
 					/>
 				</Head>
-				<body>
+				<body className="text-normal-text bg-normal-bg">
+					{/* insert blocking script to detect color scheme before rendering the app */}
+					<ThemeScript />
 					<Main />
 					<NextScript />
 				</body>

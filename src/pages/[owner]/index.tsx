@@ -23,7 +23,7 @@ const UserReposPage = () => {
 	);
 
 	return (
-		<div className="max-w-3xl p-2 mx-auto flex flex-col gap-5">
+		<div className="flex flex-col gap-5">
 			<div className="flex items-center">
 				<h1 className="text-2xl">
 					<a
@@ -33,11 +33,11 @@ const UserReposPage = () => {
 						rel="noopener noreferrer"
 					>
 						<Skeleton
-							className="w-10 h-10 rounded-full overflow-auto"
+							className="w-10 h-10 rounded-full overflow-hidden"
 							isLoading={user === undefined}
 						>
 							{() => (
-								<div className="w-10 h-10 rounded-full border-2 overflow-hidden">
+								<div className="w-10 h-10 rounded-full border-2 border-normal-border overflow-hidden">
 									<img
 										className="object-cover"
 										src={user!.avatar_url}

@@ -21,7 +21,7 @@ const PathBreadcrumbEntry = ({
 			className={classNames(
 				last
 					? "font-medium cursor-text"
-					: "text-blue-600 hover:underline"
+					: "text-normal-link hover:underline"
 			)}
 			onClick={onSelect}
 			disabled={last}

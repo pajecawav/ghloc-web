@@ -8,7 +8,12 @@ type Props = {
 
 export const Block = ({ className, children }: Props) => {
 	return (
-		<div className={classNames("border rounded-md", className)}>
+		<div
+			className={classNames(
+				"border border-normal-border rounded-md",
+				className
+			)}
+		>
 			{children}
 		</div>
 	);

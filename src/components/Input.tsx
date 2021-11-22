@@ -15,8 +15,8 @@ export const Input = ({ className, ...props }: Props) => {
 	return (
 		<input
 			className={classNames(
-				"px-3 py-0.5 transition-colors duration-100 rounded-md !outline-none appearance-none font-sm text-primary-200",
-				"border-2 focus:border-gray-600",
+				"px-3 py-0.5 transition-colors duration-100 rounded-md !outline-none appearance-none font-sm text-normal-text bg-normal-bg placeholder-muted-text",
+				"border-2 border-normal-border focus:border-active-border",
 				className
 			)}
 			size={1}

@@ -1,13 +1,26 @@
 import classNames from "classnames";
 import { ComponentProps } from "react";
 
-type Props = ComponentProps<"div">;
+const colorClassNames = {
+	normal: "text-badge-normal-text bg-badge-normal-bg",
+	outlined: "text-badge-outlined-text bg-badge-outlined-bg",
+};
 
-export const Badge = ({ className, children, ...props }: Props) => {
+type Props = ComponentProps<"div"> & {
+	color?: keyof typeof colorClassNames;
+};
+
+export const Badge = ({
+	className,
+	children,
+	color = "normal",
+	...props
+}: Props) => {
 	return (
 		<div
 			className={classNames(
-				"text-gray-500 px-2 py-0.5 border rounded-full",
+				"px-2 py-0.5 border border-normal-border rounded-full min-w-[2rem] text-center",
+				colorClassNames[color],
 				className
 			)}
 			{...props}

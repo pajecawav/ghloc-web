@@ -33,21 +33,21 @@ export const RepoPage = () => {
 	const repo = repoQuery.data;
 
 	return (
-		<div className="max-w-3xl p-2 mx-auto flex flex-col gap-2">
+		<div className="flex flex-col gap-2">
 			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
 				<Skeleton
 					className="h-6 w-40 rounded-full"
 					isLoading={!router.isReady}
 				>
-					<div className="flex gap-1 items-center whitespace-nowrap overflow-x-auto text-xl w-full xs:w-auto">
+					<div className="flex gap-1 items-center whitespace-nowrap overflow-x-auto text-xl text-muted-text w-full xs:w-auto">
 						<Link href={`/${owner}`}>
-							<a className="text-blue-600 hover:underline">
+							<a className="text-normal-link hover:underline">
 								{owner}
 							</a>
 						</Link>{" "}
 						/{" "}
 						<Link href={`/${owner}/${repoName}`}>
-							<a className="text-blue-600 hover:underline">
+							<a className="text-normal-link hover:underline">
 								{repoName}
 							</a>
 						</Link>
@@ -59,6 +59,7 @@ export const RepoPage = () => {
 						{repo.archived && (
 							<Badge
 								className="flex-shrink-0 text-xs"
+								color="outlined"
 								title="Repo is archived"
 							>
 								Archived
@@ -67,6 +68,7 @@ export const RepoPage = () => {
 						{repo.fork && (
 							<Badge
 								className="flex-shrink-0 text-xs"
+								color="outlined"
 								title="Repo is a fork"
 							>
 								Fork
@@ -74,6 +76,7 @@ export const RepoPage = () => {
 						)}
 						<Badge
 							className="flex-shrink-0 text-xs"
+							color="outlined"
 							title="Repo size"
 						>
 							{formatRepoSize(repo.size)}
@@ -94,7 +97,7 @@ export const RepoPage = () => {
 				<div className="flex flex-wrap gap-2">
 					{Array.from({ length: 3 }).map((_, index) => (
 						<Skeleton
-							className="border rounded-full h-4 w-14"
+							className="border border-normal-border rounded-full h-4 w-14"
 							key={index}
 						/>
 					))}
@@ -103,10 +106,7 @@ export const RepoPage = () => {
 				repo.topics.length !== 0 && (
 					<div className="flex flex-wrap gap-2">
 						{repo.topics.map(topic => (
-							<Badge
-								className="px-3 bg-blue-100 text-gray-700 text-xs selection:bg-gray-400 selection:text-white"
-								key={topic}
-							>
+							<Badge className="px-3 text-xs" key={topic}>
 								{topic}
 							</Badge>
 						))}
@@ -128,7 +128,7 @@ export const RepoPage = () => {
 				>
 					{repo?.homepage && (
 						<a
-							className="w-max text-blue-600 hover:underline"
+							className="w-max text-normal-link hover:underline"
 							href={repo.homepage}
 							target="_blank"
 							rel="noopener noreferrer"

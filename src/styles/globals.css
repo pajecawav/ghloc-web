@@ -2,10 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-	--scrollbar-color: #d1d5db; /* theme("colors.gray.300") */
-	@apply caret-blue-600 selection:bg-blue-100;
+html {
+	/* TODO: this naming is a mess */
+	/* TODO: move component-related variables to css modules */
+
+	/* text */
+	--colors-normal-text: black;
+	--colors-subtle-text: theme("colors.gray.700");
+	--colors-muted-text: theme("colors.gray.500");
+
+	/* background */
+	--colors-normal-bg: white;
+	--colors-accent-bg: theme("colors.gray.200");
+	--colors-accent2-bg: theme("colors.gray.300");
+
+	/* selection */
+	--colors-selection-bg: theme("colors.blue.100");
+	--colors-selection-text: var(--colors-normal-text);
+
+	/* scrollbar */
+	--colors-scrollbar: theme("colors.gray.300");
+
+	/* caret */
+	--colors-caret: theme("colors.blue.600");
+
+	/* borders */
+	--colors-normal-border: #e5e7eb;
+	--colors-active-border: black;
+	--colors-active2-border: black;
+
+	/* links */
+	--colors-normal-link: theme("colors.blue.600");
+	--colors-secondary-link: theme("colors.blue.700");
+
+	/* button */
+	--colors-btn-normal-bg: black;
+	--colors-btn-normal-text: white;
+
+	/* outline */
+	--colors-outline: black;
+
+	/* select */
+	--colors-active-select: theme("colors.blue.50");
+
+	/* badge */
+	--colors-badge-normal-bg: theme("colors.blue.100");
+	--colors-badge-normal-text: var(--colors-subtle-text);
+	--colors-badge-outlined-bg: var(--colors-normal-bg);
+	--colors-badge-outlined-text: var(--colors-muted-text);
+
+	/* inline code  */
+	--colors-normal-code-bg: theme("colors.blue.100");
+
+	/* heatmap levels */
+	--colors-heat-level1: theme("colors.green.300");
+	--colors-heat-level2: theme("colors.green.500");
+	--colors-heat-level3: theme("colors.green.700");
+	--colors-heat-level4: theme("colors.green.900");
 }
+
+html.dark {
+	/* text */
+	--colors-normal-text: theme("colors.gray.200");
+	--colors-subtle-text: theme("colors.gray.300");
+	--colors-muted-text: #6b7280;
+
+	/* background */
+	--colors-normal-bg: #181a1b;
+	--colors-accent-bg: #25282a;
+	--colors-accent2-bg: #2f3335;
+
+	/* selection */
+	--colors-selection-bg: theme("colors.blue.200");
+	--colors-selection-text: var(--colors-accent-bg);
+
+	/* scrollbar */
+	--colors-scrollbar: var(--colors-accent-bg);
+
+	/* caret */
+	--colors-caret: theme("colors.blue.300");
+
+	/* borders */
+	--colors-normal-border: #363b3d;
+	--colors-active-border: theme("colors.gray.400");
+	--colors-active2-border: theme("colors.gray.500");
+
+	/* links */
+	--colors-normal-link: theme("colors.blue.500");
+	--colors-secondary-link: theme("colors.blue.600");
+
+	/* button */
+	--colors-btn-normal-bg: var(--colors-accent2-bg);
+	--colors-btn-normal-text: white;
+
+	/* outline */
+	--colors-outline: theme("colors.blue.500");
+
+	/* select */
+	--colors-active-select: var(--colors-accent-bg);
+
+	/* badge */
+	--colors-badge-normal-bg: var(--colors-accent-bg);
+	--colors-badge-normal-text: var(--colors-subtle-text);
+	--colors-badge-outlined-bg: var(--colors-normal-bg);
+	--colors-badge-outlined-text: var(--colors-subtle-text);
+
+	/* inline code  */
+	--colors-normal-code-bg: theme("colors.blue.200");
+
+	/* heatmap levels */
+	--colors-heat-level1: theme("colors.green.900");
+	--colors-heat-level2: theme("colors.green.700");
+	--colors-heat-level3: theme("colors.green.500");
+	--colors-heat-level4: theme("colors.green.300");
+}
+
+body {
+	caret-color: var(--colors-caret);
+}
+
+/* *::selection {
+	background: var(--colors-selection-bg);
+	color: var(--colors-selection-text);
+} */
 
 html,
 body {
@@ -34,12 +153,16 @@ body,
 	min-height: -webkit-fill-available;
 }
 
+#__next {
+	overflow-y: auto;
+}
+
 * {
 	box-sizing: border-box;
 }
 
 *:focus {
-	outline: 2px solid black;
+	outline: 2px solid var(--colors-outline);
 	outline-offset: 0px;
 }
 
@@ -55,7 +178,7 @@ body,
 html,
 * {
 	scrollbar-width: auto;
-	scrollbar-color: var(--scrollbar-color) transparent !important;
+	scrollbar-color: var(--colors-scrollbar) transparent !important;
 }
 
 /* non-firefox scrollbar */
@@ -70,7 +193,7 @@ html,
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: var(--scrollbar-color);
+	background-color: var(--colors-scrollbar);
 	border-radius: 9px;
 }
 

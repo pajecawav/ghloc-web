@@ -19,7 +19,7 @@ export const LocsStats = ({ locs, className }: Props) => {
 	return (
 		<ul
 			className={classNames(
-				"divide-y",
+				"divide-y divide-normal-border",
 				className,
 				!entries.length && "h-40"
 			)}

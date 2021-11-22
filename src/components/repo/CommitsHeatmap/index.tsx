@@ -19,11 +19,11 @@ export const CommitsHeatmap = ({ data }: Props) => {
 	const randomLabelOffset = 10; // idk what this is
 
 	const commitsLevelColors = {
-		0: "text-gray-200",
-		1: "text-green-300",
-		2: "text-green-500",
-		3: "text-green-700",
-		4: "text-green-900",
+		0: "text-accent-bg",
+		1: "text-heat-level1",
+		2: "text-heat-level2",
+		3: "text-heat-level3",
+		4: "text-heat-level4",
 	} as Record<number, string>;
 	const getSquareColor = (value: number) => {
 		const level = value ? Math.min(Math.floor(value / 5) + 1, 4) : 0;
@@ -67,7 +67,7 @@ export const CommitsHeatmap = ({ data }: Props) => {
 			</g>
 
 			<g
-				className="text-gray-500 font-medium"
+				className="text-muted-text font-medium"
 				fill="currentColor"
 				transform={`translate(${weekDaysOffset}, 0)`}
 			>
@@ -92,7 +92,7 @@ export const CommitsHeatmap = ({ data }: Props) => {
 			</g>
 
 			<g
-				className="text-gray-500 font-medium"
+				className="text-muted-text font-medium"
 				fill="currentColor"
 				transform={`translate(0, ${headerOffset})`}
 			>
