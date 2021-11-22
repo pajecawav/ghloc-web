@@ -117,14 +117,14 @@ export const RepoPage = () => {
 
 			<div className="flex flex-col gap-1">
 				<Skeleton
-					className="h-6 rounded-full sm:w-3/4"
+					className="h-5 mb-1 rounded-full sm:w-3/4"
 					isLoading={repo === undefined}
 				>
 					{repo?.description && <p>{repo.description}</p>}
 				</Skeleton>
 
 				<Skeleton
-					className="h-6 rounded-full sm:w-3/4"
+					className="h-5 mb-1 rounded-full sm:w-3/4"
 					isLoading={repo === undefined}
 				>
 					{repo?.homepage && (
