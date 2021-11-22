@@ -45,12 +45,11 @@ export const RepoCard = ({ repo }: Props) => {
 							{repo.language}
 						</div>
 					)}
-					<div className="flex gap-2">
-						<RepoStats
-							stars={repo.stargazers_count}
-							forks={repo.forks}
-						/>
-					</div>
+					<RepoStats
+						className="flex-shrink-0"
+						stars={repo.stargazers_count}
+						forks={repo.forks}
+					/>
 				</div>
 			</a>
 		</Link>

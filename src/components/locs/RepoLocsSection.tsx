@@ -7,6 +7,7 @@ import { Select, SelectOption } from "@/components/Select";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useDebouncedState } from "@/hooks/useDebouncedState";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Locs } from "@/types";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/dist/client/router";
@@ -22,6 +23,8 @@ const sortOrders: Record<SortOrder, SelectOption> = {
 } as const;
 
 export const RepoLocsSection = () => {
+	const isExtraSmallOrLarger = useMediaQuery("xs");
+
 	const router = useRouter();
 	const { owner, repo, branch } = router.query as {
 		owner: string;
@@ -133,7 +136,7 @@ export const RepoLocsSection = () => {
 				<Spacer className="hidden sm:block" />
 
 				<Select
-					className="sm:flex-shrink-0 w-full xs:flex-grow sm:flex-grow-0 xs:w-auto sm:w-40"
+					className="hidden xs:block sm:flex-shrink-0 xs:flex-grow sm:flex-grow-0 sm:w-40"
 					value={order}
 					options={sortOrders}
 					onChange={value => setOrder(value as SortOrder)}
@@ -154,7 +157,18 @@ export const RepoLocsSection = () => {
 			</div>
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<div className="flex flex-col gap-1 self-start order-last sm:order-first">
-					<Heading>Files</Heading>
+					<div className="flex">
+						<Heading>Files</Heading>
+						<Spacer />
+						<Select
+							className="block xs:hidden flex-shrink-0 w-40"
+							value={order}
+							options={sortOrders}
+							onChange={value => setOrder(value as SortOrder)}
+							label="Sort by "
+							title="Sort order"
+						/>
+					</div>
 					<Block>
 						<Skeleton
 							className="h-80"

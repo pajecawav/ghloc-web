@@ -2,8 +2,8 @@ import { ComponentProps, ReactNode, useEffect, useState } from "react";
 
 const Queries = {
 	xs: {
-		min: 0,
-		max: 474,
+		min: 475,
+		max: 639,
 	},
 	sm: {
 		min: 640,
