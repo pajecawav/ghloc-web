@@ -29,7 +29,8 @@ export const Header = ({ className }: Props) => {
 				onClick={toggleTheme}
 				title="Toggle dark mode"
 			>
-				{theme === Theme.light ? <SunIcon /> : <MoonIcon />}
+				{theme !== undefined &&
+					(theme === Theme.light ? <SunIcon /> : <MoonIcon />)}
 			</button>
 			<a
 				className="w-5 h-5 transition-all duration-100 hover:text-secondary-link active:scale-90"

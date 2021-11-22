@@ -12,7 +12,7 @@ export const ThemeContext = createContext<ThemeContextValue>(
 );
 
 export type ThemeContextValue = {
-	theme: Theme;
+	theme?: Theme;
 	setTheme: (theme: Theme) => void;
 	toggleTheme: () => void;
 };
@@ -22,7 +22,11 @@ export enum Theme {
 	dark = "dark",
 }
 
-const getTheme = (): Theme => {
+const getTheme = (): Theme | undefined => {
+	if (typeof window === "undefined") {
+		return undefined;
+	}
+
 	const storedTheme = isClient()
 		? window.localStorage.getItem("color-theme")
 		: undefined;
@@ -34,14 +38,15 @@ const getTheme = (): Theme => {
 		? window.matchMedia("(prefers-color-scheme: dark)")
 		: undefined;
 	if (userMedia?.matches) {
-		return Theme.light;
+		return Theme.dark;
 	}
 
-	return Theme.dark;
+	return Theme.light;
 };
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-	const [theme, setTheme] = useState(getTheme);
+	// const [theme, setTheme] = useState(getTheme);
+	const [theme, setTheme] = useState<Theme>();
 
 	const rawSetTheme = (theme: Theme) => {
 		const root = document.documentElement;
@@ -60,7 +65,13 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 	}, []);
 
 	useEffect(() => {
-		rawSetTheme(theme);
+		setTheme(getTheme());
+	}, []);
+
+	useEffect(() => {
+		if (theme) {
+			rawSetTheme(theme);
+		}
 	}, [theme]);
 
 	return (

@@ -20,7 +20,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 		<div className={classNames("relative group grid", className)}>
 			<button
 				className={classNames(
-					"relative w-5 h-5 transition-colors duration-75 text-normal-text focus:text-normal-text",
+					"no-highlight relative w-5 h-5 transition-colors duration-75 text-muted-text focus:text-normal-text",
 					"after:hidden group-focus-within:after:block group-hover:after:block after:h-[calc(100%+1.25rem)] after:absolute after:top-0 after:w-[200%] after:right-0"
 				)}
 			>
@@ -51,8 +51,8 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 					<li>
 						<Code>filter=.md$,!^README.md$</Code> will ignore all
 						Markdown files (i.e. ending with <Code>.md</Code>)
-						except for
-						<Code>README.md</Code> in the root of the repository.
+						except for <Code>README.md</Code> in the root of the
+						repository.
 					</li>
 					<li>
 						<Code>filter=</Code> will ignore all paths (you will get

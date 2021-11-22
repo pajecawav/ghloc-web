@@ -153,10 +153,6 @@ body,
 	min-height: -webkit-fill-available;
 }
 
-#__next {
-	overflow-y: auto;
-}
-
 * {
 	box-sizing: border-box;
 }
@@ -198,6 +194,10 @@ html,
 }
 
 @layer utilities {
+	.no-highlight {
+		-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+	}
+
 	.heroicon-sw-2 path {
 		stroke-width: 2 !important;
 	}
