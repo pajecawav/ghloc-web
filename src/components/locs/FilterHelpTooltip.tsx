@@ -1,8 +1,10 @@
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 import { ReactNode } from "react";
+
 type Props = {
 	className?: string;
+	tooltipClassName?: string;
 };
 
 const Code = ({ children }: { children: ReactNode }) => {
@@ -13,7 +15,7 @@ const Code = ({ children }: { children: ReactNode }) => {
 	);
 };
 
-export const FilterHelpTooltip = ({ className }: Props) => {
+export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 	return (
 		<div className={classNames("relative group", className)}>
 			<button className="w-5 h-5 align-middle transition-colors duration-75 text-gray-600 focus:text-black">
@@ -26,7 +28,8 @@ export const FilterHelpTooltip = ({ className }: Props) => {
 					"transition duration-75 ease-out scale-95 opacity-0",
 					"group-focus-within:duration-100 group-focus-within:opacity-100 group-focus-within:scale-100",
 					"group-hover:duration-100 group-hover:opacity-100 group-hover:scale-100",
-					"pointer-events-none group-focus-within:pointer-events-auto group-hover:pointer-events-auto"
+					"pointer-events-none group-focus-within:pointer-events-auto group-hover:pointer-events-auto",
+					tooltipClassName
 				)}
 			>
 				<h3 className="text-base text-black mb-1">

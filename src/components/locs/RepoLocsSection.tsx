@@ -148,7 +148,7 @@ export const RepoLocsSection = () => {
 						onChange={e => setFilter(e.target.value)}
 					/>
 					<div className="absolute top-0 bottom-0 right-1 grid place-items-center">
-						<FilterHelpTooltip />
+						<FilterHelpTooltip tooltipClassName="-mr-1" />
 					</div>
 				</div>
 			</div>
