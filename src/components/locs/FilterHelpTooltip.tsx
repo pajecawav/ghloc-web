@@ -21,7 +21,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 			<button
 				className={classNames(
 					"relative w-5 h-5 transition-colors duration-75 text-gray-600 focus:text-black",
-					"after:hidden group-focus-within:after:block group-hover:after:block after:h-[calc(100%+1.25rem)] after:absolute after:top-0 after:w-[200%] after:right-0 after:cursor-auto"
+					"after:hidden group-focus-within:after:block group-hover:after:block after:h-[calc(100%+1.25rem)] after:absolute after:top-0 after:w-[200%] after:right-0"
 				)}
 			>
 				<QuestionMarkCircleIcon />
@@ -30,9 +30,9 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 			<div
 				className={classNames(
 					"absolute top-2 mt-8 right-0 h-max w-96 max-w-[calc(100vw-1rem)] border border-gray-200 shadow-lg rounded-lg origin-top-right bg-white px-4 py-2 text-xs text-gray-700",
-					"transition duration-75 ease-out scale-95 opacity-0",
-					"group-focus-within:duration-100 group-focus-within:opacity-100 group-focus-within:scale-100",
-					"group-hover:duration-100 group-hover:opacity-100 group-hover:scale-100",
+					"transition duration-75 ease-out scale-95 opacity-0 select-none",
+					"group-focus-within:duration-100 group-focus-within:opacity-100 group-focus-within:scale-100 group-focus-within:select-text",
+					"group-hover:duration-100 group-hover:opacity-100 group-hover:scale-100 group-hover:select-text",
 					"pointer-events-none group-focus-within:pointer-events-auto group-hover:pointer-events-auto",
 					tooltipClassName
 				)}
