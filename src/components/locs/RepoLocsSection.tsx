@@ -142,13 +142,13 @@ export const RepoLocsSection = () => {
 				/>
 				<div className="relative w-full sm:flex-shrink-0 xs:flex-grow-[4] sm:flex-grow-0 xs:w-auto sm:w-40">
 					<Input
-						className="w-full pr-6"
+						className="w-full pr-10"
 						placeholder="Filter"
 						value={filter}
 						onChange={e => setFilter(e.target.value)}
 					/>
-					<div className="absolute top-0 bottom-0 right-1 grid place-items-center">
-						<FilterHelpTooltip tooltipClassName="-mr-1" />
+					<div className="absolute top-0 bottom-0 right-0 pr-2 grid place-items-center">
+						<FilterHelpTooltip tooltipClassName="-mr-2" />
 					</div>
 				</div>
 			</div>
