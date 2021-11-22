@@ -97,10 +97,10 @@ export const RepoHealthSection = ({ className }: Props) => {
 			</Heading>
 
 			{!health ? (
-				<div className="flex flex-col gap-1">
+				<div className="flex flex-col gap-2">
 					{Array.from({ length: 6 }).map((_, index) => (
 						<Skeleton
-							className="h-5 w-40 odd:w-32 rounded-lg border border-normal-border"
+							className="h-4 w-40 odd:w-32 rounded-lg border border-normal-border"
 							key={index}
 						/>
 					))}
