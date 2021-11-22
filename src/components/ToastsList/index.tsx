@@ -8,9 +8,9 @@ import styles from "./ToastsList.module.css";
 type ToastType = "blank" | "success" | "error";
 
 const typeClassnames: Record<ToastType, string> = {
-	blank: "bg-blue-100 border-blue-200/50",
-	success: "bg-green-200 border-green-200/75",
-	error: "bg-red-200 border-red-200/75",
+	blank: "bg-accent2-bg border-accent2-bg/50",
+	success: "bg-success border-success/75 text-gray-900",
+	error: "bg-error border-error/75 text-gray-900",
 };
 
 const typeIcons: Record<ToastType, ReactNode> = {

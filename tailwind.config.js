@@ -25,6 +25,10 @@ module.exports = {
 				"accent-bg": "var(--colors-accent-bg)",
 				"accent2-bg": "var(--colors-accent2-bg)",
 
+				// success/error
+				success: "var(--colors-success)",
+				error: "var(--colors-error)",
+
 				// borders
 				"normal-border": "var(--colors-normal-border)",
 				"active-border": "var(--colors-active-border)",

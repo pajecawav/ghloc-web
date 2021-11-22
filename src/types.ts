@@ -1,5 +1,3 @@
-import { BlockList } from "net";
-
 export type LocsChild = Locs | number;
 
 export type UserType = "User" | "Organization";
@@ -42,6 +40,13 @@ export interface UserResponse {
 	following: number;
 	created_at: string;
 	updated_at: string;
+}
+
+export interface RepoResponseLicense {
+	key: "other" | string;
+	name: string;
+	spdx_id: string;
+	url: null | string;
 }
 
 export interface RepoResponseOwner {
@@ -89,7 +94,7 @@ export interface ReposResponseItem {
 	archived: boolean;
 	disabled: boolean;
 	open_issues_count: number;
-	license: string | null;
+	license: RepoResponseLicense | null;
 	allow_forking: boolean;
 	is_template: boolean;
 	topics: string[];
@@ -133,7 +138,7 @@ export interface RepoResponse {
 	archived: boolean;
 	disabled: boolean;
 	open_issues_count: number;
-	license: string | null;
+	license: RepoResponseLicense | null;
 	allow_forking: boolean;
 	is_template: boolean;
 	topics: string[];
@@ -159,4 +164,45 @@ export interface ReposSearchResponse {
 	total_count: number;
 	incomplete_results: boolean;
 	items: ReposResponseItem[];
+}
+
+export interface RepoHealthResponse {
+	health_percentage: number;
+	description: string | null;
+	documentation: string | null;
+	files: {
+		code_of_conduct: null | {
+			key: "other" | string;
+			name: string;
+			html_url: string;
+			url: string;
+		};
+		code_of_conduct_file: null | {
+			url: string;
+			html_url: string;
+		};
+		contributing: {
+			url: string;
+			html_url: string;
+		};
+		issue_template: null | {
+			url: string;
+			html_url: string;
+		};
+		pull_request_template: null | {
+			url: string;
+			html_url: string;
+		};
+		license:
+			| null
+			| (RepoResponseLicense & {
+					html_url: string;
+			  });
+		readme: null | {
+			url: string;
+			html_url: string;
+		};
+	};
+	updated_at: string | null;
+	content_reports_enabled?: boolean;
 }

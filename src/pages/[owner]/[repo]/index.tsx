@@ -1,6 +1,7 @@
 import { Badge } from "@/components/Badge";
 import { RepoLocsSection } from "@/components/locs/RepoLocsSection";
 import { CommitsHeatmapSection } from "@/components/repo/CommitsHeatmapSection";
+import { RepoHealthSection } from "@/components/repo/RepoHealthSection";
 import { RepoStats } from "@/components/repo/RepoStats";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
@@ -139,6 +140,8 @@ export const RepoPage = () => {
 					)}
 				</Skeleton>
 			</div>
+
+			<RepoHealthSection />
 
 			<CommitsHeatmapSection
 				className="hidden sm:flex"
