@@ -21,7 +21,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 			<button
 				className={classNames(
 					"relative w-5 h-5 transition-colors duration-75 text-gray-600 focus:text-black",
-					"after:hidden group-focus-within:after:block group-hover:after:block after:h-4 after:absolute after:left-0 after:right-0 after:cursor-auto"
+					"after:hidden group-focus-within:after:block group-hover:after:block after:h-5 after:absolute after:left-0 after:right-0 after:cursor-auto"
 				)}
 			>
 				<QuestionMarkCircleIcon />
