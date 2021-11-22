@@ -93,6 +93,7 @@ export const HomePage = () => {
 						"h-max max-h-full overflow-y-auto border border-gray-200 shadow-sm rounded-lg divide-y",
 						"transition duration-75 ease-out scale-95 opacity-0",
 						showResults &&
+							results.items.length &&
 							"group-focus-within:duration-100 group-focus-within:opacity-100 group-focus-within:scale-100"
 					)}
 					tabIndex={-1}
