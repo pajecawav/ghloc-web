@@ -31,7 +31,7 @@ export const Select = ({
 		<Listbox value={value} onChange={onChange}>
 			<div className={classNames("relative rounded-md", className)}>
 				<Listbox.Button
-					className="relative block w-full h-8 pl-3 pr-10 text-left rounded-md outline-none border-2 transition-colors duration-100 group focus:border-gray-600"
+					className="relative block w-full h-8 pl-3 pr-10 text-left rounded-md !outline-none border-2 transition-colors duration-100 group focus:border-gray-600"
 					title={title}
 				>
 					<span className="block truncate">

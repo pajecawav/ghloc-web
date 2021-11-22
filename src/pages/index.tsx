@@ -71,7 +71,7 @@ export const HomePage = () => {
 
 			<div className="relative flex-shrink-0">
 				<Input
-					className="w-full !px-12 !py-3 text-2xl text-center rounded-lg shadow-sm border border-gray-300/80 font-light group-focus-withing:border-black caret-blue-400"
+					className="w-full !px-12 !py-3 text-2xl text-center !rounded-lg shadow-sm border border-gray-300/80 font-light group-focus-withing:border-black caret-blue-400"
 					value={query}
 					placeholder="Find repo"
 					autoFocus
@@ -110,7 +110,7 @@ export const HomePage = () => {
 						>
 							<a
 								className={classNames(
-									"block px-6 py-3 select-none relative cursor-pointer outline-none hover:bg-blue-50 focus:bg-blue-50"
+									"block px-6 py-3 select-none relative cursor-pointer !outline-none hover:bg-blue-50 focus:bg-blue-50"
 								)}
 							>
 								<div>{result.full_name}</div>

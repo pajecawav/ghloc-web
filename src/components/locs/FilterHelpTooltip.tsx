@@ -29,7 +29,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 
 			<div
 				className={classNames(
-					"absolute top-2 mt-8 right-0 h-max w-96 max-w-[calc(100vw-1rem)] border border-gray-200 shadow-lg rounded-lg bg-white px-4 py-2 text-xs text-gray-700",
+					"absolute top-2 mt-8 right-0 h-max w-96 max-w-[calc(100vw-1rem)] border border-gray-200 shadow-lg rounded-lg origin-top-right bg-white px-4 py-2 text-xs text-gray-700",
 					"transition duration-75 ease-out scale-95 opacity-0",
 					"group-focus-within:duration-100 group-focus-within:opacity-100 group-focus-within:scale-100",
 					"group-hover:duration-100 group-hover:opacity-100 group-hover:scale-100",

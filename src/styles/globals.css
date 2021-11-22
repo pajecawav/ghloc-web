@@ -34,12 +34,13 @@ body,
 	min-height: -webkit-fill-available;
 }
 
-/* #__next {
-	overflow-y: auto;
-} */
-
 * {
 	box-sizing: border-box;
+}
+
+*:focus {
+	outline: 2px solid black;
+	outline-offset: 0px;
 }
 
 #nprogress .bar {
