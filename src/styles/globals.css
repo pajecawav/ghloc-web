@@ -59,6 +59,8 @@ html {
 	--colors-heat-level2: theme("colors.green.500");
 	--colors-heat-level3: theme("colors.green.700");
 	--colors-heat-level4: theme("colors.green.900");
+
+	background: var(--colors-normal-bg);
 }
 
 html.dark {
