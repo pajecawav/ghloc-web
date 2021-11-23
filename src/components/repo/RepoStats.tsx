@@ -15,21 +15,21 @@ export const RepoStats = ({ watchers, stars, forks, className }: Props) => {
 	return (
 		<div className={classNames("flex gap-2 text-normal-text", className)}>
 			{watchers !== undefined && (
-				<div title="Watchers">
-					<EyeIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
-					{formatRepoStat(watchers)}
+				<div className="flex gap-1 items-center" title="Watchers">
+					<EyeIcon className="w-4 h-4" />
+					<span> {formatRepoStat(watchers)}</span>
 				</div>
 			)}
 			{stars !== undefined && (
-				<div title="Stars">
-					<StarIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
-					{formatRepoStat(stars)}
+				<div className="flex gap-1 items-center" title="Stars">
+					<StarIcon className="w-4 h-4" />
+					<span>{formatRepoStat(stars)}</span>
 				</div>
 			)}
 			{forks !== undefined && (
-				<div title="Forks">
-					<GitForkIcon className="inline-block w-4 h-4 align-text-bottom" />{" "}
-					{formatRepoStat(forks)}
+				<div className="flex gap-1 items-center" title="Forks">
+					<GitForkIcon className="w-4 h-4" />
+					<span> {formatRepoStat(forks)}</span>
 				</div>
 			)}
 		</div>
