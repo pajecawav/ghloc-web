@@ -9,7 +9,7 @@ type Props = {
 
 const Code = ({ children }: { children: ReactNode }) => {
 	return (
-		<code className="px-1 py-0.5 text-accent-bg bg-normal-code-bg rounded-md">
+		<code className="px-1 py-0.5 text-normal-code-text bg-normal-code-bg rounded-md">
 			{children}
 		</code>
 	);

@@ -35,12 +35,7 @@ const LocsTreeEntry = ({
 		<li className="hover:bg-accent-bg">
 			<button
 				className="w-full px-2 py-1 flex items-center gap-2 disabled:cursor-text select-text"
-				disabled={isFile}
-				onClick={() => {
-					if (typeof node !== "number") {
-						onSelect?.(name);
-					}
-				}}
+				onClick={() => onSelect?.(name)}
 				title={name}
 			>
 				<div className="w-5 h-5 flex-shrink-0">
@@ -50,12 +45,7 @@ const LocsTreeEntry = ({
 						<FolderIcon className="text-blue-400" />
 					)}
 				</div>
-				<span
-					className={classNames(
-						"text-left truncate",
-						!isFile && "hover:underline hover:text-normal-link"
-					)}
-				>
+				<span className="text-left truncate hover:underline hover:text-normal-link">
 					{name}
 				</span>
 				<Spacer />

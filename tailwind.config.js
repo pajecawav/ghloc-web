@@ -53,6 +53,7 @@ module.exports = {
 
 				// inline code
 				"normal-code-bg": "var(--colors-normal-code-bg)",
+				"normal-code-text": "var(--colors-normal-code-text)",
 
 				// heatmap levels
 				"heat-level1": "var(--colors-heat-level1)",

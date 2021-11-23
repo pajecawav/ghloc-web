@@ -19,6 +19,7 @@ const PathBreadcrumbEntry = ({
 	return (
 		<button
 			className={classNames(
+				"text-left",
 				last
 					? "font-medium cursor-text"
 					: "text-normal-link hover:underline"
@@ -33,20 +34,15 @@ const PathBreadcrumbEntry = ({
 
 export const PathBreadcrumb = ({ path, onSelect, className }: Props) => {
 	return (
-		<div
-			className={classNames(
-				"flex gap-1 items-center whitespace-nowrap overflow-x-auto",
-				className
-			)}
-		>
+		<div className={classNames("", className)}>
 			{path.map((name, index) => (
 				<Fragment key={index}>
 					<PathBreadcrumbEntry
 						value={name}
 						last={index + 1 === path.length}
 						onSelect={() => onSelect(index)}
-					/>
-					{index + 1 < path.length && <span>/</span>}
+					/>{" "}
+					{index + 1 < path.length && <span>/</span>}{" "}
 				</Fragment>
 			))}
 		</div>

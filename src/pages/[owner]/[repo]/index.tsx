@@ -148,7 +148,7 @@ export const RepoPage = () => {
 				enabled={isSmallOrLarger}
 			/>
 
-			<RepoLocsSection />
+			<RepoLocsSection defaultBranch={repo?.default_branch} />
 		</div>
 	);
 };

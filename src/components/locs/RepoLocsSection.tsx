@@ -7,24 +7,27 @@ import { Select, SelectOption } from "@/components/Select";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useDebouncedState } from "@/hooks/useDebouncedState";
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { Locs } from "@/types";
 import axios, { AxiosError } from "axios";
+import classNames from "classnames";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { Heading } from "../Heading";
+import { FilePreview } from "./FilePreview";
 import { FilterHelpTooltip } from "./FilterHelpTooltip";
+
+type Props = {
+	defaultBranch?: string;
+};
 
 const sortOrders: Record<SortOrder, SelectOption> = {
 	type: { name: "Type" },
 	locs: { name: "Locs" },
 } as const;
 
-export const RepoLocsSection = () => {
-	const isExtraSmallOrLarger = useMediaQuery("xs");
-
+export const RepoLocsSection = ({ defaultBranch }: Props) => {
 	const router = useRouter();
 	const { owner, repo, branch } = router.query as {
 		owner: string;
@@ -122,41 +125,51 @@ export const RepoLocsSection = () => {
 		}
 	}
 
+	const isFile = pathLocs && !pathLocs.children;
+
 	return (
 		<div className="flex flex-col gap-2">
-			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
+			<div className="flex items-center gap-2 flex-wrap">
 				<PathBreadcrumb
-					className="xs:w-full"
+					className="flex-grow break-all w-full xs:w-auto"
 					path={[repo, ...path]}
 					onSelect={index =>
 						setPath(index === 0 ? [] : path.slice(0, index))
 					}
 				/>
 
-				<Spacer className="hidden sm:block" />
+				{/* <Spacer className="hidden sm:block" /> */}
 
-				<Select
-					className="hidden xs:block sm:flex-shrink-0 xs:flex-grow sm:flex-grow-0 sm:w-40"
-					value={order}
-					options={sortOrders}
-					onChange={value => setOrder(value as SortOrder)}
-					label="Sort by "
-					title="Sort order"
-				/>
-				<div className="relative w-full sm:flex-shrink-0 xs:flex-grow-[4] sm:flex-grow-0 xs:w-auto sm:w-40">
-					<Input
-						className="w-full pr-10"
-						placeholder="Filter"
-						value={filter}
-						onChange={e => setFilter(e.target.value)}
+				<div className="flex gap-2 flex-nowrap  ml-auto w-full xs:w-auto">
+					<Select
+						className="hidden xs:block w-40"
+						value={order}
+						options={sortOrders}
+						onChange={value => setOrder(value as SortOrder)}
+						label="Sort by "
+						title="Sort order"
 					/>
-					<div className="absolute top-0 bottom-0 right-0 pr-2 grid place-items-center">
-						<FilterHelpTooltip tooltipClassName="-mr-2" />
+					<div className="relative w-full sm:flex-shrink-0 sm:flex-grow-0 xs:w-48">
+						<Input
+							className="w-full pr-10"
+							placeholder="Filter"
+							value={filter}
+							onChange={e => setFilter(e.target.value)}
+						/>
+						<div className="absolute top-0 bottom-0 right-0 pr-2 grid place-items-center">
+							<FilterHelpTooltip tooltipClassName="-mr-2" />
+						</div>
 					</div>
 				</div>
 			</div>
+
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-				<div className="flex flex-col gap-1 self-start order-last sm:order-first">
+				<div
+					className={classNames(
+						"flex flex-col gap-1 self-start order-last sm:order-first",
+						isFile && "col-span-1 sm:col-span-2"
+					)}
+				>
 					<div className="flex">
 						<Heading>Files</Heading>
 						<Spacer />
@@ -170,33 +183,43 @@ export const RepoLocsSection = () => {
 						/>
 					</div>
 					<Block>
-						<Skeleton
-							className="h-80"
-							isLoading={pathLocs === undefined}
-						>
-							{() => (
+						{isFile ? (
+							<FilePreview
+								owner={owner}
+								repo={repo}
+								branch={(branch || defaultBranch)!}
+								path={path}
+							/>
+						) : (
+							<Skeleton
+								className="h-80"
+								isLoading={pathLocs === undefined}
+							>
 								<LocsTree
 									locs={pathLocs!}
 									order={order}
 									onSelect={name => setPath([...path, name])}
 								/>
-							)}
-						</Skeleton>
+							</Skeleton>
+						)}
 					</Block>
 				</div>
-				<div className="flex flex-col gap-1 self-start">
-					<Heading>
-						Lines of code {pathLocs?.loc && `(${pathLocs.loc})`}
-					</Heading>
-					<Block>
-						<Skeleton
-							className="h-80"
-							isLoading={pathLocs === undefined}
-						>
-							{() => <LocsStats locs={pathLocs!} />}
-						</Skeleton>
-					</Block>
-				</div>
+
+				{!isFile && (
+					<div className="flex flex-col gap-1 self-start">
+						<Heading>
+							Lines of code {pathLocs?.loc && `(${pathLocs.loc})`}
+						</Heading>
+						<Block>
+							<Skeleton
+								className="h-80"
+								isLoading={pathLocs === undefined}
+							>
+								{() => <LocsStats locs={pathLocs!} />}
+							</Skeleton>
+						</Block>
+					</div>
+				)}
 			</div>
 		</div>
 	);

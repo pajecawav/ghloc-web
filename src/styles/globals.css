@@ -57,6 +57,7 @@ html {
 
 	/* inline code  */
 	--colors-normal-code-bg: theme("colors.blue.100");
+	--colors-normal-code-text: var(--colors-normal-text);
 
 	/* heatmap levels */
 	--colors-heat-level1: theme("colors.green.300");
@@ -119,6 +120,7 @@ html.dark {
 
 	/* inline code  */
 	--colors-normal-code-bg: theme("colors.blue.200");
+	--colors-normal-code-text: var(--colors-accent-bg);
 
 	/* heatmap levels */
 	--colors-heat-level1: theme("colors.green.900");
