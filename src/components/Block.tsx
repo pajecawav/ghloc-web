@@ -10,7 +10,7 @@ export const Block = ({ className, children }: Props) => {
 	return (
 		<div
 			className={classNames(
-				"border border-normal-border rounded-lg",
+				"border border-normal-border rounded-lg overflow-hidden",
 				className
 			)}
 		>

@@ -13,7 +13,7 @@ html {
 
 	/* background */
 	--colors-normal-bg: white;
-	--colors-accent-bg: theme("colors.gray.200");
+	--colors-accent-bg: theme("colors.gray.100");
 	--colors-accent2-bg: theme("colors.gray.300");
 
 	/* success/error */

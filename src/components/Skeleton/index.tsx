@@ -5,7 +5,7 @@ import styles from "./Skeleton.module.css";
 type Props = {
 	className?: string;
 	isLoading?: boolean;
-	children?: ReactNode;
+	children?: ReactNode | (() => ReactNode);
 };
 
 export const Skeleton = ({ className, isLoading = true, children }: Props) => {

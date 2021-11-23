@@ -189,6 +189,8 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 								repo={repo}
 								branch={(branch || defaultBranch)!}
 								path={path}
+								// TODO: fix LOCs types
+								loc={pathLocs as any as number}
 							/>
 						) : (
 							<Skeleton

@@ -129,7 +129,7 @@ export const RepoPage = () => {
 				>
 					{repo?.homepage && (
 						<a
-							className="w-max text-normal-link hover:underline"
+							className="max-w-full w-max text-normal-link hover:underline truncate"
 							href={repo.homepage}
 							target="_blank"
 							rel="noopener noreferrer"
