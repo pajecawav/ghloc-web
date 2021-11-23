@@ -27,6 +27,9 @@ html {
 	/* scrollbar */
 	--colors-scrollbar: theme("colors.gray.300");
 
+	/* progress-bar */
+	--colors-navigation-progress: black;
+
 	/* caret */
 	--colors-caret: theme("colors.blue.600");
 
@@ -89,6 +92,9 @@ html.dark {
 
 	/* scrollbar */
 	--colors-scrollbar: var(--colors-accent-bg);
+
+	/* progress-bar */
+	--colors-navigation-progress: var(--colors-muted-text);
 
 	/* caret */
 	--colors-caret: theme("colors.blue.300");
@@ -175,10 +181,11 @@ body,
 }
 
 #nprogress .bar {
-	background: black;
+	background: var(--colors-navigation-progress);
 }
 
-#nprogress .spinner {
+#nprogress .spinner,
+#nprogress .peg {
 	display: none;
 }
 
