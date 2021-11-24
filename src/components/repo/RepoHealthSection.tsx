@@ -57,10 +57,11 @@ export const RepoHealthSection = ({ className }: Props) => {
 		repo: string;
 	};
 
-	const { data: health, isLoadingError } = useQuery<
-		RepoHealthResponse,
-		AxiosError
-	>(
+	const {
+		data: health,
+		isLoadingError,
+		error,
+	} = useQuery<RepoHealthResponse, AxiosError>(
 		["repo_health", { owner, repo }],
 		() =>
 			axios
@@ -75,10 +76,10 @@ export const RepoHealthSection = ({ className }: Props) => {
 	);
 
 	useEffect(() => {
-		if (isLoadingError) {
+		if (isLoadingError && error?.response?.status !== 403) {
 			toast.error("Failed to load repo health.");
 		}
-	}, [isLoadingError]);
+	}, [isLoadingError, error]);
 
 	const {
 		license,

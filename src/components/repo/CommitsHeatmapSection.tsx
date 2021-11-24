@@ -23,7 +23,7 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 	};
 	const commitAcitivityLoadingToastIdRef = useRef<string>();
 
-	const { data, isLoading, isLoadingError, failureCount } = useQuery<
+	const { data, error, isLoading, isLoadingError, failureCount } = useQuery<
 		CommitActivity,
 		AxiosError
 	>(
@@ -57,31 +57,43 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 		},
 		{
 			enabled: enabled && router.isReady,
-			retry: true,
+			retry: (_, error) => error.response?.status !== 403,
 			retryDelay: 7500,
 			staleTime: 30 * 60 * 60 * 1000, // 30 minutes
 		}
 	);
 
 	useEffect(() => {
-		if (isLoading && failureCount > 0) {
+		// TODO: this is a mess, is there a cleaner way to do this?
+		if (
+			error?.response?.status !== 403 &&
+			!isLoadingError &&
+			isLoading &&
+			failureCount > 0
+		) {
 			if (!commitAcitivityLoadingToastIdRef.current) {
 				commitAcitivityLoadingToastIdRef.current = toast.loading(
-					"Waiting for Github to calculate commit activity...",
-					{ duration: Infinity }
+					"Waiting for Github to calculate commit activity..."
 				);
 			}
-		} else {
+		} else if (commitAcitivityLoadingToastIdRef.current) {
 			toast.dismiss(commitAcitivityLoadingToastIdRef.current);
 			commitAcitivityLoadingToastIdRef.current = undefined;
 		}
-	}, [isLoading, failureCount]);
+	}, [isLoadingError, isLoading, failureCount, error]);
+	useEffect(() => {
+		return () => {
+			if (commitAcitivityLoadingToastIdRef.current) {
+				toast.dismiss(commitAcitivityLoadingToastIdRef.current);
+			}
+		};
+	}, []);
 
 	useEffect(() => {
-		if (isLoadingError) {
+		if (isLoadingError && error?.response?.status !== 403) {
 			toast.error("Failed to load commit activity.");
 		}
-	}, [isLoadingError]);
+	}, [isLoadingError, error]);
 
 	return (
 		<div className={classNames("flex flex-col gap-1", className)}>

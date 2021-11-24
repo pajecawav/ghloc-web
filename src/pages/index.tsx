@@ -36,7 +36,6 @@ export const HomePage = () => {
 				})
 				.then(response => response.data),
 		{
-			// enabled: !!debouncedQuery && router.isReady,
 			enabled: !!debouncedQuery,
 			staleTime: Infinity,
 			keepPreviousData: true,

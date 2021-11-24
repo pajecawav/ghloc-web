@@ -33,7 +33,7 @@ export const ToastsList = () => {
 			gutter={8}
 			toastOptions={{
 				duration: 10 * 1000,
-				error: {
+				loading: {
 					duration: Infinity,
 				},
 			}}
