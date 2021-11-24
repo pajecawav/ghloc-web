@@ -1,4 +1,5 @@
 import { Badge } from "@/components/Badge";
+import { GithubIcon } from "@/components/icons/GithubIcon";
 import { RepoLocsSection } from "@/components/locs/RepoLocsSection";
 import { CommitsHeatmapSection } from "@/components/repo/CommitsHeatmapSection";
 import { RepoHealthSection } from "@/components/repo/RepoHealthSection";
@@ -41,8 +42,17 @@ export const RepoPage = () => {
 					isLoading={!router.isReady}
 				>
 					<div className="flex gap-1 items-center whitespace-nowrap overflow-x-auto text-xl text-muted-text w-full xs:w-auto">
+						<a
+							className="w-4 h-4 transition-colors duration-100 hover:text-normal-link"
+							href={`https://github.com/${owner}/${repoName}`}
+							target="_blank"
+							rel="noopener noreferrer"
+							title="Repo source"
+						>
+							<GithubIcon />
+						</a>
 						<Link href={`/${owner}`}>
-							<a className="text-normal-link hover:underline">
+							<a className="block text-normal-link hover:underline">
 								{owner}
 							</a>
 						</Link>{" "}

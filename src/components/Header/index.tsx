@@ -61,7 +61,7 @@ export const Header = ({ className }: Props) => {
 						href="https://github.com/pajecawav/repo-stats"
 						target="_blank"
 						rel="noopener noreferrer"
-						title="Link to Github"
+						title="Project source code"
 					>
 						<GithubIcon />
 					</a>
