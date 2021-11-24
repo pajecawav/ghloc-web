@@ -31,18 +31,16 @@ export const Select = ({
 		<Listbox value={value} onChange={onChange}>
 			<div className={classNames("relative rounded-md group", className)}>
 				<Listbox.Button
-					className="relative block w-full h-8 pl-3 pr-10 text-left rounded-md !outline-none border-2 border-normal-border transition-colors duration-100 group-focus-within:border-active-border"
+					className="relative block w-full h-8 pl-3 pr-10 text-left rounded-md !outline-none border-2 border-normal transition-colors duration-100 group-focus-within:border-active"
 					title={title}
 				>
 					<span className="block truncate">
-						{label && (
-							<span className="text-muted-text">{label}</span>
-						)}
+						{label && <span className="text-muted">{label}</span>}
 						{selected.name}
 					</span>
 					<span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
 						<ChevronDownIcon
-							className="w-4 h-4 text-muted-text transition-transform duration-300 group-focus-within:text-active-border"
+							className="w-4 h-4 text-muted transition-transform duration-300 group-focus-within:text-border-active"
 							aria-hidden="true"
 						/>
 					</span>
@@ -52,14 +50,14 @@ export const Select = ({
 					leave="transition ease-in duration-100"
 					leaveTo="opacity-0"
 				>
-					<Listbox.Options className="absolute z-10 w-full py-1 mt-1 border border-normal-border overflow-auto bg-normal-bg rounded-md shadow-lg max-h-60 focus:outline-none">
+					<Listbox.Options className="absolute z-10 w-full py-1 mt-1 border border-normal overflow-auto bg-normal rounded-md shadow-lg max-h-60 focus:outline-none">
 						{Object.entries(options).map(
 							([optionValue, option]) => (
 								<Listbox.Option
 									key={optionValue}
 									className={({ active }) =>
 										classNames(
-											active && "bg-active-select",
+											active && "bg-select-active",
 											"select-none relative py-1 px-3 cursor-pointer"
 										)
 									}

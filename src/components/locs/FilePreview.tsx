@@ -9,7 +9,7 @@ type FileType = "text" | "image";
 
 const FileHeading = ({ children }: { children: ReactNode }) => {
 	return (
-		<div className="bg-accent-bg text-subtle-text px-4 py-2 text-xs border-b border-normal-border">
+		<div className="bg-accent text-subtle px-4 py-2 text-xs border-b border-normal">
 			{children}
 		</div>
 	);
@@ -20,10 +20,10 @@ const UnsupportedFile = ({ url, size }: { url: string; size: number }) => {
 		<div>
 			<FileHeading>{formatSize(size)}</FileHeading>
 			<div className="text-center p-4">
-				<div className="text-subtle-text">Unsupported file type</div>
+				<div className="text-subtle">Unsupported file type</div>
 				<div>
 					<a
-						className="text-normal-link hover:underline"
+						className="text-link-normal hover:underline"
 						href={url}
 						target="_blank"
 						rel="noreferrer noopener"
@@ -53,7 +53,7 @@ const PlainTextFile = ({
 		<div>
 			<FileHeading>
 				{lines.length} lines ({loc} sloc){" "}
-				<span className="inline-block text-muted-text mx-1">|</span>{" "}
+				<span className="inline-block text-muted mx-1">|</span>{" "}
 				{formatSize(size)}
 			</FileHeading>
 			<div className="py-1 overflow-auto">
@@ -61,7 +61,7 @@ const PlainTextFile = ({
 					<tbody>
 						{lines.map((line, index) => (
 							<tr key={index}>
-								<td className="min-w-[3rem] px-3 text-muted-text text-right select-none">
+								<td className="min-w-[3rem] px-3 text-muted text-right select-none">
 									{index + 1}
 								</td>
 								<td className="pr-3">

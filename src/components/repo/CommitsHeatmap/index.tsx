@@ -19,7 +19,7 @@ export const CommitsHeatmap = ({ data }: Props) => {
 	const randomLabelOffset = 10; // idk what this is
 
 	const commitsLevelColors = {
-		0: "text-accent-bg",
+		0: "text-bg-accent",
 		1: "text-heat-level1",
 		2: "text-heat-level2",
 		3: "text-heat-level3",
@@ -67,7 +67,7 @@ export const CommitsHeatmap = ({ data }: Props) => {
 			</g>
 
 			<g
-				className="text-muted-text font-medium"
+				className="text-muted font-medium"
 				fill="currentColor"
 				transform={`translate(${weekDaysOffset}, 0)`}
 			>
@@ -92,7 +92,7 @@ export const CommitsHeatmap = ({ data }: Props) => {
 			</g>
 
 			<g
-				className="text-muted-text font-medium"
+				className="text-muted font-medium"
 				fill="currentColor"
 				transform={`translate(0, ${headerOffset})`}
 			>

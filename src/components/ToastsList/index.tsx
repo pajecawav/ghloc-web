@@ -8,7 +8,7 @@ import styles from "./ToastsList.module.css";
 type ToastType = "blank" | "success" | "error";
 
 const typeClassnames: Record<ToastType, string> = {
-	blank: "bg-accent2-bg border-accent2-bg/50",
+	blank: "bg-accent2 border-bg-accent2/50",
 	success: "bg-success border-success/75 text-gray-900",
 	error: "bg-error border-error/75 text-gray-900",
 };
@@ -35,7 +35,7 @@ export const ToastsList = () => {
 			{t => (
 				<div
 					className={classNames(
-						"relative max-w-xs flex gap-2 pl-3 pr-8 py-3 rounded-lg items-start font-medium border border-normal-border shadow",
+						"relative max-w-xs flex gap-2 pl-3 pr-8 py-3 rounded-lg items-start font-medium border border-normal shadow",
 						typeClassnames[t.type as ToastType],
 						t.visible ? styles.appear : styles.dismiss
 					)}

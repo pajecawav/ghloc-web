@@ -7,7 +7,7 @@ type Props = {
 export const LoadingPlaceholder = ({ className }: Props) => {
 	return (
 		<svg
-			className={classNames("animate-spin text-black", className)}
+			className={classNames("animate-spin text-muted", className)}
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"

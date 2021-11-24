@@ -37,7 +37,7 @@ const UserReposPage = () => {
 							isLoading={user === undefined}
 						>
 							{() => (
-								<div className="w-10 h-10 rounded-full border-2 border-normal-border overflow-hidden">
+								<div className="w-10 h-10 rounded-full border-2 border-normal overflow-hidden">
 									<img
 										className="object-cover"
 										src={user!.avatar_url}

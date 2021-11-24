@@ -9,7 +9,7 @@ type Props = {
 
 const Code = ({ children }: { children: ReactNode }) => {
 	return (
-		<code className="px-1 py-0.5 text-normal-code-text bg-normal-code-bg rounded-md">
+		<code className="px-1 py-0.5 text-code-normal-text bg-code-normal-bg rounded-md">
 			{children}
 		</code>
 	);
@@ -20,7 +20,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 		<div className={classNames("relative group grid", className)}>
 			<button
 				className={classNames(
-					"no-highlight relative w-5 h-5 transition-colors duration-75 text-muted-text focus:text-normal-text",
+					"no-highlight relative w-5 h-5 transition-colors duration-75 text-muted focus:text-normal",
 					"after:hidden group-focus-within:after:block group-hover:after:block after:h-[calc(100%+1.25rem)] after:absolute after:top-0 after:w-[200%] after:right-0"
 				)}
 			>
@@ -29,7 +29,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 
 			<div
 				className={classNames(
-					"absolute top-2 mt-8 right-0 h-max w-96 max-w-[calc(100vw-1rem)] border border-normal-border shadow-lg rounded-lg origin-top-right bg-normal-bg px-4 py-2 text-xs",
+					"absolute top-2 mt-8 right-0 h-max w-96 max-w-[calc(100vw-1rem)] border border-normal shadow-lg rounded-lg origin-top-right bg-normal px-4 py-2 text-xs",
 					"transition duration-75 ease-out scale-95 opacity-0 select-none",
 					"group-focus-within:duration-100 group-focus-within:opacity-100 group-focus-within:scale-100 group-focus-within:select-text",
 					"group-hover:duration-100 group-hover:opacity-100 group-hover:scale-100 group-hover:select-text",
@@ -76,7 +76,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 				<p className="mt-1">
 					See{" "}
 					<a
-						className="text-normal-link hover:underline"
+						className="text-link-normal hover:underline"
 						href="https://github.com/subtle-byte/ghloc#readme"
 						target="_blank"
 						rel="noopener noreferrer"

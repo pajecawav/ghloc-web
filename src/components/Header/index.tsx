@@ -28,7 +28,7 @@ export const Header = ({ className }: Props) => {
 						<a
 							className={classNames(
 								styles.icon,
-								"w-6 h-6 hover:text-secondary-link",
+								"w-6 h-6 hover:text-link-secondary",
 								"hover:transition-all hover:duration-100"
 							)}
 							title="Search repos"
@@ -39,7 +39,7 @@ export const Header = ({ className }: Props) => {
 					<button
 						className={classNames(
 							styles.icon,
-							"w-6 h-6 hover:text-secondary-link active:scale-90",
+							"w-6 h-6 hover:text-link-secondary active:scale-90",
 							// NOTE: styles.icon adds an appear animation on
 							// transform and it's duration interferes with
 							// transition-duration so we have to conditionally
@@ -55,7 +55,7 @@ export const Header = ({ className }: Props) => {
 					<a
 						className={classNames(
 							styles.icon,
-							"w-5 h-5 hover:text-secondary-link active:scale-90",
+							"w-5 h-5 hover:text-link-secondary active:scale-90",
 							"hover:transition-all hover:duration-100"
 						)}
 						href="https://github.com/pajecawav/repo-stats"

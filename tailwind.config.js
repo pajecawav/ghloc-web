@@ -1,6 +1,6 @@
-const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
+/** @type {import("tailwindcss/tailwind-config").TailwindConfig} */
 module.exports = {
 	mode: "jit",
 	purge: [
@@ -14,36 +14,49 @@ module.exports = {
 			...defaultTheme.screens,
 		},
 		extend: {
+			textColor: {
+				normal: "var(--colors-text-normal)",
+				subtle: "var(--colors-text-subtle)",
+				muted: "var(--colors-text-muted)",
+
+				"bg-accent": "var(--colors-bg-accent)",
+
+				"border-active": "var(--colors-border-active)",
+				"border-active2": "var(--colors-border-active2)",
+			},
+			backgroundColor: {
+				normal: "var(--colors-bg-normal)",
+				accent: "var(--colors-bg-accent)",
+				accent2: "var(--colors-bg-accent2)",
+			},
+			borderColor: {
+				normal: "var(--colors-border-normal)",
+				active: "var(--colors-border-active)",
+				active2: "var(--colors-border-active2)",
+
+				"bg-accent2": "var(--colors-bg-accent2)",
+			},
+			divideColor: {
+				normal: "var(--colors-border-normal)",
+			},
+			placeholderColor: {
+				"text-muted": "var(--colors-text-muted)",
+			},
 			colors: {
-				// text
-				"normal-text": "var(--colors-normal-text)",
-				"subtle-text": "var(--colors-subtle-text)",
-				"muted-text": "var(--colors-muted-text)",
-
-				// background
-				"normal-bg": "var(--colors-normal-bg)",
-				"accent-bg": "var(--colors-accent-bg)",
-				"accent2-bg": "var(--colors-accent2-bg)",
-
 				// success/error
 				success: "var(--colors-success)",
 				error: "var(--colors-error)",
 
-				// borders
-				"normal-border": "var(--colors-normal-border)",
-				"active-border": "var(--colors-active-border)",
-				"active2-border": "var(--colors-active2-border)",
-
 				// links
-				"normal-link": "var(--colors-normal-link)",
-				"secondary-link": "var(--colors-secondary-link)",
+				"link-normal": "var(--colors-link-normal)",
+				"link-secondary": "var(--colors-link-secondary)",
 
 				// buttons
 				"btn-normal-bg": "var(--colors-btn-normal-bg)",
 				"btn-normal-text": "var(--colors-btn-normal-text)",
 
 				// select
-				"active-select": "var(--colors-active-select)",
+				"select-active": "var(--colors-select-active)",
 
 				// badge
 				"badge-normal-bg": "var(--colors-badge-normal-bg)",
@@ -52,22 +65,14 @@ module.exports = {
 				"badge-outlined-text": "var(--colors-badge-outlined-text)",
 
 				// inline code
-				"normal-code-bg": "var(--colors-normal-code-bg)",
-				"normal-code-text": "var(--colors-normal-code-text)",
+				"code-normal-bg": "var(--colors-code-normal-bg)",
+				"code-normal-text": "var(--colors-code-normal-text)",
 
 				// heatmap levels
 				"heat-level1": "var(--colors-heat-level1)",
 				"heat-level2": "var(--colors-heat-level2)",
 				"heat-level3": "var(--colors-heat-level3)",
 				"heat-level4": "var(--colors-heat-level4)",
-			},
-			stroke: {
-				"normal-bg": "var(--colors-normal-bg)",
-				"normal-text": "var(--colors-normal-text)",
-			},
-			fill: {
-				"normal-bg": "var(--colors-normal-bg)",
-				"normal-text": "var(--colors-normal-text)",
 			},
 		},
 	},

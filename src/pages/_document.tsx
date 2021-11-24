@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
 						rel="stylesheet"
 					/>
 				</Head>
-				<body className="text-normal-text bg-normal-bg">
+				<body className="text-normal bg-normal">
 					{/* insert blocking script to detect color scheme before rendering the app */}
 					<ThemeScript />
 					<Main />

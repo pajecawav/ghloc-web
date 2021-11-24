@@ -32,7 +32,7 @@ const LocsTreeEntry = ({
 	const isFile = typeof node === "number";
 
 	return (
-		<li className="hover:bg-accent-bg">
+		<li className="hover:bg-accent">
 			<button
 				className="w-full px-2 py-1 flex items-center gap-2 disabled:cursor-text select-text"
 				onClick={() => onSelect?.(name)}
@@ -45,7 +45,7 @@ const LocsTreeEntry = ({
 						<FolderIcon className="text-blue-400" />
 					)}
 				</div>
-				<span className="text-left truncate hover:underline hover:text-normal-link">
+				<span className="text-left truncate hover:underline hover:text-link-normal">
 					{name}
 				</span>
 				<Spacer />
@@ -103,7 +103,7 @@ export const LocsTree = ({ locs, className, order, onSelect }: Props) => {
 	return (
 		<ul
 			className={classNames(
-				"divide-y divide-normal-border",
+				"divide-y divide-normal",
 				className,
 				!entries.length && "h-40"
 			)}

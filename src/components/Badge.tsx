@@ -19,7 +19,7 @@ export const Badge = ({
 	return (
 		<div
 			className={classNames(
-				"px-2 py-0.5 border border-normal-border rounded-full min-w-[2rem] text-center",
+				"px-2 py-0.5 border border-normal rounded-full min-w-[2rem] text-center",
 				colorClassNames[color],
 				className
 			)}

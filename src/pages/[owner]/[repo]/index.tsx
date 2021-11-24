@@ -41,9 +41,9 @@ export const RepoPage = () => {
 					className="h-6 w-40 rounded-full"
 					isLoading={!router.isReady}
 				>
-					<div className="flex gap-1 items-center whitespace-nowrap overflow-x-auto text-xl text-muted-text w-full xs:w-auto">
+					<div className="flex gap-1 items-center whitespace-nowrap overflow-x-auto text-xl text-muted w-full xs:w-auto">
 						<a
-							className="w-4 h-4 transition-colors duration-100 hover:text-normal-link"
+							className="w-4 h-4 transition-colors duration-100 hover:text-link-normal"
 							href={`https://github.com/${owner}/${repoName}`}
 							target="_blank"
 							rel="noopener noreferrer"
@@ -52,13 +52,13 @@ export const RepoPage = () => {
 							<GithubIcon />
 						</a>
 						<Link href={`/${owner}`}>
-							<a className="block text-normal-link hover:underline">
+							<a className="block text-link-normal hover:underline">
 								{owner}
 							</a>
 						</Link>{" "}
 						/{" "}
 						<Link href={`/${owner}/${repoName}`}>
-							<a className="text-normal-link hover:underline">
+							<a className="text-link-normal hover:underline">
 								{repoName}
 							</a>
 						</Link>
@@ -108,7 +108,7 @@ export const RepoPage = () => {
 				<div className="flex flex-wrap gap-2">
 					{Array.from({ length: 3 }).map((_, index) => (
 						<Skeleton
-							className="border border-normal-border rounded-full h-4 w-14"
+							className="border border-normal rounded-full h-4 w-14"
 							key={index}
 						/>
 					))}
@@ -139,7 +139,7 @@ export const RepoPage = () => {
 				>
 					{repo?.homepage && (
 						<a
-							className="max-w-full w-max text-normal-link hover:underline truncate"
+							className="max-w-full w-max text-link-normal hover:underline truncate"
 							href={repo.homepage}
 							target="_blank"
 							rel="noopener noreferrer"

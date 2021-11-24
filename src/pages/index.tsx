@@ -65,32 +65,32 @@ export const HomePage = () => {
 		<div className="flex-grow max-w-xl w-full mx-auto flex flex-col gap-4 group md:justify-center">
 			<div className="flex-grow max-h-[4rem] hidden md:block" />
 
-			<h1 className="text-subtle-text text-lg text-center">
+			<h1 className="text-subtle text-lg text-center">
 				See stats of a Github repository
 			</h1>
 
 			<div className="relative flex-shrink-0">
 				<Input
-					className="w-full !px-12 !py-3 text-2xl text-center !rounded-lg shadow-sm border border-normal-border font-light group-focus-within:!border-active2-border caret-blue-400"
+					className="w-full !px-12 !py-3 text-2xl text-center !rounded-lg shadow-sm border border-normal font-light group-focus-within:!border-active2 caret-blue-400"
 					value={query}
 					placeholder="Find repo"
 					autoFocus
 					// onChange event doesn't detect when the input is cleared
 					onInput={event => setQuery(event.currentTarget.value)}
 				/>
-				<div className="absolute top-0 bottom-0 right-2 m-auto w-8 h-8 text-muted-text transition-colors duration-100 group-focus-within:text-active2-border">
+				<div className="absolute top-0 bottom-0 right-2 m-auto w-8 h-8 text-muted transition-colors duration-100 group-focus-within:text-border-active2">
 					<SearchIcon className="heroicon-sw-1" />
 				</div>
 			</div>
 
 			<div
 				className={classNames(
-					"flex-grow h-0 md:max-h-[36rem] bg-normal-bg pointer-events-none group-focus-within:pointer-events-auto"
+					"flex-grow h-0 md:max-h-[36rem] bg-normal pointer-events-none group-focus-within:pointer-events-auto"
 				)}
 			>
 				<div
 					className={classNames(
-						"h-max max-h-full overflow-y-auto border border-normal-border shadow-sm rounded-lg divide-y divide-normal-border",
+						"h-max max-h-full overflow-y-auto border border-normal shadow-sm rounded-lg divide-y divide-normal",
 						"transition duration-75 ease-out scale-95 opacity-0",
 						showResults &&
 							results.items.length &&
@@ -110,12 +110,12 @@ export const HomePage = () => {
 						>
 							<a
 								className={classNames(
-									"block px-6 py-3 select-none relative cursor-pointer !outline-none hover:bg-active-select focus:bg-active-select"
+									"block px-6 py-3 select-none relative cursor-pointer !outline-none hover:bg-select-active focus:bg-select-active"
 								)}
 							>
 								<div>{result.full_name}</div>
 								{result.description && (
-									<div className="text-sm text-muted-text">
+									<div className="text-sm text-muted">
 										{result.description}
 									</div>
 								)}

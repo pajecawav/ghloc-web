@@ -3,18 +3,15 @@
 @tailwind utilities;
 
 html {
-	/* TODO: this naming is a mess */
-	/* TODO: move component-related variables to css modules */
-
 	/* text */
-	--colors-normal-text: black;
-	--colors-subtle-text: theme("colors.gray.700");
-	--colors-muted-text: theme("colors.gray.500");
+	--colors-text-normal: black;
+	--colors-text-subtle: theme("colors.gray.700");
+	--colors-text-muted: theme("colors.gray.500");
 
 	/* background */
-	--colors-normal-bg: white;
-	--colors-accent-bg: theme("colors.gray.100");
-	--colors-accent2-bg: theme("colors.gray.300");
+	--colors-bg-normal: white;
+	--colors-bg-accent: theme("colors.gray.100");
+	--colors-bg-accent2: theme("colors.gray.300");
 
 	/* success/error */
 	--colors-success: theme("colors.green.500");
@@ -22,7 +19,7 @@ html {
 
 	/* selection */
 	--colors-selection-bg: theme("colors.blue.100");
-	--colors-selection-text: var(--colors-normal-text);
+	--colors-selection-text: var(--colors-text-normal);
 
 	/* scrollbar */
 	--colors-scrollbar: theme("colors.gray.300");
@@ -34,13 +31,13 @@ html {
 	--colors-caret: theme("colors.blue.600");
 
 	/* borders */
-	--colors-normal-border: #e5e7eb;
-	--colors-active-border: black;
-	--colors-active2-border: black;
+	--colors-border-normal: #e5e7eb;
+	--colors-border-active: black;
+	--colors-border-active2: black;
 
 	/* links */
-	--colors-normal-link: theme("colors.blue.600");
-	--colors-secondary-link: theme("colors.blue.700");
+	--colors-link-normal: theme("colors.blue.600");
+	--colors-link-secondary: theme("colors.blue.700");
 
 	/* button */
 	--colors-btn-normal-bg: black;
@@ -50,37 +47,35 @@ html {
 	--colors-outline: black;
 
 	/* select */
-	--colors-active-select: theme("colors.blue.50");
+	--colors-select-active: theme("colors.blue.50");
 
 	/* badge */
 	--colors-badge-normal-bg: theme("colors.blue.100");
-	--colors-badge-normal-text: var(--colors-subtle-text);
-	--colors-badge-outlined-bg: var(--colors-normal-bg);
-	--colors-badge-outlined-text: var(--colors-muted-text);
+	--colors-badge-normal-text: var(--colors-text-subtle);
+	--colors-badge-outlined-bg: var(--colors-bg-normal);
+	--colors-badge-outlined-text: var(--colors-text-muted);
 
 	/* inline code  */
-	--colors-normal-code-bg: theme("colors.blue.100");
-	--colors-normal-code-text: var(--colors-normal-text);
+	--colors-code-normal-bg: theme("colors.blue.100");
+	--colors-code-normal-text: var(--colors-text-normal);
 
 	/* heatmap levels */
 	--colors-heat-level1: theme("colors.green.300");
 	--colors-heat-level2: theme("colors.green.500");
 	--colors-heat-level3: theme("colors.green.700");
 	--colors-heat-level4: theme("colors.green.900");
-
-	background: var(--colors-normal-bg);
 }
 
 html.dark {
 	/* text */
-	--colors-normal-text: theme("colors.gray.200");
-	--colors-subtle-text: theme("colors.gray.300");
-	--colors-muted-text: #6b7280;
+	--colors-text-normal: theme("colors.gray.200");
+	--colors-text-subtle: theme("colors.gray.300");
+	--colors-text-muted: #6b7280;
 
 	/* background */
-	--colors-normal-bg: #181a1b;
-	--colors-accent-bg: #25282a;
-	--colors-accent2-bg: #2f3335;
+	--colors-bg-normal: #181a1b;
+	--colors-bg-accent: #25282a;
+	--colors-bg-accent2: #2f3335;
 
 	/* success/error */
 	--colors-success: theme("colors.green.400");
@@ -88,45 +83,45 @@ html.dark {
 
 	/* selection */
 	--colors-selection-bg: theme("colors.blue.200");
-	--colors-selection-text: var(--colors-accent-bg);
+	--colors-selection-text: var(--colors-bg-accent);
 
 	/* scrollbar */
-	--colors-scrollbar: var(--colors-accent-bg);
+	--colors-scrollbar: var(--colors-bg-accent);
 
 	/* progress-bar */
-	--colors-navigation-progress: var(--colors-muted-text);
+	--colors-navigation-progress: var(--colors-text-muted);
 
 	/* caret */
 	--colors-caret: theme("colors.blue.300");
 
 	/* borders */
-	--colors-normal-border: #363b3d;
-	--colors-active-border: theme("colors.gray.400");
-	--colors-active2-border: theme("colors.gray.500");
+	--colors-border-normal: #363b3d;
+	--colors-border-active: theme("colors.gray.400");
+	--colors-border-active2: theme("colors.gray.500");
 
 	/* links */
-	--colors-normal-link: theme("colors.blue.500");
-	--colors-secondary-link: theme("colors.blue.600");
+	--colors-link-normal: theme("colors.blue.500");
+	--colors-link-secondary: theme("colors.blue.600");
 
 	/* button */
-	--colors-btn-normal-bg: var(--colors-accent2-bg);
+	--colors-btn-normal-bg: var(--colors-bg-accent2);
 	--colors-btn-normal-text: white;
 
 	/* outline */
 	--colors-outline: theme("colors.blue.500");
 
 	/* select */
-	--colors-active-select: var(--colors-accent-bg);
+	--colors-select-active: var(--colors-bg-accent);
 
 	/* badge */
-	--colors-badge-normal-bg: var(--colors-accent-bg);
-	--colors-badge-normal-text: var(--colors-subtle-text);
-	--colors-badge-outlined-bg: var(--colors-normal-bg);
-	--colors-badge-outlined-text: var(--colors-subtle-text);
+	--colors-badge-normal-bg: var(--colors-bg-accent);
+	--colors-badge-normal-text: var(--colors-text-subtle);
+	--colors-badge-outlined-bg: var(--colors-bg-normal);
+	--colors-badge-outlined-text: var(--colors-text-subtle);
 
 	/* inline code  */
-	--colors-normal-code-bg: theme("colors.blue.200");
-	--colors-normal-code-text: var(--colors-accent-bg);
+	--colors-code-normal-bg: theme("colors.blue.200");
+	--colors-code-normal-text: var(--colors-bg-accent);
 
 	/* heatmap levels */
 	--colors-heat-level1: theme("colors.green.900");
@@ -135,14 +130,13 @@ html.dark {
 	--colors-heat-level4: theme("colors.green.300");
 }
 
+html {
+	background: var(--colors-bg-normal);
+}
+
 body {
 	caret-color: var(--colors-caret);
 }
-
-/* *::selection {
-	background: var(--colors-selection-bg);
-	color: var(--colors-selection-text);
-} */
 
 html,
 body {

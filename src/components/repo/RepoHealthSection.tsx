@@ -31,8 +31,8 @@ const HealthEntry = ({
 		<li>
 			<a
 				className={classNames(
-					"w-max text-subtle-text flex items-center gap-2 transition-colors duration-75",
-					url && "hover:text-normal-link focus:text-normal-link"
+					"w-max text-subtle flex items-center gap-2 transition-colors duration-75",
+					url && "hover:text-link-normal focus:text-link-normal"
 				)}
 				href={url}
 				target="_blank"
@@ -100,7 +100,7 @@ export const RepoHealthSection = ({ className }: Props) => {
 				<div className="flex flex-col gap-2">
 					{Array.from({ length: 6 }).map((_, index) => (
 						<Skeleton
-							className="h-4 w-40 odd:w-32 rounded-lg border border-normal-border"
+							className="h-4 w-40 odd:w-32 rounded-lg border border-normal"
 							key={index}
 						/>
 					))}

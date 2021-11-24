@@ -13,7 +13,7 @@ type Props = {
 
 export const RepoStats = ({ watchers, stars, forks, className }: Props) => {
 	return (
-		<div className={classNames("flex gap-2 text-normal-text", className)}>
+		<div className={classNames("flex gap-2 text-normal", className)}>
 			{watchers !== undefined && (
 				<div className="flex gap-1 items-center" title="Watchers">
 					<EyeIcon className="w-4 h-4" />

@@ -3,8 +3,7 @@ import React, { ComponentProps } from "react";
 import { LoadingPlaceholder } from "./LoadingPlaceholder";
 
 const colorClassnames = {
-	default:
-		"bg-btn-normal-bg text-btn-normal-text border border-normal-border",
+	default: "bg-btn-normal-bg text-btn-normal-text border border-normal",
 };
 
 type Props = ComponentProps<"button"> & {
@@ -32,7 +31,7 @@ export const Button = ({
 			{isProcessing && (
 				<div
 					className={classNames(
-						"absolute inset-0 grid place-items-center rounded-md",
+						"absolute inset-0 grid place-items-center rounded-md text-subtle",
 						colorClassnames[color]
 					)}
 				>
