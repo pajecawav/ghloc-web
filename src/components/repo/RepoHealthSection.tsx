@@ -76,7 +76,7 @@ export const RepoHealthSection = ({ className }: Props) => {
 
 	useEffect(() => {
 		if (isLoadingError) {
-			toast.error("Failed to load commit activity.");
+			toast.error("Failed to load repo health.");
 		}
 	}, [isLoadingError]);
 

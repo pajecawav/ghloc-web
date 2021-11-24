@@ -3,7 +3,7 @@ import { CommitActivity } from "@/types";
 import axios, { AxiosError } from "axios";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { Block } from "../Block";
@@ -21,20 +21,23 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 		owner: string;
 		repo: string;
 	};
+	const commitAcitivityLoadingToastIdRef = useRef<string>();
 
-	const { data, isLoadingError } = useQuery<
+	const { data, isLoading, isLoadingError, failureCount } = useQuery<
 		CommitActivity,
-		AxiosError | Error
+		AxiosError
 	>(
 		["commit_activity", { owner, repo }],
 		async () => {
 			const response = await axios.get<CommitActivity>(
-				`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`
+				`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`,
+				{
+					// treat 202 as an error (indicates that Github has started
+					// calculating commit activity)
+					validateStatus: status =>
+						status >= 200 && status < 300 && status !== 202,
+				}
 			);
-
-			if (response.status === 202) {
-				throw new Error("Waiting for API to calculate commit activity");
-			}
 
 			const data = response.data;
 
@@ -59,6 +62,20 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 			staleTime: 30 * 60 * 60 * 1000, // 30 minutes
 		}
 	);
+
+	useEffect(() => {
+		if (isLoading && failureCount > 0) {
+			if (!commitAcitivityLoadingToastIdRef.current) {
+				commitAcitivityLoadingToastIdRef.current = toast.loading(
+					"Waiting for Github to calculate commit activity...",
+					{ duration: Infinity }
+				);
+			}
+		} else {
+			toast.dismiss(commitAcitivityLoadingToastIdRef.current);
+			commitAcitivityLoadingToastIdRef.current = undefined;
+		}
+	}, [isLoading, failureCount]);
 
 	useEffect(() => {
 		if (isLoadingError) {
