@@ -32,7 +32,7 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 			const response = await axios.get<CommitActivity>(
 				`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`,
 				{
-					// treat 202 as an error (indicates that Github has started
+					// treat 202 as an error (indicates that GitHub has started
 					// calculating commit activity)
 					validateStatus: status =>
 						status >= 200 && status < 300 && status !== 202,
@@ -73,7 +73,7 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 		) {
 			if (!commitAcitivityLoadingToastIdRef.current) {
 				commitAcitivityLoadingToastIdRef.current = toast.loading(
-					"Waiting for Github to calculate commit activity..."
+					"Waiting for GitHub to calculate commit activity..."
 				);
 			}
 		} else if (commitAcitivityLoadingToastIdRef.current) {

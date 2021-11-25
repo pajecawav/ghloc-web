@@ -24,7 +24,7 @@ const queryClient = new QueryClient({
 	},
 	queryCache: new QueryCache({
 		onError: error => {
-			// show erorr toast when Github API limit is reached
+			// show erorr toast when GitHub API limit is reached
 			if (axios.isAxiosError(error) && error.response?.status === 403) {
 				const limit = parseInt(
 					error.response.headers["x-ratelimit-remaining"]
@@ -34,7 +34,7 @@ const queryClient = new QueryClient({
 					1000;
 				if (limit === 0) {
 					toast.error(
-						`Github API limit reached. Reset ${dayjs().to(reset)}.`,
+						`GitHub API limit reached. Reset ${dayjs().to(reset)}.`,
 						{
 							duration: Infinity,
 							id: "github_api-limit-reached",
@@ -53,7 +53,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider>
 				<Head>
-					<title>Github Stats</title>
+					<title>GitHub Stats</title>
 				</Head>
 
 				<NavigationProgressBar />
