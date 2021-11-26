@@ -1,6 +1,7 @@
 import { Input } from "@/components/Input";
 import { RepoStats } from "@/components/repo/RepoStats";
 import { useDebouncedState } from "@/hooks/useDebouncedState";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { ReposSearchResponse } from "@/types";
 import { SearchIcon } from "@heroicons/react/outline";
 import axios, { AxiosError } from "axios";
@@ -17,6 +18,8 @@ export const HomePage = () => {
 		typeof window !== "undefined"
 			? new URLSearchParams(window.location.search).get("q") || ""
 			: "";
+
+	const isMediumOrLarger = useMediaQuery("md");
 
 	const {
 		state: query,
@@ -58,8 +61,6 @@ export const HomePage = () => {
 		}
 	}, [isLoadingError]);
 
-	const showResults = query && results;
-
 	return (
 		<div className="flex-grow max-w-xl w-full mx-auto flex flex-col gap-4 group md:justify-center">
 			<div className="flex-grow max-h-[4rem] hidden md:block" />
@@ -84,49 +85,50 @@ export const HomePage = () => {
 
 			<div
 				className={classNames(
-					"flex-grow h-0 md:max-h-[36rem] bg-normal pointer-events-none group-focus-within:pointer-events-auto"
+					"flex-grow h-0 md:max-h-[36rem] bg-normal",
+					"pointer-events-none group-focus-within:pointer-events-auto",
+					results && !isMediumOrLarger && "!pointer-events-auto"
 				)}
 			>
-				<div
+				<ul
 					className={classNames(
 						"h-max max-h-full overflow-y-auto border border-normal shadow-sm rounded-lg divide-y divide-normal",
-						"transition duration-75 ease-out scale-95 opacity-0",
-						showResults &&
-							results.items.length &&
-							"group-focus-within:duration-100 group-focus-within:opacity-100 group-focus-within:scale-100"
+						"origin-top transition duration-75 ease-out -translate-y-2 scale-95 opacity-0",
+						results?.items.length &&
+							"group-focus-within:duration-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 group-focus-within:scale-100",
+						results?.items.length &&
+							!isMediumOrLarger &&
+							"duration-100 translate-y-0 opacity-100 scale-100"
 					)}
 					tabIndex={-1}
 				>
 					{results?.items.map(result => (
-						<Link
-							href={{
-								pathname: `/${result.full_name}`,
-								query: {
-									branch: result.default_branch,
-								},
-							}}
-							key={result.id}
-						>
-							<a
-								className={classNames(
-									"block px-6 py-3 select-none relative cursor-pointer !outline-none hover:bg-select-active focus:bg-select-active"
-								)}
+						<li key={result.id}>
+							<Link
+								href={{
+									pathname: `/${result.full_name}`,
+									query: {
+										branch: result.default_branch,
+									},
+								}}
 							>
-								<div>{result.full_name}</div>
-								{result.description && (
-									<div className="text-sm text-muted">
-										{result.description}
-									</div>
-								)}
-								<RepoStats
-									className="mt-1"
-									stars={result.stargazers_count}
-									forks={result.forks}
-								/>
-							</a>
-						</Link>
+								<a className="block px-6 py-3 select-none relative cursor-pointer !outline-none hover:bg-select-active focus:bg-select-active">
+									<div>{result.full_name}</div>
+									{result.description && (
+										<div className="text-sm text-muted">
+											{result.description}
+										</div>
+									)}
+									<RepoStats
+										className="mt-1"
+										stars={result.stargazers_count}
+										forks={result.forks}
+									/>
+								</a>
+							</Link>
+						</li>
 					))}
-				</div>
+				</ul>
 			</div>
 		</div>
 	);

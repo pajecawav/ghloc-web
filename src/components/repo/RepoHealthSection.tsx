@@ -13,19 +13,9 @@ type Props = {
 	className?: string;
 };
 
-const HealthEntry = ({
-	text,
-	url,
-	icon: Icon,
-}: {
-	text: string;
-	url?: string;
-	icon?: ComponentType<{ className: string }>;
-}) => {
+const HealthEntry = ({ text, url }: { text: string; url?: string }) => {
 	const isPassed = !!url;
-	if (!Icon) {
-		Icon = isPassed ? CheckCircleIcon : XCircleIcon;
-	}
+	const Icon = isPassed ? CheckCircleIcon : XCircleIcon;
 
 	return (
 		<li>
