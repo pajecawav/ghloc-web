@@ -1,17 +1,18 @@
 # Repo Stats
 
 ![build](https://github.com/pajecawav/repo-stats/actions/workflows/build.yml/badge.svg)
+[![CodeFactor](https://www.codefactor.io/repository/github/pajecawav/repo-stats/badge)](https://www.codefactor.io/repository/github/pajecawav/repo-stats)
 
-Display GitHub repository stats. Currently the following information is available:
+A [website](https://github.elif.pw/) to display GitHub repository stats. Currently the following information is available:
 
 -   Total repo size
 -   Repo health calculated by GitHub (`README.md`, license, etc)
 -   Repo commit activity for the past year
 -   Total lines of code in files by file extension. Supports navigation, preview of text files and files filtering. LOCs data is provided by [ghloc](https://github.com/subtle-byte/ghloc).
 
-Also available a [Firefox addon](https://addons.mozilla.org/ru/firefox/addon/github-lines-of-code/) is available. It provides LOCs stats dropdown directly on GitHub and a link to repo-stats page for the repository. Source code available [here](https://github.com/pajecawav/ghloc-extension/).
+Also a [Firefox addon](https://addons.mozilla.org/ru/firefox/addon/github-lines-of-code/) is available. It provides LOCs stats dropdown directly on project's GitHub page and a link to page with detailed stats for the repository. Source code available [here](https://github.com/pajecawav/ghloc-extension/).
 
-![Screenshot of the site](./assets/screenshot.png)
+[![Screenshot of the site](./assets/screenshot.png)](https://github.elif.pw/pajecawav/repo-stats)
 
 ## Current Limitations
 

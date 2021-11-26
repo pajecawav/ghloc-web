@@ -171,7 +171,7 @@ body,
 
 *:focus {
 	outline: 2px solid var(--colors-outline);
-	outline-offset: 0px;
+	outline-offset: 0;
 }
 
 #nprogress .bar {

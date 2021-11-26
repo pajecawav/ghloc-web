@@ -27,10 +27,11 @@ const queryClient = new QueryClient({
 			// show erorr toast when GitHub API limit is reached
 			if (axios.isAxiosError(error) && error.response?.status === 403) {
 				const limit = parseInt(
-					error.response.headers["x-ratelimit-remaining"]
+					error.response.headers["x-ratelimit-remaining"],
+					10
 				);
 				const reset =
-					parseInt(error.response.headers["x-ratelimit-reset"]) *
+					parseInt(error.response.headers["x-ratelimit-reset"], 10) *
 					1000;
 				if (limit === 0) {
 					toast.error(
