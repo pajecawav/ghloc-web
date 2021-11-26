@@ -9,6 +9,8 @@ Display GitHub repository stats. Currently the following information is availabl
 -   Repo commit activity for the past year
 -   Total lines of code in files by file extension. Supports navigation, preview of text files and files filtering. LOCs data is provided by [ghloc](https://github.com/subtle-byte/ghloc).
 
+Also available a [Firefox addon](https://addons.mozilla.org/ru/firefox/addon/github-lines-of-code/) is available. It provides LOCs stats dropdown directly on GitHub and a link to repo-stats page for the repository. Source code available [here](https://github.com/pajecawav/ghloc-extension/).
+
 ![Screenshot of the site](./assets/screenshot.png)
 
 ## Current Limitations
