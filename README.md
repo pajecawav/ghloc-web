@@ -1,34 +1,26 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Repo Stats
 
-## Getting Started
+![build](https://github.com/pajecawav/repo-stats/actions/workflows/build.yml/badge.svg)
 
-First, run the development server:
+Display GitHub repository stats. Currently the following information is available:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+-   Total repo size
+-   Repo health calculated by GitHub (`README.md`, license, etc)
+-   Repo commit activity for the past year
+-   Total lines of code in files by file extension. Supports navigation, preview of text files and files filtering. LOCs data is provided by [ghloc](https://github.com/subtle-byte/ghloc).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+![Screenshot of the site](./assets/screenshot.png)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Current Limitations
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+-   GitHub API has a limit of 60 unathorized requests per hour. This should be enough for most use cases but a simple GitHub OAuth with no scopes can be implemented later to increase the limit to 5000 requests per hour.
+-   LOCs API has a max repo size limit.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Development
 
-## Learn More
+1. Clone the repository: `git clone https://github.com/pajecawav/repo-stats`.
+1. Install dependencies: `yarn install`.
+1. Start development server: `yarn dev`.
+1. Navigate to `localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
-
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To build the project run `yarn build`.
