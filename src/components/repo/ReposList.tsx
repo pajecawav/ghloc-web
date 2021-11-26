@@ -40,7 +40,10 @@ export const ReposList = ({ user }: Props) => {
 			return undefined;
 		}
 
-		return reposData.pages.reduce((all, page) => [...all, ...page], []);
+		return reposData.pages.reduce((all, page) => {
+			all.push(...page);
+			return all;
+		}, []);
 	}, [reposData]);
 
 	return (
