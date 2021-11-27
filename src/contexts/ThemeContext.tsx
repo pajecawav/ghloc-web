@@ -23,20 +23,16 @@ export enum Theme {
 }
 
 const getTheme = (): Theme | undefined => {
-	if (typeof window === "undefined") {
+	if (window === undefined) {
 		return undefined;
 	}
 
-	const storedTheme = isClient()
-		? window.localStorage.getItem("color-theme")
-		: undefined;
+	const storedTheme = window.localStorage.getItem("color-theme");
 	if (typeof storedTheme === "string") {
 		return storedTheme as Theme;
 	}
 
-	const userMedia = isClient()
-		? window.matchMedia("(prefers-color-scheme: dark)")
-		: undefined;
+	const userMedia = window.matchMedia("(prefers-color-scheme: dark)");
 	if (userMedia?.matches) {
 		return Theme.dark;
 	}
@@ -45,7 +41,6 @@ const getTheme = (): Theme | undefined => {
 };
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-	// const [theme, setTheme] = useState(getTheme);
 	const [theme, setTheme] = useState<Theme>();
 
 	const rawSetTheme = (theme: Theme) => {

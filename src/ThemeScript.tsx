@@ -11,10 +11,10 @@ export const ThemeScript = () => {
 
             const userMedia = window.matchMedia("(prefers-color-scheme: dark)");
             if (userMedia?.matches) {
-                return "${Theme.light}";
+                return "${Theme.dark}";
             }
 
-            return "${Theme.dark}";
+            return "${Theme.light}";
         }
 
 
