@@ -82,15 +82,15 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 		}
 	}, [isLoadingError, isLoading, failureCount, error]);
 	useEffect(() => {
-		return () => {
-			if (commitAcitivityLoadingToastIdRef.current) {
-				toast.dismiss(commitAcitivityLoadingToastIdRef.current);
-			}
-		};
+		return () => toast.dismiss(commitAcitivityLoadingToastIdRef.current);
 	}, []);
 
 	useEffect(() => {
-		if (isLoadingError && error?.response?.status !== 403) {
+		if (
+			isLoadingError &&
+			error?.response?.status !== 403 &&
+			!axios.isCancel(error)
+		) {
 			toast.error("Failed to load commit activity.");
 		}
 	}, [isLoadingError, error]);

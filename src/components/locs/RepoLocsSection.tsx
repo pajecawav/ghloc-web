@@ -91,10 +91,10 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 	);
 
 	useEffect(() => {
-		if (locsQuery.isLoadingError) {
+		if (locsQuery.isLoadingError && !axios.isCancel(locsQuery.error)) {
 			toast.error("Failed to load LOC stats.");
 		}
-	}, [locsQuery.isLoadingError]);
+	}, [locsQuery.isLoadingError, locsQuery.error]);
 
 	useEffect(() => {
 		if (router.isReady) {

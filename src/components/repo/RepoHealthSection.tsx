@@ -66,7 +66,11 @@ export const RepoHealthSection = ({ className }: Props) => {
 	);
 
 	useEffect(() => {
-		if (isLoadingError && error?.response?.status !== 403) {
+		if (
+			isLoadingError &&
+			error?.response?.status !== 403 &&
+			!axios.isCancel(error)
+		) {
 			toast.error("Failed to load repo health.");
 		}
 	}, [isLoadingError, error]);
