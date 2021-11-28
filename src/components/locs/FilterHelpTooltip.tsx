@@ -1,6 +1,6 @@
 import { QuestionMarkCircleIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
-import { ReactNode } from "react";
+import React, { ComponentProps, ReactNode } from "react";
 
 type Props = {
 	className?: string;
@@ -23,6 +23,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 					"no-highlight relative w-5 h-5 transition-colors duration-75 text-muted focus:text-normal",
 					"after:hidden group-focus-within:after:block group-hover:after:block after:h-[calc(100%+1.25rem)] after:absolute after:top-0 after:w-[200%] after:right-0"
 				)}
+				aria-label="Show filter syntax help"
 			>
 				<QuestionMarkCircleIcon />
 			</button>

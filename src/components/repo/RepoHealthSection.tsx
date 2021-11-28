@@ -14,28 +14,35 @@ type Props = {
 };
 
 const HealthEntry = ({ text, url }: { text: string; url?: string }) => {
-	const isPassed = !!url;
-	const Icon = isPassed ? CheckCircleIcon : XCircleIcon;
+	const success = !!url;
+	const Icon = success ? CheckCircleIcon : XCircleIcon;
+
+	const Comp = url ? "a" : "span";
+	const compProps = url
+		? {
+				href: url,
+				target: "_blank",
+				rel: "noreferrer noopener",
+		  }
+		: {};
 
 	return (
 		<li>
-			<a
+			<Comp
 				className={classNames(
 					"w-max text-subtle flex items-center gap-2 transition-colors duration-75",
 					url && "hover:text-link-normal focus:text-link-normal"
 				)}
-				href={url}
-				target="_blank"
-				rel="noreferrer noopener"
+				{...compProps}
 			>
 				<Icon
 					className={classNames(
 						"inline-block w-5 h-5",
-						isPassed ? "text-success" : "text-error"
+						success ? "text-success" : "text-error"
 					)}
 				/>
 				<span>{text}</span>
-			</a>
+			</Comp>
 		</li>
 	);
 };
@@ -85,7 +92,7 @@ export const RepoHealthSection = ({ className }: Props) => {
 	} = health?.files ?? {};
 
 	return (
-		<div className={classNames("flex flex-col gap-1", className)}>
+		<article className={classNames("flex flex-col gap-1", className)}>
 			<Heading>
 				Repo health{" "}
 				{health && `(${health.health_percentage.toFixed(0)}%)`}
@@ -145,6 +152,6 @@ export const RepoHealthSection = ({ className }: Props) => {
 					/>
 				</ul>
 			)}
-		</div>
+		</article>
 	);
 };

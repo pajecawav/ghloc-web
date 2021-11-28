@@ -57,7 +57,6 @@ export const ReposList = ({ user }: Props) => {
 			>
 				{!repos
 					? Array.from({ length: 6 }).map((_, index) => (
-							// TODO: proper RepoCard skeleton
 							<Skeleton
 								className="h-32 border border-normal rounded-md"
 								key={index}

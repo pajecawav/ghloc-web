@@ -1,4 +1,5 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
 
 /** @type {import("tailwindcss/tailwind-config").TailwindConfig} */
 module.exports = {
@@ -43,6 +44,8 @@ module.exports = {
 				"text-muted": "var(--colors-text-muted)",
 			},
 			colors: {
+				warmGray: colors.warmGray,
+
 				// success/error
 				success: "var(--colors-success)",
 				error: "var(--colors-error)",

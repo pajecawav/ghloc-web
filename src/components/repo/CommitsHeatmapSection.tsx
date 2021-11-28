@@ -96,7 +96,7 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 	}, [isLoadingError, error]);
 
 	return (
-		<div className={classNames("flex flex-col gap-1", className)}>
+		<article className={classNames("flex flex-col gap-1", className)}>
 			<Heading>Commits</Heading>
 			<Skeleton className="h-32 rounded-md" isLoading={!data}>
 				{() => (
@@ -105,6 +105,6 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 					</Block>
 				)}
 			</Skeleton>
-		</div>
+		</article>
 	);
 };

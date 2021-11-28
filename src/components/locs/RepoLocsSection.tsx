@@ -34,7 +34,6 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 		repo: string;
 		branch?: string;
 	};
-	// TODO: move this to useEffect and add 'setImmediateState' to 'useDebouncedState`?
 	const filterParam =
 		typeof window !== "undefined"
 			? new URLSearchParams(window.location.search).get("filter") || ""
@@ -128,7 +127,7 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 	const isFile = pathLocs && !pathLocs.children;
 
 	return (
-		<div className="flex flex-col gap-2">
+		<article className="flex flex-col gap-2">
 			<div className="flex items-center gap-2 flex-wrap">
 				<PathBreadcrumb
 					className="flex-grow break-all w-full xs:w-auto"
@@ -223,6 +222,6 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 					</div>
 				)}
 			</div>
-		</div>
+		</article>
 	);
 };

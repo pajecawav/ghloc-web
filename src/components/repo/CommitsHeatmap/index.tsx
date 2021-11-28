@@ -77,8 +77,10 @@ export const CommitsHeatmap = ({ data }: Props) => {
 
 					if (date.isSame(dateEnd, "month")) return null;
 
+					// do not show the label if it's the last column
+					if (index + 1 === data.length) return null;
+
 					return (
-						// TODO: if new month stars this week text will overflow svg
 						<text
 							className="text-[12px]"
 							dy={randomLabelOffset}
