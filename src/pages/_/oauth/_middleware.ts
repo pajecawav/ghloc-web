@@ -26,19 +26,13 @@ async function exchangeOAuthCode(code: string): Promise<string | null> {
 
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
 	const code = req.nextUrl.searchParams.get("code");
-	req.nextUrl.search = "";
 
 	let token;
 	if (code) {
 		token = await exchangeOAuthCode(code);
 	}
 
-	req.nextUrl.pathname = "/";
-	if (process.env.NODE_ENV === "development") {
-		req.nextUrl.protocol = "http";
-	}
-
-	const res = NextResponse.redirect(req.nextUrl);
+	const res = NextResponse.redirect("/");
 	if (token) {
 		res.headers.set("set-cookie", `token=${token}; Path=/; Max-Age=10`);
 	}
