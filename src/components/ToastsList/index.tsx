@@ -1,4 +1,3 @@
-import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { InformationCircleIcon, XIcon } from "@heroicons/react/outline";
 import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
@@ -24,11 +23,9 @@ const typeIcons: Record<ToastType, ReactNode> = {
 };
 
 export const ToastsList = () => {
-	const isExtraSmallOrLarger = useMediaQuery("xs");
-
 	return (
 		<Toaster
-			position={isExtraSmallOrLarger ? "bottom-right" : "bottom-center"}
+			position="bottom-right"
 			reverseOrder={false}
 			gutter={8}
 			toastOptions={{

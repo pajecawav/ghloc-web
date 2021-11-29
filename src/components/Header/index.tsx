@@ -1,10 +1,14 @@
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { Theme } from "@/contexts/ThemeContext";
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 import { useTheme } from "@/hooks/useTheme";
+import { LoginIcon, LogoutIcon } from "@heroicons/react/outline";
 import { MoonIcon, SearchIcon, SunIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 import Link from "next/link";
 import styles from "./Header.module.css";
+import { LogInPopover } from "./LogInPopover";
+import { LogOutButton } from "./LogOutButton";
 
 type Props = {
 	className?: string;
@@ -12,6 +16,7 @@ type Props = {
 
 export const Header = ({ className }: Props) => {
 	const { theme, toggleTheme } = useTheme();
+	const isLoggedIn = useIsLoggedIn();
 
 	const showIcons = theme !== undefined;
 
@@ -70,6 +75,26 @@ export const Header = ({ className }: Props) => {
 							>
 								<GithubIcon />
 							</a>
+						</li>
+
+						<li>
+							{isLoggedIn ? (
+								<LogOutButton
+									buttonClassNames={classNames(
+										styles.icon,
+										"w-6 h-6 hover:text-link-secondary active:scale-90",
+										"hover:transition-all hover:duration-100"
+									)}
+								/>
+							) : (
+								<LogInPopover
+									buttonClassNames={classNames(
+										styles.icon,
+										"w-6 h-6 hover:text-link-secondary active:scale-90",
+										"hover:transition-all hover:duration-100"
+									)}
+								/>
+							)}
 						</li>
 					</>
 				)}
