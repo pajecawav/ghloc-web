@@ -26,7 +26,7 @@ async function exchangeOAuthCode(code: string): Promise<string | null> {
 
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
 	const code = req.nextUrl.searchParams.get("code");
-	req.nextUrl.searchParams.delete("code");
+	req.nextUrl.search = "";
 
 	let token;
 	if (code) {
