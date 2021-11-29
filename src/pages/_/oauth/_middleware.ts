@@ -34,7 +34,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
 
 	const res = NextResponse.redirect("/");
 	if (token) {
-		res.headers.set("set-cookie", `token=${token}; Path=/; Max-Age=10`);
+		res.cookie("token", token, { path: "/", maxAge: 10 * 1000 });
 	}
 
 	return res;
