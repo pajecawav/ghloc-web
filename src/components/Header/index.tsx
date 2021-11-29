@@ -8,7 +8,7 @@ import classNames from "classnames";
 import Link from "next/link";
 import styles from "./Header.module.css";
 import { LogInPopover } from "./LogInPopover";
-import { LogOutButton } from "./LogOutButton";
+import { LogOutPopover } from "./LogOutPopover";
 
 type Props = {
 	className?: string;
@@ -79,7 +79,7 @@ export const Header = ({ className }: Props) => {
 
 						<li>
 							{isLoggedIn ? (
-								<LogOutButton
+								<LogOutPopover
 									buttonClassNames={classNames(
 										styles.icon,
 										"w-6 h-6 hover:text-link-secondary active:scale-90",

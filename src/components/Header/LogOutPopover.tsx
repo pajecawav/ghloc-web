@@ -12,7 +12,7 @@ type Props = {
 	buttonClassNames?: string;
 };
 
-export const LogOutButton = ({ buttonClassNames }: Props) => {
+export const LogOutPopover = ({ buttonClassNames }: Props) => {
 	const { removeToken } = useTokenStore();
 	const { theme } = useTheme();
 
@@ -25,7 +25,7 @@ export const LogOutButton = ({ buttonClassNames }: Props) => {
 		<Popover className="relative grid">
 			<Popover.Button
 				className={classNames(buttonClassNames)}
-				title="Log in with GitHub"
+				title="Log out"
 			>
 				<LogoutIcon />
 			</Popover.Button>
