@@ -1,4 +1,4 @@
-import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next";
 
 async function exchangeOAuthCode(code: string): Promise<string | null> {
 	const params = new URLSearchParams();
@@ -24,18 +24,18 @@ async function exchangeOAuthCode(code: string): Promise<string | null> {
 	return null;
 }
 
-export async function middleware(req: NextRequest, event: NextFetchEvent) {
-	const code = req.nextUrl.searchParams.get("code");
+// TODO: figure out why middleware doesn't work on Vercel and replace this with
+// middleware (Vercel doesn't set the cookie for some reason)
+export default async function handler(
+	req: NextApiRequest,
+	res: NextApiResponse
+) {
+	const code = req.query.code;
 
-	let token;
-	if (code) {
-		token = await exchangeOAuthCode(code);
+	if (typeof code === "string") {
+		const token = await exchangeOAuthCode(code);
+		res.setHeader("Set-Cookie", `token=${token}; path=/; max-age=10`);
 	}
 
-	const res = NextResponse.redirect("/");
-	if (token) {
-		res.cookie("token", token, { path: "/", maxAge: 10 * 1000 });
-	}
-
-	return res;
+	res.redirect("/");
 }
