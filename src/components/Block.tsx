@@ -9,10 +9,7 @@ type Props = {
 export const Block = ({ className, children }: Props) => {
 	return (
 		<div
-			className={classNames(
-				"border border-normal rounded-lg overflow-hidden",
-				className
-			)}
+			className={classNames("border border-normal rounded-lg", className)}
 		>
 			{children}
 		</div>

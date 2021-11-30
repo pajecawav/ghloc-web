@@ -41,7 +41,7 @@ export const RepoPage = () => {
 					className="h-6 w-40 rounded-full"
 					isLoading={!router.isReady}
 				>
-					<div className="flex gap-1 items-center whitespace-nowrap overflow-x-auto text-xl text-muted w-full xs:w-auto">
+					<div className="flex gap-1 items-center whitespace-nowrap text-xl text-muted w-full xs:w-auto">
 						<a
 							className="w-4 h-4 transition-colors duration-100 hover:text-link-normal"
 							href={`https://github.com/${owner}/${repoName}`}
