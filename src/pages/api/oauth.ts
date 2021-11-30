@@ -34,7 +34,9 @@ export default async function handler(
 
 	if (typeof code === "string") {
 		const token = await exchangeOAuthCode(code);
-		res.setHeader("Set-Cookie", `token=${token}; path=/; max-age=10`);
+		if (token) {
+			res.setHeader("Set-Cookie", `token=${token}; path=/; max-age=10`);
+		}
 	}
 
 	res.redirect("/");
