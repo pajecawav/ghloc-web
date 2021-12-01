@@ -95,7 +95,7 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 
 	useEffect(() => {
 		if (locsQuery.isLoadingError && !axios.isCancel(locsQuery.error)) {
-			toast.error("Failed to load LOC stats.");
+			toast.error("Failed to load LOC stats: repo is too big.");
 		}
 	}, [locsQuery.isLoadingError, locsQuery.error]);
 
