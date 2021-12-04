@@ -41,36 +41,31 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 				<h3 className="text-base mb-1">Filter syntax examples</h3>
 				<ul className="leading-relaxed list-disc list-inside">
 					<li>
-						<Code>filter=test,.sum</Code> will ignore paths
-						containing <Code>test</Code> or <Code>.sum</Code>.
+						<Code>test,.sum</Code> will ignore paths containing{" "}
+						<Code>test</Code> or <Code>.sum</Code>.
 					</li>
 					<li>
-						<Code>filter=_test.go$,^docs/</Code> will ignore paths
-						ending with <Code>_test.go</Code> or starting with{" "}
+						<Code>_test.go$,^docs/</Code> will ignore paths ending
+						with <Code>_test.go</Code> or starting with{" "}
 						<Code>docs/</Code>.
 					</li>
 					<li>
-						<Code>filter=.md$,!^README.md$</Code> will ignore all
-						Markdown files (i.e. ending with <Code>.md</Code>)
-						except for <Code>README.md</Code> in the root of the
-						repository.
+						<Code>.md$,!^README.md$</Code> will ignore all Markdown
+						files (i.e. ending with <Code>.md</Code>) except for{" "}
+						<Code>README.md</Code> in the root of the repository.
 					</li>
 					<li>
-						<Code>filter=</Code> will ignore all paths (you will get
-						empty results).
+						<Code>,!.go</Code> will only include paths containing{" "}
+						<Code>.go</Code>.
 					</li>
 					<li>
-						<Code>filter=,!.go</Code> will only include paths
-						containing <Code>.go</Code>.
-					</li>
-					<li>
-						<Code>filter=,!.go$</Code> will only include files with{" "}
+						<Code>,!.go$</Code> will only include files with{" "}
 						<Code>.go</Code> extension.
 					</li>
 					<li>
-						<Code>filter=,!^src/</Code> will filter all paths,
-						except for the ones starting with <Code>src/</Code>{" "}
-						(i.e. placed in the <Code>src</Code>
+						<Code>,!^src/</Code> will filter all paths, except for
+						the ones starting with <Code>src/</Code> (i.e. placed in
+						the <Code>src</Code>
 						folder).
 					</li>
 				</ul>

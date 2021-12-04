@@ -1,7 +1,4 @@
 .skeleton {
-	--accent-1: #fafafa; /* gradient line color */
-	--accent-2: #eaeaea; /* background color */
-
 	--accent-1: var(--colors-bg-accent); /* gradient line color */
 	--accent-2: var(--colors-bg-accent2); /* background color */
 
