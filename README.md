@@ -1,7 +1,6 @@
 # Repo Stats
 
 ![build](https://github.com/pajecawav/repo-stats/actions/workflows/build.yml/badge.svg)
-[![CodeFactor](https://www.codefactor.io/repository/github/pajecawav/repo-stats/badge)](https://www.codefactor.io/repository/github/pajecawav/repo-stats)
 
 A [website](https://github.elif.pw/) to display GitHub repository stats. Currently the following information is available:
 
