@@ -2,37 +2,54 @@ import { Badge } from "@/components/Badge";
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { RepoLocsSection } from "@/components/locs/RepoLocsSection";
 import { CommitsHeatmapSection } from "@/components/repo/CommitsHeatmapSection";
+import { PackageInfo } from "@/components/repo/PackageInfo";
 import { RepoHealthSection } from "@/components/repo/RepoHealthSection";
 import { RepoStats } from "@/components/repo/RepoStats";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { RepoResponse } from "@/types";
-import { formatRepoSize, removeProtocol } from "@/utils";
+import { formatRepoSize } from "@/lib/format";
+import { getRepo, RepoResponse } from "@/lib/github";
+import { removeProtocol } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 
 export const RepoPage = () => {
 	const router = useRouter();
-	const { owner, repo: repoName } = router.query as {
+	const {
+		owner,
+		repo: repoName,
+		branch,
+	} = router.query as {
 		owner: string;
 		repo: string;
+		branch?: string;
 	};
 	const isSmallOrLarger = useMediaQuery("sm");
 
 	const repoQuery = useQuery<RepoResponse, AxiosError>(
 		["repos", repoName],
 		() =>
-			axios
-				.get(`https://api.github.com/repos/${owner}/${repoName}`)
-				.then(response => response.data),
+			getRepo({ owner, repo: repoName }).then(response => response.data),
 		{ enabled: router.isReady }
 	);
 	const repo = repoQuery.data;
+
+	useEffect(() => {
+		const defaultBranch = repo?.default_branch;
+		if (!branch && defaultBranch) {
+			const query = new URLSearchParams(window.location.search);
+			query.set("branch", defaultBranch);
+			router.replace({
+				pathname: window.location.pathname,
+				search: query.toString(),
+			});
+		}
+	}, [repo, branch, router]);
 
 	return (
 		<div className="flex flex-col gap-2">
@@ -151,7 +168,10 @@ export const RepoPage = () => {
 				</Skeleton>
 			</div>
 
-			<RepoHealthSection />
+			<div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+				<RepoHealthSection />
+				<PackageInfo />
+			</div>
 
 			<CommitsHeatmapSection
 				className="hidden sm:flex"

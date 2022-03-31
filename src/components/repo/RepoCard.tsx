@@ -1,4 +1,4 @@
-import { ReposResponseItem } from "@/types";
+import { ReposResponseItem } from "@/lib/github";
 import dayjs from "dayjs";
 import Link from "next/link";
 import React from "react";

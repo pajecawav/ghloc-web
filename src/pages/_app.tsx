@@ -18,7 +18,13 @@ dayjs.extend(relativeTime);
 axios.interceptors.request.use(config => {
 	if (!config.url || !config.headers) return config;
 
-	const url = new URL(config.url);
+	let url;
+	try {
+		url = new URL(config.url);
+	} catch (e) {
+		return config;
+	}
+
 	if (url.hostname === "api.github.com") {
 		const { token } = useTokenStore.getState();
 		if (token) {

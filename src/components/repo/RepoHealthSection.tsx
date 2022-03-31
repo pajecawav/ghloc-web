@@ -1,9 +1,9 @@
-import { RepoHealthResponse } from "@/types";
+import { getCommunityProfile, RepoHealthResponse } from "@/lib/github";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/solid";
 import axios, { AxiosError } from "axios";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import React, { ComponentType, useEffect } from "react";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { Heading } from "../Heading";
@@ -61,11 +61,9 @@ export const RepoHealthSection = ({ className }: Props) => {
 	} = useQuery<RepoHealthResponse, AxiosError>(
 		["repo_health", { owner, repo }],
 		() =>
-			axios
-				.get<RepoHealthResponse>(
-					`https://api.github.com/repos/${owner}/${repo}/community/profile`
-				)
-				.then(response => response.data),
+			getCommunityProfile({ owner, repo }).then(
+				response => response.data
+			),
 		{
 			enabled: router.isReady,
 			staleTime: 60 * 60 * 60 * 1000, // 1 hour
@@ -92,7 +90,7 @@ export const RepoHealthSection = ({ className }: Props) => {
 	} = health?.files ?? {};
 
 	return (
-		<article className={classNames("flex flex-col gap-1", className)}>
+		<div className={classNames("flex flex-col gap-1", className)}>
 			<Heading>
 				Repo health{" "}
 				{health && `(${health.health_percentage.toFixed(0)}%)`}
@@ -152,6 +150,6 @@ export const RepoHealthSection = ({ className }: Props) => {
 					/>
 				</ul>
 			)}
-		</article>
+		</div>
 	);
 };

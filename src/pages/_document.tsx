@@ -15,6 +15,14 @@ export default class MyDocument extends Document {
 						content="See GitHub repository commit activity and total lines of code by language."
 					/>
 					<link rel="preconnect" href="https://api.github.com" />
+					<script
+						async
+						defer
+						data-website-id={
+							process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
+						}
+						src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC}
+					/>
 				</Head>
 				<body className="text-normal bg-normal">
 					{/* insert blocking script to detect color scheme before rendering the app */}

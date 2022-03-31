@@ -1,5 +1,5 @@
-import { ReposResponse } from "@/types";
-import axios, { AxiosError } from "axios";
+import { getUserRepos, ReposResponse } from "@/lib/github";
+import { AxiosError } from "axios";
 import { useMemo } from "react";
 import { useInfiniteQuery } from "react-query";
 import { Button } from "../Button";
@@ -22,11 +22,9 @@ export const ReposList = ({ user }: Props) => {
 	} = useInfiniteQuery<ReposResponse, AxiosError>(
 		["user", user, "repos"],
 		({ pageParam: page }) =>
-			axios
-				.get(`https://api.github.com/users/${user}/repos`, {
-					params: { per_page: REPOS_PER_PAGE, page, sort: "updated" },
-				})
-				.then(response => response.data),
+			getUserRepos({ user, perPage: REPOS_PER_PAGE, page }).then(
+				response => response.data
+			),
 		{
 			getNextPageParam: (lastPage, allPages) =>
 				lastPage.length === REPOS_PER_PAGE

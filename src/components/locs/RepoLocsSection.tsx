@@ -131,7 +131,7 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 	const isFile = pathLocs && !pathLocs.children;
 
 	return (
-		<article className="flex flex-col gap-2">
+		<div className="flex flex-col gap-2">
 			<div className="flex items-center gap-2 flex-wrap">
 				<PathBreadcrumb
 					className="flex-grow break-all w-full xs:w-auto"
@@ -226,6 +226,6 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 					</div>
 				)}
 			</div>
-		</article>
+		</div>
 	);
 };

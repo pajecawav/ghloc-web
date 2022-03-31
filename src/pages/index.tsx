@@ -2,9 +2,9 @@ import { Input } from "@/components/Input";
 import { RepoStats } from "@/components/repo/RepoStats";
 import { useDebouncedState } from "@/hooks/useDebouncedState";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { ReposSearchResponse } from "@/types";
+import { ReposSearchResponse, searchRepos } from "@/lib/github";
 import { SearchIcon } from "@heroicons/react/outline";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import classNames from "classnames";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -33,11 +33,9 @@ export const HomePage = () => {
 	>(
 		["search", debouncedQuery],
 		() =>
-			axios
-				.get("https://api.github.com/search/repositories", {
-					params: { q: debouncedQuery, per_page: 10 },
-				})
-				.then(response => response.data),
+			searchRepos({ query: debouncedQuery }).then(
+				response => response.data
+			),
 		{
 			enabled: !!debouncedQuery,
 			staleTime: Infinity,

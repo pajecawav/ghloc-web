@@ -1,4 +1,4 @@
-import { CommitActivity } from "@/types";
+import { CommitActivity } from "@/lib/github";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import React from "react";

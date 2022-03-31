@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/Skeleton";
-import { CommitActivity } from "@/types";
+import { CommitActivity, getCommitActivity } from "@/lib/github";
 import axios, { AxiosError } from "axios";
 import classNames from "classnames";
 import { useRouter } from "next/router";
@@ -29,15 +29,7 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 	>(
 		["commit_activity", { owner, repo }],
 		async () => {
-			const response = await axios.get<CommitActivity>(
-				`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`,
-				{
-					// treat 202 as an error (indicates that GitHub has started
-					// calculating commit activity)
-					validateStatus: status =>
-						status >= 200 && status < 300 && status !== 202,
-				}
-			);
+			const response = await getCommitActivity({ owner, repo });
 
 			const data = response.data;
 
@@ -96,7 +88,7 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 	}, [isLoadingError, error]);
 
 	return (
-		<article className={classNames("flex flex-col gap-1", className)}>
+		<div className={classNames("flex flex-col gap-1", className)}>
 			<Heading>Commits</Heading>
 			<Skeleton className="h-32 rounded-md" isLoading={!data}>
 				{() => (
@@ -105,6 +97,6 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 					</Block>
 				)}
 			</Skeleton>
-		</article>
+		</div>
 	);
 };

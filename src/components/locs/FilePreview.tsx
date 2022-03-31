@@ -1,6 +1,7 @@
-import { formatRepoSize, formatSize } from "@/utils";
+import { formatSize } from "@/lib/format";
+import { getRawGitHubUrl } from "@/lib/github";
 import axios, { AxiosError } from "axios";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { Skeleton } from "../Skeleton";
@@ -100,9 +101,7 @@ type Props = {
 };
 
 export const FilePreview = ({ owner, repo, branch, path, loc }: Props) => {
-	const url = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path.join(
-		"/"
-	)}`;
+	const url = getRawGitHubUrl({ owner, repo, branch, path: path.join("/") });
 
 	// make a HEAD request first to detect file type
 	const { data: meta } = useQuery<

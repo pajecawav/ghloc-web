@@ -1,8 +1,8 @@
 import { Heading } from "@/components/Heading";
 import { ReposList } from "@/components/repo/ReposList";
 import { Skeleton } from "@/components/Skeleton";
-import { UserResponse } from "@/types";
-import axios, { AxiosError } from "axios";
+import { getUser, UserResponse } from "@/lib/github";
+import { AxiosError } from "axios";
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
@@ -15,10 +15,7 @@ const UserReposPage = () => {
 
 	const { data: user } = useQuery<UserResponse, AxiosError>(
 		["user", owner],
-		() =>
-			axios
-				.get(`https://api.github.com/users/${owner}`)
-				.then(response => response.data),
+		() => getUser(owner).then(response => response.data),
 		{ enabled: router.isReady }
 	);
 

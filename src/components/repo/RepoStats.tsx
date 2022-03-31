@@ -1,5 +1,5 @@
 import { GitForkIcon } from "@/components/icons/GitForkIcon";
-import { formatRepoStat } from "@/utils";
+import { formatRepoStat } from "@/lib/format";
 import { EyeIcon, StarIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 import React from "react";
