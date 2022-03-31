@@ -47,11 +47,11 @@ export const HomePage = () => {
 		if (router.isReady) {
 			router.replace({
 				pathname: "/",
-				query: { ...(query && { q: query }) },
+				query: { ...(debouncedQuery && { q: debouncedQuery }) },
 			});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query]);
+	}, [debouncedQuery]);
 
 	useEffect(() => {
 		if (isLoadingError) {
