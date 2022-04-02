@@ -15,7 +15,7 @@
 		"postinstall": "is-ci || yarn prepare"
 	},
 	"dependencies": {
-		"@headlessui/react": "^1.4.2",
+		"@headlessui/react": "^1.5.0",
 		"@heroicons/react": "^1.0.5",
 		"axios": "^0.24.0",
 		"classnames": "^2.3.1",
@@ -33,6 +33,7 @@
 		"@types/nprogress": "^0.2.0",
 		"@types/react": "17.0.35",
 		"@types/tailwindcss": "^2.2.4",
+		"@types/umami": "^0.1.0",
 		"autoprefixer": "^10.4.0",
 		"eslint": "7",
 		"eslint-config-next": "12.0.4",

@@ -1,17 +1,12 @@
 import classNames from "classnames";
-import { ComponentPropsWithoutRef, useEffect, useRef } from "react";
+import { ComponentPropsWithoutRef, forwardRef } from "react";
 
 type Props = ComponentPropsWithoutRef<"input">;
 
-export const Input = ({ className, ...props }: Props) => {
-	const ref = useRef<HTMLInputElement | null>(null);
-
-	useEffect(() => {
-		if (props.autoFocus) {
-			ref.current?.focus();
-		}
-	}, [props.autoFocus]);
-
+export const Input = forwardRef<HTMLInputElement, Props>(function Input(
+	{ className, ...props }: Props,
+	ref
+) {
 	return (
 		<input
 			className={classNames(
@@ -21,15 +16,7 @@ export const Input = ({ className, ...props }: Props) => {
 			)}
 			size={1}
 			ref={ref}
-			{...(props.autoFocus && {
-				// HACK: trick to always place caret at the end of the text
-				onFocus: e =>
-					e.currentTarget.setSelectionRange(
-						e.currentTarget.value.length,
-						e.currentTarget.value.length
-					),
-			})}
 			{...props}
 		/>
 	);
-};
+});

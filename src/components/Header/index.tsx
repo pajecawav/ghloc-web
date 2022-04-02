@@ -2,7 +2,6 @@ import { GithubIcon } from "@/components/icons/GithubIcon";
 import { Theme } from "@/contexts/ThemeContext";
 import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 import { useTheme } from "@/hooks/useTheme";
-import { LoginIcon, LogoutIcon } from "@heroicons/react/outline";
 import { MoonIcon, SearchIcon, SunIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 import Link from "next/link";
@@ -66,7 +65,8 @@ export const Header = ({ className }: Props) => {
 								className={classNames(
 									styles.icon,
 									"block w-5 h-5 hover:text-link-secondary active:scale-90",
-									"hover:transition-all hover:duration-100"
+									"hover:transition-all hover:duration-100",
+									"umami--click--github-button"
 								)}
 								href="https://github.com/pajecawav/repo-stats"
 								target="_blank"
