@@ -45,6 +45,9 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 		setState: setFilter,
 	} = useDebouncedState(filterParam, 1000);
 	const [order, setOrder] = useState<keyof typeof sortOrders>("type");
+	const [selectedLanguage, setSelectedLanguage] = useState<string | null>(
+		null
+	);
 
 	let path: string[];
 	try {
@@ -204,6 +207,7 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 									locs={pathLocs!}
 									order={order}
 									onSelect={name => setPath([...path, name])}
+									selectedLanguage={selectedLanguage}
 								/>
 							</Skeleton>
 						)}
@@ -220,7 +224,13 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 								className="h-80"
 								isLoading={pathLocs === undefined}
 							>
-								{() => <LocsStats locs={pathLocs!} />}
+								{() => (
+									<LocsStats
+										locs={pathLocs!}
+										selectedLanguage={selectedLanguage}
+										onSelectLanguage={setSelectedLanguage}
+									/>
+								)}
 							</Skeleton>
 						</Block>
 					</div>

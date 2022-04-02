@@ -31,13 +31,12 @@ export const RepoPage = () => {
 	};
 	const isSmallOrLarger = useMediaQuery("sm");
 
-	const repoQuery = useQuery<RepoResponse, AxiosError>(
+	const { data: repo } = useQuery<RepoResponse, AxiosError>(
 		["repos", repoName],
 		() =>
 			getRepo({ owner, repo: repoName }).then(response => response.data),
 		{ enabled: router.isReady }
 	);
-	const repo = repoQuery.data;
 
 	useEffect(() => {
 		const defaultBranch = repo?.default_branch;

@@ -1,7 +1,7 @@
 import { CommitActivity } from "@/lib/github";
 import classNames from "classnames";
 import dayjs from "dayjs";
-import React from "react";
+import React, { memo } from "react";
 import styles from "./CommitsHeatmap.module.css";
 
 const DAY = 60 * 60 * 24;
@@ -10,7 +10,7 @@ type Props = {
 	data: CommitActivity;
 };
 
-export const CommitsHeatmap = ({ data }: Props) => {
+export const CommitsHeatmap = memo(({ data }: Props) => {
 	const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 	const cellSize = 16;
@@ -110,4 +110,4 @@ export const CommitsHeatmap = ({ data }: Props) => {
 			</g>
 		</svg>
 	);
-};
+});

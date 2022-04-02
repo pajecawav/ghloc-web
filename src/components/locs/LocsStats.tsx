@@ -1,17 +1,31 @@
 import { Locs } from "@/types";
 import classNames from "classnames";
-import React from "react";
+import React, { useCallback } from "react";
 import { Spacer } from "../Spacer";
 
 export type Props = {
 	locs: Locs;
 	className?: string;
+	selectedLanguage?: string | null;
+	onSelectLanguage?: (language: string | null) => void;
 };
 
-export const LocsStats = ({ locs, className }: Props) => {
+export const LocsStats = ({
+	locs,
+	className,
+	selectedLanguage,
+	onSelectLanguage,
+}: Props) => {
 	const totalLocs = Object.values(locs.locByLangs).reduce(
 		(sum, loc) => sum + loc,
 		0
+	);
+
+	const handleSelectLanguage = useCallback(
+		(language: string) => {
+			onSelectLanguage?.(language === selectedLanguage ? null : language);
+		},
+		[selectedLanguage, onSelectLanguage]
 	);
 
 	const entries = Object.entries(locs.locByLangs);
@@ -25,12 +39,20 @@ export const LocsStats = ({ locs, className }: Props) => {
 			)}
 		>
 			{entries.map(([lang, loc]) => (
-				<li className="flex px-2 py-1 gap-2" key={lang}>
-					<span className="text-left truncate">{lang}</span>
-					<Spacer />
-					<span className="whitespace-nowrap">
-						{loc} ({((100 * loc) / totalLocs).toFixed(2)}%)
-					</span>
+				<li key={lang}>
+					<button
+						className={classNames(
+							"w-full flex px-2 py-1 gap-2 hover:bg-accent",
+							lang === selectedLanguage && "bg-blue-50"
+						)}
+						onClick={() => handleSelectLanguage(lang)}
+					>
+						<span className="text-left truncate">{lang}</span>
+						<Spacer />
+						<span className="whitespace-nowrap">
+							{loc} ({((100 * loc) / totalLocs).toFixed(2)}%)
+						</span>
+					</button>
 				</li>
 			))}
 		</ul>
