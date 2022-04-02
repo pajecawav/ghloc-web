@@ -22,7 +22,7 @@ jobs:
                   cache: "yarn"
                   cache-dependency-path: ./yarn.lock
             - name: Install dependencies
-              run: yarn install
+              run: yarn install --frozen-lockfile
             - name: Run checks
               run: yarn ci-check
 
@@ -38,6 +38,6 @@ jobs:
                   cache: "yarn"
                   cache-dependency-path: ./yarn.lock
             - name: Install dependencies
-              run: yarn install
+              run: yarn install --frozen-lockfile
             - name: Build project
               run: yarn build
