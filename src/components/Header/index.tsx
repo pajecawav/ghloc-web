@@ -5,6 +5,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { MoonIcon, SearchIcon, SunIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 import Link from "next/link";
+import { FirefoxIcon } from "../icons/FirefoxIcon";
 import styles from "./Header.module.css";
 import { LogInPopover } from "./LogInPopover";
 import { LogOutPopover } from "./LogOutPopover";
@@ -76,7 +77,22 @@ export const Header = ({ className }: Props) => {
 								<GithubIcon />
 							</a>
 						</li>
-
+						<li>
+							<a
+								className={classNames(
+									styles.icon,
+									"block w-5 h-5 hover:text-link-secondary active:scale-90",
+									"hover:transition-all hover:duration-100",
+									"umami--click--firefox-addon-button"
+								)}
+								href="https://addons.mozilla.org/ru/firefox/addon/github-lines-of-code"
+								target="_blank"
+								rel="noopener noreferrer"
+								title="Firefox addon"
+							>
+								<FirefoxIcon />
+							</a>
+						</li>
 						<li>
 							{isLoggedIn ? (
 								<LogOutPopover
