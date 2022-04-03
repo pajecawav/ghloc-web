@@ -1,8 +1,8 @@
 .entry {
 	background-image: linear-gradient(
 		to right,
-		theme("colors.blue.50") 0%,
-		theme("colors.blue.50") 100%
+		var(--colors-select-active) 0%,
+		var(--colors-select-active) 100%
 	);
 	transition: background-size 0.4s;
 	background-repeat: no-repeat;
