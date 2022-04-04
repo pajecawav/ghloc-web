@@ -2,7 +2,9 @@ import { Heading } from "@/components/Heading";
 import { ReposList } from "@/components/repo/ReposList";
 import { Skeleton } from "@/components/Skeleton";
 import { getUser, UserResponse } from "@/lib/github";
+import { formatTitle } from "@/lib/format";
 import { AxiosError } from "axios";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "react-query";
@@ -21,6 +23,12 @@ const UserReposPage = () => {
 
 	return (
 		<div className="flex flex-col gap-5">
+			{router.isReady && (
+				<Head>
+					<title>{formatTitle(`${owner}`)}</title>
+				</Head>
+			)}
+
 			<div className="flex items-center">
 				<h1 className="text-2xl">
 					<a

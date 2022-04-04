@@ -8,11 +8,12 @@ import { RepoStats } from "@/components/repo/RepoStats";
 import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { formatRepoSize } from "@/lib/format";
+import { formatRepoSize, formatTitle } from "@/lib/format";
 import { getRepo, RepoResponse } from "@/lib/github";
 import { removeProtocol } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
 import { AxiosError } from "axios";
+import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -52,6 +53,12 @@ export const RepoPage = () => {
 
 	return (
 		<div className="flex flex-col gap-2">
+			{router.isReady && (
+				<Head>
+					<title>{formatTitle(`${owner}/${repoName}`)}</title>
+				</Head>
+			)}
+
 			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
 				<Skeleton
 					className="h-6 w-40 rounded-full"

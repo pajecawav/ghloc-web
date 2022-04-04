@@ -4,6 +4,7 @@ import { ToastsList } from "@/components/ToastsList";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { useTokenStore } from "@/stores/useTokenStore";
 import "@/styles/globals.css";
+import { formatTitle } from "@/lib/format";
 import axios, { AxiosError } from "axios";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -104,9 +105,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider>
 				<Head>
-					<title>GitHub Stats</title>
+					<title>{formatTitle()}</title>
 				</Head>
-
 				<NavigationProgressBar />
 				<ToastsList />
 

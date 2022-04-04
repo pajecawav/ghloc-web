@@ -1,3 +1,7 @@
+export function formatTitle(text?: string): string {
+	return (text ? `${text} | ` : "") + "GitHub Stats";
+}
+
 export function formatRepoSize(kb: number): string {
 	return kb < 1e3 ? `${Math.floor(kb)} KB` : `${Math.floor(kb / 1e3)} MB`;
 }
