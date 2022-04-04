@@ -74,7 +74,9 @@ export const LocsTree = ({
 						className={styles.entry}
 						name={name}
 						node={node}
-						percentage={getValueOfChild(node) / totalLocs}
+						percentage={
+							totalLocs ? getValueOfChild(node) / totalLocs : 0
+						}
 						langLocsPercentage={langLocsPercentage || 0}
 						onSelect={onSelect}
 						key={name}
