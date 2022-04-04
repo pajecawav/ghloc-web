@@ -17,6 +17,8 @@ export const PackageInfo = () => {
 		branch?: string;
 	};
 
+	const enabled = router.isReady && !!branch;
+
 	const { data, isLoading, isLoadingError, error } = useQuery<
 		PackageInfoResponse,
 		AxiosError
@@ -29,7 +31,7 @@ export const PackageInfo = () => {
 				})
 				.then(response => response.data.data),
 		{
-			enabled: router.isReady && !!branch,
+			enabled,
 			staleTime: 60 * 60 * 60 * 1000, // 1 hour
 		}
 	);
@@ -44,7 +46,7 @@ export const PackageInfo = () => {
 		<div className={classNames("flex flex-col gap-1")}>
 			<Heading>Package</Heading>
 
-			{isLoading ? (
+			{isLoading || !enabled ? (
 				<div className="flex flex-col gap-2">
 					{Array.from({ length: 3 }).map((_, index) => (
 						<Skeleton
