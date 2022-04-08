@@ -36,12 +36,6 @@ export const PackageInfo = () => {
 		}
 	);
 
-	useEffect(() => {
-		if (isLoadingError && !axios.isCancel(error)) {
-			toast.error("Failed to load package info.");
-		}
-	}, [isLoadingError, error]);
-
 	return (
 		<div className={classNames("flex flex-col gap-1")}>
 			<Heading>Package</Heading>

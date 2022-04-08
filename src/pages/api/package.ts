@@ -19,6 +19,7 @@ export default async function handler(
 		const data = await getPackageInfo({ owner, repo, branch });
 		res.json({ data });
 	} catch (e) {
+		console.error(e);
 		return res.status(500).end("Internal Server Error");
 	}
 }
