@@ -70,7 +70,7 @@ html.dark {
 	/* text */
 	--colors-text-normal: theme("colors.gray.200");
 	--colors-text-subtle: theme("colors.gray.300");
-	--colors-text-muted: theme("colors.warmGray.400");
+	--colors-text-muted: theme("colors.stone.400");
 
 	/* background */
 	--colors-bg-normal: #181a1b;

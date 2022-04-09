@@ -111,3 +111,5 @@ export const CommitsHeatmap = memo(({ data }: Props) => {
 		</svg>
 	);
 });
+
+CommitsHeatmap.displayName = "CommitsHeatmap";

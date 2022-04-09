@@ -4,11 +4,10 @@ const colors = require("tailwindcss/colors");
 /** @type {import("tailwindcss/tailwind-config").TailwindConfig} */
 module.exports = {
 	mode: "jit",
-	purge: [
+	content: [
 		"./src/pages/**/*.{js,ts,jsx,tsx}",
 		"./src/components/**/*.{js,ts,jsx,tsx}",
 	],
-	darkMode: false, // or 'media' or 'class'
 	theme: {
 		screens: {
 			xs: "475px",
@@ -44,8 +43,6 @@ module.exports = {
 				"text-muted": "var(--colors-text-muted)",
 			},
 			colors: {
-				warmGray: colors.warmGray,
-
 				// success/error
 				success: "var(--colors-success)",
 				error: "var(--colors-error)",
