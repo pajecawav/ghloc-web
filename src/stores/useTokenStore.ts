@@ -1,4 +1,4 @@
-import create, { GetState, SetState } from "zustand";
+import create from "zustand";
 import { persist } from "zustand/middleware";
 
 type Store = {

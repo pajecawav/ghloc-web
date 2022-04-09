@@ -15,7 +15,6 @@ Also a [Firefox addon](https://addons.mozilla.org/ru/firefox/addon/github-lines-
 
 ## Current Limitations
 
--   GitHub API has a limit of 60 unathorized requests per hour. This should be enough for most use cases but a simple GitHub OAuth with no scopes can be implemented later to increase the limit to 5000 requests per hour.
 -   LOCs API has a max repo size limit.
 
 ## Development

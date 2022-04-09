@@ -1,14 +1,13 @@
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { Theme } from "@/contexts/ThemeContext";
-import { useIsLoggedIn } from "@/hooks/useIsLoggedIn";
 import { useTheme } from "@/hooks/useTheme";
-import { MoonIcon, SearchIcon, SunIcon } from "@heroicons/react/solid";
+import { CogIcon, MoonIcon, SearchIcon, SunIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 import Link from "next/link";
+import { useState } from "react";
+import { GitHubTokenModal } from "../GitHubTokenModal";
 import { FirefoxIcon } from "../icons/FirefoxIcon";
 import styles from "./Header.module.css";
-import { LogInPopover } from "./LogInPopover";
-import { LogOutPopover } from "./LogOutPopover";
 
 type Props = {
 	className?: string;
@@ -16,7 +15,7 @@ type Props = {
 
 export const Header = ({ className }: Props) => {
 	const { theme, toggleTheme } = useTheme();
-	const isLoggedIn = useIsLoggedIn();
+	const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
 
 	const showIcons = theme !== undefined;
 
@@ -94,23 +93,21 @@ export const Header = ({ className }: Props) => {
 							</a>
 						</li>
 						<li>
-							{isLoggedIn ? (
-								<LogOutPopover
-									buttonClassNames={classNames(
-										styles.icon,
-										"w-6 h-6 hover:text-link-secondary active:scale-90",
-										"hover:transition-all hover:duration-100"
-									)}
-								/>
-							) : (
-								<LogInPopover
-									buttonClassNames={classNames(
-										styles.icon,
-										"w-6 h-6 hover:text-link-secondary active:scale-90",
-										"hover:transition-all hover:duration-100"
-									)}
-								/>
-							)}
+							<button
+								className={classNames(
+									styles.icon,
+									"block w-6 h-6 hover:text-link-secondary active:scale-90",
+									"hover:transition-all hover:duration-100",
+									"active:transition-all active:duration-100"
+								)}
+								onClick={() => setIsTokenModalOpen(true)}
+							>
+								<CogIcon />
+							</button>
+							<GitHubTokenModal
+								isOpen={isTokenModalOpen}
+								onClose={() => setIsTokenModalOpen(false)}
+							/>
 						</li>
 					</>
 				)}

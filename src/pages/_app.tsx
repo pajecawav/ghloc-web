@@ -90,16 +90,6 @@ const queryClient = new QueryClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
 	const AppShell = (Component as any).AppShell || DefaultAppShell;
-	const { setToken } = useTokenStore();
-
-	useEffect(() => {
-		if (document.cookie) {
-			const [, token] = document.cookie.split("=");
-			setToken(token);
-			document.cookie = "";
-			toast("You have successfully logged in.");
-		}
-	}, [setToken]);
 
 	return (
 		<QueryClientProvider client={queryClient}>
