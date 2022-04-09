@@ -18,10 +18,6 @@ import { useQuery } from "react-query";
 
 export const HomePage = () => {
 	const router = useRouter();
-	const queryParam =
-		typeof window !== "undefined"
-			? new URLSearchParams(window.location.search).get("q") || ""
-			: "";
 
 	const isMediumOrLarger = useMediaQuery("md");
 
@@ -29,7 +25,7 @@ export const HomePage = () => {
 		state: query,
 		debounced: debouncedQuery,
 		setState: setQuery,
-	} = useDebouncedState(queryParam, 750);
+	} = useDebouncedState("", 750);
 	const resultsRef = useRef<HTMLUListElement | null>(null);
 
 	const { data: results, isLoadingError } = useQuery<
@@ -47,16 +43,6 @@ export const HomePage = () => {
 			keepPreviousData: true,
 		}
 	);
-
-	useEffect(() => {
-		if (router.isReady) {
-			router.replace({
-				pathname: "/",
-				query: { ...(debouncedQuery && { q: debouncedQuery }) },
-			});
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [debouncedQuery]);
 
 	useEffect(() => {
 		if (resultsRef.current) {
