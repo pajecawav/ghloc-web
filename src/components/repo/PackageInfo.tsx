@@ -3,8 +3,6 @@ import { PackageInfo as PackageInfoResponse } from "@/lib/package";
 import axios, { AxiosError } from "axios";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
@@ -19,10 +17,7 @@ export const PackageInfo = () => {
 
 	const enabled = router.isReady && !!branch;
 
-	const { data, isLoading, isLoadingError, error } = useQuery<
-		PackageInfoResponse,
-		AxiosError
-	>(
+	const { data, isLoading } = useQuery<PackageInfoResponse, AxiosError>(
 		["package_info", { owner, repo, branch }],
 		() =>
 			axios
@@ -56,36 +51,54 @@ export const PackageInfo = () => {
 					<li>
 						<a
 							className="text-link-normal hover:underline"
-							href={`https://bundlephobia.com/package/${data.bundle.name}`}
+							href={`https://bundlephobia.com/package/${data.name}`}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							Bundle size
 						</a>
-						: {formatSize(data.bundle.size)} minified (
-						{formatSize(data.bundle.gzip)} gzipped)
+						:{" "}
+						{data.bundle ? (
+							`${formatSize(
+								data.bundle.size
+							)} minified (${formatSize(
+								data.bundle.gzip
+							)} gzipped)`
+						) : (
+							<span className="text-muted">failed to load.</span>
+						)}
 					</li>
 					<li>
 						<a
 							className="text-link-normal hover:underline"
-							href={`https://packagephobia.com/result?p=${data.bundle.name}`}
+							href={`https://packagephobia.com/result?p=${data.name}`}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							Install size
 						</a>
-						: {formatSize(data.package.install.bytes)}
+						:{" "}
+						{data.package ? (
+							formatSize(data.package.install.bytes)
+						) : (
+							<span className="text-muted">failed to load.</span>
+						)}
 					</li>
 					<li>
 						<a
 							className="text-link-normal hover:underline"
-							href={`https://packagephobia.com/result?p=${data.bundle.name}`}
+							href={`https://packagephobia.com/result?p=${data.name}`}
 							target="_blank"
 							rel="noopener noreferrer"
 						>
 							Publish size
 						</a>
-						: {formatSize(data.package.publish.bytes)}
+						:{" "}
+						{data.package ? (
+							formatSize(data.package.publish.bytes)
+						) : (
+							<span className="text-muted">failed to load.</span>
+						)}
 					</li>
 				</ul>
 			)}

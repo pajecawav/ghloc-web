@@ -35,7 +35,7 @@ export function GitHubTokenModal({ isOpen, onClose }: Props) {
 				onClose={onClose}
 				initialFocus={closeButtonRef}
 			>
-				<div className="min-h-screen px-4 grid place-items-center">
+				<div className="h-full px-4 grid place-items-center">
 					<Transition.Child
 						as={Fragment}
 						enter="ease-out duration-200"

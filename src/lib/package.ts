@@ -73,8 +73,9 @@ async function fetchBundlephobiaData(
 }
 
 export type PackageInfo = {
-	bundle: BundlephobiaResponse;
-	package: PackagephobiaResponse;
+	name: string;
+	bundle: BundlephobiaResponse | null;
+	package: PackagephobiaResponse | null;
 };
 
 export async function getPackageInfo({
@@ -110,10 +111,19 @@ export async function getPackageInfo({
 		return null;
 	}
 
-	const [bundleInfo, packageInfo] = await Promise.all([
+	const [bundleData, packageData] = await Promise.allSettled([
 		fetchBundlephobiaData(pkg.name),
 		fetchPackagephobiaData(pkg.name),
 	]);
 
-	return { bundle: bundleInfo, package: packageInfo };
+	const bundleInfo =
+		bundleData.status === "fulfilled" ? bundleData.value : null;
+	const packageInfo =
+		packageData.status === "fulfilled" ? packageData.value : null;
+
+	return {
+		name: pkg.name as string,
+		bundle: bundleInfo,
+		package: packageInfo,
+	};
 }

@@ -87,7 +87,8 @@ export const HomePage = () => {
 						onChange={event => setQuery(event.target.value)}
 						displayValue={() => query}
 						className="w-full !px-12 !py-3 text-2xl text-center !rounded-lg shadow-sm border border-normal font-light group-focus-within:!border-active2 caret-blue-400"
-						placeholder="Find repo"
+						placeholder="facebook/react"
+						type="search"
 						autoFocus
 					/>
 					<div className="absolute top-0 bottom-0 right-2 m-auto w-8 h-8 text-muted transition-colors duration-100 group-focus-within:text-border-active2">

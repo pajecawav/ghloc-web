@@ -17,6 +17,7 @@ export const Header = ({ className }: Props) => {
 	const { theme, toggleTheme } = useTheme();
 	const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
 
+	// hide icons on initial render to avoid hydration mismatch
 	const showIcons = theme !== undefined;
 
 	return (
@@ -54,9 +55,9 @@ export const Header = ({ className }: Props) => {
 								title="Toggle dark mode"
 							>
 								{theme === Theme.light ? (
-									<SunIcon />
-								) : (
 									<MoonIcon />
+								) : (
+									<SunIcon />
 								)}
 							</button>
 						</li>
