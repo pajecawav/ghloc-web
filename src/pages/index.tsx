@@ -16,6 +16,9 @@ import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 
+const githubUrlRegex =
+	/(https?:\/\/)?github.com\/(?<owner>[^\/]+)\/(?<repo>[^\/]+)(\/[^\$]+)?/;
+
 export const HomePage = () => {
 	const router = useRouter();
 
@@ -65,6 +68,17 @@ export const HomePage = () => {
 		});
 	};
 
+	const onChange = (value: string) => {
+		// try to parse github url to use `owner/repo` as a query
+		const match = value.match(githubUrlRegex);
+		if (match?.groups) {
+			const { owner, repo } = match.groups;
+			value = `${owner}/${repo}`;
+		}
+
+		setQuery(value);
+	};
+
 	return (
 		<Combobox
 			value={null as ReposResponseItem | null}
@@ -84,7 +98,7 @@ export const HomePage = () => {
 				<div className="relative flex-shrink-0">
 					<Combobox.Input
 						as={Input}
-						onChange={event => setQuery(event.target.value)}
+						onChange={event => onChange(event.target.value)}
 						displayValue={() => query}
 						className="w-full !px-12 !py-3 text-2xl text-center !rounded-lg shadow-sm border border-normal font-light group-focus-within:!border-active2 caret-blue-400"
 						placeholder="facebook/react"
