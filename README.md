@@ -11,7 +11,7 @@ A [website](https://github.elif.pw/) to display GitHub repository stats. Current
 
 Also a [Firefox addon](https://addons.mozilla.org/ru/firefox/addon/github-lines-of-code/) is available. It provides LOCs stats dropdown directly on project's GitHub page and a link to page with detailed stats for the repository. Source code available [here](https://github.com/pajecawav/ghloc-extension/).
 
-[![Screenshot of the site](./assets/screenshot.png)](https://github.elif.pw/pajecawav/repo-stats)
+[![Screenshot of the site](https://user-images.githubusercontent.com/18193831/166311168-72751a16-e8a4-4b3d-94ad-c37993d9e7bd.png)](https://github.elif.pw/facebook/react)
 
 ## Current Limitations
 
