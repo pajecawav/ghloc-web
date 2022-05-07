@@ -88,7 +88,7 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 			return axios
 				.get<Locs>(url, {
 					params: {
-						...(filter && { filter: debouncedFilter }),
+						...(filter && { match: debouncedFilter }),
 					},
 				})
 				.then(response => response.data);
