@@ -1,6 +1,6 @@
 # Repo Stats
 
-![build](https://github.com/pajecawav/repo-stats/actions/workflows/build.yml/badge.svg)
+![build](https://github.com/pajecawav/ghloc-web/actions/workflows/build.yml/badge.svg)
 
 A [website](https://github.elif.pw/) to display GitHub repository stats. Currently the following information is available:
 
@@ -19,7 +19,7 @@ Also a [Firefox addon](https://addons.mozilla.org/ru/firefox/addon/github-lines-
 
 ## Development
 
-1. Clone the repository: `git clone https://github.com/pajecawav/repo-stats`.
+1. Clone the repository: `git clone https://github.com/pajecawav/ghloc-web`.
 1. Install dependencies: `yarn install`.
 1. Start development server: `yarn dev`.
 1. Navigate to `localhost:3000`.

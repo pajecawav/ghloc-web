@@ -76,23 +76,17 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 
 	const locsQuery = useQuery<Locs, AxiosError>(
 		["stats", { owner, repo, branch, filter: debouncedFilter }],
-		() => {
-			// NOTE: the actual service is hosted on https://ghloc.bytes.pw but
-			// uBlock Origin has a rule to block all third-party requests to
-			// *.pw so we use ghloc.elif.pw (which is the same domain) as a
-			// proxy to ghloc.bytes.pw
-			let url = `https://ghloc.elif.pw/${owner}/${repo}`;
-			if (branch) {
-				url += `/${branch}`;
-			}
-			return axios
-				.get<Locs>(url, {
+		() =>
+			axios
+				.get<Locs>("/api/locs", {
 					params: {
+						owner,
+						repo,
+						branch,
 						...(filter && { match: debouncedFilter }),
 					},
 				})
-				.then(response => response.data);
-		},
+				.then(response => response.data),
 		{ enabled: router.isReady, keepPreviousData: true }
 	);
 

@@ -69,7 +69,7 @@ export const Header = ({ className }: Props) => {
 									"hover:transition-all hover:duration-100",
 									"umami--click--github-button"
 								)}
-								href="https://github.com/pajecawav/repo-stats"
+								href="https://github.com/pajecawav/ghloc-web"
 								target="_blank"
 								rel="noopener noreferrer"
 								title="Project source code"
