@@ -1,5 +1,5 @@
 {
-	"name": "github-stats",
+	"name": "ghloc-web",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -7,12 +7,20 @@
 		"start": "next start",
 		"prepare": "husky install",
 		"lint": "next lint",
-		"lint:fix": "next lint --fix",
 		"tsc": "tsc --noEmit",
-		"format": "prettier 'src/**/*.{css,js,jsx,ts,tsx}' --write",
-		"format:list": "prettier --list-different \"src/**/*.{js,ts,jsx,tsx,css}\"",
+		"format": "prettier './**/*.{js,jsx,ts,tsx,css,json,md,yml}' --write",
+		"format:check": "prettier --check './**/*.{js,jsx,ts,tsx,css,json,md,yml}'",
 		"ci-check": "npm-run-all format:list --parallel lint tsc",
 		"postinstall": "is-ci || yarn prepare"
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx}": [
+			"eslint --fix",
+			"prettier --write"
+		],
+		"*.{json,md,yml,css}": [
+			"prettier --write"
+		]
 	},
 	"dependencies": {
 		"@headlessui/react": "^1.5.0",
@@ -39,6 +47,7 @@
 		"eslint-config-next": "^12.1.4",
 		"husky": "^7.0.4",
 		"is-ci": "^3.0.1",
+		"lint-staged": "^12.4.1",
 		"npm-run-all": "^4.1.5",
 		"postcss": "^8.3.11",
 		"prettier": "^2.4.1",

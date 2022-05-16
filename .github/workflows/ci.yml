@@ -1,7 +1,4 @@
-# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Build
+name: Build and lint
 
 on:
     pull_request:
@@ -10,34 +7,46 @@ on:
         branches: [master]
 
 jobs:
-    lint:
+    Lint:
         runs-on: ubuntu-latest
 
         steps:
             - uses: actions/checkout@v2
+
             - name: Setup Node
               uses: actions/setup-node@v2
               with:
                   node-version: "16"
                   cache: "yarn"
                   cache-dependency-path: ./yarn.lock
+
             - name: Install dependencies
               run: yarn install --frozen-lockfile
-            - name: Run checks
-              run: yarn ci-check
 
-    build:
+            - name: Check formatting
+              run: yarn format:check
+
+            - name: Typecheck
+              run: yarn tsc
+
+            - name: Lint
+              run: yarn lint
+
+    Build:
         runs-on: ubuntu-latest
 
         steps:
             - uses: actions/checkout@v2
+
             - name: Setup Node
               uses: actions/setup-node@v2
               with:
                   node-version: "16"
                   cache: "yarn"
                   cache-dependency-path: ./yarn.lock
+
             - name: Install dependencies
               run: yarn install --frozen-lockfile
+
             - name: Build project
               run: yarn build
