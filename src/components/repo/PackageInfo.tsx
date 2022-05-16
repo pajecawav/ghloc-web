@@ -21,9 +21,12 @@ export const PackageInfo = () => {
 		["package_info", { owner, repo, branch }],
 		() =>
 			axios
-				.get<{ data: PackageInfoResponse }>(`/api/package`, {
-					params: { owner, repo, branch },
-				})
+				.get<{ data: PackageInfoResponse }>(
+					`/api/${owner}/${repo}/package`,
+					{
+						params: { branch },
+					}
+				)
 				.then(response => response.data.data),
 		{
 			enabled,

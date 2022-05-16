@@ -78,10 +78,8 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 		["stats", { owner, repo, branch, filter: debouncedFilter }],
 		() =>
 			axios
-				.get<Locs>("/api/locs", {
+				.get<Locs>(`/api/${owner}/${repo}/locs`, {
 					params: {
-						owner,
-						repo,
 						branch,
 						...(filter && { match: debouncedFilter }),
 					},

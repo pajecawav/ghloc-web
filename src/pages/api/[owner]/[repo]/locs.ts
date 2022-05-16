@@ -19,10 +19,6 @@ export default async function handler(
 		string
 	>;
 
-	if (!owner || !repo) {
-		return res.status(400).end("Bad Request");
-	}
-
 	let url = `${GHLOC_BASE_URL}/${owner}/${repo}`;
 	if (branch) {
 		url += `/${branch}`;

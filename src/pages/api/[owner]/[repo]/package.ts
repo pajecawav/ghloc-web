@@ -11,7 +11,7 @@ export default async function handler(
 
 	const { owner, repo, branch } = req.query as Record<string, string>;
 
-	if (!owner || !repo || !branch) {
+	if (!branch) {
 		return res.status(400).end("Bad Request");
 	}
 
