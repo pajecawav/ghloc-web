@@ -2,7 +2,7 @@ import { InformationCircleIcon, XIcon } from "@heroicons/react/outline";
 import { CheckCircleIcon, ExclamationCircleIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 import React, { ReactNode } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast, { resolveValue, Toaster } from "react-hot-toast";
 import { LoadingPlaceholder } from "../LoadingPlaceholder";
 import styles from "./ToastsList.module.css";
 
@@ -48,7 +48,7 @@ export const ToastsList = () => {
 							{typeIcons[t.type as ToastType]}
 						</div>
 					)}
-					<div>{t.message}</div>
+					<div>{resolveValue(t.message, t)}</div>
 					{t.type !== "loading" && (
 						<button
 							className="absolute top-3 right-2"

@@ -27,12 +27,11 @@ export default async function handler(
 	try {
 		const response = await axios.get(url, { params });
 		const locs = response.data;
-		res.setHeader("cache-control", "public, max-age=60, s-maxage=60");
+		res.setHeader("cache-control", "public, max-age=300, s-maxage=300");
 		res.json(locs);
 	} catch (e) {
 		if (axios.isAxiosError(e)) {
-			const errorMessage = e.response?.data.error as string | undefined;
-			res.status(Number(e.code) || 400).end(errorMessage ?? e.message);
+			res.status(Number(e.code) || 400).end(e.message);
 		} else {
 			res.status(500).end("Internal Server Error");
 		}
