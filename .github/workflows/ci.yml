@@ -11,42 +11,48 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 7
 
             - name: Setup Node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
-                  node-version: "16"
-                  cache: "yarn"
-                  cache-dependency-path: ./yarn.lock
+                  node-version: 16
+                  cache: pnpm
 
             - name: Install dependencies
-              run: yarn install --frozen-lockfile
+              run: pnpm install --frozen-lockfile
 
             - name: Check formatting
-              run: yarn format:check
+              run: pnpm format:check
 
             - name: Typecheck
-              run: yarn tsc
+              run: pnpm tsc
 
             - name: Lint
-              run: yarn lint
+              run: pnpm lint
 
     Build:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v3
+
+            - uses: pnpm/action-setup@v2
+              with:
+                  version: 7
 
             - name: Setup Node
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
-                  node-version: "16"
-                  cache: "yarn"
-                  cache-dependency-path: ./yarn.lock
+                  node-version: 16
+                  cache: pnpm
 
             - name: Install dependencies
-              run: yarn install --frozen-lockfile
+              run: pnpm install --frozen-lockfile
 
             - name: Build project
-              run: yarn build
+              run: pnpm build
