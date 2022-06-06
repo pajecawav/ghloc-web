@@ -1,6 +1,7 @@
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { Theme } from "@/contexts/ThemeContext";
 import { useTheme } from "@/hooks/useTheme";
+import { CodeIcon } from "@heroicons/react/outline";
 import { CogIcon, MoonIcon, SearchIcon, SunIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 import Link from "next/link";
@@ -91,6 +92,22 @@ export const Header = ({ className }: Props) => {
 								title="Firefox addon"
 							>
 								<FirefoxIcon />
+							</a>
+						</li>
+						<li>
+							<a
+								className={classNames(
+									styles.icon,
+									"block w-5 h-5 hover:text-link-secondary active:scale-90",
+									"hover:transition-all hover:duration-100",
+									"umami--click--userscript-button"
+								)}
+								href="https://gist.github.com/pajecawav/70ffe72bf4aa0968aa9f97318976138f"
+								target="_blank"
+								rel="noopener noreferrer"
+								title="Userscript link"
+							>
+								<CodeIcon />
 							</a>
 						</li>
 						<li>

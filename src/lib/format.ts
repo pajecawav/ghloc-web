@@ -1,5 +1,5 @@
 export function formatTitle(text?: string): string {
-	return (text ? `${text} | ` : "") + "GitHub Stats";
+	return (text ? `${text} | ` : "") + "ghloc";
 }
 
 export function formatRepoSize(kb: number): string {
