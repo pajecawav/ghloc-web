@@ -31,7 +31,6 @@ export const Header = ({ className }: Props) => {
 
 	// hide icons on initial render to avoid hydration mismatch
 	const showIcons = theme !== undefined;
-	console.log(theme);
 
 	return (
 		<header className={className}>

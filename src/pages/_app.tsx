@@ -55,8 +55,10 @@ function handleGitHubError(error: AxiosError) {
 			);
 		}
 	} else if (error.response?.status === 401) {
-		const { removeToken } = useTokenStore.getState();
-		removeToken();
+		toast.error("Invalid GitHub API token.", {
+			duration: Infinity,
+			id: "github_api-token-expired",
+		});
 	}
 }
 
