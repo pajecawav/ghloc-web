@@ -3,7 +3,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
-		"build": "next build",
+		"build": "pnpm build-languages && next build",
+		"build-languages": "esno scripts/build-languages.ts",
 		"start": "next start",
 		"prepare": "husky install",
 		"lint": "next lint",
@@ -44,6 +45,7 @@
 		"autoprefixer": "^10.4.7",
 		"eslint": "^8.19.0",
 		"eslint-config-next": "^12.2.1",
+		"esno": "^0.16.3",
 		"husky": "^8.0.1",
 		"is-ci": "^3.0.1",
 		"lint-staged": "^13.0.3",

@@ -2,15 +2,14 @@ import { DefaultAppShell } from "@/components/DefaultAppShell";
 import { NavigationProgressBar } from "@/components/NavigationProgressBar";
 import { ToastsList } from "@/components/ToastsList";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { formatTitle } from "@/lib/format";
 import { useTokenStore } from "@/stores/useTokenStore";
 import "@/styles/globals.css";
-import { formatTitle } from "@/lib/format";
 import axios, { AxiosError } from "axios";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { QueryCache, QueryClient, QueryClientProvider } from "react-query";
 

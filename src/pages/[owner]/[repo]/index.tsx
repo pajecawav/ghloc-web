@@ -16,7 +16,7 @@ import { AxiosError } from "axios";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 
 export const RepoPage = () => {

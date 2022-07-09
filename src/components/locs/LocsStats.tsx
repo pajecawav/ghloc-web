@@ -1,3 +1,4 @@
+import { getLanguageFromExtension } from "@/languages";
 import { Locs } from "@/types";
 import classNames from "classnames";
 import React, { useCallback } from "react";
@@ -47,7 +48,12 @@ export const LocsStats = ({
 						)}
 						onClick={() => handleSelectLanguage(lang)}
 					>
-						<span className="text-left truncate">{lang}</span>
+						<span
+							className="text-left truncate"
+							title={getLanguageFromExtension(lang) ?? undefined}
+						>
+							{lang}
+						</span>
 						<Spacer />
 						<span className="whitespace-nowrap">
 							{loc} ({((100 * loc) / totalLocs).toFixed(2)}%)

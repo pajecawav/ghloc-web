@@ -1,0 +1,890 @@
+{
+	"languages": {
+		"Abap": {
+			"name": "ABAP",
+			"extensions": ["abap"]
+		},
+		"ABNF": {
+			"extensions": ["abnf"]
+		},
+		"ActionScript": {
+			"extensions": ["as"]
+		},
+		"Ada": {
+			"extensions": ["ada", "adb", "ads", "pad"]
+		},
+		"Alex": {
+			"extensions": ["x"]
+		},
+		"Agda": {
+			"extensions": ["agda"]
+		},
+		"Alloy": {
+			"extensions": ["als"]
+		},
+		"Arduino": {
+			"name": "Arduino C++",
+			"extensions": ["ino"]
+		},
+		"AsciiDoc": {
+			"extensions": ["adoc", "asciidoc"]
+		},
+		"Asn1": {
+			"name": "ASN.1",
+			"extensions": ["asn1"]
+		},
+		"Assembly": {
+			"extensions": ["asm"]
+		},
+		"AssemblyGAS": {
+			"name": "GNU Style Assembly",
+			"extensions": ["s"]
+		},
+		"Asp": {
+			"name": "ASP",
+			"extensions": ["asa", "asp"]
+		},
+		"AspNet": {
+			"name": "ASP.NET",
+			"extensions": [
+				"asax",
+				"ascx",
+				"asmx",
+				"aspx",
+				"master",
+				"sitemap",
+				"webinfo"
+			]
+		},
+		"Ats": {
+			"name": "ATS",
+			"extensions": ["dats", "hats", "sats", "atxt"]
+		},
+		"Autoconf": {
+			"extensions": ["in"]
+		},
+		"AutoHotKey": {
+			"extensions": ["ahk"]
+		},
+		"Automake": {
+			"extensions": ["am"]
+		},
+		"AWK": {
+			"extensions": ["awk"]
+		},
+		"Sh": {
+			"name": "Shell",
+			"extensions": ["sh"]
+		},
+		"Bash": {
+			"name": "BASH",
+			"extensions": ["bash"]
+		},
+		"BrightScript": {
+			"extensions": ["brs"]
+		},
+		"Elvish": {
+			"extensions": ["elv"]
+		},
+		"Fennel": {
+			"extensions": ["fnl"]
+		},
+		"Fish": {
+			"extensions": ["fish"]
+		},
+		"Batch": {
+			"extensions": ["bat", "btm", "cmd"]
+		},
+		"Bean": {
+			"extensions": ["bean", "beancount"]
+		},
+		"C": {
+			"extensions": ["c", "ec", "pgc"]
+		},
+		"Cabal": {
+			"extensions": ["cabal"]
+		},
+		"Cassius": {
+			"extensions": ["cassius"]
+		},
+		"Ceylon": {
+			"extensions": ["ceylon"]
+		},
+		"CHeader": {
+			"name": "C Header",
+			"extensions": ["h"]
+		},
+		"Clojure": {
+			"extensions": ["clj"]
+		},
+		"ClojureScript": {
+			"extensions": ["cljs"]
+		},
+		"ClojureC": {
+			"extensions": ["cljc"]
+		},
+		"CMake": {
+			"extensions": ["cmake"],
+			"filenames": ["cmakelists.txt"]
+		},
+		"Cobol": {
+			"name": "COBOL",
+			"extensions": ["cob", "cbl", "ccp", "cobol", "cpy"]
+		},
+		"CodeQL": {
+			"extensions": ["ql", "qll"]
+		},
+		"CoffeeScript": {
+			"extensions": ["coffee", "cjsx"]
+		},
+		"Cogent": {
+			"extensions": ["cogent"]
+		},
+		"ColdFusion": {
+			"extensions": ["cfm"]
+		},
+		"ColdFusionScript": {
+			"name": "ColdFusion CFScript",
+			"extensions": ["cfc"]
+		},
+		"Coq": {
+			"extensions": ["v"]
+		},
+		"Cpp": {
+			"name": "C++",
+			"extensions": ["cc", "cpp", "cxx", "c++", "pcc", "tpp"]
+		},
+		"CppHeader": {
+			"name": "C++ Header",
+			"extensions": ["hh", "hpp", "hxx", "inl", "ipp"]
+		},
+		"Crystal": {
+			"extensions": ["cr"]
+		},
+		"CSharp": {
+			"name": "C#",
+			"extensions": ["cs", "csx"]
+		},
+		"CShell": {
+			"name": "C Shell",
+			"extensions": ["csh"]
+		},
+		"Css": {
+			"name": "CSS",
+			"extensions": ["css"]
+		},
+		"D": {
+			"extensions": ["d"]
+		},
+		"Daml": {
+			"name": "DAML",
+			"extensions": ["daml"]
+		},
+		"Dart": {
+			"extensions": ["dart"]
+		},
+		"DeviceTree": {
+			"name": "Device Tree",
+			"extensions": ["dts", "dtsi"]
+		},
+		"Dhall": {
+			"extensions": ["dhall"]
+		},
+		"DreamMaker": {
+			"name": "Dream Maker",
+			"extensions": ["dm", "dme"]
+		},
+		"Dockerfile": {
+			"extensions": ["dockerfile", "dockerignore"],
+			"filenames": ["dockerfile"]
+		},
+		"DotNetResource": {
+			"name": ".NET Resource",
+			"extensions": ["resx"]
+		},
+		"Dust": {
+			"name": "Dust.js",
+			"extensions": ["dust"]
+		},
+		"Edn": {
+			"extensions": ["edn"]
+		},
+		"Elisp": {
+			"name": "Emacs Lisp",
+			"extensions": ["el"]
+		},
+		"Elixir": {
+			"extensions": ["ex", "exs"]
+		},
+		"Elm": {
+			"extensions": ["elm"]
+		},
+		"EmacsDevEnv": {
+			"name": "Emacs Dev Env",
+			"extensions": ["ede"]
+		},
+		"Emojicode": {
+			"extensions": ["emojic", "🍇"]
+		},
+		"Erlang": {
+			"extensions": ["erl", "hrl"]
+		},
+		"Factor": {
+			"extensions": ["factor"]
+		},
+		"FEN": {
+			"name": "FEN",
+			"extensions": ["fen"]
+		},
+		"FlatBuffers": {
+			"name": "FlatBuffers Schema",
+			"extensions": ["fbs"]
+		},
+		"Fstar": {
+			"name": "F*",
+			"extensions": ["fst"]
+		},
+		"Forth": {
+			"extensions": [
+				"4th",
+				"forth",
+				"fr",
+				"frt",
+				"fth",
+				"f83",
+				"fb",
+				"fpm",
+				"e4",
+				"rx",
+				"ft"
+			]
+		},
+		"FortranLegacy": {
+			"name": "FORTRAN Legacy",
+			"extensions": ["f", "for", "ftn", "f77", "pfo"]
+		},
+		"FortranModern": {
+			"name": "FORTRAN Modern",
+			"extensions": ["f03", "f08", "f90", "f95"]
+		},
+		"FreeMarker": {
+			"extensions": ["ftl", "ftlh", "ftlx"]
+		},
+		"FSharp": {
+			"name": "F#",
+			"extensions": ["fs", "fsi", "fsx", "fsscript"]
+		},
+		"Futhark": {
+			"extensions": ["fut"]
+		},
+		"GDB": {
+			"name": "GDB Script",
+			"extensions": ["gdb"]
+		},
+		"GdScript": {
+			"name": "GDScript",
+			"extensions": ["gd"]
+		},
+		"Gherkin": {
+			"name": "Gherkin (Cucumber)",
+			"extensions": ["feature"]
+		},
+		"Gleam": {
+			"name": "Gleam",
+			"extensions": ["gleam"]
+		},
+		"Gml": {
+			"name": "Gml",
+			"extensions": ["gml"]
+		},
+		"Glsl": {
+			"name": "GLSL",
+			"extensions": [
+				"vert",
+				"tesc",
+				"tese",
+				"geom",
+				"frag",
+				"comp",
+				"mesh",
+				"task",
+				"rgen",
+				"rint",
+				"rahit",
+				"rchit",
+				"rmiss",
+				"rcall",
+				"glsl"
+			]
+		},
+		"Go": {
+			"extensions": ["go"]
+		},
+		"Gohtml": {
+			"name": "Go HTML",
+			"extensions": ["gohtml"]
+		},
+		"Graphql": {
+			"name": "GraphQL",
+			"extensions": ["gql", "graphql"]
+		},
+		"Groovy": {
+			"extensions": ["groovy", "grt", "gtpl", "gvy"]
+		},
+		"Gwion": {
+			"extensions": ["gw"]
+		},
+		"Happy": {
+			"extensions": ["y", "ly"]
+		},
+		"Handlebars": {
+			"extensions": ["hbs", "handlebars"]
+		},
+		"Haskell": {
+			"extensions": ["hs"]
+		},
+		"Hcl": {
+			"name": "HCL",
+			"extensions": ["hcl", "tf", "tfvars"]
+		},
+		"Headache": {
+			"extensions": ["ha"]
+		},
+		"Hlsl": {
+			"name": "HLSL",
+			"extensions": ["hlsl"]
+		},
+		"HolyC": {
+			"extensions": ["HC", "hc"]
+		},
+		"Html": {
+			"name": "HTML",
+			"extensions": ["html", "htm"]
+		},
+		"Hamlet": {
+			"extensions": ["hamlet"]
+		},
+		"Haxe": {
+			"extensions": ["hx"]
+		},
+		"Hex": {
+			"name": "HEX",
+			"extensions": ["hex"]
+		},
+		"Idris": {
+			"extensions": ["idr", "lidr"]
+		},
+		"Ini": {
+			"name": "INI",
+			"extensions": ["ini"]
+		},
+		"IntelHex": {
+			"name": "Intel HEX",
+			"extensions": ["ihex"]
+		},
+		"Isabelle": {
+			"extensions": ["thy"]
+		},
+		"Jai": {
+			"name": "JAI",
+			"extensions": ["jai"]
+		},
+		"Java": {
+			"extensions": ["java"]
+		},
+		"JavaScript": {
+			"extensions": ["js", "mjs"]
+		},
+		"Jinja2": {
+			"name": "Jinja2",
+			"extensions": ["j2"]
+		},
+		"Json": {
+			"name": "JSON",
+			"extensions": ["json"]
+		},
+		"Jsonnet": {
+			"extensions": ["jsonnet", "libsonnet"]
+		},
+		"Jsx": {
+			"extensions": ["jsx"]
+		},
+		"Julia": {
+			"extensions": ["jl"]
+		},
+		"Julius": {
+			"extensions": ["julius"]
+		},
+		"Jupyter": {
+			"name": "Jupyter Notebooks",
+			"extensions": ["ipynb"]
+		},
+		"K": {
+			"name": "K",
+			"extensions": ["k"]
+		},
+		"KakouneScript": {
+			"name": "Kakoune script",
+			"extensions": ["kak"]
+		},
+		"Kotlin": {
+			"extensions": ["kt", "kts"]
+		},
+		"Ksh": {
+			"name": "Korn shell",
+			"extensions": ["ksh"]
+		},
+		"KvLanguage": {
+			"name": "KV Language",
+			"extensions": ["kv"]
+		},
+		"Lean": {
+			"extensions": ["lean", "hlean"]
+		},
+		"Less": {
+			"name": "LESS",
+			"extensions": ["less"]
+		},
+		"Liquid": {
+			"name": "Liquid",
+			"extensions": ["liquid"]
+		},
+		"LinkerScript": {
+			"name": "LD Script",
+			"extensions": ["lds"]
+		},
+		"Lisp": {
+			"name": "Common Lisp",
+			"extensions": ["lisp", "lsp", "asd"]
+		},
+		"LiveScript": {
+			"extensions": ["ls"]
+		},
+		"LLVM": {
+			"extensions": ["ll"]
+		},
+		"Logtalk": {
+			"extensions": ["lgt", "logtalk"]
+		},
+		"LolCode": {
+			"name": "LOLCODE",
+			"extensions": ["lol"]
+		},
+		"Lua": {
+			"extensions": ["lua"]
+		},
+		"Lucius": {
+			"extensions": ["lucius"]
+		},
+		"Madlang": {
+			"extensions": ["mad"]
+		},
+		"Makefile": {
+			"extensions": ["makefile", "mak", "mk"],
+			"filenames": ["makefile"]
+		},
+		"Markdown": {
+			"literate": true,
+			"important_syntax": ["```"],
+			"extensions": ["md", "markdown"]
+		},
+		"Metal": {
+			"name": "Metal Shading Language",
+			"extensions": ["metal"]
+		},
+		"ModuleDef": {
+			"name": "Module-Definition",
+			"extensions": ["def"]
+		},
+		"MoonScript": {
+			"extensions": ["moon"]
+		},
+		"Meson": {
+			"filenames": ["meson.build", "meson_options.txt"]
+		},
+		"Mint": {
+			"extensions": ["mint"]
+		},
+		"Mlatu": {
+			"extensions": ["mlt"]
+		},
+		"Mustache": {
+			"extensions": ["mustache"]
+		},
+		"Nim": {
+			"extensions": ["nim"]
+		},
+		"Nix": {
+			"extensions": ["nix"]
+		},
+		"ObjectiveC": {
+			"name": "Objective-C",
+			"extensions": ["m"]
+		},
+		"ObjectiveCpp": {
+			"name": "Objective-C++",
+			"extensions": ["mm"]
+		},
+		"OCaml": {
+			"extensions": ["ml", "mli", "mll", "mly", "re", "rei"]
+		},
+		"Odin": {
+			"extensions": ["odin"]
+		},
+		"OpenPolicyAgent": {
+			"name": "Open Policy Agent",
+			"extensions": ["rego"]
+		},
+		"OpenType": {
+			"name": "OpenType Feature File",
+			"extensions": ["fea"]
+		},
+		"Org": {
+			"extensions": ["org"]
+		},
+		"Oz": {
+			"extensions": ["oz"]
+		},
+		"Pan": {
+			"extensions": ["pan", "tpl"]
+		},
+		"Pascal": {
+			"extensions": ["pas", "pp"]
+		},
+		"Perl": {
+			"extensions": ["pl", "pm"]
+		},
+		"Perl6": {
+			"name": "Rakudo",
+			"extensions": ["pl6", "pm6"]
+		},
+		"Pest": {
+			"extensions": ["pest"]
+		},
+		"NotQuitePerl": {
+			"name": "Not Quite Perl",
+			"extensions": ["nqp"]
+		},
+		"Php": {
+			"name": "PHP",
+			"extensions": ["php"]
+		},
+		"Polly": {
+			"extensions": ["polly"]
+		},
+		"Pony": {
+			"extensions": ["pony"]
+		},
+		"PostCss": {
+			"name": "PostCSS",
+			"extensions": ["pcss", "sss"]
+		},
+		"Processing": {
+			"extensions": ["pde"]
+		},
+		"Prolog": {
+			"extensions": ["p", "pro"]
+		},
+		"PowerShell": {
+			"extensions": [
+				"ps1",
+				"psm1",
+				"psd1",
+				"ps1xml",
+				"cdxml",
+				"pssc",
+				"psc1"
+			]
+		},
+		"PSL": {
+			"name": "PSL Assertion",
+			"extensions": ["psl"]
+		},
+		"Protobuf": {
+			"name": "Protocol Buffers",
+			"extensions": ["proto"]
+		},
+		"Pug": {
+			"extensions": ["pug"]
+		},
+		"PureScript": {
+			"extensions": ["purs"]
+		},
+		"Python": {
+			"extensions": ["py", "pyw"]
+		},
+		"Qcl": {
+			"name": "QCL",
+			"extensions": ["qcl"]
+		},
+		"Q": {
+			"name": "Q",
+			"extensions": ["q"]
+		},
+		"Qml": {
+			"name": "QML",
+			"extensions": ["qml"]
+		},
+		"R": {
+			"extensions": ["r"]
+		},
+		"Racket": {
+			"extensions": ["rkt", "scrbl"]
+		},
+		"Rakefile": {
+			"filenames": ["rakefile"],
+			"extensions": ["rake"]
+		},
+		"Razor": {
+			"extensions": ["cshtml"]
+		},
+		"Renpy": {
+			"name": "Ren'Py",
+			"extensions": ["rpy"]
+		},
+		"RON": {
+			"name": "Rusty Object Notation",
+			"extensions": ["ron"]
+		},
+		"RPMSpecfile": {
+			"name": "RPM Specfile",
+			"extensions": ["spec"]
+		},
+		"Ruby": {
+			"extensions": ["rb"]
+		},
+		"RubyHtml": {
+			"name": "Ruby HTML",
+			"extensions": ["rhtml", "erb"]
+		},
+		"Rust": {
+			"extensions": ["rs"]
+		},
+		"ReStructuredText": {
+			"extensions": ["rst"]
+		},
+		"Sass": {
+			"extensions": ["sass", "scss"]
+		},
+		"Scala": {
+			"extensions": ["sc", "scala"]
+		},
+		"Scheme": {
+			"extensions": ["scm", "ss"]
+		},
+		"Scons": {
+			"filenames": ["sconstruct", "sconscript"]
+		},
+		"Sml": {
+			"name": "Standard ML (SML)",
+			"extensions": ["sml"]
+		},
+		"Solidity": {
+			"name": "Solidity",
+			"extensions": ["sol"]
+		},
+		"SpecmanE": {
+			"name": "Specman e",
+			"extensions": ["e"]
+		},
+		"Spice": {
+			"name": "Spice Netlist",
+			"extensions": ["ckt"]
+		},
+		"Sql": {
+			"name": "SQL",
+			"extensions": ["sql"]
+		},
+		"SRecode": {
+			"name": "SRecode Template",
+			"extensions": ["srt"]
+		},
+		"Stan": {
+			"extensions": ["stan"]
+		},
+		"Stratego": {
+			"name": "Stratego/XT",
+			"extensions": ["str"]
+		},
+		"Stylus": {
+			"extensions": ["styl"]
+		},
+		"Svelte": {
+			"extensions": ["svelte"]
+		},
+		"Svg": {
+			"name": "SVG",
+			"extensions": ["svg"]
+		},
+		"Swift": {
+			"extensions": ["swift"]
+		},
+		"Swig": {
+			"name": "SWIG",
+			"extensions": ["swg", "i"]
+		},
+		"SystemVerilog": {
+			"extensions": ["sv", "svh"]
+		},
+		"Tcl": {
+			"name": "TCL",
+			"extensions": ["tcl"]
+		},
+		"Tera": {
+			"extensions": ["tera"]
+		},
+		"Tex": {
+			"name": "TeX",
+			"extensions": ["tex", "sty"]
+		},
+		"Text": {
+			"name": "Plain Text",
+			"extensions": ["text", "txt"]
+		},
+		"Thrift": {
+			"extensions": ["thrift"]
+		},
+		"Toml": {
+			"name": "TOML",
+			"extensions": ["toml"]
+		},
+		"Tsx": {
+			"name": "TSX",
+			"extensions": ["tsx"]
+		},
+		"Ttcn": {
+			"name": "TTCN-3",
+			"extensions": ["ttcn", "ttcn3", "ttcnpp"]
+		},
+		"Twig": {
+			"name": "Twig",
+			"extensions": ["twig"]
+		},
+		"TypeScript": {
+			"extensions": ["ts"]
+		},
+		"UnrealPlugin": {
+			"name": "Unreal Plugin",
+			"extensions": ["uplugin"]
+		},
+		"UnrealProject": {
+			"name": "Unreal Project",
+			"extensions": ["uproject"]
+		},
+		"UnrealScript": {
+			"name": "Unreal Script",
+			"extensions": ["uc", "uci", "upkg"]
+		},
+		"UnrealShader": {
+			"name": "Unreal Shader",
+			"extensions": ["usf"]
+		},
+		"UnrealShaderHeader": {
+			"name": "Unreal Shader Header",
+			"extensions": ["ush"]
+		},
+		"UnrealDeveloperMarkdown": {
+			"name": "Unreal Markdown",
+			"important_syntax": ["```"],
+			"extensions": ["udn"]
+		},
+		"UrWeb": {
+			"name": "Ur/Web",
+			"extensions": ["ur", "urs"]
+		},
+		"UrWebProject": {
+			"name": "Ur/Web Project",
+			"extensions": ["urp"]
+		},
+		"Vala": {
+			"extensions": ["vala"]
+		},
+		"VB6": {
+			"name": "VB6",
+			"extensions": ["frm", "bas", "cls"]
+		},
+		"VBScript": {
+			"name": "VBScript",
+			"extensions": ["vbs"]
+		},
+		"Velocity": {
+			"name": "Apache Velocity",
+			"extensions": ["vm"]
+		},
+		"Verilog": {
+			"extensions": ["vg", "vh"]
+		},
+		"VerilogArgsFile": {
+			"name": "Verilog Args File",
+			"extensions": ["irunargs", "xrunargs"]
+		},
+		"Vhdl": {
+			"name": "VHDL",
+			"extensions": ["vhd", "vhdl"]
+		},
+		"VisualBasic": {
+			"name": "Visual Basic",
+			"extensions": ["vb"]
+		},
+		"VisualStudioSolution": {
+			"name": "Visual Studio Solution",
+			"extensions": ["sln"]
+		},
+		"VisualStudioProject": {
+			"name": "Visual Studio Project",
+			"extensions": ["vcproj", "vcxproj"]
+		},
+		"VimScript": {
+			"name": "Vim script",
+			"extensions": ["vim"]
+		},
+		"Vue": {
+			"name": "Vue",
+			"important_syntax": ["<script", "<style", "<template"],
+			"extensions": ["vue"]
+		},
+		"WebAssembly": {
+			"extensions": ["wat", "wast"]
+		},
+		"WGSL": {
+			"name": "WebGPU Shader Language",
+			"extensions": ["wgsl"]
+		},
+		"Wolfram": {
+			"extensions": ["nb", "wl"]
+		},
+		"Xaml": {
+			"name": "XAML",
+			"extensions": ["xaml"]
+		},
+		"XcodeConfig": {
+			"name": "Xcode Config",
+			"extensions": ["xcconfig"]
+		},
+		"Xml": {
+			"name": "XML",
+			"extensions": ["xml"]
+		},
+		"XSL": {
+			"name": "XSL",
+			"extensions": ["xsl", "xslt"]
+		},
+		"MsBuild": {
+			"name": "MSBuild",
+			"extensions": ["csproj", "vbproj", "fsproj", "props", "targets"]
+		},
+		"Xtend": {
+			"extensions": ["xtend"]
+		},
+		"Yaml": {
+			"name": "YAML",
+			"extensions": ["yaml", "yml"]
+		},
+		"Zig": {
+			"extensions": ["zig"]
+		},
+		"Zsh": {
+			"extensions": ["zsh"]
+		}
+	}
+}
