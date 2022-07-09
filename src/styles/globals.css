@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+svg {
+	/* border: 1px solid red; */
+}
+
 html {
 	/* text */
 	--colors-text-normal: black;
@@ -48,6 +52,9 @@ html {
 
 	/* select */
 	--colors-select-active: theme("colors.blue.50");
+
+	/* tree */
+	--colors-tree-active: theme("colors.sky.100");
 
 	/* badge */
 	--colors-badge-normal-bg: theme("colors.blue.100");
@@ -113,6 +120,9 @@ html.dark {
 	/* select */
 	--colors-select-active: var(--colors-bg-accent);
 
+	/* tree */
+	--colors-tree-active: var(--colors-bg-accent);
+
 	/* badge */
 	--colors-badge-normal-bg: var(--colors-bg-accent);
 	--colors-badge-normal-text: var(--colors-text-subtle);
@@ -169,13 +179,9 @@ body,
 	box-sizing: border-box;
 }
 
-*:focus {
-	outline: 2px solid var(--colors-outline);
-	outline-offset: 0;
-}
-
 #nprogress .bar {
 	background: var(--colors-navigation-progress);
+	height: 3px;
 }
 
 #nprogress .spinner,
@@ -209,21 +215,5 @@ html,
 @layer utilities {
 	.no-highlight {
 		-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
-	}
-
-	.heroicon-sw-2 path {
-		stroke-width: 2 !important;
-	}
-
-	.heroicon-sw-1\.75 path {
-		stroke-width: 1.75 !important;
-	}
-
-	.heroicon-sw-1\.5 path {
-		stroke-width: 1.5 !important;
-	}
-
-	.heroicon-sw-1 path {
-		stroke-width: 1 !important;
 	}
 }

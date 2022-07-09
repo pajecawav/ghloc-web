@@ -4,6 +4,7 @@ const colors = require("tailwindcss/colors");
 /** @type {import("tailwindcss/tailwind-config").TailwindConfig} */
 module.exports = {
 	mode: "jit",
+	darkMode: "class",
 	content: [
 		"./src/pages/**/*.{js,ts,jsx,tsx}",
 		"./src/components/**/*.{js,ts,jsx,tsx}",
@@ -57,6 +58,9 @@ module.exports = {
 
 				// select
 				"select-active": "var(--colors-select-active)",
+
+				// tree
+				"tree-active": "var(--colors-tree-active)",
 
 				// badge
 				"badge-normal-bg": "var(--colors-badge-normal-bg)",

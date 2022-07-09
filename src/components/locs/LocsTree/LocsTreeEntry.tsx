@@ -2,7 +2,6 @@ import { LocsChild } from "@/types";
 import { DocumentIcon } from "@heroicons/react/outline";
 import { FolderIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
-import React, { ComponentProps } from "react";
 import { Spacer } from "../../Spacer";
 import { getValueOfChild } from "./LocsTree.utils";
 
@@ -27,7 +26,7 @@ export const LocsTreeEntry = ({
 
 	return (
 		<li
-			className={classNames("hover:bg-accent", className)}
+			className={classNames("hover:bg-tree-active", className)}
 			style={{
 				backgroundSize: `${langLocsPercentage || 0}%`,
 			}}
@@ -41,12 +40,13 @@ export const LocsTreeEntry = ({
 					{isFile ? (
 						<DocumentIcon />
 					) : (
-						<FolderIcon className="text-blue-400" />
+						<FolderIcon
+							className="text-blue-400 stroke-black dark:stroke-current"
+							strokeWidth="1"
+						/>
 					)}
 				</div>
-				<span className="text-left truncate hover:underline hover:text-link-normal">
-					{name}
-				</span>
+				<span className="text-left truncate">{name}</span>
 				<Spacer />
 
 				<span className="whitespace-nowrap">

@@ -42,8 +42,8 @@ export const LocsStats = ({
 				<li key={lang}>
 					<button
 						className={classNames(
-							"w-full flex px-2 py-1 gap-2 hover:bg-accent",
-							lang === selectedLanguage && "bg-select-active"
+							"w-full flex px-2 py-1 gap-2 hover:bg-tree-active",
+							lang === selectedLanguage && "bg-tree-active"
 						)}
 						onClick={() => handleSelectLanguage(lang)}
 					>

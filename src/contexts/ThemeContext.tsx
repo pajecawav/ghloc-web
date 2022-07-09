@@ -22,7 +22,7 @@ export enum Theme {
 }
 
 const getTheme = (): Theme | undefined => {
-	if (window === undefined) {
+	if (typeof window === "undefined") {
 		return undefined;
 	}
 
