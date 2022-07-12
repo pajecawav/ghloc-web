@@ -30,3 +30,7 @@ export function formatRepoStat(stat: number): string {
 	const str = stat < 1000 ? stat.toString() : `${(stat / 1000).toFixed(1)}k`;
 	return str.replace(".0", "");
 }
+
+export function formatNumber(value: number): string {
+	return new Intl.NumberFormat().format(value);
+}
