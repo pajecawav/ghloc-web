@@ -34,7 +34,7 @@ export const Header = ({ className }: Props) => {
 
 	return (
 		<header className={className}>
-			<ul className="flex items-center justify-end">
+			<ul className="flex items-center justify-end h-8">
 				{showIcons && (
 					<>
 						<HeaderItem>
@@ -61,6 +61,7 @@ export const Header = ({ className }: Props) => {
 							<button
 								className="w-full h-full"
 								onClick={() => setIsTokenModalOpen(true)}
+								title="Open GitHub token settings"
 							>
 								<CogIcon />
 							</button>

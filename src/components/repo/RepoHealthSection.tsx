@@ -106,7 +106,7 @@ export const RepoHealthSection = ({ className }: Props) => {
 					))}
 				</div>
 			) : (
-				<ul className="flex flex-col gap-1 text-sm">
+				<ul className="flex flex-col">
 					<HealthEntry
 						text={readme ? "Readme" : "No Readme"}
 						url={readme?.html_url}

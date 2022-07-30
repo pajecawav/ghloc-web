@@ -35,7 +35,7 @@ export const PackageInfo = () => {
 		}
 	);
 
-	const failedLabel = <span className="text-muted">failed to load.</span>;
+	const failedLabel = <span className="text-muted">failed to load</span>;
 
 	return (
 		<div className={classNames("flex flex-col gap-1")}>
