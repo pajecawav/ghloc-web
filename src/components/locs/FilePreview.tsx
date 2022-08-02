@@ -3,7 +3,7 @@ import { getRawGitHubUrl } from "@/lib/github";
 import axios, { AxiosError } from "axios";
 import { ReactNode, useEffect } from "react";
 import toast from "react-hot-toast";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "../Skeleton";
 
 type FileType = "text" | "image";

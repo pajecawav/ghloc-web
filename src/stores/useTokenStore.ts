@@ -7,14 +7,13 @@ type Store = {
 	removeToken: () => void;
 };
 
-export const useTokenStore = create<Store>(
+export const useTokenStore = create<Store>()(
 	persist(
-		set =>
-			({
-				token: undefined,
-				setToken: (token: string) => set({ token }),
-				removeToken: () => set({ token: undefined }),
-			} as Store),
+		set => ({
+			token: undefined,
+			setToken: (token: string) => set({ token }),
+			removeToken: () => set({ token: undefined }),
+		}),
 		{ name: "token" }
 	)
 );

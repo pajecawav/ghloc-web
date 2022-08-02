@@ -7,7 +7,7 @@ import { AxiosError } from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const UserReposPage = () => {
 	const router = useRouter();

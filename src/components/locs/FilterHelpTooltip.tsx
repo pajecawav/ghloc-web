@@ -20,7 +20,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 		<div className={classNames("relative group grid", className)}>
 			<button
 				className={classNames(
-					"no-highlight relative w-5 h-5 transition-colors duration-75 text-muted focus:text-normal",
+					"no-highlight relative w-5 h-5 transition-colors duration-75 text-muted outline-none focus:text-normal",
 					"after:hidden group-focus-within:after:block group-hover:after:block after:h-[calc(100%+1.25rem)] after:absolute after:top-0 after:w-[200%] after:right-0"
 				)}
 				aria-label="Show filter syntax help"

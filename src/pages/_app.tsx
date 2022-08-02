@@ -5,13 +5,17 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import { formatTitle } from "@/lib/format";
 import { useTokenStore } from "@/stores/useTokenStore";
 import "@/styles/globals.css";
+import {
+	QueryCache,
+	QueryClient,
+	QueryClientProvider,
+} from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import toast from "react-hot-toast";
-import { QueryCache, QueryClient, QueryClientProvider } from "react-query";
 
 dayjs.extend(relativeTime);
 
@@ -49,14 +53,14 @@ function handleGitHubError(error: AxiosError) {
 				`GitHub API limit reached. Reset ${dayjs().to(reset)}.`,
 				{
 					duration: Infinity,
-					id: "github_api-limit-reached",
+					id: "error_github-limit-reached",
 				}
 			);
 		}
 	} else if (error.response?.status === 401) {
 		toast.error("Invalid GitHub API token.", {
 			duration: Infinity,
-			id: "github_api-token-expired",
+			id: "error_github-token-expired",
 		});
 	}
 }
@@ -77,7 +81,7 @@ const queryClient = new QueryClient({
 		queries: {
 			retry: false,
 			refetchOnWindowFocus: false,
-			staleTime: 5 * 60 * 1000, // 5 min
+			staleTime: Infinity,
 		},
 	},
 	queryCache: new QueryCache({
@@ -98,6 +102,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 				<Head>
 					<title>{formatTitle()}</title>
 				</Head>
+
 				<NavigationProgressBar />
 				<ToastsList />
 

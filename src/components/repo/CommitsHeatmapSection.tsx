@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Block } from "../Block";
 import { Heading } from "../Heading";
 import { CommitsHeatmap } from "./CommitsHeatmap";

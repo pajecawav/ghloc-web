@@ -4,7 +4,7 @@ import axios, { AxiosError } from "axios";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
 
