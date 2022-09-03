@@ -1,6 +1,6 @@
 # ghloc-web
 
-![build status](https://github.com/pajecawav/ghloc-web/actions/workflows/build.yml/badge.svg)
+![build status](https://github.com/pajecawav/ghloc-web/actions/workflows/ci.yml/badge.svg)
 
 A [website](https://ghloc.vercel.app/) to display GitHub repository info. The following information is available:
 
