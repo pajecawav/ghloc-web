@@ -39,7 +39,7 @@
 	},
 	"devDependencies": {
 		"@next/bundle-analyzer": "^12.2.3",
-		"@types/node": "^16.11.7",
+		"@types/node": "^18.0.0",
 		"@types/nprogress": "^0.2.0",
 		"@types/react": "^18.0.15",
 		"@types/umami": "^0.1.0",
