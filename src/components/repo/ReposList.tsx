@@ -1,11 +1,11 @@
 import { getUserRepos, ReposResponse } from "@/lib/github";
-import { AxiosError } from "axios";
 import { useMemo } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { Button } from "../Button";
 import { LoadingPlaceholder } from "../LoadingPlaceholder";
 import { Skeleton } from "../Skeleton";
 import { RepoCard } from "./RepoCard";
+import type { FetchError } from "ohmyfetch";
 
 type Props = {
 	user: string;
@@ -19,12 +19,10 @@ export const ReposList = ({ user }: Props) => {
 		fetchNextPage,
 		hasNextPage,
 		isFetchingNextPage,
-	} = useInfiniteQuery<ReposResponse, AxiosError>(
+	} = useInfiniteQuery<ReposResponse, FetchError>(
 		["user", user, "repos"],
 		({ pageParam: page }) =>
-			getUserRepos({ user, perPage: REPOS_PER_PAGE, page }).then(
-				response => response.data
-			),
+			getUserRepos({ user, perPage: REPOS_PER_PAGE, page }),
 		{
 			getNextPageParam: (lastPage, allPages) =>
 				lastPage.length === REPOS_PER_PAGE

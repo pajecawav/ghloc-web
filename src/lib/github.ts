@@ -1,4 +1,55 @@
-import axios from "axios";
+import { useTokenStore } from "@/stores/useTokenStore";
+import dayjs from "dayjs";
+import { $fetch, FetchError, createFetchError } from "ohmyfetch";
+import toast from "react-hot-toast";
+
+const fetcher = $fetch.create({
+	retry: 0,
+	async onRequest({ options }) {
+		options.headers = getGitHubAuthHeaders();
+	},
+	async onResponseError(error) {
+		if (error.response?.status === 403) {
+			const limit = parseInt(
+				error.response.headers.get("x-ratelimit-remaining")!,
+				10
+			);
+			const reset =
+				parseInt(error.response.headers.get("x-ratelimit-reset")!, 10) *
+				1000;
+
+			// show toast with an error when GitHub API limit is reached
+			if (limit === 0) {
+				toast.error(
+					`GitHub API limit reached. Reset ${dayjs().to(reset)}.`,
+					{
+						duration: Infinity,
+						id: "error_github-limit-reached",
+					}
+				);
+			}
+		} else if (error.response?.status === 401) {
+			toast.error("Invalid GitHub API token.", {
+				duration: Infinity,
+				id: "error_github-token-expired",
+			});
+		}
+	},
+});
+
+export class GitHubActivityCalculationStartedError extends Error {}
+
+function getGitHubAuthHeaders(): Record<string, string> {
+	const { token } = useTokenStore.getState();
+
+	if (!token) {
+		return {};
+	}
+
+	return {
+		Authorization: `token ${token}`,
+	};
+}
 
 export function getRawGitHubUrl({
 	owner,
@@ -26,16 +77,17 @@ export function searchRepos({
 	query: string;
 	perPage?: number;
 }) {
-	return axios.get<ReposSearchResponse>(
+	return fetcher<ReposSearchResponse>(
 		"https://api.github.com/search/repositories",
 		{
+			method: "GET",
 			params: { q: query, per_page: perPage },
 		}
 	);
 }
 
 export function getUser(user: string) {
-	return axios.get<UserResponse>(`https://api.github.com/users/${user}`);
+	return fetcher<UserResponse>(`https://api.github.com/users/${user}`);
 }
 
 export function getUserRepos({
@@ -47,7 +99,7 @@ export function getUserRepos({
 	perPage: number;
 	page: number;
 }) {
-	return axios.get<ReposResponse>(
+	return fetcher<ReposResponse>(
 		`https://api.github.com/users/${user}/repos`,
 		{
 			params: { per_page: perPage, page, sort: "updated" },
@@ -56,27 +108,33 @@ export function getUserRepos({
 }
 
 export function getRepo({ owner, repo }: RepoDetails) {
-	return axios.get<RepoResponse>(
+	return fetcher<RepoResponse>(
 		`https://api.github.com/repos/${owner}/${repo}`
 	);
 }
 
 export function getCommunityProfile({ owner, repo }: RepoDetails) {
-	return axios.get<RepoHealthResponse>(
+	return fetcher<RepoHealthResponse>(
 		`https://api.github.com/repos/${owner}/${repo}/community/profile`
 	);
 }
 
-export function getCommitActivity({ owner, repo }: RepoDetails) {
-	return axios.get<CommitActivity>(
-		`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`,
-		{
-			// treat 202 as an error (indicates that GitHub has started
-			// calculating commit activity)
-			validateStatus: status =>
-				status >= 200 && status < 300 && status !== 202,
-		}
+export async function getCommitActivity({ owner, repo }: RepoDetails) {
+	const response = await fetcher.raw<CommitActivity>(
+		`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`
 	);
+
+	if (!response.ok) {
+		throw createFetchError("", undefined, response);
+	}
+
+	// 202 response status means that GitHub started calculating commit
+	// activity and we need to wait for some time before retrying request
+	if (response.status === 202) {
+		throw new GitHubActivityCalculationStartedError();
+	}
+
+	return response._data!;
 }
 
 export type UserType = "User" | "Organization";

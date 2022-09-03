@@ -8,7 +8,6 @@ import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useDebouncedState } from "@/hooks/useDebouncedState";
 import { Locs } from "@/types";
-import axios, { AxiosError } from "axios";
 import classNames from "classnames";
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect, useState } from "react";
@@ -17,6 +16,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Heading } from "../Heading";
 import { FilePreview } from "./FilePreview";
 import { FilterHelpTooltip } from "./FilterHelpTooltip";
+import { $fetch, FetchError } from "ohmyfetch";
 
 type Props = {
 	defaultBranch?: string;
@@ -74,25 +74,25 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 		);
 	};
 
-	const locsQuery = useQuery<Locs, AxiosError>(
+	const locsQuery = useQuery<Locs, FetchError>(
 		["stats", { owner, repo, branch, filter: debouncedFilter }],
 		() =>
-			axios
-				.get<Locs>(`/api/${owner}/${repo}/locs`, {
-					params: {
-						branch,
-						...(filter && { match: debouncedFilter }),
-					},
-				})
-				.then(response => response.data),
-		{ enabled: router.isReady, keepPreviousData: true }
-	);
-
-	useEffect(() => {
-		if (locsQuery.isLoadingError && !axios.isCancel(locsQuery.error)) {
-			toast.error("Failed to load LOC stats: repo is too big.");
+			$fetch<Locs>(`/api/${owner}/${repo}/locs`, {
+				params: {
+					branch,
+					...(filter && { match: debouncedFilter }),
+				},
+			}),
+		{
+			enabled: router.isReady,
+			keepPreviousData: true,
+			onError() {
+				toast.error(
+					"Failed to load LOC stats: probably repo is too big."
+				);
+			},
 		}
-	}, [locsQuery.isLoadingError, locsQuery.error]);
+	);
 
 	useEffect(() => {
 		if (router.isReady) {

@@ -12,12 +12,12 @@ import { formatRepoSize, formatTitle } from "@/lib/format";
 import { getRepo, RepoResponse } from "@/lib/github";
 import { removeProtocol } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
-import { AxiosError } from "axios";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
+import type { FetchError } from "ohmyfetch";
 
 export const RepoPage = () => {
 	const router = useRouter();
@@ -32,10 +32,9 @@ export const RepoPage = () => {
 	};
 	const isSmallOrLarger = useMediaQuery("sm");
 
-	const { data: repo } = useQuery<RepoResponse, AxiosError>(
+	const { data: repo } = useQuery<RepoResponse, FetchError>(
 		["repos", repoName],
-		() =>
-			getRepo({ owner, repo: repoName }).then(response => response.data),
+		() => getRepo({ owner, repo: repoName }),
 		{ enabled: router.isReady }
 	);
 

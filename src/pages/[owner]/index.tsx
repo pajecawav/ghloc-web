@@ -3,11 +3,11 @@ import { ReposList } from "@/components/repo/ReposList";
 import { Skeleton } from "@/components/Skeleton";
 import { getUser, UserResponse } from "@/lib/github";
 import { formatTitle } from "@/lib/format";
-import { AxiosError } from "axios";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
+import type { FetchError } from "ohmyfetch";
 
 const UserReposPage = () => {
 	const router = useRouter();
@@ -15,9 +15,9 @@ const UserReposPage = () => {
 		owner: string;
 	};
 
-	const { data: user } = useQuery<UserResponse, AxiosError>(
+	const { data: user } = useQuery<UserResponse, FetchError>(
 		["user", owner],
-		() => getUser(owner).then(response => response.data),
+		() => getUser(owner),
 		{ enabled: router.isReady }
 	);
 

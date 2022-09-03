@@ -1,12 +1,12 @@
 import { formatNumber, formatSize } from "@/lib/format";
 import { PackageInfo as PackageInfoResponse } from "@/lib/package";
-import axios, { AxiosError } from "axios";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
+import { $fetch, FetchError } from "ohmyfetch";
 
 export const PackageInfo = () => {
 	const router = useRouter();
@@ -18,20 +18,17 @@ export const PackageInfo = () => {
 
 	const enabled = router.isReady && !!branch;
 
-	const { data, isLoading } = useQuery<PackageInfoResponse, AxiosError>(
+	const { data, isLoading } = useQuery<PackageInfoResponse, FetchError>(
 		["package_info", { owner, repo, branch }],
 		() =>
-			axios
-				.get<{ data: PackageInfoResponse }>(
-					`/api/${owner}/${repo}/package`,
-					{
-						params: { branch },
-					}
-				)
-				.then(response => response.data.data),
+			$fetch<{ data: PackageInfoResponse }>(
+				`/api/${owner}/${repo}/package`,
+				{
+					params: { branch },
+				}
+			).then(response => response.data),
 		{
 			enabled,
-			staleTime: 60 * 60 * 60 * 1000, // 1 hour
 		}
 	);
 

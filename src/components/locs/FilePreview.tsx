@@ -1,10 +1,10 @@
 import { formatSize } from "@/lib/format";
 import { getRawGitHubUrl } from "@/lib/github";
-import axios, { AxiosError } from "axios";
 import { ReactNode, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "../Skeleton";
+import { $fetch, FetchError } from "ohmyfetch";
 
 type FileType = "text" | "image";
 
@@ -106,46 +106,34 @@ export const FilePreview = ({ owner, repo, branch, path, loc }: Props) => {
 	// make a HEAD request first to detect file type
 	const { data: meta } = useQuery<
 		{ type: FileType | null; size: number } | null,
-		AxiosError
-	>(
-		["files", { owner, repo, branch, path }, "type"],
-		async () => {
-			const response = await axios.head(url);
-			const contentType = response.headers["content-type"];
-			const size = parseInt(response.headers["content-length"], 10);
-			let type: FileType | null = null;
-			if (contentType.startsWith("text/plain")) {
-				type = "text";
-			} else if (contentType.startsWith("image")) {
-				type = "image";
-			}
-			return { type, size };
-		},
-		{
-			staleTime: 60 * 60 * 60 * 1000, // 60 minutes
+		FetchError
+	>(["files", { owner, repo, branch, path }, "type"], async () => {
+		const response = await $fetch.raw(url, { method: "HEAD" });
+		const contentType = response.headers.get("content-type")!;
+		const size = parseInt(response.headers.get("content-length")!, 10);
+		let type: FileType | null = null;
+		if (contentType.startsWith("text/plain")) {
+			type = "text";
+		} else if (contentType.startsWith("image")) {
+			type = "image";
 		}
-	);
+		return { type, size };
+	});
 
-	const { data: file, isLoadingError } = useQuery<string, AxiosError>(
+	const { data: file, isLoadingError } = useQuery<string, FetchError>(
 		["files", { owner, repo, branch, path }],
 		() =>
-			axios
-				.get<string>(url, {
-					// response is plain text
-					transformResponse: text => text,
-				})
-				.then(response => response.data),
+			$fetch<string>(url, {
+				// response is plain text
+				parseResponse: text => text,
+			}),
 		{
 			enabled: !!meta,
-			staleTime: 30 * 60 * 60 * 1000, // 30 minutes
+			onError() {
+				toast.error("Failed to load file.");
+			},
 		}
 	);
-
-	useEffect(() => {
-		if (isLoadingError) {
-			toast.error(`Failed to fetch file.`);
-		}
-	}, [isLoadingError]);
 
 	const isReady = file || meta?.type === "image";
 

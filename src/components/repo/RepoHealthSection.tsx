@@ -1,6 +1,5 @@
 import { getCommunityProfile, RepoHealthResponse } from "@/lib/github";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/solid";
-import axios, { AxiosError } from "axios";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -8,6 +7,7 @@ import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
+import type { FetchError } from "ohmyfetch";
 
 type Props = {
 	className?: string;
@@ -58,27 +58,16 @@ export const RepoHealthSection = ({ className }: Props) => {
 		data: health,
 		isLoadingError,
 		error,
-	} = useQuery<RepoHealthResponse, AxiosError>(
+	} = useQuery<RepoHealthResponse, FetchError>(
 		["repo_health", { owner, repo }],
-		() =>
-			getCommunityProfile({ owner, repo }).then(
-				response => response.data
-			),
+		() => getCommunityProfile({ owner, repo }),
 		{
 			enabled: router.isReady,
-			staleTime: 60 * 60 * 60 * 1000, // 1 hour
+			onError() {
+				toast.error("Failed to load repo health.");
+			},
 		}
 	);
-
-	useEffect(() => {
-		if (
-			isLoadingError &&
-			error?.response?.status !== 403 &&
-			!axios.isCancel(error)
-		) {
-			toast.error("Failed to load repo health.");
-		}
-	}, [isLoadingError, error]);
 
 	const {
 		license,

@@ -9,12 +9,12 @@ import {
 } from "@/lib/github";
 import { Combobox } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/outline";
-import { AxiosError } from "axios";
+import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useRouter } from "next/router";
+import type { FetchError } from "ohmyfetch";
 import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
 
 const githubUrlRegex =
 	/(https?:\/\/)?github.com\/(?<owner>[^\/]+)\/(?<repo>[^\/]+)(\/[^\$]+)?/;
@@ -33,17 +33,16 @@ export const HomePage = () => {
 
 	const { data: results, isLoadingError } = useQuery<
 		ReposSearchResponse,
-		AxiosError
+		FetchError
 	>(
 		["search", debouncedQuery],
-		() =>
-			searchRepos({ query: debouncedQuery }).then(
-				response => response.data
-			),
+		() => searchRepos({ query: debouncedQuery }),
 		{
 			enabled: !!debouncedQuery,
-			staleTime: Infinity,
 			keepPreviousData: true,
+			onError() {
+				toast.error("Failed to load search results.");
+			},
 		}
 	);
 
@@ -52,12 +51,6 @@ export const HomePage = () => {
 			resultsRef.current.scrollTop = 0;
 		}
 	}, [results]);
-
-	useEffect(() => {
-		if (isLoadingError) {
-			toast.error("Failed to load search results.");
-		}
-	}, [isLoadingError]);
 
 	const navigateToRepoPage = (repo: ReposResponseItem) => {
 		router.push({
