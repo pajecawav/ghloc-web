@@ -1,9 +1,5 @@
 const path = require("path");
 
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-	enabled: ["true", "1"].includes(process.env.ANALYZE),
-});
-
 /** @type {import('next').NextConfig} */
 let config = {
 	reactStrictMode: true,
@@ -13,6 +9,9 @@ let config = {
 	},
 };
 
-config = withBundleAnalyzer(config);
+if (process.env.ANALYZE === "true") {
+	const withStatoscope = require("next-statoscope")(config);
+	config = withStatoscope(config);
+}
 
 module.exports = config;

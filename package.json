@@ -38,7 +38,6 @@
 		"zustand": "^4.1.1"
 	},
 	"devDependencies": {
-		"@next/bundle-analyzer": "^12.2.5",
 		"@types/node": "^16.11.56",
 		"@types/nprogress": "^0.2.0",
 		"@types/react": "^18.0.18",
@@ -50,6 +49,7 @@
 		"husky": "^8.0.1",
 		"is-ci": "^3.0.1",
 		"lint-staged": "^13.0.3",
+		"next-statoscope": "^1.0.0",
 		"npm-run-all": "^4.1.5",
 		"postcss": "^8.4.16",
 		"prettier": "^2.7.1",
