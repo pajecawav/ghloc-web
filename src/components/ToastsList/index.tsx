@@ -38,7 +38,7 @@ export const ToastsList = () => {
 			{t => (
 				<div
 					className={classNames(
-						"relative max-w-sm flex gap-4 pl-3 pr-9 py-3 rounded-lg items-start font-medium border border-normal shadow text-sm xs:text-base",
+						"relative max-w-sm flex gap-4 pl-3 pr-9 py-3 rounded-md items-start font-medium border border-normal shadow text-sm xs:text-base",
 						typeClassnames[t.type as ToastType],
 						t.visible ? styles.appear : styles.dismiss
 					)}

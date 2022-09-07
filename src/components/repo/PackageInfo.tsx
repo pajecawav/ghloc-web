@@ -1,12 +1,12 @@
 import { formatNumber, formatSize } from "@/lib/format";
 import { PackageInfo as PackageInfoResponse } from "@/lib/package";
+import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import dayjs from "dayjs";
 import { useRouter } from "next/router";
-import { useQuery } from "@tanstack/react-query";
+import { $fetch, FetchError } from "ohmyfetch";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
-import { $fetch, FetchError } from "ohmyfetch";
 
 export const PackageInfo = () => {
 	const router = useRouter();
@@ -42,7 +42,7 @@ export const PackageInfo = () => {
 				<div className="flex flex-col gap-2">
 					{Array.from({ length: 3 }).map((_, index) => (
 						<Skeleton
-							className="h-4 w-32 first:w-52 rounded-lg border border-normal"
+							className="h-4 w-32 first:w-52 rounded-md border border-normal"
 							key={index}
 						/>
 					))}

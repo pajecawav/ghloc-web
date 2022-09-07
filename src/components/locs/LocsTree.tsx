@@ -1,7 +1,7 @@
 import { getLanguageFromExtension } from "@/languages";
 import { Locs } from "@/types";
 import classNames from "classnames";
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { Spacer } from "../Spacer";
 
 export type Props = {
@@ -11,7 +11,7 @@ export type Props = {
 	onSelectLanguage?: (language: string | null) => void;
 };
 
-export const LocsStats = ({
+export const LocsTree = ({
 	locs,
 	className,
 	selectedLanguage,
@@ -40,12 +40,15 @@ export const LocsStats = ({
 			)}
 		>
 			{entries.map(([lang, loc]) => (
-				<li key={lang}>
+				<li
+					className={classNames(
+						"first:rounded-t-md last:rounded-b-md hover:bg-tree-active",
+						lang === selectedLanguage && "bg-tree-active"
+					)}
+					key={lang}
+				>
 					<button
-						className={classNames(
-							"w-full flex px-2 py-1 gap-2 hover:bg-tree-active",
-							lang === selectedLanguage && "bg-tree-active"
-						)}
+						className={classNames("w-full flex px-2 py-1 gap-2")}
 						onClick={() => handleSelectLanguage(lang)}
 					>
 						<span

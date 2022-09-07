@@ -1,13 +1,12 @@
 import { getCommunityProfile, RepoHealthResponse } from "@/lib/github";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/solid";
+import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import type { FetchError } from "ohmyfetch";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
-import type { FetchError } from "ohmyfetch";
 
 type Props = {
 	className?: string;
@@ -89,7 +88,7 @@ export const RepoHealthSection = ({ className }: Props) => {
 				<div className="flex flex-col gap-2">
 					{Array.from({ length: 6 }).map((_, index) => (
 						<Skeleton
-							className="h-4 w-40 odd:w-32 rounded-lg border border-normal"
+							className="h-4 w-40 odd:w-32 rounded-md border border-normal"
 							key={index}
 						/>
 					))}

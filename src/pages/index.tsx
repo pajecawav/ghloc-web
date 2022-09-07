@@ -1,6 +1,6 @@
 import { Input } from "@/components/Input";
 import { RepoStats } from "@/components/repo/RepoStats";
-import { useDebouncedState } from "@/hooks/useDebouncedState";
+import { useDebounce } from "@/hooks/useDebounce";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import {
 	ReposResponseItem,
@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import type { FetchError } from "ohmyfetch";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 
 const githubUrlRegex =
@@ -24,17 +24,12 @@ export const HomePage = () => {
 
 	const isMediumOrLarger = useMediaQuery("md");
 
-	const {
-		state: query,
-		debounced: debouncedQuery,
-		setState: setQuery,
-	} = useDebouncedState("", 750);
+	const [query, setQuery] = useState("");
+	const [debouncedQuery, setDebouncedQuery] = useState(query);
+	useDebounce(() => setDebouncedQuery(query), 750, [query]);
 	const resultsRef = useRef<HTMLUListElement | null>(null);
 
-	const { data: results, isLoadingError } = useQuery<
-		ReposSearchResponse,
-		FetchError
-	>(
+	const { data: results } = useQuery<ReposSearchResponse, FetchError>(
 		["search", debouncedQuery],
 		() => searchRepos({ query: debouncedQuery }),
 		{
@@ -93,7 +88,7 @@ export const HomePage = () => {
 						as={Input}
 						onChange={event => onChange(event.target.value)}
 						displayValue={() => query}
-						className="w-full !px-12 !py-3 text-2xl text-center !rounded-lg shadow-sm border border-normal font-light group-focus-within:!border-active2 caret-blue-400"
+						className="w-full !px-12 !py-3 text-2xl text-center !rounded-md shadow-sm border border-normal font-light group-focus-within:!border-active2 caret-blue-400"
 						placeholder="facebook/react"
 						type="search"
 						autoFocus
@@ -112,7 +107,7 @@ export const HomePage = () => {
 				>
 					<Combobox.Options
 						className={classNames(
-							"h-max max-h-full overflow-y-auto border border-normal shadow-sm rounded-lg divide-y divide-normal",
+							"h-max max-h-full overflow-y-auto border border-normal shadow-sm rounded-md divide-y divide-normal",
 							"origin-top transition duration-75 ease-out -translate-y-2 scale-95 opacity-0",
 							results?.items.length &&
 								"group-focus-within:duration-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 group-focus-within:scale-100",

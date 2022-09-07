@@ -53,7 +53,7 @@ export function GitHubTokenModal({ isOpen, onClose }: Props) {
 						leave="ease-in duration-200"
 						leaveTo="opacity-0 scale-95"
 					>
-						<div className="z-20 w-full max-w-lg flex flex-col gap-2 p-4 rounded-lg bg-normal overflow-hidden">
+						<div className="z-20 w-full max-w-lg flex flex-col gap-2 p-4 rounded-md bg-normal overflow-hidden">
 							<div className="flex justify-between">
 								<Dialog.Title className="text-2xl font-medium">
 									Add GitHub Access Token

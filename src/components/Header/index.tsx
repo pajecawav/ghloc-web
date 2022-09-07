@@ -19,7 +19,7 @@ type Props = {
 
 const HeaderItem = ({ children }: { children: ReactNode }) => {
 	return (
-		<li className="w-8 h-8 p-[0.3em] rounded-lg transition-colors duration-100 hover:bg-accent">
+		<li className="w-8 h-8 p-[0.3em] rounded-md transition-colors duration-100 hover:bg-accent">
 			{children}
 		</li>
 	);

@@ -12,12 +12,12 @@ import { formatRepoSize, formatTitle } from "@/lib/format";
 import { getRepo, RepoResponse } from "@/lib/github";
 import { removeProtocol } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
+import { useQuery } from "@tanstack/react-query";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
 import type { FetchError } from "ohmyfetch";
+import { useEffect } from "react";
 
 export const RepoPage = () => {
 	const router = useRouter();
@@ -43,10 +43,14 @@ export const RepoPage = () => {
 		if (!branch && defaultBranch) {
 			const query = new URLSearchParams(window.location.search);
 			query.set("branch", defaultBranch);
-			router.replace({
-				pathname: window.location.pathname,
-				search: query.toString(),
-			});
+			router.replace(
+				{
+					pathname: window.location.pathname,
+					search: query.toString(),
+				},
+				undefined,
+				{ scroll: false, shallow: true }
+			);
 		}
 	}, [repo, branch, router]);
 
