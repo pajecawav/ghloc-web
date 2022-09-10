@@ -6,6 +6,8 @@ import {
 	useState,
 } from "react";
 
+export const THEME_KEY = "ghloc.theme";
+
 export const ThemeContext = createContext<ThemeContextValue>(
 	{} as ThemeContextValue
 );
@@ -26,7 +28,7 @@ const getTheme = (): Theme | undefined => {
 		return undefined;
 	}
 
-	const storedTheme = window.localStorage.getItem("color-theme");
+	const storedTheme = window.localStorage.getItem(THEME_KEY);
 	if (typeof storedTheme === "string") {
 		return storedTheme as Theme;
 	}
@@ -51,7 +53,7 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 			root.classList.remove("dark");
 		}
 
-		localStorage.setItem("color-theme", theme);
+		localStorage.setItem(THEME_KEY, theme);
 	};
 
 	const toggleTheme = useCallback(() => {

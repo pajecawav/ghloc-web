@@ -1,10 +1,10 @@
-import { Theme } from "./contexts/ThemeContext";
+import { Theme, THEME_KEY } from "./contexts/ThemeContext";
 
 export const ThemeScript = () => {
 	const script = `
     (function() {
         function getTheme() {
-            const storedTheme = window.localStorage.getItem("color-theme")
+            const storedTheme = window.localStorage.getItem("${THEME_KEY}")
             if (typeof storedTheme === "string") {
                 return storedTheme;
             }
