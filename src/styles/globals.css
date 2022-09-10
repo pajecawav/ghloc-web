@@ -189,6 +189,10 @@ body,
 	display: none;
 }
 
+html {
+	scrollbar-gutter: stable;
+}
+
 /* firefox scrollbar */
 html,
 * {
