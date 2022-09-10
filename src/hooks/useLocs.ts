@@ -29,9 +29,8 @@ export function useLocs(
 	const query = useQuery<Locs, FetchError>(
 		["stats", { owner, repo, branch, filter }],
 		() =>
-			$fetch<Locs>(`/api/${owner}/${repo}/locs`, {
+			$fetch<Locs>(`https://ghloc.ifels.dev/${owner}/${repo}/${branch}`, {
 				params: {
-					branch,
 					...(filter && { match: filter }),
 				},
 			}),
