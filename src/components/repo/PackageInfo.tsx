@@ -39,10 +39,11 @@ export const PackageInfo = () => {
 			<Heading>Package</Heading>
 
 			{isLoading || !enabled ? (
-				<div className="flex flex-col gap-2">
-					{Array.from({ length: 3 }).map((_, index) => (
+				<div className="flex flex-col">
+					{Array.from({ length: 6 }).map((_, index) => (
 						<Skeleton
-							className="h-4 w-32 first:w-52 rounded-md border border-normal"
+							className="h-6 w-40 odd:w-24 rounded-md"
+							isText={true}
 							key={index}
 						/>
 					))}

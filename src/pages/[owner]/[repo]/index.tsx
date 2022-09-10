@@ -64,8 +64,9 @@ export const RepoPage = () => {
 
 			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
 				<Skeleton
-					className="h-6 w-40 rounded-full"
+					className="h-7 w-40 rounded-md"
 					isLoading={!router.isReady}
+					isText={true}
 				>
 					<div className="flex gap-1 items-center whitespace-nowrap text-xl text-muted w-full xs:w-auto">
 						<a
@@ -134,7 +135,8 @@ export const RepoPage = () => {
 				<div className="flex flex-wrap gap-2">
 					{Array.from({ length: 3 }).map((_, index) => (
 						<Skeleton
-							className="border border-normal rounded-full h-4 w-14"
+							className="h-6 w-14 rounded-md"
+							isText={true}
 							key={index}
 						/>
 					))}
@@ -153,14 +155,16 @@ export const RepoPage = () => {
 
 			<div className="flex flex-col gap-1">
 				<Skeleton
-					className="h-5 mb-1 rounded-full sm:w-3/4"
+					className="h-6 rounded-md sm:w-3/4"
+					isText={true}
 					isLoading={repo === undefined}
 				>
 					{repo?.description && <p>{repo.description}</p>}
 				</Skeleton>
 
 				<Skeleton
-					className="h-5 mb-1 rounded-full sm:w-3/4"
+					className="h-6 rounded-md sm:w-36"
+					isText={true}
 					isLoading={repo === undefined}
 				>
 					{repo?.homepage && (
