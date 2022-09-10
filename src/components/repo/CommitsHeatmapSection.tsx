@@ -8,6 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import type { FetchError } from "ohmyfetch";
+import { useMemo } from "react";
 import toast from "react-hot-toast";
 import { Block } from "../Block";
 import { Heading } from "../Heading";
@@ -62,9 +63,17 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 		}
 	);
 
+	const totalCommits = useMemo(() => {
+		if (!data) return data;
+		return data.reduce((sum, entry) => sum + entry.total, 0);
+	}, [data]);
+
 	return (
 		<div className={classNames("flex flex-col gap-1", className)}>
-			<Heading>Commits</Heading>
+			<div>
+				<Heading className="inline">Commits</Heading>
+				{totalCommits !== undefined && ` (${totalCommits} last year)`}
+			</div>
 			<Skeleton className="h-36 rounded-md" isLoading={!data}>
 				{() => (
 					<Block className="h-36 p-4 grid place-items-center">
