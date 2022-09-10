@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useDebounce } from "@/hooks/useDebounce";
 import { isFolder, SortOrder, useLocs } from "@/hooks/useLocs";
+import { formatNumber } from "@/lib/format";
 import classNames from "classnames";
 import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
@@ -181,7 +182,9 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 				{!isFile && (
 					<div className="flex flex-col gap-1 self-start">
 						<Heading>
-							Lines of code {locs?.loc && `(${locs.loc})`}
+							Lines of code{" "}
+							{locs?.loc !== undefined &&
+								`(${formatNumber(locs.loc)})`}
 						</Heading>
 						<Block>
 							<Skeleton
