@@ -80,7 +80,7 @@ export const HomePage = () => {
 				<div className="flex-grow max-h-[4rem] hidden md:block" />
 
 				<h1 className="text-subtle text-lg text-center">
-					See stats of a GitHub repository
+					Count lines of code in a GitHub repository
 				</h1>
 
 				<div className="relative flex-shrink-0">

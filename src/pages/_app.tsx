@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 		<QueryClientProvider client={queryClient}>
 			<ThemeProvider>
 				<Head>
-					<title>{formatTitle()}</title>
+					<title>ghloc | Count lines of code</title>
 				</Head>
 
 				<NavigationProgressBar />

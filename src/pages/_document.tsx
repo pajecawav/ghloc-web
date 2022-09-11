@@ -7,13 +7,18 @@ export default class MyDocument extends Document {
 			<Html lang="en">
 				<Head>
 					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-					<link
-						href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-						rel="stylesheet"
-					/>
+					<meta name="application-name" content="ghloc" />
 					<meta
 						name="description"
-						content="See GitHub repository commit activity and total lines of code by language."
+						content="Count lines of code in a GitHub repository"
+					/>
+					<meta
+						name="google-site-verification"
+						content="FnhvmqWUsfbh_7kFL_8bcS5_wOYRnaQD1dY4IB3WT7s"
+					/>
+					<link
+						href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+						rel="stylesheet"
 					/>
 					<link rel="preconnect" href="https://api.github.com" />
 					{process.env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC && (
