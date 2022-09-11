@@ -84,8 +84,11 @@ export const HomePage = () => {
 						displayValue={() => query}
 						className="w-full !px-12 !py-3 text-2xl text-center !rounded-md shadow-sm border border-normal font-light group-focus-within:!border-active2 caret-blue-400"
 						placeholder="facebook/react"
-						type="search"
-						autoFocus
+						autoFocus={true}
+						autoComplete="off"
+						autoCorrect="off"
+						autoCapitalize="off"
+						spellCheck={false}
 					/>
 					<div className="absolute top-0 bottom-0 right-2 m-auto w-8 h-8 text-muted transition-colors duration-100 group-focus-within:text-border-active2">
 						<SearchIcon />
