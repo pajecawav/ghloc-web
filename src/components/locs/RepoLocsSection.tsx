@@ -47,7 +47,6 @@ export const RepoLocsSection = ({ defaultBranch }: Props) => {
 
 				router.replace(
 					{
-						pathname: router.pathname,
 						query: {
 							...query,
 							...(filter && { filter }),

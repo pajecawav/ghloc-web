@@ -4,7 +4,6 @@ import { DocumentIcon } from "@heroicons/react/outline";
 import { FolderIcon } from "@heroicons/react/solid";
 import classNames from "classnames";
 import { useMemo } from "react";
-import styles from "./FileTree.module.css";
 
 type Props = {
 	locs: Locs;
@@ -91,8 +90,8 @@ export const FileTree = ({ locs, onSelect, selectedLanguage }: Props) => {
 			{entries.map(([name, child]) => (
 				<li
 					className={classNames(
-						"hover:bg-tree-active first:rounded-t-md last:rounded-b-md ",
-						styles.entry
+						"hover:bg-tree-active first:rounded-t-md last:rounded-b-md",
+						"bg-gradient-to-r from-tree-active to-tree-active bg-no-repeat transition-[background-size] duration-[0.4s]"
 					)}
 					style={getStyleForSelectedLanguage(
 						getLocsPercentageOfSelectedLanguage(name, child)

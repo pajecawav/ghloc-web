@@ -41,12 +41,13 @@ export const RepoPage = () => {
 	useEffect(() => {
 		const defaultBranch = repo?.default_branch;
 		if (!branch && defaultBranch) {
-			const query = new URLSearchParams(window.location.search);
-			query.set("branch", defaultBranch);
 			router.replace(
 				{
 					pathname: window.location.pathname,
-					search: query.toString(),
+					query: {
+						...router.query,
+						branch: defaultBranch,
+					},
 				},
 				undefined,
 				{ scroll: false, shallow: true }

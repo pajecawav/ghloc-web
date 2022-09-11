@@ -1,9 +1,0 @@
-.entry {
-	background-image: linear-gradient(
-		to right,
-		var(--colors-tree-active) 0%,
-		var(--colors-tree-active) 100%
-	);
-	transition: background-size 0.4s;
-	background-repeat: no-repeat;
-}

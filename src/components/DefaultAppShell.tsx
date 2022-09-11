@@ -8,7 +8,7 @@ type Props = {
 export const DefaultAppShell = ({ children }: Props) => {
 	return (
 		<main className="max-w-3xl min-h-full flex flex-col mx-auto p-2">
-			<Header className="mb-2" />
+			<Header className="mb-1" />
 			{children}
 		</main>
 	);

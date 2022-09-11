@@ -57,8 +57,7 @@ export const LocsTree = ({
 						>
 							{lang}
 						</span>
-						<Spacer />
-						<span className="whitespace-nowrap">
+						<span className="ml-auto whitespace-nowrap">
 							{loc} ({((100 * loc) / totalLocs).toFixed(2)}%)
 						</span>
 					</button>

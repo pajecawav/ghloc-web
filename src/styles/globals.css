@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-svg {
-	/* border: 1px solid red; */
-}
-
 html {
 	/* text */
 	--colors-text-normal: black;
