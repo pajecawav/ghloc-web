@@ -90,7 +90,7 @@ export const HomePage = () => {
 						autoCapitalize="off"
 						spellCheck={false}
 					/>
-					<div className="absolute top-0 bottom-0 right-2 m-auto w-8 h-8 text-muted transition-colors duration-100 group-focus-within:text-border-active2">
+					<div className="absolute top-0 bottom-0 right-2 m-auto w-8 h-8 text-muted transition-[border-color] duration-100 group-focus-within:text-border-active2">
 						<SearchIcon />
 					</div>
 				</div>

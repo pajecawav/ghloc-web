@@ -70,10 +70,10 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 
 	return (
 		<div className={classNames("flex flex-col gap-1", className)}>
-			<div>
-				<Heading className="inline">Commits</Heading>
+			<Heading>
+				Commits{" "}
 				{totalCommits !== undefined && ` (${totalCommits} last year)`}
-			</div>
+			</Heading>
 			<Skeleton className="h-36 rounded-md" isLoading={!data}>
 				{() => (
 					<Block className="h-36 p-4 grid place-items-center">

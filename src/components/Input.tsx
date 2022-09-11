@@ -10,7 +10,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(function Input(
 	return (
 		<input
 			className={classNames(
-				"px-3 py-0.5 transition-colors duration-100 rounded-md !outline-none appearance-none font-sm text-normal bg-normal placeholder-text-muted",
+				"px-3 py-0.5 transition-[border-color] duration-100 rounded-md !outline-none appearance-none font-sm text-normal bg-normal placeholder-text-muted",
 				"border-2 border-normal focus:border-active",
 				className
 			)}
