@@ -13,7 +13,7 @@ import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useRouter } from "next/router";
 import type { FetchError } from "ohmyfetch";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 const githubUrlRegex =
@@ -27,7 +27,6 @@ export const HomePage = () => {
 	const [query, setQuery] = useState("");
 	const [debouncedQuery, setDebouncedQuery] = useState(query);
 	useDebounce(() => setDebouncedQuery(query), 750, [query]);
-	const resultsRef = useRef<HTMLUListElement | null>(null);
 
 	const { data: results } = useQuery<ReposSearchResponse, FetchError>(
 		["search", debouncedQuery],
@@ -40,12 +39,6 @@ export const HomePage = () => {
 			},
 		}
 	);
-
-	useEffect(() => {
-		if (resultsRef.current) {
-			resultsRef.current.scrollTop = 0;
-		}
-	}, [results]);
 
 	const navigateToRepoPage = (repo: ReposResponseItem) => {
 		router.push({
@@ -75,6 +68,7 @@ export const HomePage = () => {
 					navigateToRepoPage(repo);
 				}
 			}}
+			by={(a, b) => a?.id === b?.id}
 		>
 			<div className="flex-grow max-w-xl w-full mx-auto flex flex-col gap-4 group md:justify-center">
 				<div className="flex-grow max-h-[4rem] hidden md:block" />
@@ -117,7 +111,6 @@ export const HomePage = () => {
 						)}
 						static
 						hold
-						ref={resultsRef}
 					>
 						{results?.items.map(result => (
 							<Combobox.Option
