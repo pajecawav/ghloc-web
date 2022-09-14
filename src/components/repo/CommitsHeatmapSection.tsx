@@ -56,7 +56,7 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 					error.response?.status !== 403
 				);
 			},
-			retryDelay: 5000,
+			retryDelay: 7500,
 			onError(error) {
 				toast.error("Failed to load commit activity.");
 			},

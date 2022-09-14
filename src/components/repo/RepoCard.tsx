@@ -41,12 +41,12 @@ export const RepoCard = ({ repo }: Props) => {
 
 				<div className="flex items-center gap-2 text-sm text-normal">
 					{repo.language && (
-						<div className="mr-2 truncate" title={repo.language}>
+						<div className="truncate" title={repo.language}>
 							{repo.language}
 						</div>
 					)}
 					<RepoStats
-						className="flex-shrink-0"
+						className="ml-auto flex-shrink-0"
 						stars={repo.stargazers_count}
 						forks={repo.forks}
 					/>

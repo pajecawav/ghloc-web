@@ -14,15 +14,6 @@
 		"ci-check": "npm-run-all format:check --parallel lint tsc",
 		"postinstall": "is-ci || yarn prepare"
 	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx}": [
-			"eslint --fix",
-			"prettier --write"
-		],
-		"*.{json,md,yml,css}": [
-			"prettier --write"
-		]
-	},
 	"dependencies": {
 		"@headlessui/react": "^1.7.0",
 		"@heroicons/react": "^1.0.5",
