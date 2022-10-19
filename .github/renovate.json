@@ -2,7 +2,8 @@
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": ["config:base", "group:allNonMajor"],
 	"rangeStrategy": "bump",
-	"schedule": ["on wednesday and saturday"],
+	"timezone": "Europe/Moscow",
+	"schedule": ["before 9am on wednesday and saturday"],
 	"npm": {
 		"stabilityDays": 3
 	}
