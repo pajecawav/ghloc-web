@@ -1,4 +1,5 @@
 import { isFolder } from "@/hooks/useLocs";
+import { formatNumber } from "@/lib/format";
 import { Locs, LocsChild } from "@/types";
 import { DocumentIcon } from "@heroicons/react/outline";
 import { FolderIcon } from "@heroicons/react/solid";
@@ -16,7 +17,7 @@ function getLocsValue(child: LocsChild): number {
 }
 
 function renderLoc(loc: number, total: number): string {
-	return `${loc} (${((100 * loc) / total).toFixed(2)}%)`;
+	return `${formatNumber(loc)} (${((100 * loc) / total).toFixed(1)}%)`;
 }
 
 function renderIcon(isFolder: boolean) {

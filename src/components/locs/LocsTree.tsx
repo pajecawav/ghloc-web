@@ -1,8 +1,8 @@
 import { getLanguageFromExtension } from "@/languages";
+import { formatNumber } from "@/lib/format";
 import { Locs } from "@/types";
 import classNames from "classnames";
 import { useCallback } from "react";
-import { Spacer } from "../Spacer";
 
 export type Props = {
 	locs: Locs;
@@ -10,6 +10,10 @@ export type Props = {
 	selectedLanguage?: string | null;
 	onSelectLanguage?: (language: string | null) => void;
 };
+
+function renderLoc(loc: number, total: number): string {
+	return `${formatNumber(loc)} (${((100 * loc) / total).toFixed(1)}%)`;
+}
 
 export const LocsTree = ({
 	locs,
@@ -58,7 +62,7 @@ export const LocsTree = ({
 							{lang}
 						</span>
 						<span className="ml-auto whitespace-nowrap">
-							{loc} ({((100 * loc) / totalLocs).toFixed(2)}%)
+							{renderLoc(loc, totalLocs)}
 						</span>
 					</button>
 				</li>
