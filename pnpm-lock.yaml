@@ -4,7 +4,7 @@ specifiers:
   '@headlessui/react': ^1.7.3
   '@heroicons/react': ^1.0.6
   '@tanstack/react-query': ^4.13.4
-  '@types/node': ^16.18.2
+  '@types/node': ^18.11.7
   '@types/nprogress': ^0.2.0
   '@types/react': ^18.0.24
   '@types/umami': ^0.1.0
@@ -48,7 +48,7 @@ dependencies:
   zustand: 4.1.4_react@18.2.0
 
 devDependencies:
-  '@types/node': 16.18.3
+  '@types/node': 18.11.9
   '@types/nprogress': 0.2.0
   '@types/react': 18.0.24
   '@types/umami': 0.1.0
@@ -541,8 +541,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node/16.18.3:
-    resolution: {integrity: sha512-jh6m0QUhIRcZpNv7Z/rpN+ZWXOicUUQbSoWks7Htkbb9IjFQj4kzcX/xFCkjstCj5flMsN8FiSvt+q+Tcs4Llg==}
+  /@types/node/18.11.9:
+    resolution: {integrity: sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==}
     dev: true
 
   /@types/nprogress/0.2.0:
@@ -2369,7 +2369,7 @@ packages:
     resolution: {integrity: sha512-7vuh85V5cdDofPyxn58nrPjBktZo0u9x1g8WtjQol+jZDaE+fhN+cIvTj11GndBnMnyfrUOG1sZQxCdjKh+DKg==}
     engines: {node: '>= 10.13.0'}
     dependencies:
-      '@types/node': 16.18.3
+      '@types/node': 18.11.9
       merge-stream: 2.0.0
       supports-color: 8.1.1
     dev: true
