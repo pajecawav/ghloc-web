@@ -79,16 +79,18 @@ export const RepoPage = () => {
 						>
 							<GithubIcon />
 						</a>
-						<Link href={`/${owner}`}>
-							<a className="block text-link-normal hover:underline">
-								{owner}
-							</a>
+						<Link
+							href={`/${owner}`}
+							className="block text-link-normal hover:underline"
+						>
+							{owner}
 						</Link>{" "}
 						/{" "}
-						<Link href={`/${owner}/${repoName}`}>
-							<a className="text-link-normal hover:underline">
-								{repoName}
-							</a>
+						<Link
+							href={`/${owner}/${repoName}`}
+							className="text-link-normal hover:underline"
+						>
+							{repoName}
 						</Link>
 					</div>
 				</Skeleton>

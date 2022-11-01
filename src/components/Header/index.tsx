@@ -38,10 +38,8 @@ export const Header = ({ className }: Props) => {
 				{showIcons && (
 					<>
 						<HeaderItem>
-							<Link href="/">
-								<a title="Search repos">
-									<SearchIcon />
-								</a>
+							<Link href="/" title="Search repos">
+								<SearchIcon />
 							</Link>
 						</HeaderItem>
 						<HeaderItem>
