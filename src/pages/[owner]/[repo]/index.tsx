@@ -41,9 +41,14 @@ export const getServerSideProps: GetServerSideProps<
 	};
 };
 
-export const RepoPage = ({ owner, repo: repoName, branch }: PageProps) => {
+export const RepoPage = ({
+	owner,
+	repo: repoName,
+	branch: branchProp,
+}: PageProps) => {
 	const router = useRouter();
 	const isSmallOrLarger = useMediaQuery("sm");
+	const branch = (router.query.branch as string | undefined) ?? branchProp;
 
 	const { data: repo } = useQuery<RepoResponse, FetchError>(
 		["repos", repoName],
