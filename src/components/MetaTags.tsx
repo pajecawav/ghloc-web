@@ -25,8 +25,11 @@ export function MetaTags({
 			<title>{title}</title>
 			<meta
 				name="description"
+				key="description"
 				content={description ?? DEFAULT_DESCRIPTION}
 			/>
+
+			<link rel="canonical" href={origin + canonicalPath} />
 
 			<meta property="og:type" key="og:type" content="website" />
 			<meta property="og:title" key="og:title" content={title} />
@@ -41,7 +44,11 @@ export function MetaTags({
 				content={image ? `${origin}/${image}` : defaultImage}
 			/>
 
-			<link rel="canonical" href={origin + canonicalPath} />
+			<meta
+				name="twitter:card"
+				key="twitter:card"
+				content={image ? "summary_large_image" : "summary"}
+			/>
 		</Head>
 	);
 }
