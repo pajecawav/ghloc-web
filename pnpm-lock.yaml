@@ -7,7 +7,6 @@ specifiers:
   '@types/node': ^18.11.7
   '@types/nprogress': ^0.2.0
   '@types/react': ^18.0.24
-  '@types/umami': ^0.1.0
   '@vercel/og': ^0.0.20
   autoprefixer: ^10.4.13
   classnames: ^2.3.2
@@ -53,7 +52,6 @@ devDependencies:
   '@types/node': 18.11.9
   '@types/nprogress': 0.2.0
   '@types/react': 18.0.24
-  '@types/umami': 0.1.0
   autoprefixer: 10.4.13_postcss@8.4.18
   csstype: 3.1.1
   eslint: 8.26.0
@@ -583,10 +581,6 @@ packages:
 
   /@types/semver/7.3.12:
     resolution: {integrity: sha512-WwA1MW0++RfXmCr12xeYOOC5baSC9mSb0ZqCquFzKhcoF4TvHu5MKOuXsncgZcpVFhB1pXd5hZmM0ryAoCp12A==}
-    dev: true
-
-  /@types/umami/0.1.0:
-    resolution: {integrity: sha512-nsrcnBdKXTP/koCwL3c+ywQG0lk+uqNo74oIe0FHC109aO4vZoXL0eSQqkUdWa9Hwc3ssFgJINBBCe0MZVYUwg==}
     dev: true
 
   /@types/yoga-layout/1.9.2:
