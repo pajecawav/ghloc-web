@@ -10,7 +10,7 @@ import { Skeleton } from "../Skeleton";
 interface PackageInfoProps {
 	owner: string;
 	repo: string;
-	branch?: string;
+	branch?: string | null;
 }
 
 export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {

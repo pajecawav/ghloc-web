@@ -23,7 +23,7 @@ import { useEffect } from "react";
 interface PageProps {
 	owner: string;
 	repo: string;
-	branch?: string;
+	branch: string | null;
 }
 
 export const getServerSideProps: GetServerSideProps<
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<
 		props: {
 			owner: params!.owner,
 			repo: params!.repo,
-			branch: query.branch as string | undefined,
+			branch: (query.branch as string | undefined) ?? null,
 		},
 	};
 };

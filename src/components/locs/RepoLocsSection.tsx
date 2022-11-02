@@ -19,7 +19,7 @@ import { FilterHelpTooltip } from "./FilterHelpTooltip";
 type Props = {
 	owner: string;
 	repo: string;
-	branch?: string;
+	branch?: string | null;
 	defaultBranch?: string;
 };
 

@@ -13,7 +13,7 @@ export interface UseLocsOptions {
 	filter?: string;
 	owner: string;
 	repo: string;
-	branch?: string;
+	branch?: string | null;
 }
 
 export function isFolder(child: LocsChild): child is Locs {
