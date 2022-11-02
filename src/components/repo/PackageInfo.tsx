@@ -3,21 +3,17 @@ import { PackageInfo as PackageInfoResponse } from "@/lib/package";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import dayjs from "dayjs";
-import { useRouter } from "next/router";
 import { $fetch, FetchError } from "ohmyfetch";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
 
-export const PackageInfo = () => {
-	const router = useRouter();
-	const { owner, repo, branch } = router.query as {
-		owner: string;
-		repo: string;
-		branch?: string;
-	};
+interface PackageInfoProps {
+	owner: string;
+	repo: string;
+	branch?: string;
+}
 
-	const enabled = router.isReady && !!branch;
-
+export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
 	const { data, isLoading } = useQuery<PackageInfoResponse, FetchError>(
 		["package_info", { owner, repo, branch }],
 		() =>
@@ -28,7 +24,7 @@ export const PackageInfo = () => {
 				}
 			).then(response => response.data),
 		{
-			enabled,
+			enabled: !!branch,
 		}
 	);
 
@@ -38,7 +34,7 @@ export const PackageInfo = () => {
 		<div className={classNames("flex flex-col gap-1")}>
 			<Heading>Package</Heading>
 
-			{isLoading || !enabled ? (
+			{isLoading ? (
 				<div className="flex flex-col">
 					{Array.from({ length: 6 }).map((_, index) => (
 						<Skeleton

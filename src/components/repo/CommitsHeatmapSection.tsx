@@ -6,7 +6,6 @@ import {
 } from "@/lib/github";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
-import { useRouter } from "next/router";
 import type { FetchError } from "ohmyfetch";
 import { useMemo } from "react";
 import toast from "react-hot-toast";
@@ -16,16 +15,17 @@ import { CommitsHeatmap } from "./CommitsHeatmap";
 
 type Props = {
 	className?: string;
+	owner: string;
+	repo: string;
 	enabled?: boolean;
 };
 
-export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
-	const router = useRouter();
-	const { owner, repo } = router.query as {
-		owner: string;
-		repo: string;
-	};
-
+export const CommitsHeatmapSection = ({
+	className,
+	owner,
+	repo,
+	enabled = true,
+}: Props) => {
 	const { data, error, isLoading, isLoadingError, failureCount } = useQuery<
 		CommitActivity,
 		FetchError | GitHubActivityCalculationStartedError
@@ -49,7 +49,7 @@ export const CommitsHeatmapSection = ({ className, enabled = true }: Props) => {
 			return data;
 		},
 		{
-			enabled: enabled && router.isReady,
+			enabled,
 			retry(_, error) {
 				return (
 					error instanceof GitHubActivityCalculationStartedError ||

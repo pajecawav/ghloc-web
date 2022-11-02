@@ -2,13 +2,14 @@ import { getCommunityProfile, RepoHealthResponse } from "@/lib/github";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/solid";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
-import { useRouter } from "next/router";
 import type { FetchError } from "ohmyfetch";
 import toast from "react-hot-toast";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
 
 type Props = {
+	owner: string;
+	repo: string;
 	className?: string;
 };
 
@@ -46,13 +47,7 @@ const HealthEntry = ({ text, url }: { text: string; url?: string }) => {
 	);
 };
 
-export const RepoHealthSection = ({ className }: Props) => {
-	const router = useRouter();
-	const { owner, repo } = router.query as {
-		owner: string;
-		repo: string;
-	};
-
+export const RepoHealthSection = ({ owner, repo, className }: Props) => {
 	const {
 		data: health,
 		isLoadingError,
@@ -61,7 +56,6 @@ export const RepoHealthSection = ({ className }: Props) => {
 		["repo_health", { owner, repo }],
 		() => getCommunityProfile({ owner, repo }),
 		{
-			enabled: router.isReady,
 			onError() {
 				toast.error("Failed to load repo health.");
 			},

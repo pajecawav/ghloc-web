@@ -24,8 +24,6 @@ export function useLocs(
 	path: string[],
 	{ sortOrder = "type", filter, owner, repo, branch }: UseLocsOptions
 ) {
-	const enabled = Boolean(owner && repo && branch);
-
 	const query = useQuery<Locs, FetchError>(
 		["stats", { owner, repo, branch, filter }],
 		() =>
@@ -35,7 +33,7 @@ export function useLocs(
 				},
 			}),
 		{
-			enabled,
+			enabled: !!branch,
 			keepPreviousData: true,
 			onError() {
 				toast.error(

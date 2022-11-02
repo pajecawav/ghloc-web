@@ -17,6 +17,9 @@ import { FilePreview } from "./FilePreview";
 import { FilterHelpTooltip } from "./FilterHelpTooltip";
 
 type Props = {
+	owner: string;
+	repo: string;
+	branch?: string;
 	defaultBranch?: string;
 };
 
@@ -25,13 +28,13 @@ const sortOrders: Record<SortOrder, SelectOption> = {
 	locs: { name: "Locs" },
 } as const;
 
-export const RepoLocsSection = ({ defaultBranch }: Props) => {
+export const RepoLocsSection = ({
+	owner,
+	repo,
+	branch,
+	defaultBranch,
+}: Props) => {
 	const router = useRouter();
-	const { owner, repo, branch } = router.query as {
-		owner: string;
-		repo: string;
-		branch?: string;
-	};
 	const filterParam =
 		typeof window !== "undefined"
 			? new URLSearchParams(window.location.search).get("filter") || ""
