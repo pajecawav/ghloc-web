@@ -117,7 +117,7 @@ html.dark {
 	--colors-select-active: var(--colors-bg-accent);
 
 	/* tree */
-	--colors-tree-active: var(--colors-bg-accent);
+	--colors-tree-active: var(--colors-bg-accent2);
 
 	/* badge */
 	--colors-badge-normal-bg: var(--colors-bg-accent);

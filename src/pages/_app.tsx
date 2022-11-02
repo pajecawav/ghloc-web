@@ -2,7 +2,6 @@ import { DefaultAppShell } from "@/components/DefaultAppShell";
 import { NavigationProgressBar } from "@/components/NavigationProgressBar";
 import { ToastsList } from "@/components/ToastsList";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import { formatTitle } from "@/lib/format";
 import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import dayjs from "dayjs";

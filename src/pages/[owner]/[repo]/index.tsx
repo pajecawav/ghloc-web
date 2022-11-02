@@ -1,6 +1,7 @@
 import { Badge } from "@/components/Badge";
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { RepoLocsSection } from "@/components/locs/RepoLocsSection";
+import { MetaTags } from "@/components/MetaTags";
 import { CommitsHeatmapSection } from "@/components/repo/CommitsHeatmapSection";
 import { PackageInfo } from "@/components/repo/PackageInfo";
 import { RepoHealthSection } from "@/components/repo/RepoHealthSection";
@@ -13,7 +14,6 @@ import { getRepo, RepoResponse } from "@/lib/github";
 import { removeProtocol } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
 import { useQuery } from "@tanstack/react-query";
-import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import type { FetchError } from "ohmyfetch";
@@ -55,12 +55,19 @@ export const RepoPage = () => {
 		}
 	}, [repo, branch, router]);
 
+	let imagePath = `api/${owner}/${repoName}/og-image`;
+	if (branch) {
+		imagePath += `?branch=${encodeURIComponent(branch)}`;
+	}
+
 	return (
 		<div className="flex flex-col gap-2">
 			{router.isReady && (
-				<Head>
-					<title>{formatTitle(`${owner}/${repoName}`)}</title>
-				</Head>
+				<MetaTags
+					title={formatTitle(`${owner}/${repoName}`)}
+					canonicalPath={`/${owner}/${repoName}`}
+					image={imagePath}
+				/>
 			)}
 
 			<div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">

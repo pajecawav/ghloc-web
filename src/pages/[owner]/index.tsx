@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { FetchError } from "ohmyfetch";
+import { MetaTags } from "@/components/MetaTags";
 
 const UserReposPage = () => {
 	const router = useRouter();
@@ -24,9 +25,10 @@ const UserReposPage = () => {
 	return (
 		<div className="flex flex-col gap-5">
 			{router.isReady && (
-				<Head>
-					<title>{formatTitle(`${owner}`)}</title>
-				</Head>
+				<MetaTags
+					title={formatTitle(`${owner}`)}
+					canonicalPath={`/${owner}`}
+				/>
 			)}
 
 			<div className="flex items-center">

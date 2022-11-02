@@ -8,11 +8,13 @@ export default class MyDocument extends Document {
 				<Head>
 					<link rel="icon" href="/favicon.ico" sizes="any" />
 					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-					<meta name="application-name" content="ghloc" />
-					<meta
-						name="description"
-						content="Count lines of code in a GitHub repository"
+					<link
+						rel="apple-touch-icon"
+						sizes="180x180"
+						href="/apple-touch-icon.png"
 					/>
+					<meta name="application-name" content="ghloc" />
+					<link rel="manifest" href="/manifest.json" />
 					<meta
 						name="google-site-verification"
 						content="FnhvmqWUsfbh_7kFL_8bcS5_wOYRnaQD1dY4IB3WT7s"
@@ -22,16 +24,6 @@ export default class MyDocument extends Document {
 						rel="stylesheet"
 					/>
 					<link rel="preconnect" href="https://api.github.com" />
-					{process.env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC && (
-						<script
-							async
-							defer
-							data-website-id={
-								process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID
-							}
-							src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_SRC}
-						/>
-					)}
 				</Head>
 				<body className="text-normal bg-normal">
 					{/* insert blocking script to detect color scheme before rendering the app */}
