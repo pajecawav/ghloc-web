@@ -10,7 +10,7 @@ A [website](https://ghloc.vercel.app/) to display GitHub repository info:
 -   Bundle size of an `npm` package
 -   Total lines of code by file extension
 
-[![Screenshot](https://user-images.githubusercontent.com/18193831/166311168-72751a16-e8a4-4b3d-94ad-c37993d9e7bd.png)](https://ghloc.vercel.app/facebook/react)
+[![Screenshot](https://user-images.githubusercontent.com/18193831/199794714-a4c7d8c1-17c3-4be9-8de4-dc0fb745ea2d.png)](https://ghloc.vercel.app/facebook/react)
 
 ## Addons
 
