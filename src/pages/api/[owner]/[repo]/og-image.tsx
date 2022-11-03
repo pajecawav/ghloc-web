@@ -74,9 +74,10 @@ export default async function handler(req: NextRequest) {
 			</div>
 		),
 		{
-			width: 1200,
-			// TODO: is it 600 or 630?
-			height: 630,
+			headers: {
+				// override default cache
+				"cache-control": "public, no-transform, max-age=900",
+			},
 		}
 	);
 }
