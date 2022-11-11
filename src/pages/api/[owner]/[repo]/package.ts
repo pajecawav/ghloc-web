@@ -17,7 +17,7 @@ export default async function handler(
 
 	try {
 		const data = await getPackageInfo({ owner, repo, branch });
-		res.setHeader("cache-control", "public, max-age=60, s-maxage=60");
+		res.setHeader("cache-control", "public, max-age=600");
 		res.json({ data });
 	} catch (e) {
 		console.error(e);

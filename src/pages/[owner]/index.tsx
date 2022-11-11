@@ -4,32 +4,40 @@ import { Skeleton } from "@/components/Skeleton";
 import { getUser, UserResponse } from "@/lib/github";
 import { formatTitle } from "@/lib/format";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import type { FetchError } from "ohmyfetch";
 import { MetaTags } from "@/components/MetaTags";
+import { GetServerSideProps } from "next";
 
-const UserReposPage = () => {
-	const router = useRouter();
-	const { owner } = router.query as {
-		owner: string;
+interface PageProps {
+	owner: string;
+}
+
+export const getServerSideProps: GetServerSideProps<
+	PageProps,
+	{ owner: string }
+> = async ({ req, res, params, query }) => {
+	res.setHeader("cache-control", "public, max-age=600");
+	return {
+		props: {
+			owner: params!.owner,
+		},
 	};
+};
 
+const UserReposPage = ({ owner }: PageProps) => {
 	const { data: user } = useQuery<UserResponse, FetchError>(
 		["user", owner],
-		() => getUser(owner),
-		{ enabled: router.isReady }
+		() => getUser(owner)
 	);
 
 	return (
 		<div className="flex flex-col gap-5">
-			{router.isReady && (
-				<MetaTags
-					title={formatTitle(`${owner}`)}
-					canonicalPath={`/${owner}`}
-				/>
-			)}
+			<MetaTags
+				title={formatTitle(`${owner}`)}
+				canonicalPath={`/${owner}`}
+			/>
 
 			<div className="flex items-center">
 				<h1 className="text-2xl">

@@ -30,8 +30,7 @@ export const getServerSideProps: GetServerSideProps<
 	PageProps,
 	{ owner: string; repo: string }
 > = async ({ req, res, params, query }) => {
-	res.setHeader("Cache-Control", "public, max-age=600, s-maxage=600");
-
+	res.setHeader("cache-control", "public, max-age=600");
 	return {
 		props: {
 			owner: params!.owner,
