@@ -45,7 +45,9 @@ export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
 					))}
 				</div>
 			) : !data ? (
-				<p className="text-muted">No npm package detected.</p>
+				<p className="text-muted">
+					No npm package detected in the project root.
+				</p>
 			) : (
 				<ul>
 					<li>

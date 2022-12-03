@@ -1,14 +1,8 @@
-import languagesJson from "./languages.json";
 import fs from "fs";
 import { resolve } from "path";
+import languagesJson from "./languages.json";
 
-interface Language {
-	name?: string;
-	filenames?: string[];
-	extensions?: string[];
-}
-
-const languages = languagesJson.languages as Record<string, Language>;
+const languages = languagesJson.languages;
 
 type ExtensionsMap = Record<string, string>;
 type FilenamesMap = Record<string, string>;
@@ -18,15 +12,15 @@ function buildLanguagesMap() {
 	const filenamesMap: FilenamesMap = {};
 
 	for (const [key, language] of Object.entries(languages)) {
-		const name = language.name || key;
+		const name = "name" in language ? language.name : key;
 
-		if (language.extensions) {
+		if ("extensions" in language) {
 			for (const extension of language.extensions) {
 				extensionsMap[extension.toLowerCase()] = name;
 			}
 		}
 
-		if (language.filenames) {
+		if ("filenames" in language) {
 			for (const filename of language.filenames) {
 				filenamesMap[filename.toLowerCase()] = name;
 			}
