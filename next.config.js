@@ -10,7 +10,7 @@ let config = {
 };
 
 if (process.env.ANALYZE === "true") {
-	const withStatoscope = require("next-statoscope")(config);
+	const withStatoscope = require("next-statoscope")();
 	config = withStatoscope(config);
 }
 

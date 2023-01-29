@@ -30,6 +30,8 @@ export function useLocs(
 			$fetch<Locs>(`https://ghloc.ifels.dev/${owner}/${repo}/${branch}`, {
 				params: {
 					...(filter && { match: filter }),
+					// disable pretty-formatting to save bandwidth
+					pretty: false,
 				},
 			}),
 		{
