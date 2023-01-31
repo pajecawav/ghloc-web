@@ -61,12 +61,7 @@ const UserReposPage = ({ owner }: PageProps) => {
 								</div>
 							)}
 						</Skeleton>
-						<Skeleton
-							className="w-32 h-6"
-							isLoading={user === undefined}
-						>
-							{() => <span>{owner}</span>}
-						</Skeleton>
+						<span>{owner}</span>
 					</a>
 				</h1>
 			</div>
