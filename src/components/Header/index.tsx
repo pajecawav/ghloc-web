@@ -82,7 +82,7 @@ export const Header = ({ className }: Props) => {
 						<HeaderItem>
 							<a
 								className="umami--click--firefox-addon-button"
-								href="https://addons.mozilla.org/ru/firefox/addon/github-lines-of-code"
+								href="https://addons.mozilla.org/firefox/addon/github-lines-of-code"
 								target="_blank"
 								rel="noopener noreferrer"
 								title="Firefox addon"
