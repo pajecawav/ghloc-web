@@ -17,8 +17,8 @@ A [website](https://ghloc.vercel.app/) to display GitHub repository info:
 ```bash
 git clone https://github.com/pajecawav/ghloc-web.git
 cd ghloc-web
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 ## Addons
