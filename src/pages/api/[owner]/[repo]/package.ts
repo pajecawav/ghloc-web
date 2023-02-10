@@ -1,26 +1,35 @@
 import { getPackageInfo } from "@/lib/package";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest } from "next/server";
 
-export default async function handler(
-	req: NextApiRequest,
-	res: NextApiResponse
-) {
+export const config = {
+	runtime: "edge",
+};
+
+export default async function handler(req: NextRequest) {
 	if (req.method !== "GET") {
-		return res.status(405).end("Method Not Allowed");
+		return new Response("Method Not Allowed", { status: 405 });
 	}
 
-	const { owner, repo, branch } = req.query as Record<string, string>;
+	const { searchParams } = new URL(req.url);
+	const owner = searchParams.get("owner")!;
+	const repo = searchParams.get("repo")!;
+	const branch = searchParams.get("branch");
 
 	if (!branch) {
-		return res.status(400).end("Bad Request");
+		return new Response("Bad Request", { status: 400 });
 	}
 
 	try {
 		const data = await getPackageInfo({ owner, repo, branch });
-		res.setHeader("cache-control", "public, max-age=600");
-		res.json({ data });
+		return new Response(JSON.stringify({ data }), {
+			status: 200,
+			headers: {
+				"content-type": "application/json",
+				"cache-control": "public, max-age=600",
+			},
+		});
 	} catch (e) {
 		console.error(e);
-		return res.status(500).end("Internal Server Error");
+		return new Response("Internal Server Error", { status: 500 });
 	}
 }

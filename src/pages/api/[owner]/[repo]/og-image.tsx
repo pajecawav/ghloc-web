@@ -8,7 +8,7 @@ import { NextRequest } from "next/server";
 import { $fetch } from "ohmyfetch";
 
 export const config = {
-	runtime: "experimental-edge",
+	runtime: "edge",
 };
 
 const DEBUG = false;
