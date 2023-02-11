@@ -1,5 +1,6 @@
 import { getPackageInfo } from "@/lib/package";
 import { NextRequest } from "next/server";
+import { ServerTiming } from "tiny-server-timing";
 
 export const config = {
 	runtime: "edge",
@@ -20,12 +21,14 @@ export default async function handler(req: NextRequest) {
 	}
 
 	try {
-		const data = await getPackageInfo({ owner, repo, branch });
+		const timing = new ServerTiming({ precision: 0 });
+		const data = await getPackageInfo({ owner, repo, branch }, timing);
 		return new Response(JSON.stringify({ data }), {
 			status: 200,
 			headers: {
 				"content-type": "application/json",
 				"cache-control": "public, max-age=600",
+				...timing.getHeaders(),
 			},
 		});
 	} catch (e) {

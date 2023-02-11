@@ -27,6 +27,7 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-hot-toast": "^2.4.0",
+		"tiny-server-timing": "^0.1.0",
 		"zustand": "^4.3.2"
 	},
 	"devDependencies": {

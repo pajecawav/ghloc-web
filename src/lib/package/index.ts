@@ -1,3 +1,4 @@
+import { ServerTiming } from "tiny-server-timing";
 import { getRawGitHubUrl } from "../github";
 import { BundlephobiaData, fetchBundlephobiaData } from "./bundlephobia";
 import { fetchNpmData, NpmData } from "./npm";
@@ -10,15 +11,16 @@ export type PackageInfo = {
 	npm: NpmData | null;
 };
 
-export async function getPackageInfo({
-	owner,
-	repo,
-	branch,
-}: {
+type PackageInfoOptions = {
 	owner: string;
 	repo: string;
 	branch: string;
-}): Promise<PackageInfo | null> {
+};
+
+export async function getPackageInfo(
+	{ owner, repo, branch }: PackageInfoOptions,
+	timing?: ServerTiming
+): Promise<PackageInfo | null> {
 	const packageUrl = getRawGitHubUrl({
 		owner,
 		repo,
@@ -26,7 +28,9 @@ export async function getPackageInfo({
 		path: "package.json",
 	});
 
+	timing?.start("github");
 	const res = await fetch(packageUrl);
+	timing?.end("github");
 
 	if (!res.ok) {
 		return null;
@@ -44,9 +48,9 @@ export async function getPackageInfo({
 	}
 
 	const [bundleData, packageData, npmData] = await Promise.allSettled([
-		fetchBundlephobiaData(pkg.name),
-		fetchPackagephobiaData(pkg.name),
-		fetchNpmData(pkg.name),
+		fetchBundlephobiaData(pkg.name, timing),
+		fetchPackagephobiaData(pkg.name, timing),
+		fetchNpmData(pkg.name, timing),
 	]);
 
 	const bundleInfo =
