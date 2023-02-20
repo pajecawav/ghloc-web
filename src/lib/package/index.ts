@@ -19,7 +19,7 @@ type PackageInfoOptions = {
 
 export async function getPackageInfo(
 	{ owner, repo, branch }: PackageInfoOptions,
-	timing?: ServerTiming
+	timing: ServerTiming
 ): Promise<PackageInfo | null> {
 	const packageUrl = getRawGitHubUrl({
 		owner,
@@ -28,15 +28,13 @@ export async function getPackageInfo(
 		path: "package.json",
 	});
 
-	timing?.start("github");
-	const res = await fetch(packageUrl);
-	timing?.end("github");
+	const res = await timing.timeAsync("github", () => fetch(packageUrl));
 
 	if (!res.ok) {
 		return null;
 	}
 
-	let pkg;
+	let pkg: { name: string; private: boolean };
 	try {
 		pkg = await res.json();
 	} catch (e) {
@@ -48,9 +46,9 @@ export async function getPackageInfo(
 	}
 
 	const [bundleData, packageData, npmData] = await Promise.allSettled([
-		fetchBundlephobiaData(pkg.name, timing),
-		fetchPackagephobiaData(pkg.name, timing),
-		fetchNpmData(pkg.name, timing),
+		timing.timeAsync("bundle", () => fetchBundlephobiaData(pkg.name)),
+		timing.timeAsync("package", () => fetchPackagephobiaData(pkg.name)),
+		timing.timeAsync("npm", () => fetchNpmData(pkg.name)),
 	]);
 
 	const bundleInfo =

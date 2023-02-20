@@ -1,12 +1,5 @@
-import { ServerTiming } from "tiny-server-timing";
-
-export async function fetchNpmData(
-	name: string,
-	timing?: ServerTiming
-): Promise<NpmData> {
-	timing?.start("npm");
+export async function fetchNpmData(name: string): Promise<NpmData> {
 	const res = await fetch(`https://api.npms.io/v2/package/${name}`);
-	timing?.end("npm");
 
 	if (!res.ok) {
 		throw new Error(`Failed to load npm data for '${name}'`);

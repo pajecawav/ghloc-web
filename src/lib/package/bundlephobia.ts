@@ -1,14 +1,9 @@
-import { ServerTiming } from "tiny-server-timing";
-
 export async function fetchBundlephobiaData(
-	name: string,
-	timing?: ServerTiming
+	name: string
 ): Promise<BundlephobiaData> {
-	timing?.start("bundle");
 	const res = await fetch(
 		`https://bundlephobia.com/api/size?package=${encodeURIComponent(name)}`
 	);
-	timing?.end("bundle");
 
 	if (!res.ok) {
 		throw new Error(`Failed to load bundle data for '${name}'`);
