@@ -81,7 +81,6 @@ export const RepoLocsSection = ({
 
 		router.push(
 			{
-				pathname: router.pathname,
 				query: {
 					...query,
 					...(newPath.length && {

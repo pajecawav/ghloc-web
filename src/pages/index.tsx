@@ -3,6 +3,7 @@ import { MetaTags } from "@/components/MetaTags";
 import { RepoStats } from "@/components/repo/RepoStats";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { formatTitle } from "@/lib/format";
 import {
 	ReposResponseItem,
 	ReposSearchResponse,
@@ -63,7 +64,10 @@ export const HomePage = () => {
 
 	return (
 		<>
-			<MetaTags title="ghloc | Count lines of code" canonicalPath="" />
+			<MetaTags
+				title={formatTitle("Count lines of code")}
+				canonicalPath=""
+			/>
 
 			<Combobox
 				value={null as ReposResponseItem | null}

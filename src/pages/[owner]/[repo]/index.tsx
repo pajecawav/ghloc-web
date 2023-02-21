@@ -59,7 +59,6 @@ export const RepoPage = ({
 		if (!branch && defaultBranch) {
 			router.replace(
 				{
-					pathname: window.location.pathname,
 					query: {
 						...router.query,
 						branch: defaultBranch,
