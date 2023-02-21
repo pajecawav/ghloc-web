@@ -1,9 +1,10 @@
 import { formatNumber, formatSize } from "@/lib/format";
 import { PackageInfo as PackageInfoResponse } from "@/lib/package";
+import { queryKeys } from "@/lib/query-keys";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import dayjs from "dayjs";
-import { $fetch, FetchError } from "ohmyfetch";
+import { $fetch } from "ohmyfetch";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
 
@@ -14,19 +15,14 @@ interface PackageInfoProps {
 }
 
 export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
-	const { data, isLoading } = useQuery<PackageInfoResponse, FetchError>(
-		["package_info", { owner, repo, branch }],
-		() =>
-			$fetch<{ data: PackageInfoResponse }>(
-				`/api/${owner}/${repo}/package`,
-				{
-					params: { branch },
-				}
-			).then(response => response.data),
-		{
-			enabled: !!branch,
-		}
-	);
+	const { data, isLoading } = useQuery({
+		queryKey: queryKeys.packageInfo({ owner, repo, branch: branch! }),
+		queryFn: () =>
+			$fetch<PackageInfoResponse>(`/api/${owner}/${repo}/package`, {
+				params: { branch },
+			}),
+		enabled: !!branch,
+	});
 
 	const failedLabel = <span className="text-muted">failed to load</span>;
 

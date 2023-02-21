@@ -1,4 +1,5 @@
 import { getLocs, Locs, LocsChild } from "@/lib/locs";
+import { queryKeys } from "@/lib/query-keys";
 import { useQuery } from "@tanstack/react-query";
 import { $fetch, FetchError } from "ohmyfetch";
 import { useMemo } from "react";
@@ -24,19 +25,20 @@ export function useLocs(
 	path: string[],
 	{ sortOrder = "type", filter, owner, repo, branch }: UseLocsOptions
 ) {
-	const query = useQuery<Locs, FetchError>(
-		["locs", { owner, repo, branch, filter: filter ?? null }],
-		() => getLocs({ owner, repo, branch: branch!, filter }),
-		{
-			enabled: !!branch,
-			keepPreviousData: true,
-			onError() {
-				toast.error(
-					"Failed to load LOC stats: probably repo is too big."
-				);
-			},
-		}
-	);
+	const query = useQuery<Locs, FetchError>({
+		queryKey: queryKeys.locs({
+			owner,
+			repo,
+			branch: branch!,
+			filter: filter ?? null,
+		}),
+		queryFn: () => getLocs({ owner, repo, branch: branch!, filter }),
+		enabled: !!branch,
+		keepPreviousData: true,
+		onError() {
+			toast.error("Failed to load LOC stats: probably repo is too big.");
+		},
+	});
 
 	const locs = query.data ?? null;
 

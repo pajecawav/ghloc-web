@@ -10,6 +10,7 @@ import {
 	ReposSearchResponse,
 	searchRepos,
 } from "@/lib/github";
+import { queryKeys } from "@/lib/query-keys";
 import { Combobox } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/outline";
 import { useQuery } from "@tanstack/react-query";
@@ -52,17 +53,15 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 	const { data: results, isFetching } = useQuery<
 		ReposSearchResponse,
 		FetchError
-	>(
-		["search", debouncedQuery],
-		() => searchRepos({ query: debouncedQuery }),
-		{
-			enabled: !!debouncedQuery,
-			keepPreviousData: true,
-			onError() {
-				toast.error("Failed to load search results.");
-			},
-		}
-	);
+	>({
+		queryKey: queryKeys.search(debouncedQuery),
+		queryFn: () => searchRepos({ query: debouncedQuery }),
+		enabled: !!debouncedQuery,
+		keepPreviousData: true,
+		onError() {
+			toast.error("Failed to load search results.");
+		},
+	});
 
 	const navigateToRepoPage = (repo: ReposResponseItem) => {
 		router.push({

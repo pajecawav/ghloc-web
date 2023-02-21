@@ -4,6 +4,7 @@ import {
 	getCommitActivity,
 	GitHubActivityCalculationStartedError,
 } from "@/lib/github";
+import { queryKeys } from "@/lib/query-keys";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import type { FetchError } from "ohmyfetch";
@@ -29,9 +30,9 @@ export const CommitsHeatmapSection = ({
 	const { data, error, isLoading, isLoadingError, failureCount } = useQuery<
 		CommitActivity,
 		FetchError | GitHubActivityCalculationStartedError
-	>(
-		["commit_activity", { owner, repo }],
-		async () => {
+	>({
+		queryKey: queryKeys.commitActivity({ owner, repo }),
+		queryFn: async () => {
 			const data = await getCommitActivity({ owner, repo });
 
 			// remove future dates data
@@ -48,20 +49,18 @@ export const CommitsHeatmapSection = ({
 
 			return data;
 		},
-		{
-			enabled,
-			retry(_, error) {
-				return (
-					error instanceof GitHubActivityCalculationStartedError ||
-					error.response?.status !== 403
-				);
-			},
-			retryDelay: 7500,
-			onError(error) {
-				toast.error("Failed to load commit activity.");
-			},
-		}
-	);
+		enabled,
+		retry(_, error) {
+			return (
+				error instanceof GitHubActivityCalculationStartedError ||
+				error.response?.status !== 403
+			);
+		},
+		retryDelay: 7500,
+		onError(error) {
+			toast.error("Failed to load commit activity.");
+		},
+	});
 
 	const totalCommits = useMemo(() => {
 		if (!data) return data;

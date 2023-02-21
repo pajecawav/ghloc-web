@@ -42,7 +42,7 @@ function createClientFetcher() {
 	});
 }
 
-const fetcher = isClient() ? createClientFetcher() : $fetch;
+const ghFetcher = isClient() ? createClientFetcher() : $fetch;
 
 export class GitHubActivityCalculationStartedError extends Error {}
 
@@ -84,7 +84,7 @@ export function searchRepos({
 	query: string;
 	perPage?: number;
 }) {
-	return fetcher<ReposSearchResponse>(
+	return ghFetcher<ReposSearchResponse>(
 		"https://api.github.com/search/repositories",
 		{
 			method: "GET",
@@ -94,7 +94,7 @@ export function searchRepos({
 }
 
 export function getUser(user: string) {
-	return fetcher<UserResponse>(`https://api.github.com/users/${user}`);
+	return ghFetcher<UserResponse>(`https://api.github.com/users/${user}`);
 }
 
 export function getUserRepos({
@@ -106,7 +106,7 @@ export function getUserRepos({
 	perPage: number;
 	page: number;
 }) {
-	return fetcher<ReposResponse>(
+	return ghFetcher<ReposResponse>(
 		`https://api.github.com/users/${user}/repos`,
 		{
 			params: { per_page: perPage, page, sort: "updated" },
@@ -115,19 +115,19 @@ export function getUserRepos({
 }
 
 export function getRepo({ owner, repo }: RepoDetails) {
-	return fetcher<RepoResponse>(
+	return ghFetcher<RepoResponse>(
 		`https://api.github.com/repos/${owner}/${repo}`
 	);
 }
 
 export function getCommunityProfile({ owner, repo }: RepoDetails) {
-	return fetcher<RepoHealthResponse>(
+	return ghFetcher<RepoHealthResponse>(
 		`https://api.github.com/repos/${owner}/${repo}/community/profile`
 	);
 }
 
 export async function getCommitActivity({ owner, repo }: RepoDetails) {
-	const response = await fetcher.raw<CommitActivity>(
+	const response = await ghFetcher.raw<CommitActivity>(
 		`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`
 	);
 

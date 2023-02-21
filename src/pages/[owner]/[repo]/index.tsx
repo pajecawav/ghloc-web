@@ -13,6 +13,7 @@ import { formatRepoSize, formatTitle } from "@/lib/format";
 import { getCommunityProfile, getRepo, RepoResponse } from "@/lib/github";
 import { getLocs } from "@/lib/locs";
 import { getPackageInfo } from "@/lib/package";
+import { queryKeys } from "@/lib/query-keys";
 import { removeProtocol } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
@@ -46,28 +47,38 @@ export const getServerSideProps: GetServerSideProps<
 		};
 	}
 
-	const client = new QueryClient();
+	const client = new QueryClient({
+		defaultOptions: { queries: { staleTime: Infinity, retry: false } },
+	});
 	const timing = new ServerTiming();
 
 	await Promise.all([
 		timing.timeAsync("repo", () =>
-			client.prefetchQuery(["repos", repo], () =>
-				getRepo({ owner, repo })
-			)
+			client.prefetchQuery({
+				queryKey: queryKeys.repo(repo),
+				queryFn: () => getRepo({ owner, repo }),
+			})
 		),
 		timing.timeAsync("health", () =>
-			client.prefetchQuery(["repo_health", { owner, repo }], () =>
-				getCommunityProfile({ owner, repo })
-			)
+			client.prefetchQuery({
+				queryKey: queryKeys.repoHealth({ owner, repo }),
+				queryFn: () => getCommunityProfile({ owner, repo }),
+			})
 		),
-		client.prefetchQuery(["package_info", { owner, repo, branch }], () =>
-			getPackageInfo({ owner, repo, branch }, timing)
-		),
+		client.prefetchQuery({
+			queryKey: queryKeys.packageInfo({ owner, repo, branch }),
+			queryFn: () => getPackageInfo({ owner, repo, branch }, timing),
+		}),
 		timing.timeAsync("locs", () =>
-			client.prefetchQuery(
-				["locs", { owner, repo, branch, filter: filter ?? null }],
-				() => getLocs({ owner, repo, branch, filter })
-			)
+			client.prefetchQuery({
+				queryKey: queryKeys.locs({
+					owner,
+					repo,
+					branch,
+					filter: filter ?? null,
+				}),
+				queryFn: () => getLocs({ owner, repo, branch, filter }),
+			})
 		),
 	]);
 
@@ -94,10 +105,10 @@ export const RepoPage = ({
 	const isSmallOrLarger = useMediaQuery("sm");
 	const branch = (router.query.branch as string | undefined) ?? branchProp;
 
-	const { data: repo } = useQuery<RepoResponse, FetchError>(
-		["repos", repoName],
-		() => getRepo({ owner, repo: repoName })
-	);
+	const { data: repo } = useQuery<RepoResponse, FetchError>({
+		queryKey: queryKeys.repo(repoName),
+		queryFn: () => getRepo({ owner, repo: repoName }),
+	});
 
 	useEffect(() => {
 		const defaultBranch = repo?.default_branch;

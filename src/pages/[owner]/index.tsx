@@ -3,6 +3,7 @@ import { MetaTags } from "@/components/MetaTags";
 import { ReposList } from "@/components/repo/ReposList";
 import { formatTitle } from "@/lib/format";
 import { getUser, getUserRepos, UserResponse } from "@/lib/github";
+import { queryKeys } from "@/lib/query-keys";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
 import type { FetchError } from "ohmyfetch";
@@ -58,10 +59,10 @@ export const getServerSideProps: GetServerSideProps<
 };
 
 const UserReposPage = ({ owner }: PageProps) => {
-	const { data: user } = useQuery<UserResponse, FetchError>(
-		["user", owner],
-		() => getUser(owner)
-	);
+	const { data: user } = useQuery<UserResponse, FetchError>({
+		queryKey: queryKeys.user(owner),
+		queryFn: () => getUser(owner),
+	});
 
 	return (
 		<div className="flex flex-col gap-5">
