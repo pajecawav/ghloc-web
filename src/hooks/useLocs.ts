@@ -1,8 +1,8 @@
+import { getLocs, Locs, LocsChild } from "@/lib/locs";
 import { useQuery } from "@tanstack/react-query";
 import { $fetch, FetchError } from "ohmyfetch";
 import { useMemo } from "react";
 import toast from "react-hot-toast";
-import { Locs, LocsChild } from "../types";
 
 export type SortOrder = "type" | "locs";
 
@@ -25,15 +25,8 @@ export function useLocs(
 	{ sortOrder = "type", filter, owner, repo, branch }: UseLocsOptions
 ) {
 	const query = useQuery<Locs, FetchError>(
-		["stats", { owner, repo, branch, filter }],
-		() =>
-			$fetch<Locs>(`https://ghloc.ifels.dev/${owner}/${repo}/${branch}`, {
-				params: {
-					...(filter && { match: filter }),
-					// disable pretty-formatting to save bandwidth
-					pretty: false,
-				},
-			}),
+		["locs", { owner, repo, branch, filter: filter ?? null }],
+		() => getLocs({ owner, repo, branch: branch!, filter }),
 		{
 			enabled: !!branch,
 			keepPreviousData: true,

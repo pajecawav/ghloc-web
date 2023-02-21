@@ -21,6 +21,7 @@
 		"@vercel/og": "^0.0.27",
 		"classnames": "^2.3.2",
 		"dayjs": "^1.11.7",
+		"js-cookie": "^3.0.1",
 		"next": "^13.1.6",
 		"nprogress": "^0.2.0",
 		"ohmyfetch": "^0.4.21",
@@ -31,6 +32,7 @@
 		"zustand": "^4.3.2"
 	},
 	"devDependencies": {
+		"@types/js-cookie": "^3.0.3",
 		"@types/node": "^18.11.19",
 		"@types/nprogress": "^0.2.0",
 		"@types/react": "^18.0.27",

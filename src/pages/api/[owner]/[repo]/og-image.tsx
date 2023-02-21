@@ -1,9 +1,8 @@
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { getLanguageFromExtension } from "@/languages";
 import { formatNumber } from "@/lib/format";
-import { Locs } from "@/types";
+import { Locs } from "@/lib/locs";
 import { ImageResponse } from "@vercel/og";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest } from "next/server";
 import { $fetch } from "ohmyfetch";
 

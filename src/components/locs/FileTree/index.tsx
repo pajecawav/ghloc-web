@@ -1,6 +1,6 @@
 import { isFolder } from "@/hooks/useLocs";
 import { formatNumber } from "@/lib/format";
-import { Locs, LocsChild } from "@/types";
+import { Locs, LocsChild } from "@/lib/locs";
 import { DocumentIcon } from "@heroicons/react/outline";
 import { FolderIcon } from "@heroicons/react/solid";
 import classNames from "classnames";

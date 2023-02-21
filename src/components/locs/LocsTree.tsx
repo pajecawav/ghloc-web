@@ -1,6 +1,6 @@
 import { getLanguageFromExtension } from "@/languages";
 import { formatNumber } from "@/lib/format";
-import { Locs } from "@/types";
+import { Locs } from "@/lib/locs";
 import classNames from "classnames";
 import { useCallback } from "react";
 

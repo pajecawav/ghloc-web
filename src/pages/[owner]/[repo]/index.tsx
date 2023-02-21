@@ -10,32 +10,76 @@ import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { formatRepoSize, formatTitle } from "@/lib/format";
-import { getRepo, RepoResponse } from "@/lib/github";
+import { getCommunityProfile, getRepo, RepoResponse } from "@/lib/github";
+import { getLocs } from "@/lib/locs";
+import { getPackageInfo } from "@/lib/package";
 import { removeProtocol } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
-import { useQuery } from "@tanstack/react-query";
+import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { FetchError } from "ohmyfetch";
+import { FetchError } from "ohmyfetch";
 import { useEffect } from "react";
+import { ServerTiming } from "tiny-server-timing";
 
 interface PageProps {
 	owner: string;
 	repo: string;
 	branch: string | null;
+	filter: string | null;
 }
 
 export const getServerSideProps: GetServerSideProps<
 	PageProps,
 	{ owner: string; repo: string }
 > = async ({ req, res, params, query }) => {
-	res.setHeader("cache-control", "public, max-age=600");
+	const token = req.cookies.token;
+	const owner = params!.owner;
+	const repo = params!.repo;
+	const branch = (query!.branch as string | undefined) ?? null;
+	const filter = query!.filter as string | undefined;
+
+	if (!token || !branch) {
+		return {
+			props: { owner, repo, branch, filter: filter ?? null },
+		};
+	}
+
+	const client = new QueryClient();
+	const timing = new ServerTiming();
+
+	await Promise.all([
+		timing.timeAsync("repo", () =>
+			client.prefetchQuery(["repos", repo], () =>
+				getRepo({ owner, repo })
+			)
+		),
+		timing.timeAsync("health", () =>
+			client.prefetchQuery(["repo_health", { owner, repo }], () =>
+				getCommunityProfile({ owner, repo })
+			)
+		),
+		client.prefetchQuery(["package_info", { owner, repo, branch }], () =>
+			getPackageInfo({ owner, repo, branch }, timing)
+		),
+		timing.timeAsync("locs", () =>
+			client.prefetchQuery(
+				["locs", { owner, repo, branch, filter: filter ?? null }],
+				() => getLocs({ owner, repo, branch, filter })
+			)
+		),
+	]);
+
+	res.setHeader("Server-Timing", timing.getHeaders()["Server-Timing"]);
+
 	return {
 		props: {
-			owner: params!.owner,
-			repo: params!.repo,
-			branch: (query.branch as string | undefined) ?? null,
+			owner,
+			repo,
+			branch,
+			dehydratedState: dehydrate(client),
+			filter: filter ?? null,
 		},
 	};
 };
@@ -44,6 +88,7 @@ export const RepoPage = ({
 	owner,
 	repo: repoName,
 	branch: branchProp,
+	filter,
 }: PageProps) => {
 	const router = useRouter();
 	const isSmallOrLarger = useMediaQuery("sm");
@@ -215,6 +260,7 @@ export const RepoPage = ({
 				repo={repoName}
 				branch={branch}
 				defaultBranch={repo?.default_branch}
+				initialFilter={filter}
 			/>
 		</div>
 	);
