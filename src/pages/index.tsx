@@ -13,6 +13,7 @@ import { Combobox } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/outline";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
+import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import type { FetchError } from "ohmyfetch";
 import { useState } from "react";
@@ -21,12 +22,29 @@ import toast from "react-hot-toast";
 const githubUrlRegex =
 	/(https?:\/\/)?github.com\/(?<owner>[^\/]+)\/(?<repo>[^\/]+)(\/[^\$]+)?/;
 
-export const HomePage = () => {
+interface PageProps {
+	query: string;
+}
+
+export const getServerSideProps: GetServerSideProps<PageProps> = async ({
+	req,
+	res,
+	query,
+}) => {
+	res.setHeader("cache-control", "public, max-age=600");
+	return {
+		props: {
+			query: (query.q as string | undefined) ?? "",
+		},
+	};
+};
+
+export const HomePage = ({ query: initialQuery }: PageProps) => {
 	const router = useRouter();
 
 	const isMediumOrLarger = useMediaQuery("md");
 
-	const [query, setQuery] = useState("");
+	const [query, setQuery] = useState(initialQuery);
 	const [debouncedQuery, setDebouncedQuery] = useState(query);
 	useDebounce(() => setDebouncedQuery(query), 750, [query]);
 

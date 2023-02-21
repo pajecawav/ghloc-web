@@ -1,0 +1,9 @@
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+    <ShortName>ghloc</ShortName>
+    <Description>Search GitHub repos on ghloc</Description>
+    <InputEncoding>UTF-8</InputEncoding>
+    <Image width="32" height="32" type="image/x-icon">https://ghloc.vercel.app/favicon.ico</Image>
+    <Tags>ghloc</Tags>
+    <Url type="text/html" template="https://ghloc.vercel.app?q={searchTerms}" />
+    <moz:SearchForm>https://ghloc.vercel.app.com</moz:SearchForm>
+</OpenSearchDescription>
