@@ -59,7 +59,7 @@ export const getServerSideProps: GetServerSideProps<
 };
 
 const UserReposPage = ({ owner }: PageProps) => {
-	const { data: user } = useQuery<UserResponse, FetchError>({
+	const { data: user } = useQuery({
 		queryKey: queryKeys.user(owner),
 		queryFn: () => getUser(owner),
 	});

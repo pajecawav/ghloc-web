@@ -53,7 +53,7 @@ export const RepoHealthSection = ({ owner, repo, className }: Props) => {
 		data: health,
 		isLoadingError,
 		error,
-	} = useQuery<RepoHealthResponse, FetchError>({
+	} = useQuery({
 		queryKey: queryKeys.repoHealth({ owner, repo }),
 		queryFn: () => getCommunityProfile({ owner, repo }),
 		onError() {

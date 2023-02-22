@@ -50,10 +50,7 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 	const [debouncedQuery, setDebouncedQuery] = useState(query);
 	useDebounce(() => setDebouncedQuery(query), 750, [query]);
 
-	const { data: results, isFetching } = useQuery<
-		ReposSearchResponse,
-		FetchError
-	>({
+	const { data: results, isFetching } = useQuery({
 		queryKey: queryKeys.search(debouncedQuery),
 		queryFn: () => searchRepos({ query: debouncedQuery }),
 		enabled: !!debouncedQuery,

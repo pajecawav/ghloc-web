@@ -105,10 +105,7 @@ export const FilePreview = ({ owner, repo, branch, path, loc }: Props) => {
 	const url = getRawGitHubUrl({ owner, repo, branch, path: path.join("/") });
 
 	// make a HEAD request first to detect file type
-	const { data: meta } = useQuery<
-		{ type: FileType | null; size: number } | null,
-		FetchError
-	>({
+	const { data: meta } = useQuery({
 		queryKey: ["files", { owner, repo, branch, path }, "type"],
 		queryFn: async () => {
 			const response = await $fetch.raw(url, { method: "HEAD" });
@@ -124,7 +121,7 @@ export const FilePreview = ({ owner, repo, branch, path, loc }: Props) => {
 		},
 	});
 
-	const { data: file, isLoadingError } = useQuery<string, FetchError>({
+	const { data: file, isLoadingError } = useQuery({
 		queryKey: ["files", { owner, repo, branch, path }],
 		queryFn: () =>
 			$fetch<string>(url, {

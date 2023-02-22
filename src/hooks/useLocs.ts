@@ -25,7 +25,7 @@ export function useLocs(
 	path: string[],
 	{ sortOrder = "type", filter, owner, repo, branch }: UseLocsOptions
 ) {
-	const query = useQuery<Locs, FetchError>({
+	const query = useQuery({
 		queryKey: queryKeys.locs({
 			owner,
 			repo,

@@ -105,7 +105,7 @@ export const RepoPage = ({
 	const isSmallOrLarger = useMediaQuery("sm");
 	const branch = (router.query.branch as string | undefined) ?? branchProp;
 
-	const { data: repo } = useQuery<RepoResponse, FetchError>({
+	const { data: repo } = useQuery({
 		queryKey: queryKeys.repo(repoName),
 		queryFn: () => getRepo({ owner, repo: repoName }),
 	});
