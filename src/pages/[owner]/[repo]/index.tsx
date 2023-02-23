@@ -10,17 +10,17 @@ import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { formatRepoSize, formatTitle } from "@/lib/format";
-import { getCommunityProfile, getRepo, RepoResponse } from "@/lib/github";
+import { getCommunityProfile, getRepo } from "@/lib/github";
 import { getLocs } from "@/lib/locs";
 import { getPackageInfo } from "@/lib/package";
 import { queryKeys } from "@/lib/query-keys";
+import { extractGitHubToken } from "@/lib/token";
 import { removeProtocol } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { FetchError } from "ohmyfetch";
 import { useEffect } from "react";
 import { ServerTiming } from "tiny-server-timing";
 
@@ -35,7 +35,8 @@ export const getServerSideProps: GetServerSideProps<
 	PageProps,
 	{ owner: string; repo: string }
 > = async ({ req, res, params, query }) => {
-	const token = req.cookies.token;
+	const token = extractGitHubToken(req);
+
 	const owner = params!.owner;
 	const repo = params!.repo;
 	const branch = (query!.branch as string | undefined) ?? null;
@@ -52,35 +53,39 @@ export const getServerSideProps: GetServerSideProps<
 	});
 	const timing = new ServerTiming();
 
-	await Promise.all([
-		timing.timeAsync("repo", () =>
+	try {
+		await Promise.allSettled([
+			timing.timeAsync("repo", () =>
+				client.prefetchQuery({
+					queryKey: queryKeys.repo(repo),
+					queryFn: () => getRepo({ owner, repo }),
+				})
+			),
+			timing.timeAsync("health", () =>
+				client.prefetchQuery({
+					queryKey: queryKeys.repoHealth({ owner, repo }),
+					queryFn: () => getCommunityProfile({ owner, repo }),
+				})
+			),
 			client.prefetchQuery({
-				queryKey: queryKeys.repo(repo),
-				queryFn: () => getRepo({ owner, repo }),
-			})
-		),
-		timing.timeAsync("health", () =>
-			client.prefetchQuery({
-				queryKey: queryKeys.repoHealth({ owner, repo }),
-				queryFn: () => getCommunityProfile({ owner, repo }),
-			})
-		),
-		client.prefetchQuery({
-			queryKey: queryKeys.packageInfo({ owner, repo, branch }),
-			queryFn: () => getPackageInfo({ owner, repo, branch }, timing),
-		}),
-		timing.timeAsync("locs", () =>
-			client.prefetchQuery({
-				queryKey: queryKeys.locs({
-					owner,
-					repo,
-					branch,
-					filter: filter ?? null,
-				}),
-				queryFn: () => getLocs({ owner, repo, branch, filter }),
-			})
-		),
-	]);
+				queryKey: queryKeys.packageInfo({ owner, repo, branch }),
+				queryFn: () => getPackageInfo({ owner, repo, branch }, timing),
+			}),
+			timing.timeAsync("locs", () =>
+				client.prefetchQuery({
+					queryKey: queryKeys.locs({
+						owner,
+						repo,
+						branch,
+						filter: filter ?? null,
+					}),
+					queryFn: () => getLocs({ owner, repo, branch, filter }),
+				})
+			),
+		]);
+	} catch (e: unknown) {
+		console.error("Failed to prefetch all queries:", e);
+	}
 
 	res.setHeader("Server-Timing", timing.getHeaders()["Server-Timing"]);
 
