@@ -41,7 +41,7 @@ export default async function handler(req: NextRequest) {
 
 	let locs: Locs;
 	try {
-		locs = await $fetch<Locs>(url);
+		locs = await $fetch<Locs>(`${url}?pretty=false`);
 	} catch {
 		return new Response("Internal Server Error", {
 			status: 500,
