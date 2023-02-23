@@ -35,8 +35,14 @@ export function useLocs(
 		queryFn: () => getLocs({ owner, repo, branch: branch!, filter }),
 		enabled: !!branch,
 		keepPreviousData: true,
-		onError() {
-			toast.error("Failed to load LOC stats: probably repo is too big.");
+		onError(error: FetchError<{ error: string }>) {
+			let message: string;
+			if (error.data?.error) {
+				message = `Failed to load LOC stats: ${error.data.error}`;
+			} else {
+				message = "Failed to load LOC stats.";
+			}
+			toast.error(message);
 		},
 	});
 

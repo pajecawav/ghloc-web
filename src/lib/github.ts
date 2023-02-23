@@ -143,7 +143,7 @@ export async function getCommitActivity({ owner, repo }: RepoDetails) {
 
 	const data = response._data!;
 
-	// remove data from the future dates
+	// remove future dates
 	const now = new Date().getTime();
 	const lastWeek = data.pop()!;
 	const msInDay = 1000 * 60 * 60 * 24;

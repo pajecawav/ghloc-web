@@ -15,12 +15,13 @@ import { getLocs } from "@/lib/locs";
 import { getPackageInfo } from "@/lib/package";
 import { queryKeys } from "@/lib/query-keys";
 import { extractGitHubToken } from "@/lib/token";
-import { removeProtocol } from "@/utils";
+import { removeProtocol, timeoutPromise } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { $fetch } from "ohmyfetch";
 import { useEffect } from "react";
 import { ServerTiming } from "tiny-server-timing";
 
@@ -85,7 +86,16 @@ export const getServerSideProps: GetServerSideProps<
 						branch,
 						filter: filter ?? null,
 					}),
-					queryFn: () => getLocs({ owner, repo, branch, filter }),
+					queryFn: () => {
+						const promise = getLocs({
+							owner,
+							repo,
+							branch,
+							filter,
+						});
+						// if locs request takes too long do not wait for result
+						return timeoutPromise(promise, 8_000);
+					},
 				})
 			),
 		]);
