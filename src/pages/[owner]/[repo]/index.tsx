@@ -78,26 +78,26 @@ export const getServerSideProps: GetServerSideProps<
 				queryKey: queryKeys.packageInfo({ owner, repo, branch }),
 				queryFn: () => getPackageInfo({ owner, repo, branch }, timing),
 			}),
-			timing.timeAsync("locs", () =>
-				client.prefetchQuery({
-					queryKey: queryKeys.locs({
-						owner,
-						repo,
-						branch,
-						filter: filter ?? null,
-					}),
-					queryFn: () => {
-						const promise = getLocs({
-							owner,
-							repo,
-							branch,
-							filter,
-						});
-						// if locs request takes too long do not wait for result
-						return timeoutPromise(promise, 8_000);
-					},
-				})
-			),
+			// timing.timeAsync("locs", () =>
+			// 	client.prefetchQuery({
+			// 		queryKey: queryKeys.locs({
+			// 			owner,
+			// 			repo,
+			// 			branch,
+			// 			filter: filter ?? null,
+			// 		}),
+			// 		queryFn: () => {
+			// 			const promise = getLocs({
+			// 				owner,
+			// 				repo,
+			// 				branch,
+			// 				filter,
+			// 			});
+			// 			// if locs request takes too long do not wait for result
+			// 			return timeoutPromise(promise, 8_000);
+			// 		},
+			// 	})
+			// ),
 		]);
 	} catch (e: unknown) {
 		console.error("Failed to prefetch all queries:", e);
