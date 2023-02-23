@@ -1,14 +1,11 @@
 import { Heading } from "@/components/Heading";
-import { ReposList } from "@/components/repo/ReposList";
-import { Skeleton } from "@/components/Skeleton";
-import { getUser, UserResponse } from "@/lib/github";
-import { formatTitle } from "@/lib/format";
-import Head from "next/head";
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import type { FetchError } from "ohmyfetch";
 import { MetaTags } from "@/components/MetaTags";
+import { ReposList } from "@/components/repo/ReposList";
+import { formatTitle } from "@/lib/format";
+import { getUser, UserResponse } from "@/lib/github";
+import { useQuery } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
+import type { FetchError } from "ohmyfetch";
 
 interface PageProps {
 	owner: string;
@@ -47,20 +44,13 @@ const UserReposPage = ({ owner }: PageProps) => {
 						target="_blank"
 						rel="noopener noreferrer"
 					>
-						<Skeleton
-							className="w-10 h-10 rounded-full overflow-hidden"
-							isLoading={user === undefined}
-						>
-							{() => (
-								<div className="w-10 h-10 rounded-full border-2 border-normal overflow-hidden">
-									<img
-										className="object-cover"
-										src={user!.avatar_url}
-										alt="avatar"
-									/>
-								</div>
-							)}
-						</Skeleton>
+						<div className="w-10 h-10 rounded-full border-2 border-normal overflow-hidden">
+							<img
+								className="object-cover"
+								src={`https://github.com/${owner}.png?size=64`}
+								alt="avatar"
+							/>
+						</div>
 						<span>{owner}</span>
 					</a>
 				</h1>
