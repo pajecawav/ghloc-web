@@ -29,23 +29,7 @@ export const CommitsHeatmapSection = ({
 }: Props) => {
 	const { data, error, isLoading, isLoadingError, failureCount } = useQuery({
 		queryKey: queryKeys.commitActivity({ owner, repo }),
-		queryFn: async () => {
-			const data = await getCommitActivity({ owner, repo });
-
-			// remove future dates data
-			const now = new Date().getTime();
-			let lastWeek = data.pop()!;
-			lastWeek.days = lastWeek.days.filter((_, index) => {
-				const day =
-					lastWeek.week * 1000 + index * (1000 * 60 * 60 * 24);
-				return day <= now;
-			});
-			if (lastWeek.days.length) {
-				data.push(lastWeek);
-			}
-
-			return data;
-		},
+		queryFn: () => getCommitActivity({ owner, repo }),
 		enabled,
 		retry(_, error) {
 			return (

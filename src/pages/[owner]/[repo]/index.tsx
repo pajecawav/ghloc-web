@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { formatRepoSize, formatTitle } from "@/lib/format";
-import { getCommunityProfile, getRepo } from "@/lib/github";
+import { getCommitActivity, getCommunityProfile, getRepo } from "@/lib/github";
 import { getLocs } from "@/lib/locs";
 import { getPackageInfo } from "@/lib/package";
 import { queryKeys } from "@/lib/query-keys";
@@ -65,6 +65,12 @@ export const getServerSideProps: GetServerSideProps<
 				client.prefetchQuery({
 					queryKey: queryKeys.repoHealth({ owner, repo }),
 					queryFn: () => getCommunityProfile({ owner, repo }),
+				})
+			),
+			timing.timeAsync("activity", () =>
+				client.prefetchQuery({
+					queryKey: queryKeys.commitActivity({ owner, repo }),
+					queryFn: () => getCommitActivity({ owner, repo }),
 				})
 			),
 			client.prefetchQuery({

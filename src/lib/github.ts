@@ -141,7 +141,21 @@ export async function getCommitActivity({ owner, repo }: RepoDetails) {
 		throw new GitHubActivityCalculationStartedError();
 	}
 
-	return response._data!;
+	const data = response._data!;
+
+	// remove data from the future dates
+	const now = new Date().getTime();
+	const lastWeek = data.pop()!;
+	const msInDay = 1000 * 60 * 60 * 24;
+	lastWeek.days = lastWeek.days.filter((_, index) => {
+		const day = lastWeek.week * 1000 + index * msInDay;
+		return day <= now;
+	});
+	if (lastWeek.days.length !== 0) {
+		data.push(lastWeek);
+	}
+
+	return data;
 }
 
 export type UserType = "User" | "Organization";
