@@ -38,6 +38,8 @@ export const getServerSideProps: GetServerSideProps<
 > = async ({ req, res, params, query }) => {
 	const token = extractGitHubToken(req);
 
+	res.setHeader("cache-control", "public, max-age=300");
+
 	const owner = params!.owner;
 	const repo = params!.repo;
 	const branch = (query!.branch as string | undefined) ?? null;

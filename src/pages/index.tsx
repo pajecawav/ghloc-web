@@ -33,7 +33,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({
 	res,
 	query,
 }) => {
-	res.setHeader("cache-control", "public, max-age=600");
+	res.setHeader("cache-control", "public, max-age=300");
 	return {
 		props: {
 			query: (query.q as string | undefined) ?? "",

@@ -7,9 +7,9 @@ import toast from "react-hot-toast";
 function createClientFetcher() {
 	return $fetch.create({
 		retry: 0,
-		async onRequest({ options }) {
-			options.headers = getGitHubAuthHeaders();
-		},
+		// async onRequest({ options }) {
+		// 	options.headers = getGitHubAuthHeaders();
+		// },
 		async onResponseError(error) {
 			if (error.response?.status === 403) {
 				const limit = parseInt(
