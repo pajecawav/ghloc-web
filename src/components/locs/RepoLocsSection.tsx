@@ -21,6 +21,7 @@ type Props = {
 	repo: string;
 	branch?: string | null;
 	defaultBranch?: string;
+	initialFilter?: string | null;
 };
 
 const sortOrders: Record<SortOrder, SelectOption> = {
@@ -33,14 +34,11 @@ export const RepoLocsSection = ({
 	repo,
 	branch,
 	defaultBranch,
+	initialFilter,
 }: Props) => {
 	const router = useRouter();
-	const filterParam =
-		typeof window !== "undefined"
-			? new URLSearchParams(window.location.search).get("filter") || ""
-			: "";
 
-	const [filter, setFilter] = useState<string>(filterParam);
+	const [filter, setFilter] = useState<string>(initialFilter ?? "");
 	const debouncedFilter = router.query.filter as string | undefined;
 	useDebounce(
 		() => {

@@ -10,6 +10,7 @@ import {
 	ReposSearchResponse,
 	searchRepos,
 } from "@/lib/github";
+import { queryKeys } from "@/lib/query-keys";
 import { Combobox } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/outline";
 import { useQuery } from "@tanstack/react-query";
@@ -32,7 +33,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({
 	res,
 	query,
 }) => {
-	res.setHeader("cache-control", "public, max-age=600");
+	res.setHeader("cache-control", "public, max-age=300");
 	return {
 		props: {
 			query: (query.q as string | undefined) ?? "",
@@ -49,20 +50,15 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 	const [debouncedQuery, setDebouncedQuery] = useState(query);
 	useDebounce(() => setDebouncedQuery(query), 750, [query]);
 
-	const { data: results, isFetching } = useQuery<
-		ReposSearchResponse,
-		FetchError
-	>(
-		["search", debouncedQuery],
-		() => searchRepos({ query: debouncedQuery }),
-		{
-			enabled: !!debouncedQuery,
-			keepPreviousData: true,
-			onError() {
-				toast.error("Failed to load search results.");
-			},
-		}
-	);
+	const { data: results, isFetching } = useQuery({
+		queryKey: queryKeys.search(debouncedQuery),
+		queryFn: () => searchRepos({ query: debouncedQuery }),
+		enabled: !!debouncedQuery,
+		keepPreviousData: true,
+		onError() {
+			toast.error("Failed to load search results.");
+		},
+	});
 
 	const navigateToRepoPage = (repo: ReposResponseItem) => {
 		router.push({

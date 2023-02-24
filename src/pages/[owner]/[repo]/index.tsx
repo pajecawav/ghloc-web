@@ -10,32 +10,110 @@ import { Skeleton } from "@/components/Skeleton";
 import { Spacer } from "@/components/Spacer";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { formatRepoSize, formatTitle } from "@/lib/format";
-import { getRepo, RepoResponse } from "@/lib/github";
-import { removeProtocol } from "@/utils";
+import { getCommitActivity, getCommunityProfile, getRepo } from "@/lib/github";
+import { getLocs } from "@/lib/locs";
+import { getPackageInfo } from "@/lib/package";
+import { queryKeys } from "@/lib/query-keys";
+import { extractGitHubToken } from "@/lib/token";
+import { removeProtocol, timeoutPromise } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
-import { useQuery } from "@tanstack/react-query";
+import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import type { FetchError } from "ohmyfetch";
+import { $fetch } from "ohmyfetch";
 import { useEffect } from "react";
+import { ServerTiming } from "tiny-server-timing";
 
 interface PageProps {
 	owner: string;
 	repo: string;
 	branch: string | null;
+	filter: string | null;
 }
 
 export const getServerSideProps: GetServerSideProps<
 	PageProps,
 	{ owner: string; repo: string }
 > = async ({ req, res, params, query }) => {
-	res.setHeader("cache-control", "public, max-age=600");
+	const token = extractGitHubToken(req);
+
+	res.setHeader("cache-control", "public, max-age=300");
+
+	const owner = params!.owner;
+	const repo = params!.repo;
+	const branch = (query!.branch as string | undefined) ?? null;
+	const filter = query!.filter as string | undefined;
+
+	if (!token || !branch) {
+		return {
+			props: { owner, repo, branch, filter: filter ?? null },
+		};
+	}
+
+	const client = new QueryClient({
+		defaultOptions: { queries: { staleTime: Infinity, retry: false } },
+	});
+	const timing = new ServerTiming();
+
+	try {
+		await Promise.allSettled([
+			timing.timeAsync("repo", () =>
+				client.prefetchQuery({
+					queryKey: queryKeys.repo(repo),
+					queryFn: () => getRepo({ owner, repo }),
+				})
+			),
+			timing.timeAsync("health", () =>
+				client.prefetchQuery({
+					queryKey: queryKeys.repoHealth({ owner, repo }),
+					queryFn: () => getCommunityProfile({ owner, repo }),
+				})
+			),
+			timing.timeAsync("activity", () =>
+				client.prefetchQuery({
+					queryKey: queryKeys.commitActivity({ owner, repo }),
+					queryFn: () => getCommitActivity({ owner, repo }),
+				})
+			),
+			client.prefetchQuery({
+				queryKey: queryKeys.packageInfo({ owner, repo, branch }),
+				queryFn: () => getPackageInfo({ owner, repo, branch }, timing),
+			}),
+			// timing.timeAsync("locs", () =>
+			// 	client.prefetchQuery({
+			// 		queryKey: queryKeys.locs({
+			// 			owner,
+			// 			repo,
+			// 			branch,
+			// 			filter: filter ?? null,
+			// 		}),
+			// 		queryFn: () => {
+			// 			const promise = getLocs({
+			// 				owner,
+			// 				repo,
+			// 				branch,
+			// 				filter,
+			// 			});
+			// 			// if locs request takes too long do not wait for result
+			// 			return timeoutPromise(promise, 8_000);
+			// 		},
+			// 	})
+			// ),
+		]);
+	} catch (e: unknown) {
+		console.error("Failed to prefetch all queries:", e);
+	}
+
+	res.setHeader("Server-Timing", timing.getHeaders()["Server-Timing"]);
+
 	return {
 		props: {
-			owner: params!.owner,
-			repo: params!.repo,
-			branch: (query.branch as string | undefined) ?? null,
+			owner,
+			repo,
+			branch,
+			dehydratedState: dehydrate(client),
+			filter: filter ?? null,
 		},
 	};
 };
@@ -44,15 +122,16 @@ export const RepoPage = ({
 	owner,
 	repo: repoName,
 	branch: branchProp,
+	filter,
 }: PageProps) => {
 	const router = useRouter();
 	const isSmallOrLarger = useMediaQuery("sm");
 	const branch = (router.query.branch as string | undefined) ?? branchProp;
 
-	const { data: repo } = useQuery<RepoResponse, FetchError>(
-		["repos", repoName],
-		() => getRepo({ owner, repo: repoName })
-	);
+	const { data: repo } = useQuery({
+		queryKey: queryKeys.repo(repoName),
+		queryFn: () => getRepo({ owner, repo: repoName }),
+	});
 
 	useEffect(() => {
 		const defaultBranch = repo?.default_branch;
@@ -215,6 +294,7 @@ export const RepoPage = ({
 				repo={repoName}
 				branch={branch}
 				defaultBranch={repo?.default_branch}
+				initialFilter={filter}
 			/>
 		</div>
 	);

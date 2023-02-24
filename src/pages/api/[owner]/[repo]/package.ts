@@ -23,7 +23,7 @@ export default async function handler(req: NextRequest) {
 	try {
 		const timing = new ServerTiming({ precision: 0 });
 		const data = await getPackageInfo({ owner, repo, branch }, timing);
-		return new Response(JSON.stringify({ data }), {
+		return new Response(JSON.stringify(data), {
 			status: 200,
 			headers: {
 				"content-type": "application/json",

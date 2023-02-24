@@ -4,9 +4,10 @@ import {
 	getCommitActivity,
 	GitHubActivityCalculationStartedError,
 } from "@/lib/github";
+import { queryKeys } from "@/lib/query-keys";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
-import type { FetchError } from "ohmyfetch";
+import { FetchError } from "ohmyfetch";
 import { useMemo } from "react";
 import toast from "react-hot-toast";
 import { Block } from "../Block";
@@ -26,42 +27,21 @@ export const CommitsHeatmapSection = ({
 	repo,
 	enabled = true,
 }: Props) => {
-	const { data, error, isLoading, isLoadingError, failureCount } = useQuery<
-		CommitActivity,
-		FetchError | GitHubActivityCalculationStartedError
-	>(
-		["commit_activity", { owner, repo }],
-		async () => {
-			const data = await getCommitActivity({ owner, repo });
-
-			// remove future dates data
-			const now = new Date().getTime();
-			let lastWeek = data.pop()!;
-			lastWeek.days = lastWeek.days.filter((_, index) => {
-				const day =
-					lastWeek.week * 1000 + index * (1000 * 60 * 60 * 24);
-				return day <= now;
-			});
-			if (lastWeek.days.length) {
-				data.push(lastWeek);
-			}
-
-			return data;
+	const { data, error, isLoading, isLoadingError, failureCount } = useQuery({
+		queryKey: queryKeys.commitActivity({ owner, repo }),
+		queryFn: () => getCommitActivity({ owner, repo }),
+		enabled,
+		retry(_, error) {
+			return (
+				error instanceof GitHubActivityCalculationStartedError ||
+				(error instanceof FetchError && error.response?.status !== 403)
+			);
 		},
-		{
-			enabled,
-			retry(_, error) {
-				return (
-					error instanceof GitHubActivityCalculationStartedError ||
-					error.response?.status !== 403
-				);
-			},
-			retryDelay: 7500,
-			onError(error) {
-				toast.error("Failed to load commit activity.");
-			},
-		}
-	);
+		retryDelay: 7500,
+		onError(error) {
+			toast.error("Failed to load commit activity.");
+		},
+	});
 
 	const totalCommits = useMemo(() => {
 		if (!data) return data;

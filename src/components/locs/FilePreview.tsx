@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "../Skeleton";
 import { $fetch, FetchError } from "ohmyfetch";
+import { queryKeys } from "@/lib/query-keys";
 
 type FileType = "text" | "image";
 
@@ -104,36 +105,34 @@ export const FilePreview = ({ owner, repo, branch, path, loc }: Props) => {
 	const url = getRawGitHubUrl({ owner, repo, branch, path: path.join("/") });
 
 	// make a HEAD request first to detect file type
-	const { data: meta } = useQuery<
-		{ type: FileType | null; size: number } | null,
-		FetchError
-	>(["files", { owner, repo, branch, path }, "type"], async () => {
-		const response = await $fetch.raw(url, { method: "HEAD" });
-		const contentType = response.headers.get("content-type")!;
-		const size = parseInt(response.headers.get("content-length")!, 10);
-		let type: FileType | null = null;
-		if (contentType.startsWith("text/plain")) {
-			type = "text";
-		} else if (contentType.startsWith("image")) {
-			type = "image";
-		}
-		return { type, size };
+	const { data: meta } = useQuery({
+		queryKey: ["files", { owner, repo, branch, path }, "type"],
+		queryFn: async () => {
+			const response = await $fetch.raw(url, { method: "HEAD" });
+			const contentType = response.headers.get("content-type")!;
+			const size = parseInt(response.headers.get("content-length")!, 10);
+			let type: FileType | null = null;
+			if (contentType.startsWith("text/plain")) {
+				type = "text";
+			} else if (contentType.startsWith("image")) {
+				type = "image";
+			}
+			return { type, size };
+		},
 	});
 
-	const { data: file, isLoadingError } = useQuery<string, FetchError>(
-		["files", { owner, repo, branch, path }],
-		() =>
+	const { data: file, isLoadingError } = useQuery({
+		queryKey: ["files", { owner, repo, branch, path }],
+		queryFn: () =>
 			$fetch<string>(url, {
 				// response is plain text
 				parseResponse: text => text,
 			}),
-		{
-			enabled: !!meta,
-			onError() {
-				toast.error("Failed to load file.");
-			},
-		}
-	);
+		enabled: !!meta,
+		onError() {
+			toast.error("Failed to load file.");
+		},
+	});
 
 	const isReady = file || meta?.type === "image";
 

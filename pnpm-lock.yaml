@@ -4,6 +4,7 @@ specifiers:
   '@headlessui/react': ^1.7.9
   '@heroicons/react': ^1.0.6
   '@tanstack/react-query': ^4.24.4
+  '@types/js-cookie': ^3.0.3
   '@types/node': ^18.11.19
   '@types/nprogress': ^0.2.0
   '@types/react': ^18.0.27
@@ -17,6 +18,7 @@ specifiers:
   esno: ^0.16.3
   husky: ^8.0.3
   is-ci: ^3.0.1
+  js-cookie: ^3.0.1
   lint-staged: ^13.1.0
   next: ^13.1.6
   next-statoscope: ^1.0.0
@@ -41,6 +43,7 @@ dependencies:
   '@vercel/og': 0.0.27
   classnames: 2.3.2
   dayjs: 1.11.7
+  js-cookie: 3.0.1
   next: 13.1.6_biqbaboplfbrettd7655fr4n2y
   nprogress: 0.2.0
   ohmyfetch: 0.4.21
@@ -48,9 +51,10 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-hot-toast: 2.4.0_owo25xnefcwdq3zjgtohz6dbju
   tiny-server-timing: 0.1.2
-  zustand: 4.3.2_react@18.2.0
+  zustand: 4.3.3_react@18.2.0
 
 devDependencies:
+  '@types/js-cookie': 3.0.3
   '@types/node': 18.13.0
   '@types/nprogress': 0.2.0
   '@types/react': 18.0.27
@@ -560,6 +564,10 @@ packages:
 
   /@types/estree/0.0.51:
     resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
+    dev: true
+
+  /@types/js-cookie/3.0.3:
+    resolution: {integrity: sha512-Xe7IImK09HP1sv2M/aI+48a20VX+TdRJucfq4vfRVy6nWN8PYPOEnlMRSgxJAgYQIXJVL8dZ4/ilAM7dWNaOww==}
     dev: true
 
   /@types/json-schema/7.0.11:
@@ -2458,6 +2466,11 @@ packages:
       '@discoveryjs/natural-compare': 1.0.0
     dev: true
 
+  /js-cookie/3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
+    dev: false
+
   /js-sdsl/4.1.4:
     resolution: {integrity: sha512-Y2/yD55y5jteOAmY50JbUZYwk3CP3wnLPEZnlR1w9oKhITrBEtAxwuWKebFf8hMrPMgbYwFoWK/lH2sBkErELw==}
     dev: true
@@ -3962,8 +3975,8 @@ packages:
     resolution: {integrity: sha512-rD3L4jyMlO1m+RWU60lNwZQK5zmzglCV5fI1gTRikmpv3YzmNIZQbjyfE6cMNb9Xaly/C1SwemYGbsiOekMvnQ==}
     dev: false
 
-  /zustand/4.3.2_react@18.2.0:
-    resolution: {integrity: sha512-rd4haDmlwMTVWVqwvgy00ny8rtti/klRoZjFbL/MAcDnmD5qSw/RZc+Vddstdv90M5Lv6RPgWvm1Hivyn0QgJw==}
+  /zustand/4.3.3_react@18.2.0:
+    resolution: {integrity: sha512-x2jXq8S0kfLGNwGh87nhRfEc2eZy37tSatpSoSIN+O6HIaBhgQHSONV/F9VNrNcBcKQu/E80K1DeHDYQC/zCrQ==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
       immer: '>=9.0'

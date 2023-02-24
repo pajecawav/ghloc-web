@@ -1,41 +1,48 @@
 import { useTokenStore } from "@/stores/useTokenStore";
+import { isClient } from "@/utils";
 import dayjs from "dayjs";
-import { $fetch, FetchError, createFetchError } from "ohmyfetch";
+import { $fetch, createFetchError } from "ohmyfetch";
 import toast from "react-hot-toast";
 
-const fetcher = $fetch.create({
-	retry: 0,
-	async onRequest({ options }) {
-		options.headers = getGitHubAuthHeaders();
-	},
-	async onResponseError(error) {
-		if (error.response?.status === 403) {
-			const limit = parseInt(
-				error.response.headers.get("x-ratelimit-remaining")!,
-				10
-			);
-			const reset =
-				parseInt(error.response.headers.get("x-ratelimit-reset")!, 10) *
-				1000;
-
-			// show toast with an error when GitHub API limit is reached
-			if (limit === 0) {
-				toast.error(
-					`GitHub API limit reached. Reset ${dayjs().to(reset)}.`,
-					{
-						duration: Infinity,
-						id: "error_github-limit-reached",
-					}
+function createClientFetcher() {
+	return $fetch.create({
+		retry: 0,
+		// async onRequest({ options }) {
+		// 	options.headers = getGitHubAuthHeaders();
+		// },
+		async onResponseError(error) {
+			if (error.response?.status === 403) {
+				const limit = parseInt(
+					error.response.headers.get("x-ratelimit-remaining")!,
+					10
 				);
+				const reset =
+					parseInt(
+						error.response.headers.get("x-ratelimit-reset")!,
+						10
+					) * 1000;
+
+				// show toast with an error when GitHub API limit is reached
+				if (limit === 0) {
+					toast.error(
+						`GitHub API limit reached. Reset ${dayjs().to(reset)}.`,
+						{
+							duration: Infinity,
+							id: "error_github-limit-reached",
+						}
+					);
+				}
+			} else if (error.response?.status === 401) {
+				toast.error("Invalid GitHub API token.", {
+					duration: Infinity,
+					id: "error_github-token-expired",
+				});
 			}
-		} else if (error.response?.status === 401) {
-			toast.error("Invalid GitHub API token.", {
-				duration: Infinity,
-				id: "error_github-token-expired",
-			});
-		}
-	},
-});
+		},
+	});
+}
+
+const ghFetcher = isClient() ? createClientFetcher() : $fetch;
 
 export class GitHubActivityCalculationStartedError extends Error {}
 
@@ -77,7 +84,7 @@ export function searchRepos({
 	query: string;
 	perPage?: number;
 }) {
-	return fetcher<ReposSearchResponse>(
+	return ghFetcher<ReposSearchResponse>(
 		"https://api.github.com/search/repositories",
 		{
 			method: "GET",
@@ -87,7 +94,7 @@ export function searchRepos({
 }
 
 export function getUser(user: string) {
-	return fetcher<UserResponse>(`https://api.github.com/users/${user}`);
+	return ghFetcher<UserResponse>(`https://api.github.com/users/${user}`);
 }
 
 export function getUserRepos({
@@ -99,7 +106,7 @@ export function getUserRepos({
 	perPage: number;
 	page: number;
 }) {
-	return fetcher<ReposResponse>(
+	return ghFetcher<ReposResponse>(
 		`https://api.github.com/users/${user}/repos`,
 		{
 			params: { per_page: perPage, page, sort: "updated" },
@@ -108,19 +115,19 @@ export function getUserRepos({
 }
 
 export function getRepo({ owner, repo }: RepoDetails) {
-	return fetcher<RepoResponse>(
+	return ghFetcher<RepoResponse>(
 		`https://api.github.com/repos/${owner}/${repo}`
 	);
 }
 
 export function getCommunityProfile({ owner, repo }: RepoDetails) {
-	return fetcher<RepoHealthResponse>(
+	return ghFetcher<RepoHealthResponse>(
 		`https://api.github.com/repos/${owner}/${repo}/community/profile`
 	);
 }
 
 export async function getCommitActivity({ owner, repo }: RepoDetails) {
-	const response = await fetcher.raw<CommitActivity>(
+	const response = await ghFetcher.raw<CommitActivity>(
 		`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`
 	);
 
@@ -134,7 +141,21 @@ export async function getCommitActivity({ owner, repo }: RepoDetails) {
 		throw new GitHubActivityCalculationStartedError();
 	}
 
-	return response._data!;
+	const data = response._data!;
+
+	// remove future dates
+	const now = new Date().getTime();
+	const lastWeek = data.pop()!;
+	const msInDay = 1000 * 60 * 60 * 24;
+	lastWeek.days = lastWeek.days.filter((_, index) => {
+		const day = lastWeek.week * 1000 + index * msInDay;
+		return day <= now;
+	});
+	if (lastWeek.days.length !== 0) {
+		data.push(lastWeek);
+	}
+
+	return data;
 }
 
 export type UserType = "User" | "Organization";

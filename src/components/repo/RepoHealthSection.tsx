@@ -1,4 +1,5 @@
 import { getCommunityProfile, RepoHealthResponse } from "@/lib/github";
+import { queryKeys } from "@/lib/query-keys";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/solid";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
@@ -52,15 +53,13 @@ export const RepoHealthSection = ({ owner, repo, className }: Props) => {
 		data: health,
 		isLoadingError,
 		error,
-	} = useQuery<RepoHealthResponse, FetchError>(
-		["repo_health", { owner, repo }],
-		() => getCommunityProfile({ owner, repo }),
-		{
-			onError() {
-				toast.error("Failed to load repo health.");
-			},
-		}
-	);
+	} = useQuery({
+		queryKey: queryKeys.repoHealth({ owner, repo }),
+		queryFn: () => getCommunityProfile({ owner, repo }),
+		onError() {
+			toast.error("Failed to load repo health.");
+		},
+	});
 
 	const {
 		license,

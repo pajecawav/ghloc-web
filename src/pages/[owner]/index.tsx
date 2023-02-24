@@ -2,10 +2,12 @@ import { Heading } from "@/components/Heading";
 import { MetaTags } from "@/components/MetaTags";
 import { ReposList } from "@/components/repo/ReposList";
 import { formatTitle } from "@/lib/format";
-import { getUser, UserResponse } from "@/lib/github";
-import { useQuery } from "@tanstack/react-query";
+import { getUser, getUserRepos } from "@/lib/github";
+import { queryKeys } from "@/lib/query-keys";
+import { extractGitHubToken } from "@/lib/token";
+import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
-import type { FetchError } from "ohmyfetch";
+import { ServerTiming } from "tiny-server-timing";
 
 interface PageProps {
 	owner: string;
@@ -15,19 +17,59 @@ export const getServerSideProps: GetServerSideProps<
 	PageProps,
 	{ owner: string }
 > = async ({ req, res, params, query }) => {
-	res.setHeader("cache-control", "public, max-age=600");
+	const token = extractGitHubToken(req);
+
+	res.setHeader("cache-control", "public, max-age=300");
+
+	const owner = params!.owner;
+
+	if (!token) {
+		return {
+			props: { owner },
+		};
+	}
+
+	const client = new QueryClient();
+	const timing = new ServerTiming();
+
+	try {
+		await Promise.allSettled([
+			timing.timeAsync("repos", () =>
+				client.prefetchInfiniteQuery(
+					["user", owner, "repos"],
+					({ pageParam: page }) =>
+						getUserRepos({
+							user: owner,
+							perPage: 18,
+							page,
+						})
+				)
+			),
+			timing.timeAsync("user", () =>
+				client.prefetchQuery(["user", owner], () => getUser(owner))
+			),
+		]);
+	} catch (e: unknown) {
+		console.error("Failed to prefetch all queries:", e);
+	}
+
+	res.setHeader("Server-Timing", timing.getHeaders()["Server-Timing"]);
+
 	return {
 		props: {
-			owner: params!.owner,
+			owner,
+			// HACK: for infinite query `pageParams` contains `undefined` for
+			// the first page so Next fails to serialize it
+			dehydratedState: JSON.parse(JSON.stringify(dehydrate(client))),
 		},
 	};
 };
 
 const UserReposPage = ({ owner }: PageProps) => {
-	const { data: user } = useQuery<UserResponse, FetchError>(
-		["user", owner],
-		() => getUser(owner)
-	);
+	const { data: user } = useQuery({
+		queryKey: queryKeys.user(owner),
+		queryFn: () => getUser(owner),
+	});
 
 	return (
 		<div className="flex flex-col gap-5">
