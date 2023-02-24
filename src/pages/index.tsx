@@ -1,3 +1,4 @@
+import { SpinnerIcon } from "@/components/icons/SpinnerIcon";
 import { Input } from "@/components/Input";
 import { MetaTags } from "@/components/MetaTags";
 import { RepoStats } from "@/components/repo/RepoStats";
@@ -48,7 +49,10 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 	const [debouncedQuery, setDebouncedQuery] = useState(query);
 	useDebounce(() => setDebouncedQuery(query), 750, [query]);
 
-	const { data: results } = useQuery<ReposSearchResponse, FetchError>(
+	const { data: results, isFetching } = useQuery<
+		ReposSearchResponse,
+		FetchError
+	>(
 		["search", debouncedQuery],
 		() => searchRepos({ query: debouncedQuery }),
 		{
@@ -108,7 +112,7 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 							as={Input}
 							onChange={event => onChange(event.target.value)}
 							displayValue={() => query}
-							className="w-full !px-12 !py-3 text-2xl text-center !rounded-md shadow-sm border border-normal font-light group-focus-within:!border-active2 caret-blue-400"
+							className="w-full !px-12 !py-3 text-2xl text-center !rounded-md shadow-sm border border-normal font-light group-focus-within:!border-active2"
 							placeholder="facebook/react"
 							autoFocus={true}
 							autoComplete="off"
@@ -117,7 +121,11 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 							spellCheck={false}
 						/>
 						<div className="absolute top-0 bottom-0 right-2 m-auto w-8 h-8 text-muted transition-[border-color] duration-100 group-focus-within:text-border-active2">
-							<SearchIcon />
+							{isFetching ? (
+								<SpinnerIcon className="animate-spin" />
+							) : (
+								<SearchIcon />
+							)}
 						</div>
 					</div>
 

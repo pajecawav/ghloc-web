@@ -27,9 +27,6 @@ html {
 	/* progress-bar */
 	--colors-navigation-progress: black;
 
-	/* caret */
-	--colors-caret: theme("colors.blue.600");
-
 	/* borders */
 	--colors-border-normal: #e5e7eb;
 	--colors-border-active: black;
@@ -94,9 +91,6 @@ html.dark {
 	/* progress-bar */
 	--colors-navigation-progress: var(--colors-text-muted);
 
-	/* caret */
-	--colors-caret: theme("colors.blue.300");
-
 	/* borders */
 	--colors-border-normal: #363b3d;
 	--colors-border-active: theme("colors.gray.400");
@@ -138,10 +132,6 @@ html.dark {
 
 html {
 	background: var(--colors-bg-normal);
-}
-
-body {
-	caret-color: var(--colors-caret);
 }
 
 html,
