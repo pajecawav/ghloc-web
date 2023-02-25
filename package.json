@@ -15,10 +15,10 @@
 		"postinstall": "is-ci || yarn prepare"
 	},
 	"dependencies": {
-		"@headlessui/react": "^1.7.9",
+		"@headlessui/react": "^1.7.11",
 		"@heroicons/react": "^1.0.6",
-		"@tanstack/react-query": "^4.24.4",
-		"@vercel/og": "^0.0.27",
+		"@tanstack/react-query": "^4.24.10",
+		"@vercel/og": "^0.1.0",
 		"classnames": "^2.3.2",
 		"dayjs": "^1.11.7",
 		"js-cookie": "^3.0.1",
@@ -29,26 +29,26 @@
 		"react-dom": "^18.2.0",
 		"react-hot-toast": "^2.4.0",
 		"tiny-server-timing": "^0.1.2",
-		"zustand": "^4.3.2"
+		"zustand": "^4.3.3"
 	},
 	"devDependencies": {
 		"@types/js-cookie": "^3.0.3",
-		"@types/node": "^18.11.19",
+		"@types/node": "^18.14.0",
 		"@types/nprogress": "^0.2.0",
-		"@types/react": "^18.0.27",
+		"@types/react": "^18.0.28",
 		"autoprefixer": "^10.4.13",
 		"csstype": "^3.1.1",
-		"eslint": "^8.33.0",
+		"eslint": "^8.34.0",
 		"eslint-config-next": "^13.1.6",
 		"esno": "^0.16.3",
 		"husky": "^8.0.3",
 		"is-ci": "^3.0.1",
-		"lint-staged": "^13.1.0",
+		"lint-staged": "^13.1.2",
 		"next-statoscope": "^1.0.0",
 		"npm-run-all": "^4.1.5",
 		"postcss": "^8.4.21",
-		"prettier": "^2.8.3",
-		"tailwindcss": "^3.2.4",
+		"prettier": "^2.8.4",
+		"tailwindcss": "^3.2.7",
 		"typescript": "^4.9.5",
 		"webpack": "^5.75.0"
 	}
