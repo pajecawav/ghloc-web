@@ -10,13 +10,14 @@ export default async function handler(req: NextRequest) {
 	const owner = searchParams.get("owner")!;
 	const repo = searchParams.get("repo")!;
 	const branch = searchParams.get("branch");
+	const filter = searchParams.get("filter") ?? undefined;
 
 	if (!branch) {
 		return new Response("Bad Request", { status: 400 });
 	}
 
 	try {
-		const locs = await getLocs({ owner, repo, branch });
+		const locs = await getLocs({ owner, repo, branch, filter });
 		return new Response(
 			JSON.stringify({
 				schemaVersion: 1,
