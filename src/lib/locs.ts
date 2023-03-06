@@ -16,10 +16,15 @@ export function getLocs({
 }: {
 	owner: string;
 	repo: string;
-	branch: string;
+	branch?: string;
 	filter?: string;
 }) {
-	return $fetch<Locs>(`https://ghloc.ifels.dev/${owner}/${repo}/${branch}`, {
+	let url = `https://ghloc.ifels.dev/${owner}/${repo}`;
+	if (branch) {
+		url += `/${encodeURIComponent(branch)}`;
+	}
+
+	return $fetch<Locs>(url, {
 		params: {
 			...(filter && { match: filter }),
 			pretty: false,

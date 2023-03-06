@@ -1,10 +1,9 @@
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { getLanguageFromExtension } from "@/languages";
 import { formatNumber } from "@/lib/format";
-import { Locs } from "@/lib/locs";
+import { getLocs, Locs } from "@/lib/locs";
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
-import { $fetch } from "ohmyfetch";
 
 export const config = {
 	runtime: "edge",
@@ -31,16 +30,11 @@ export default async function handler(req: NextRequest) {
 	const { searchParams } = new URL(req.url);
 	const owner = searchParams.get("owner")!;
 	const repo = searchParams.get("repo")!;
-	const branch = searchParams.get("branch");
-
-	let url = `https://ghloc.ifels.dev/${owner}/${repo}`;
-	if (branch) {
-		url += `/${branch}`;
-	}
+	const branch = searchParams.get("branch") ?? undefined;
 
 	let locs: Locs;
 	try {
-		locs = await $fetch<Locs>(`${url}?pretty=false`);
+		locs = await getLocs({ owner, repo, branch });
 	} catch {
 		return new Response("Internal Server Error", {
 			status: 500,
