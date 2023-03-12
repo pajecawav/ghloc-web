@@ -11,7 +11,6 @@ import { Spacer } from "@/components/Spacer";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { formatRepoSize, formatTitle } from "@/lib/format";
 import { getCommitActivity, getCommunityProfile, getRepo } from "@/lib/github";
-import { getLocs } from "@/lib/locs";
 import { getPackageInfo } from "@/lib/package";
 import { queryKeys } from "@/lib/query-keys";
 import { extractGitHubToken } from "@/lib/token";
@@ -21,7 +20,6 @@ import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { $fetch } from "ohmyfetch";
 import { useEffect } from "react";
 import { ServerTiming } from "tiny-server-timing";
 
@@ -56,30 +54,41 @@ export const getServerSideProps: GetServerSideProps<
 	});
 	const timing = new ServerTiming();
 
+	// TODO: bundlephobia and packagephobia are unstable so we timeout all requests to avoid hitting
+	// Vercel's 10s limit for functions
+	const prefetch = <T,>(label: string, fn: () => Promise<T>) => {
+		return timing.timeAsync(label, () => {
+			return timeoutPromise(fn(), 6_000);
+		});
+	};
+
 	try {
 		await Promise.allSettled([
-			timing.timeAsync("repo", () =>
+			prefetch("repo", () =>
 				client.prefetchQuery({
 					queryKey: queryKeys.repo(repo),
 					queryFn: () => getRepo({ owner, repo }),
 				})
 			),
-			timing.timeAsync("health", () =>
+			prefetch("health", () =>
 				client.prefetchQuery({
 					queryKey: queryKeys.repoHealth({ owner, repo }),
 					queryFn: () => getCommunityProfile({ owner, repo }),
 				})
 			),
-			timing.timeAsync("activity", () =>
+			prefetch("activity", () =>
 				client.prefetchQuery({
 					queryKey: queryKeys.commitActivity({ owner, repo }),
 					queryFn: () => getCommitActivity({ owner, repo }),
 				})
 			),
-			client.prefetchQuery({
-				queryKey: queryKeys.packageInfo({ owner, repo, branch }),
-				queryFn: () => getPackageInfo({ owner, repo, branch }, timing),
-			}),
+			prefetch("info", () =>
+				client.prefetchQuery({
+					queryKey: queryKeys.packageInfo({ owner, repo, branch }),
+					queryFn: () =>
+						getPackageInfo({ owner, repo, branch }, timing),
+				})
+			),
 			// timing.timeAsync("locs", () =>
 			// 	client.prefetchQuery({
 			// 		queryKey: queryKeys.locs({

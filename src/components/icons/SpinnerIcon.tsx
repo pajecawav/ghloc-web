@@ -14,8 +14,8 @@ export function SpinnerIcon(props: SpinnerIconProps) {
 			{...props}
 		>
 			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 				d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10"
 			/>
 		</svg>
