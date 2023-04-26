@@ -3,7 +3,7 @@
 	"extends": ["config:base", "group:allNonMajor"],
 	"rangeStrategy": "bump",
 	"timezone": "Europe/Moscow",
-	"schedule": ["before 9am on wednesday and saturday"],
+	"schedule": ["before 9am on saturday"],
 	"npm": {
 		"stabilityDays": 3
 	}
