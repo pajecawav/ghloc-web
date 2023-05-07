@@ -35,7 +35,8 @@ export default async function handler(req: NextRequest) {
 	let locs: Locs;
 	try {
 		locs = await getLocs({ owner, repo, branch });
-	} catch {
+	} catch (e) {
+		console.error(e);
 		return new Response("Internal Server Error", {
 			status: 500,
 		});
