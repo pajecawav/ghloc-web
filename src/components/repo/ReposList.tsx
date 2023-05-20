@@ -5,7 +5,7 @@ import { Button } from "../Button";
 import { LoadingPlaceholder } from "../LoadingPlaceholder";
 import { Skeleton } from "../Skeleton";
 import { RepoCard } from "./RepoCard";
-import type { FetchError } from "ohmyfetch";
+import type { FetchError } from "ofetch";
 
 type Props = {
 	user: string;

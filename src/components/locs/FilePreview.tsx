@@ -4,7 +4,7 @@ import { ReactNode, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "../Skeleton";
-import { $fetch, FetchError } from "ohmyfetch";
+import { $fetch, FetchError } from "ofetch";
 import { queryKeys } from "@/lib/query-keys";
 
 type FileType = "text" | "image";

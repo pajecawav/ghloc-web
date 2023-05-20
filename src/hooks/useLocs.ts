@@ -1,7 +1,7 @@
 import { getLocs, Locs, LocsChild } from "@/lib/locs";
 import { queryKeys } from "@/lib/query-keys";
 import { useQuery } from "@tanstack/react-query";
-import { $fetch, FetchError } from "ohmyfetch";
+import { FetchError } from "ofetch";
 import { useMemo } from "react";
 import toast from "react-hot-toast";
 

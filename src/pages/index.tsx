@@ -17,7 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import type { FetchError } from "ohmyfetch";
+import type { FetchError } from "ofetch";
 import { useState } from "react";
 import toast from "react-hot-toast";
 

@@ -7,7 +7,7 @@ import {
 import { queryKeys } from "@/lib/query-keys";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
-import { FetchError } from "ohmyfetch";
+import { FetchError } from "ofetch";
 import { useMemo } from "react";
 import toast from "react-hot-toast";
 import { Block } from "../Block";

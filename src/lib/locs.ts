@@ -1,4 +1,4 @@
-import { $fetch } from "ohmyfetch";
+import { $fetch } from "ofetch";
 
 export type LocsChild = Locs | number;
 

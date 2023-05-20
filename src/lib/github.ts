@@ -1,7 +1,7 @@
 import { useTokenStore } from "@/stores/useTokenStore";
 import { isClient } from "@/utils";
 import dayjs from "dayjs";
-import { $fetch, createFetchError } from "ohmyfetch";
+import { $fetch, createFetchError } from "ofetch";
 import toast from "react-hot-toast";
 
 function createClientFetcher() {

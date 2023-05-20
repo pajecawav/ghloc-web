@@ -1,0 +1,16 @@
+diff --git a/package.json b/package.json
+index a6c7dadf3e5c42c4b726feb51f1ee42cb5549d94..19bcffbf1833b189962b2e6b172972c9e2e81d0a 100644
+--- a/package.json
++++ b/package.json
+@@ -8,6 +8,11 @@
+   "type": "module",
+   "exports": {
+     ".": {
++      "edge-light": {
++        "types": "./dist/index.d.ts",
++        "import": "./dist/index.mjs",
++        "require": "./dist/index.cjs"
++      },
+       "node": {
+         "types": "./dist/node.d.ts",
+         "import": "./dist/node.mjs",
