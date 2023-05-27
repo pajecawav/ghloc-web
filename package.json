@@ -18,7 +18,7 @@
 		"@headlessui/react": "^1.7.14",
 		"@heroicons/react": "^1.0.6",
 		"@tanstack/react-query": "^4.29.7",
-		"@vercel/og": "^0.5.4",
+		"@vercel/og": "^0.5.6",
 		"classnames": "^2.3.2",
 		"dayjs": "^1.11.7",
 		"js-cookie": "^3.0.5",
@@ -33,9 +33,9 @@
 	},
 	"devDependencies": {
 		"@types/js-cookie": "^3.0.3",
-		"@types/node": "^18.16.5",
+		"@types/node": "^18.16.14",
 		"@types/nprogress": "^0.2.0",
-		"@types/react": "^18.2.6",
+		"@types/react": "^18.2.7",
 		"autoprefixer": "^10.4.14",
 		"csstype": "^3.1.2",
 		"eslint": "^8.41.0",
@@ -44,13 +44,13 @@
 		"husky": "^8.0.3",
 		"is-ci": "^3.0.1",
 		"lint-staged": "^13.2.2",
-		"next-statoscope": "^1.0.0",
+		"next-statoscope": "^1.0.1",
 		"npm-run-all": "^4.1.5",
 		"postcss": "^8.4.23",
 		"prettier": "^2.8.8",
 		"tailwindcss": "^3.3.2",
 		"typescript": "^5.0.4",
-		"webpack": "^5.83.1"
+		"webpack": "^5.84.0"
 	},
 	"pnpm": {
 		"patchedDependencies": {
