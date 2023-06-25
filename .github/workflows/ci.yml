@@ -27,7 +27,7 @@ jobs:
               run: pnpm install --frozen-lockfile
 
             - name: Build languages
-              run: pnpm build-languages
+              run: pnpm build:languages
 
             - name: Check formatting
               run: pnpm format:check

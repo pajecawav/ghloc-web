@@ -2,9 +2,10 @@
 	"name": "ghloc-web",
 	"private": true,
 	"scripts": {
-		"dev": "next dev",
-		"build": "pnpm build-languages && next build",
-		"build-languages": "esno scripts/build-languages.ts",
+		"dev": "pnpm build:languages && next dev",
+		"build": "pnpm build:languages && pnpm build:app",
+		"build:languages": "tsx scripts/build-languages.ts",
+		"build:app": "next build",
 		"start": "next start",
 		"prepare": "husky install",
 		"lint": "next lint",
@@ -40,7 +41,6 @@
 		"csstype": "^3.1.2",
 		"eslint": "^8.43.0",
 		"eslint-config-next": "^13.4.7",
-		"esno": "^0.16.3",
 		"husky": "^8.0.3",
 		"is-ci": "^3.0.1",
 		"lint-staged": "^13.2.2",
@@ -49,6 +49,7 @@
 		"postcss": "^8.4.24",
 		"prettier": "^2.8.8",
 		"tailwindcss": "^3.3.2",
+		"tsx": "^3.12.7",
 		"typescript": "^5.1.3",
 		"webpack": "^5.88.0"
 	}

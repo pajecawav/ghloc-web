@@ -12,7 +12,7 @@ A [website](https://ghloc.vercel.app/) to display GitHub repository info:
 
 [![Screenshot](https://user-images.githubusercontent.com/18193831/199794714-a4c7d8c1-17c3-4be9-8de4-dc0fb745ea2d.png)](https://ghloc.vercel.app/facebook/react)
 
-## Setup
+## Development
 
 ```bash
 git clone https://github.com/pajecawav/ghloc-web.git
