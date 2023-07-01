@@ -8,6 +8,7 @@ import {
 	QueryClient,
 	QueryClientProvider,
 } from "@tanstack/react-query";
+import { Analytics } from "@vercel/analytics/react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { AppProps } from "next/app";
@@ -30,6 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	return (
 		<QueryClientProvider client={queryClient}>
+			<Analytics />
 			<Hydrate state={pageProps.dehydratedState}>
 				<ThemeProvider>
 					<Head>

@@ -12,6 +12,7 @@ import Link from "next/link";
 import { ReactNode, useState } from "react";
 import { GitHubTokenModal } from "../GitHubTokenModal";
 import { FirefoxIcon } from "../icons/FirefoxIcon";
+import { track } from "@vercel/analytics";
 
 type Props = {
 	className?: string;
@@ -70,33 +71,33 @@ export const Header = ({ className }: Props) => {
 						</HeaderItem>
 						<HeaderItem>
 							<a
-								className="umami--click--github-button"
 								href="https://github.com/pajecawav/ghloc-web"
 								target="_blank"
 								rel="noopener noreferrer"
 								title="Project source code"
+								onClick={() => track("github")}
 							>
 								<GithubIcon />
 							</a>
 						</HeaderItem>
 						<HeaderItem>
 							<a
-								className="umami--click--firefox-addon-button"
 								href="https://addons.mozilla.org/firefox/addon/github-lines-of-code"
 								target="_blank"
 								rel="noopener noreferrer"
 								title="Firefox addon"
+								onClick={() => track("firefox")}
 							>
 								<FirefoxIcon />
 							</a>
 						</HeaderItem>
 						<HeaderItem>
 							<a
-								className="umami--click--userscript-button"
 								href="https://gist.github.com/pajecawav/70ffe72bf4aa0968aa9f97318976138f"
 								target="_blank"
 								rel="noopener noreferrer"
 								title="Userscript link"
+								onClick={() => track("userscript")}
 							>
 								<CodeIcon />
 							</a>
