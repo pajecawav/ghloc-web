@@ -13,7 +13,7 @@ import { formatRepoSize, formatTitle } from "@/lib/format";
 import { getCommitActivity, getCommunityProfile, getRepo } from "@/lib/github";
 import { getPackageInfo } from "@/lib/package";
 import { queryKeys } from "@/lib/query-keys";
-import { extractGitHubToken } from "@/lib/token";
+import { shouldEnableSsr } from "@/lib/ssr";
 import { removeProtocol, timeoutPromise } from "@/utils";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
@@ -34,8 +34,6 @@ export const getServerSideProps: GetServerSideProps<
 	PageProps,
 	{ owner: string; repo: string }
 > = async ({ req, res, params, query }) => {
-	const token = extractGitHubToken(req);
-
 	res.setHeader("cache-control", "public, max-age=300");
 
 	const owner = params!.owner;
@@ -43,7 +41,7 @@ export const getServerSideProps: GetServerSideProps<
 	const branch = (query!.branch as string | undefined) ?? null;
 	const filter = query!.filter as string | undefined;
 
-	if (!token || !branch) {
+	if (!shouldEnableSsr() || !branch) {
 		return {
 			props: { owner, repo, branch, filter: filter ?? null },
 		};

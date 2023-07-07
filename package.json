@@ -23,7 +23,6 @@
 		"@vercel/og": "^0.5.8",
 		"classnames": "^2.3.2",
 		"dayjs": "^1.11.8",
-		"js-cookie": "^3.0.5",
 		"next": "^13.4.7",
 		"nprogress": "^0.2.0",
 		"ofetch": "^1.1.1",

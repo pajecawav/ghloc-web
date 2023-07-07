@@ -3,9 +3,8 @@ import { MetaTags } from "@/components/MetaTags";
 import { ReposList } from "@/components/repo/ReposList";
 import { formatTitle } from "@/lib/format";
 import { getUserRepos } from "@/lib/github";
-import { queryKeys } from "@/lib/query-keys";
-import { extractGitHubToken } from "@/lib/token";
-import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
+import { shouldEnableSsr } from "@/lib/ssr";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
 import { ServerTiming } from "tiny-server-timing";
 
@@ -17,13 +16,11 @@ export const getServerSideProps: GetServerSideProps<
 	PageProps,
 	{ owner: string }
 > = async ({ req, res, params, query }) => {
-	const token = extractGitHubToken(req);
-
 	res.setHeader("cache-control", "public, max-age=300");
 
 	const owner = params!.owner;
 
-	if (!token) {
+	if (!shouldEnableSsr()) {
 		return {
 			props: { owner },
 		};

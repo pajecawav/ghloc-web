@@ -1,3 +1,4 @@
+import { getRepo } from "@/lib/github";
 import { getLocs, Locs } from "@/lib/locs";
 import { NextRequest } from "next/server";
 
@@ -9,11 +10,15 @@ export default async function handler(req: NextRequest) {
 	const { searchParams } = new URL(req.url);
 	const owner = searchParams.get("owner")!;
 	const repo = searchParams.get("repo")!;
-	const branch = searchParams.get("branch") ?? undefined;
+	let branch = searchParams.get("branch");
 	const filter = searchParams.get("filter") ?? undefined;
 
 	let locs: Locs;
 	try {
+		if (!branch) {
+			branch = (await getRepo({ owner, repo })).default_branch;
+		}
+
 		locs = await getLocs({ owner, repo, branch, filter });
 	} catch (e) {
 		console.error(e);

@@ -3,6 +3,7 @@ import { isClient } from "@/utils";
 import dayjs from "dayjs";
 import { $fetch, createFetchError } from "ofetch";
 import toast from "react-hot-toast";
+import { GITHUB_TOKEN } from "./ssr";
 
 function createClientFetcher() {
 	return $fetch.create({
@@ -46,7 +47,17 @@ function createClientFetcher() {
 }
 
 function createServerFetcher() {
-	return $fetch.create({ retry: 0 });
+	return $fetch.create({
+		retry: 0,
+		async onRequest({ options }) {
+			if (!GITHUB_TOKEN) return;
+
+			options.headers = {
+				...(options.headers || {}),
+				Authorization: `token ${GITHUB_TOKEN}`,
+			};
+		},
+	});
 }
 
 const ghFetcher = isClient() ? createClientFetcher() : createServerFetcher();

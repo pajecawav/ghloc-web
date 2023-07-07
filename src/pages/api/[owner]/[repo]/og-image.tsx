@@ -1,6 +1,7 @@
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { getLanguageFromExtension } from "@/languages";
 import { formatNumber } from "@/lib/format";
+import { getRepo } from "@/lib/github";
 import { getLocs, Locs } from "@/lib/locs";
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
@@ -9,18 +10,12 @@ export const config = {
 	runtime: "edge",
 };
 
-const DEBUG = false;
-
 const colors = {
 	text: "#e5e7eb",
 	bg: "#181a1b",
 	border: "#2f3335",
 	highlight: "#2f3335",
 };
-
-function getDebugBorder(color: string): string {
-	return DEBUG ? `1px solid ${color}` : "none";
-}
 
 function renderLoc(loc: number, total: number): string {
 	return `${formatNumber(loc)} (${((100 * loc) / total).toFixed(1)}%)`;
@@ -30,10 +25,14 @@ export default async function handler(req: NextRequest) {
 	const { searchParams } = new URL(req.url);
 	const owner = searchParams.get("owner")!;
 	const repo = searchParams.get("repo")!;
-	const branch = searchParams.get("branch") ?? undefined;
+	let branch = searchParams.get("branch");
 
 	let locs: Locs;
 	try {
+		if (!branch) {
+			branch = (await getRepo({ owner, repo })).default_branch;
+		}
+
 		locs = await getLocs({ owner, repo, branch });
 	} catch (e) {
 		console.error(e);
@@ -183,7 +182,6 @@ function LangsListEntry({
 				backgroundRepeat: "no-repeat",
 				backgroundSize: `${(loc / totalLocs) * 100}% 100%`,
 				marginTop: index > 0 ? "12px" : 0,
-				border: getDebugBorder("orange"),
 			}}
 		>
 			<div
@@ -191,14 +189,12 @@ function LangsListEntry({
 					flex: 1,
 					margin: "0 12px",
 					display: "flex",
-					border: getDebugBorder("red"),
 				}}
 			>
 				<div
 					style={{
 						flex: 1,
 						display: "flex",
-						border: getDebugBorder("blue"),
 					}}
 				>
 					<div
@@ -217,7 +213,6 @@ function LangsListEntry({
 						flexShrink: 0,
 						marginLeft: "auto",
 						whiteSpace: "nowrap",
-						border: getDebugBorder("green"),
 					}}
 				>
 					{renderLoc(loc, totalLocs)}
