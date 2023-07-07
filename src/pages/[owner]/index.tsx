@@ -2,7 +2,7 @@ import { Heading } from "@/components/Heading";
 import { MetaTags } from "@/components/MetaTags";
 import { ReposList } from "@/components/repo/ReposList";
 import { formatTitle } from "@/lib/format";
-import { getUser, getUserRepos } from "@/lib/github";
+import { getUserRepos } from "@/lib/github";
 import { queryKeys } from "@/lib/query-keys";
 import { extractGitHubToken } from "@/lib/token";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
@@ -45,9 +45,6 @@ export const getServerSideProps: GetServerSideProps<
 						})
 				)
 			),
-			timing.timeAsync("user", () =>
-				client.prefetchQuery(["user", owner], () => getUser(owner))
-			),
 		]);
 	} catch (e: unknown) {
 		console.error("Failed to prefetch all queries:", e);
@@ -66,11 +63,6 @@ export const getServerSideProps: GetServerSideProps<
 };
 
 const UserReposPage = ({ owner }: PageProps) => {
-	const { data: user } = useQuery({
-		queryKey: queryKeys.user(owner),
-		queryFn: () => getUser(owner),
-	});
-
 	return (
 		<div className="flex flex-col gap-5">
 			<MetaTags
@@ -82,7 +74,7 @@ const UserReposPage = ({ owner }: PageProps) => {
 				<h1 className="text-2xl">
 					<a
 						className="flex items-center gap-2 hover:underline"
-						href={user?.html_url}
+						href={`https://github.com/${owner}`}
 						target="_blank"
 						rel="noopener noreferrer"
 					>
@@ -99,9 +91,7 @@ const UserReposPage = ({ owner }: PageProps) => {
 			</div>
 
 			<div>
-				<Heading className="mb-2">
-					Repositories {user && `(${user.public_repos})`}
-				</Heading>
+				<Heading className="mb-2">Repositories</Heading>
 				<ReposList user={owner} />
 			</div>
 		</div>
