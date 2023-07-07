@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 src/languages-map.json
+public/sitemap.xml
 
 # dependencies
 /node_modules

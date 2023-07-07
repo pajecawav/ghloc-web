@@ -34,7 +34,8 @@ function buildLanguagesMap() {
 
 	fs.writeFileSync(
 		resolve(__dirname, "..", "src/languages-map.json"),
-		JSON.stringify(languagesMap)
+		JSON.stringify(languagesMap),
+		"utf8"
 	);
 }
 

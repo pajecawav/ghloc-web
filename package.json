@@ -3,8 +3,9 @@
 	"private": true,
 	"scripts": {
 		"dev": "pnpm build:languages && next dev",
-		"build": "pnpm build:languages && pnpm build:app",
-		"build:languages": "tsx scripts/build-languages.ts",
+		"build": "pnpm build:languages && pnpm build:sitemap && pnpm build:app",
+		"build:languages": "tsx scripts/languages.ts",
+		"build:sitemap": "tsx scripts/sitemap.ts",
 		"build:app": "next build",
 		"start": "next start",
 		"prepare": "husky install",
