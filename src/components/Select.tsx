@@ -1,4 +1,4 @@
-import { Listbox, Transition } from "@headlessui/react";
+import { Listbox } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import classNames from "classnames";
 import React, { ComponentType, Fragment } from "react";
@@ -45,32 +45,24 @@ export const Select = ({
 						/>
 					</span>
 				</Listbox.Button>
-				<Transition
-					as={Fragment}
-					leave="transition ease-in duration-100"
-					leaveTo="opacity-0"
-				>
-					<Listbox.Options className="absolute z-10 w-full py-1 mt-1 border border-normal overflow-auto bg-normal rounded-md shadow-lg max-h-60 focus:outline-none">
-						{Object.entries(options).map(
-							([optionValue, option]) => (
-								<Listbox.Option
-									key={optionValue}
-									className={({ active }) =>
-										classNames(
-											active && "bg-select-active",
-											"select-none relative py-1 px-3 cursor-pointer"
-										)
-									}
-									value={optionValue}
-								>
-									<span className="block truncate">
-										{option.name}
-									</span>
-								</Listbox.Option>
-							)
-						)}
-					</Listbox.Options>
-				</Transition>
+				<Listbox.Options className="absolute z-10 w-full py-1 mt-1 border border-normal overflow-auto bg-normal rounded-md shadow-lg max-h-60 focus:outline-none">
+					{Object.entries(options).map(([optionValue, option]) => (
+						<Listbox.Option
+							key={optionValue}
+							className={({ active }) =>
+								classNames(
+									active && "bg-select-active",
+									"select-none relative py-1 px-3 cursor-pointer"
+								)
+							}
+							value={optionValue}
+						>
+							<span className="block truncate">
+								{option.name}
+							</span>
+						</Listbox.Option>
+					))}
+				</Listbox.Options>
 			</div>
 		</Listbox>
 	);

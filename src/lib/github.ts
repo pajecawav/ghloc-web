@@ -7,9 +7,12 @@ import toast from "react-hot-toast";
 function createClientFetcher() {
 	return $fetch.create({
 		retry: 0,
-		// async onRequest({ options }) {
-		// 	options.headers = getGitHubAuthHeaders();
-		// },
+		async onRequest({ options }) {
+			options.headers = {
+				...(options.headers || {}),
+				...getGitHubAuthHeaders(),
+			};
+		},
 		async onResponseError(error) {
 			if (error.response?.status === 403) {
 				const limit = parseInt(
@@ -42,7 +45,11 @@ function createClientFetcher() {
 	});
 }
 
-const ghFetcher = isClient() ? createClientFetcher() : $fetch;
+function createServerFetcher() {
+	return $fetch.create({ retry: 0 });
+}
+
+const ghFetcher = isClient() ? createClientFetcher() : createServerFetcher();
 
 export class GitHubActivityCalculationStartedError extends Error {}
 

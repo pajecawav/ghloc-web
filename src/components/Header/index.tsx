@@ -8,11 +8,15 @@ import {
 	SearchIcon,
 	SunIcon,
 } from "@heroicons/react/outline";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ReactNode, useState } from "react";
-import { GitHubTokenModal } from "../GitHubTokenModal";
 import { FirefoxIcon } from "../icons/FirefoxIcon";
 import { track } from "@vercel/analytics";
+
+const GitHubTokenModal = dynamic(() =>
+	import("../GitHubTokenModal").then(mod => mod.GitHubTokenModal)
+);
 
 type Props = {
 	className?: string;
@@ -64,10 +68,11 @@ export const Header = ({ className }: Props) => {
 							>
 								<CogIcon />
 							</button>
-							<GitHubTokenModal
-								isOpen={isTokenModalOpen}
-								onClose={() => setIsTokenModalOpen(false)}
-							/>
+							{isTokenModalOpen && (
+								<GitHubTokenModal
+									onClose={() => setIsTokenModalOpen(false)}
+								/>
+							)}
 						</HeaderItem>
 						<HeaderItem>
 							<a
