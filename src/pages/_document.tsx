@@ -26,6 +26,10 @@ export default class MyDocument extends Document {
 						name="google-site-verification"
 						content="FnhvmqWUsfbh_7kFL_8bcS5_wOYRnaQD1dY4IB3WT7s"
 					/>
+					<meta
+						name="yandex-verification"
+						content="e046d5fbc4099ee0"
+					/>
 
 					<link
 						rel="search"
