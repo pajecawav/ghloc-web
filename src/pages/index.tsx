@@ -82,10 +82,7 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 
 	return (
 		<>
-			<MetaTags
-				title={formatTitle("Count lines of code")}
-				canonicalPath=""
-			/>
+			<MetaTags title={formatTitle("Count lines of code")} path="" />
 
 			<Combobox
 				value={null as ReposResponseItem | null}

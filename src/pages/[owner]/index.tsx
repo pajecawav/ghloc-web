@@ -64,7 +64,7 @@ const UserReposPage = ({ owner }: PageProps) => {
 		<div className="flex flex-col gap-5">
 			<MetaTags
 				title={formatTitle(`${owner}`)}
-				canonicalPath={`/${owner}`}
+				path={`/${owner}`.toLowerCase()}
 			/>
 
 			<div className="flex items-center">

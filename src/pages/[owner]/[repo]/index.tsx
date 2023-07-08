@@ -165,7 +165,7 @@ export const RepoPage = ({
 		<div className="flex flex-col gap-2">
 			<MetaTags
 				title={formatTitle(`${owner}/${repoName}`)}
-				canonicalPath={`/${owner}/${repoName}`}
+				path={`/${owner}/${repoName}`}
 				image={imagePath}
 			/>
 
