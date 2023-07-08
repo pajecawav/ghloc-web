@@ -13,8 +13,14 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { AppProps } from "next/app";
 import Head from "next/head";
+import { Inter } from "next/font/google";
 
 dayjs.extend(relativeTime);
+
+const inter = Inter({
+	subsets: ["latin"],
+	display: "swap",
+});
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -30,27 +36,36 @@ function MyApp({ Component, pageProps }: AppProps) {
 	const AppShell = (Component as any).AppShell || DefaultAppShell;
 
 	return (
-		<QueryClientProvider client={queryClient}>
+		<>
+			<style jsx global>{`
+				:root {
+					--font-inter: ${inter.style.fontFamily};
+				}
+			`}</style>
+
 			<Analytics />
-			<Hydrate state={pageProps.dehydratedState}>
-				<ThemeProvider>
-					<Head>
-						<title>ghloc | Count lines of code</title>
-						<meta
-							name="viewport"
-							content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content"
-						/>
-					</Head>
 
-					<NavigationProgressBar />
-					<ToastsList />
+			<QueryClientProvider client={queryClient}>
+				<Hydrate state={pageProps.dehydratedState}>
+					<ThemeProvider>
+						<Head>
+							<title>ghloc | Count lines of code</title>
+							<meta
+								name="viewport"
+								content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content"
+							/>
+						</Head>
 
-					<AppShell>
-						<Component {...pageProps} />
-					</AppShell>
-				</ThemeProvider>
-			</Hydrate>
-		</QueryClientProvider>
+						<NavigationProgressBar />
+						<ToastsList />
+
+						<AppShell>
+							<Component {...pageProps} />
+						</AppShell>
+					</ThemeProvider>
+				</Hydrate>
+			</QueryClientProvider>
+		</>
 	);
 }
 

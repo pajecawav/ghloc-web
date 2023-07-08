@@ -78,6 +78,9 @@ module.exports = {
 				"heat-level3": "var(--colors-heat-level3)",
 				"heat-level4": "var(--colors-heat-level4)",
 			},
+			fontFamily: {
+				sans: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
+			},
 		},
 	},
 	variants: {},

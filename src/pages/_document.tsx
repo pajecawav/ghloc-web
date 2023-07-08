@@ -6,10 +6,6 @@ export default class MyDocument extends Document {
 		return (
 			<Html lang="en">
 				<Head>
-					<link
-						href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
-						rel="stylesheet"
-					/>
 					<link rel="preconnect" href="https://api.github.com" />
 
 					<link rel="icon" href="/favicon.ico" sizes="any" />
@@ -38,7 +34,7 @@ export default class MyDocument extends Document {
 						title="ghloc"
 					/>
 				</Head>
-				<body className="text-normal bg-normal">
+				<body className="text-normal bg-normal font-sans">
 					{/* insert blocking script to detect color scheme before rendering the app */}
 					<ThemeScript />
 					<Main />
