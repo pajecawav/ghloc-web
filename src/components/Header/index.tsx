@@ -60,20 +60,20 @@ export const Header = ({ className }: Props) => {
 								)}
 							</button>
 						</HeaderItem>
-						<HeaderItem>
-							<button
-								className="w-full h-full"
-								onClick={() => setIsTokenModalOpen(true)}
-								title="Open GitHub token settings"
-							>
-								<CogIcon />
-							</button>
-							{isTokenModalOpen && (
-								<GitHubTokenModal
-									onClose={() => setIsTokenModalOpen(false)}
-								/>
-							)}
-						</HeaderItem>
+						{/* <HeaderItem> */}
+						{/* 	<button */}
+						{/* 		className="w-full h-full" */}
+						{/* 		onClick={() => setIsTokenModalOpen(true)} */}
+						{/* 		title="Open GitHub token settings" */}
+						{/* 	> */}
+						{/* 		<CogIcon /> */}
+						{/* 	</button> */}
+						{/* 	{isTokenModalOpen && ( */}
+						{/* 		<GitHubTokenModal */}
+						{/* 			onClose={() => setIsTokenModalOpen(false)} */}
+						{/* 		/> */}
+						{/* 	)} */}
+						{/* </HeaderItem> */}
 						<HeaderItem>
 							<a
 								href="https://github.com/pajecawav/ghloc-web"
