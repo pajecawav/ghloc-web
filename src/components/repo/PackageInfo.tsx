@@ -58,11 +58,9 @@ export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
 					</li>
 					<li>
 						Version:{" "}
-						{data.npm
-							? `${data.npm.version} (${dayjs(
-									data.npm.lastPublished
-							  ).fromNow()})`
-							: failedLabel}
+						{data.bundle?.version ??
+							data.package?.version ??
+							failedLabel}
 					</li>
 					<li>
 						Downloads:{" "}

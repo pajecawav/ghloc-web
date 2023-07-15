@@ -55,10 +55,9 @@ export const CommitsHeatmap = memo(({ data }: Props) => {
 								key={dayIndex}
 							>
 								<title>
-									{value} commits on{" "}
-									{dayjs(
+									{`${value} commits on ${dayjs(
 										(week.week + dayIndex * DAY) * 1000
-									).format("MMM D, YYYY")}
+									).format("MMM D, YYYY")}`}
 								</title>
 							</rect>
 						))}
