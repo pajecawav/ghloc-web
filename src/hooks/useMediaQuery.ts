@@ -35,7 +35,7 @@ export const useMediaQuery = (size: Size, useMax: boolean = false) => {
 		() =>
 			// always true when rendering on the server
 			typeof window === "undefined" ||
-			window.matchMedia(mediaQuery).matches
+			window.matchMedia(mediaQuery).matches,
 	);
 
 	useEffect(() => {

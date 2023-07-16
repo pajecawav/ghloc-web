@@ -36,6 +36,6 @@ export default async function handler(req: NextRequest) {
 			headers: {
 				"content-type": "application/json",
 			},
-		}
+		},
 	);
 }

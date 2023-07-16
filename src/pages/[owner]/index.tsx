@@ -39,8 +39,8 @@ export const getServerSideProps: GetServerSideProps<
 							user: owner,
 							perPage: 18,
 							page,
-						})
-				)
+						}),
+				),
 			),
 		]);
 	} catch (e: unknown) {

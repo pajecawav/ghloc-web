@@ -66,7 +66,7 @@ export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
 						Downloads:{" "}
 						{data.npm
 							? `${formatNumber(
-									data.npm.downloadsLastWeek
+									data.npm.downloadsLastWeek,
 							  )} (last week)`
 							: failedLabel}
 					</li>
@@ -82,9 +82,9 @@ export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
 						:{" "}
 						{data.bundle
 							? `${formatSize(
-									data.bundle.size
+									data.bundle.size,
 							  )} minified (${formatSize(
-									data.bundle.gzip
+									data.bundle.gzip,
 							  )} gzipped)`
 							: failedLabel}
 					</li>

@@ -21,7 +21,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 			<button
 				className={classNames(
 					"no-highlight relative w-5 h-5 transition-colors duration-75 text-muted outline-none focus:text-normal",
-					"after:hidden group-focus-within:after:block group-hover:after:block after:h-[calc(100%+1.25rem)] after:absolute after:top-0 after:w-[200%] after:right-0"
+					"after:hidden group-focus-within:after:block group-hover:after:block after:h-[calc(100%+1.25rem)] after:absolute after:top-0 after:w-[200%] after:right-0",
 				)}
 				aria-label="Show filter syntax help"
 			>
@@ -35,7 +35,7 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 					"group-focus-within:duration-100 group-focus-within:opacity-100 group-focus-within:scale-100 group-focus-within:select-text",
 					"group-hover:duration-100 group-hover:opacity-100 group-hover:scale-100 group-hover:select-text",
 					"pointer-events-none group-focus-within:pointer-events-auto group-hover:pointer-events-auto",
-					tooltipClassName
+					tooltipClassName,
 				)}
 			>
 				<h3 className="text-base mb-1">Filter syntax examples</h3>

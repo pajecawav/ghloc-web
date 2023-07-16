@@ -22,7 +22,7 @@ const PathBreadcrumbEntry = ({
 				"text-left",
 				last
 					? "font-medium cursor-text"
-					: "text-link-normal hover:underline"
+					: "text-link-normal hover:underline",
 			)}
 			onClick={onSelect}
 			disabled={last}

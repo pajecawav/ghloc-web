@@ -45,7 +45,7 @@ export const CommitsHeatmap = memo(({ data }: Props) => {
 							<rect
 								className={classNames(
 									styles.cell,
-									getSquareColor(value)
+									getSquareColor(value),
 								)}
 								width="11"
 								height="11"
@@ -56,7 +56,7 @@ export const CommitsHeatmap = memo(({ data }: Props) => {
 							>
 								<title>
 									{`${value} commits on ${dayjs(
-										(week.week + dayIndex * DAY) * 1000
+										(week.week + dayIndex * DAY) * 1000,
 									).format("MMM D, YYYY")}`}
 								</title>
 							</rect>

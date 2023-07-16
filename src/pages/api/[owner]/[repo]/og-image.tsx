@@ -71,7 +71,7 @@ export default async function handler(req: NextRequest) {
 				// override default cache
 				"cache-control": "public, no-transform, max-age=900",
 			},
-		}
+		},
 	);
 }
 

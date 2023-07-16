@@ -54,17 +54,17 @@ export const RepoLocsSection = ({
 						},
 					},
 					undefined,
-					{ scroll: false, shallow: true }
+					{ scroll: false, shallow: true },
 				);
 			}
 		},
 		750,
-		[filter]
+		[filter],
 	);
 
 	const [sortOrder, setSortOrder] = useState<SortOrder>("type");
 	const [selectedLanguage, setSelectedLanguage] = useState<string | null>(
-		null
+		null,
 	);
 
 	let path: string[];
@@ -87,7 +87,7 @@ export const RepoLocsSection = ({
 				},
 			},
 			undefined,
-			{ scroll: false, shallow: true }
+			{ scroll: false, shallow: true },
 		);
 	};
 
@@ -139,7 +139,7 @@ export const RepoLocsSection = ({
 				<div
 					className={classNames(
 						"flex flex-col gap-1 self-start order-last sm:order-first",
-						isFile && "col-span-1 sm:col-span-2"
+						isFile && "col-span-1 sm:col-span-2",
 					)}
 				>
 					<div className="flex">

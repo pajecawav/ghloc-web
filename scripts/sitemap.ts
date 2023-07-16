@@ -21,5 +21,5 @@ const sitemap = `\
 fs.writeFileSync(
 	path.resolve(__dirname, "..", "public/sitemap.xml"),
 	sitemap,
-	"utf8"
+	"utf8",
 );

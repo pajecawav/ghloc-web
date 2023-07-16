@@ -14,6 +14,6 @@ export const useTokenStore = create<Store>()(
 			setToken: (token: string) => set({ token }),
 			removeToken: () => set({ token: undefined }),
 		}),
-		{ name: "ghloc.token" }
-	)
+		{ name: "ghloc.token" },
+	),
 );

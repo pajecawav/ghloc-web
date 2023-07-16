@@ -9,7 +9,7 @@ import {
 export const THEME_KEY = "ghloc.theme";
 
 export const ThemeContext = createContext<ThemeContextValue>(
-	{} as ThemeContextValue
+	{} as ThemeContextValue,
 );
 
 export type ThemeContextValue = {

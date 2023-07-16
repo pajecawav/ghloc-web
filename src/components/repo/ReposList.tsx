@@ -28,7 +28,7 @@ export const ReposList = ({ user }: Props) => {
 				lastPage.length === REPOS_PER_PAGE
 					? allPages.length + 1
 					: false,
-		}
+		},
 	);
 
 	const repos = useMemo(() => {

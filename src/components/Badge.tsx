@@ -21,7 +21,7 @@ export const Badge = ({
 			className={classNames(
 				"px-2 py-0.5 border border-normal rounded-full min-w-[2rem] text-center",
 				colorClassNames[color],
-				className
+				className,
 			)}
 			{...props}
 		>

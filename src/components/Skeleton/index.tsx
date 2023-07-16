@@ -21,7 +21,7 @@ export const Skeleton = ({
 			className={classNames(
 				"bg-accent2 animate-pulse",
 				isText && "scale-y-[0.7]",
-				className
+				className,
 			)}
 		/>
 	) : (

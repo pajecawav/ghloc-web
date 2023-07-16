@@ -15,7 +15,7 @@ import { FirefoxIcon } from "../icons/FirefoxIcon";
 import { track } from "@vercel/analytics";
 
 const GitHubTokenModal = dynamic(() =>
-	import("../GitHubTokenModal").then(mod => mod.GitHubTokenModal)
+	import("../GitHubTokenModal").then(mod => mod.GitHubTokenModal),
 );
 
 type Props = {

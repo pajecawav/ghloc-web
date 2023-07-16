@@ -52,7 +52,7 @@ export const Select = ({
 							className={({ active }) =>
 								classNames(
 									active && "bg-select-active",
-									"select-none relative py-1 px-3 cursor-pointer"
+									"select-none relative py-1 px-3 cursor-pointer",
 								)
 							}
 							value={optionValue}

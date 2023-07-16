@@ -23,14 +23,14 @@ export const LocsTree = ({
 }: Props) => {
 	const totalLocs = Object.values(locs.locByLangs).reduce(
 		(sum, loc) => sum + loc,
-		0
+		0,
 	);
 
 	const handleSelectLanguage = useCallback(
 		(language: string) => {
 			onSelectLanguage?.(language === selectedLanguage ? null : language);
 		},
-		[selectedLanguage, onSelectLanguage]
+		[selectedLanguage, onSelectLanguage],
 	);
 
 	const entries = Object.entries(locs.locByLangs);
@@ -40,14 +40,14 @@ export const LocsTree = ({
 			className={classNames(
 				"divide-y divide-normal",
 				className,
-				!entries.length && "h-40"
+				!entries.length && "h-40",
 			)}
 		>
 			{entries.map(([lang, loc]) => (
 				<li
 					className={classNames(
 						"first:rounded-t-md last:rounded-b-md hover:bg-tree-active",
-						lang === selectedLanguage && "bg-tree-active"
+						lang === selectedLanguage && "bg-tree-active",
 					)}
 					key={lang}
 				>

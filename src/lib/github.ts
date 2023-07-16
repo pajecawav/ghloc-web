@@ -18,12 +18,12 @@ function createClientFetcher() {
 			if (error.response?.status === 403) {
 				const limit = parseInt(
 					error.response.headers.get("x-ratelimit-remaining")!,
-					10
+					10,
 				);
 				const reset =
 					parseInt(
 						error.response.headers.get("x-ratelimit-reset")!,
-						10
+						10,
 					) * 1000;
 
 				// show toast with an error when GitHub API limit is reached
@@ -33,7 +33,7 @@ function createClientFetcher() {
 						{
 							duration: Infinity,
 							id: "error_github-limit-reached",
-						}
+						},
 					);
 				}
 			} else if (error.response?.status === 401) {
@@ -107,7 +107,7 @@ export function searchRepos({
 		{
 			method: "GET",
 			params: { q: query, per_page: perPage },
-		}
+		},
 	);
 }
 
@@ -124,25 +124,25 @@ export function getUserRepos({
 		`https://api.github.com/users/${user}/repos`,
 		{
 			params: { per_page: perPage, page, sort: "updated" },
-		}
+		},
 	);
 }
 
 export function getRepo({ owner, repo }: RepoDetails) {
 	return ghFetcher<RepoResponse>(
-		`https://api.github.com/repos/${owner}/${repo}`
+		`https://api.github.com/repos/${owner}/${repo}`,
 	);
 }
 
 export function getCommunityProfile({ owner, repo }: RepoDetails) {
 	return ghFetcher<RepoHealthResponse>(
-		`https://api.github.com/repos/${owner}/${repo}/community/profile`
+		`https://api.github.com/repos/${owner}/${repo}/community/profile`,
 	);
 }
 
 export async function getCommitActivity({ owner, repo }: RepoDetails) {
 	const response = await ghFetcher.raw<CommitActivity>(
-		`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`
+		`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`,
 	);
 
 	if (!response.ok) {

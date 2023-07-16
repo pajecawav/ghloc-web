@@ -128,7 +128,7 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 							"pointer-events-none group-focus-within:pointer-events-auto",
 							results &&
 								!isMediumOrLarger &&
-								"!pointer-events-auto"
+								"!pointer-events-auto",
 						)}
 					>
 						<Combobox.Options
@@ -139,7 +139,7 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 									"group-focus-within:duration-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 group-focus-within:scale-100",
 								results?.items.length &&
 									!isMediumOrLarger &&
-									"duration-100 translate-y-0 opacity-100 scale-100"
+									"duration-100 translate-y-0 opacity-100 scale-100",
 							)}
 							static
 							hold
@@ -149,7 +149,7 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 									className={({ active }) =>
 										classNames(
 											"block px-6 py-3 select-none relative cursor-pointer !outline-none",
-											active && "bg-select-active"
+											active && "bg-select-active",
 										)
 									}
 									value={result}

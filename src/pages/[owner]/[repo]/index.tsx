@@ -66,26 +66,26 @@ export const getServerSideProps: GetServerSideProps<
 				client.prefetchQuery({
 					queryKey: queryKeys.repo(repo),
 					queryFn: () => getRepo({ owner, repo }),
-				})
+				}),
 			),
 			prefetch("health", () =>
 				client.prefetchQuery({
 					queryKey: queryKeys.repoHealth({ owner, repo }),
 					queryFn: () => getCommunityProfile({ owner, repo }),
-				})
+				}),
 			),
 			prefetch("activity", () =>
 				client.prefetchQuery({
 					queryKey: queryKeys.commitActivity({ owner, repo }),
 					queryFn: () => getCommitActivity({ owner, repo }),
-				})
+				}),
 			),
 			prefetch("info", () =>
 				client.prefetchQuery({
 					queryKey: queryKeys.packageInfo({ owner, repo, branch }),
 					queryFn: () =>
 						getPackageInfo({ owner, repo, branch }, timing),
-				})
+				}),
 			),
 			// timing.timeAsync("locs", () =>
 			// 	client.prefetchQuery({
@@ -151,7 +151,7 @@ export const RepoPage = ({
 					},
 				},
 				undefined,
-				{ scroll: false, shallow: true }
+				{ scroll: false, shallow: true },
 			);
 		}
 	}, [repo, branch, router]);

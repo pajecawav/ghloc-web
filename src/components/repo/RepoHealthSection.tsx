@@ -32,14 +32,14 @@ const HealthEntry = ({ text, url }: { text: string; url?: string }) => {
 			<Comp
 				className={classNames(
 					"w-max text-subtle flex items-center gap-2 transition-colors duration-75",
-					url && "hover:text-link-normal focus:text-link-normal"
+					url && "hover:text-link-normal focus:text-link-normal",
 				)}
 				{...compProps}
 			>
 				<Icon
 					className={classNames(
 						"inline-block w-5 h-5",
-						success ? "text-success" : "text-error"
+						success ? "text-success" : "text-error",
 					)}
 				/>
 				<span>{text}</span>

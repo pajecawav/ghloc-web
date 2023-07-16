@@ -19,7 +19,7 @@ type PackageInfoOptions = {
 
 export async function getPackageInfo(
 	{ owner, repo, branch }: PackageInfoOptions,
-	timing: ServerTiming
+	timing: ServerTiming,
 ): Promise<PackageInfo | null> {
 	const packageUrl = getRawGitHubUrl({
 		owner,

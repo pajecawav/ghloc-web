@@ -23,7 +23,7 @@ export const Button = ({
 			className={classNames(
 				"relative px-6 py-1 transition-all duration-100 rounded-md outline-none disabled:cursor-auto",
 				colorClassnames[color],
-				className
+				className,
 			)}
 			{...props}
 		>
@@ -32,7 +32,7 @@ export const Button = ({
 				<div
 					className={classNames(
 						"absolute inset-0 grid place-items-center rounded-md text-subtle",
-						colorClassnames[color]
+						colorClassnames[color],
 					)}
 				>
 					<LoadingPlaceholder className="w-5 h-5" />

@@ -1,8 +1,8 @@
 export async function fetchNpmData(name: string): Promise<NpmData> {
 	const res = await fetch(
 		`https://api.npmjs.org/downloads/point/last-week/${encodeURIComponent(
-			name
-		)}`
+			name,
+		)}`,
 	);
 
 	if (!res.ok) {

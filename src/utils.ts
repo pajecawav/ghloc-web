@@ -13,7 +13,7 @@ export function isClient() {
 export function timeoutPromise<TData, TError>(
 	promise: Promise<TData>,
 	ms: number,
-	error?: TError
+	error?: TError,
 ) {
 	let timeoutId: NodeJS.Timeout | undefined = undefined;
 

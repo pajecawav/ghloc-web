@@ -26,7 +26,7 @@ function renderIcon(isFolder: boolean) {
 		<Icon
 			className={classNames(
 				"w-5 h-5 flex-shrink-0",
-				isFolder && "text-blue-400 stroke-black dark:stroke-current"
+				isFolder && "text-blue-400 stroke-black dark:stroke-current",
 			)}
 		/>
 	);
@@ -43,9 +43,9 @@ export const FileTree = ({ locs, onSelect, selectedLanguage }: Props) => {
 		() =>
 			Object.values(locs.children ?? {}).reduce<number>(
 				(sum, child) => sum + getLocsValue(child),
-				0
+				0,
 			),
-		[locs]
+		[locs],
 	);
 
 	const getLocsOfSelectedLanguage = (name: string, node: LocsChild) => {
@@ -64,7 +64,7 @@ export const FileTree = ({ locs, onSelect, selectedLanguage }: Props) => {
 		: 0;
 	const getLocsPercentageOfSelectedLanguage = (
 		name: string,
-		node: LocsChild
+		node: LocsChild,
 	) => {
 		if (!selectedLanguage || !totalLocsOfSelectedLanguage) return 0;
 
@@ -85,17 +85,17 @@ export const FileTree = ({ locs, onSelect, selectedLanguage }: Props) => {
 		<ul
 			className={classNames(
 				"divide-y divide-normal",
-				!entries.length && "h-40"
+				!entries.length && "h-40",
 			)}
 		>
 			{entries.map(([name, child]) => (
 				<li
 					className={classNames(
 						"hover:bg-tree-active first:rounded-t-md last:rounded-b-md",
-						"bg-gradient-to-r from-tree-active to-tree-active bg-no-repeat transition-[background-size] duration-[0.4s]"
+						"bg-gradient-to-r from-tree-active to-tree-active bg-no-repeat transition-[background-size] duration-[0.4s]",
 					)}
 					style={getStyleForSelectedLanguage(
-						getLocsPercentageOfSelectedLanguage(name, child)
+						getLocsPercentageOfSelectedLanguage(name, child),
 					)}
 					key={name}
 				>

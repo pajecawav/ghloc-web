@@ -23,7 +23,7 @@ export function isFolder(child: LocsChild): child is Locs {
 
 export function useLocs(
 	path: string[],
-	{ sortOrder = "type", filter, owner, repo, branch }: UseLocsOptions
+	{ sortOrder = "type", filter, owner, repo, branch }: UseLocsOptions,
 ) {
 	const query = useQuery({
 		queryKey: queryKeys.locs({
