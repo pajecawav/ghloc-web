@@ -17,11 +17,11 @@
 		"postinstall": "is-ci || yarn prepare"
 	},
 	"dependencies": {
-		"@headlessui/react": "^1.7.15",
+		"@headlessui/react": "^1.7.16",
 		"@heroicons/react": "^1.0.6",
-		"@tanstack/react-query": "^4.32.0",
+		"@tanstack/react-query": "^4.32.1",
 		"@vercel/analytics": "^1.0.1",
-		"@vercel/og": "^0.5.9",
+		"@vercel/og": "^0.5.10",
 		"classnames": "^2.3.2",
 		"dayjs": "^1.11.9",
 		"next": "^13.4.12",
@@ -31,16 +31,16 @@
 		"react-dom": "^18.2.0",
 		"react-hot-toast": "^2.4.1",
 		"tiny-server-timing": "^0.1.4",
-		"zustand": "^4.3.9"
+		"zustand": "^4.4.0"
 	},
 	"devDependencies": {
 		"@types/js-cookie": "^3.0.3",
 		"@types/node": "^18.17.1",
 		"@types/nprogress": "^0.2.0",
-		"@types/react": "^18.2.16",
+		"@types/react": "^18.2.18",
 		"autoprefixer": "^10.4.14",
 		"csstype": "^3.1.2",
-		"eslint": "^8.45.0",
+		"eslint": "^8.46.0",
 		"eslint-config-next": "^13.4.12",
 		"husky": "^8.0.3",
 		"is-ci": "^3.0.1",
