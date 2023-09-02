@@ -146,7 +146,7 @@ export async function getCommitActivity({ owner, repo }: RepoDetails) {
 	);
 
 	if (!response.ok) {
-		throw createFetchError("", undefined, response);
+		throw createFetchError({ request: "", options: {}, response });
 	}
 
 	// 202 response status means that GitHub started calculating commit
