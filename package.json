@@ -19,7 +19,7 @@
 	"dependencies": {
 		"@headlessui/react": "^1.7.17",
 		"@heroicons/react": "^1.0.6",
-		"@tanstack/react-query": "^4.33.0",
+		"@tanstack/react-query": "^4.35.3",
 		"@vercel/analytics": "^1.0.2",
 		"@vercel/og": "^0.5.13",
 		"classnames": "^2.3.2",
@@ -35,12 +35,12 @@
 	},
 	"devDependencies": {
 		"@types/js-cookie": "^3.0.3",
-		"@types/node": "^18.17.14",
+		"@types/node": "^18.17.15",
 		"@types/nprogress": "^0.2.0",
 		"@types/react": "^18.2.21",
 		"autoprefixer": "^10.4.15",
 		"csstype": "^3.1.2",
-		"eslint": "^8.48.0",
+		"eslint": "^8.49.0",
 		"eslint-config-next": "^13.4.19",
 		"husky": "^8.0.3",
 		"is-ci": "^3.0.1",
@@ -50,7 +50,7 @@
 		"postcss": "^8.4.29",
 		"prettier": "^3.0.3",
 		"tailwindcss": "^3.3.3",
-		"tsx": "^3.12.8",
+		"tsx": "^3.12.10",
 		"typescript": "^5.2.2",
 		"webpack": "^5.88.2"
 	}
