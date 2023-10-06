@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 html {
+	color-scheme: light;
+
 	/* text */
 	--colors-text-normal: black;
 	--colors-text-subtle: theme("colors.gray.700");
@@ -67,6 +69,8 @@ html {
 }
 
 html.dark {
+	color-scheme: dark;
+
 	/* text */
 	--colors-text-normal: theme("colors.gray.200");
 	--colors-text-subtle: theme("colors.gray.300");
@@ -174,29 +178,6 @@ body,
 
 html {
 	scrollbar-gutter: stable;
-}
-
-/* firefox scrollbar */
-html,
-* {
-	scrollbar-width: auto;
-	scrollbar-color: var(--colors-scrollbar) transparent !important;
-}
-
-/* non-firefox scrollbar */
-::-webkit-scrollbar {
-	overflow: overlay;
-	height: 6px;
-	width: 8px;
-}
-
-::-webkit-scrollbar-track {
-	display: initial;
-}
-
-::-webkit-scrollbar-thumb {
-	background-color: var(--colors-scrollbar);
-	border-radius: 9px;
 }
 
 @layer utilities {
