@@ -44,7 +44,7 @@
 		"eslint-config-next": "^13.5.5",
 		"husky": "^8.0.3",
 		"is-ci": "^3.0.1",
-		"lint-staged": "^14.0.1",
+		"lint-staged": "^15.0.1",
 		"next-statoscope": "^1.0.1",
 		"npm-run-all": "^4.1.5",
 		"postcss": "^8.4.31",
