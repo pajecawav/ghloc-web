@@ -3,6 +3,7 @@ import { MetaTags } from "@/components/MetaTags";
 import { ReposList } from "@/components/repo/ReposList";
 import { formatTitle } from "@/lib/format";
 import { getUserRepos } from "@/lib/github";
+import { queryKeys } from "@/lib/query-keys";
 import { shouldEnableSsr } from "@/lib/ssr";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
@@ -32,15 +33,16 @@ export const getServerSideProps: GetServerSideProps<
 	try {
 		await Promise.allSettled([
 			timing.timeAsync("repos", () =>
-				client.prefetchInfiniteQuery(
-					["user", owner, "repos"],
-					({ pageParam: page }) =>
+				client.prefetchInfiniteQuery({
+					queryKey: ["user", owner, "repos"],
+					queryFn: ({ pageParam: page }) =>
 						getUserRepos({
 							user: owner,
 							perPage: 18,
 							page,
 						}),
-				),
+					initialPageParam: 1,
+				}),
 			),
 		]);
 	} catch (e: unknown) {

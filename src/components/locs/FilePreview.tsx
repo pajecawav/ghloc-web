@@ -121,7 +121,7 @@ export const FilePreview = ({ owner, repo, branch, path, loc }: Props) => {
 		},
 	});
 
-	const { data: file, isLoadingError } = useQuery({
+	const { data: file, error } = useQuery({
 		queryKey: ["files", { owner, repo, branch, path }],
 		queryFn: () =>
 			$fetch<string>(url, {
@@ -129,10 +129,11 @@ export const FilePreview = ({ owner, repo, branch, path, loc }: Props) => {
 				parseResponse: text => text,
 			}),
 		enabled: !!meta,
-		onError() {
-			toast.error("Failed to load file.");
-		},
 	});
+
+	useEffect(() => {
+		if (error) toast.error("Failed to load file.");
+	}, [error]);
 
 	const isReady = file || meta?.type === "image";
 

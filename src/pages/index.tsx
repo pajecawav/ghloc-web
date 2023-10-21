@@ -13,12 +13,12 @@ import {
 import { queryKeys } from "@/lib/query-keys";
 import { Combobox } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/outline";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import type { FetchError } from "ofetch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const githubUrlRegex =
@@ -50,15 +50,20 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 	const [debouncedQuery, setDebouncedQuery] = useState(query);
 	useDebounce(() => setDebouncedQuery(query), 750, [query]);
 
-	const { data: results, isFetching } = useQuery({
+	const {
+		data: results,
+		error,
+		isFetching,
+	} = useQuery({
 		queryKey: queryKeys.search(debouncedQuery),
 		queryFn: () => searchRepos({ query: debouncedQuery }),
 		enabled: !!debouncedQuery,
-		keepPreviousData: true,
-		onError() {
-			toast.error("Failed to load search results.");
-		},
+		placeholderData: keepPreviousData,
 	});
+
+	useEffect(() => {
+		if (error) toast.error("Failed to load search results.");
+	}, [error]);
 
 	const navigateToRepoPage = (repo: ReposResponseItem) => {
 		router.push({

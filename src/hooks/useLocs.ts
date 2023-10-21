@@ -1,8 +1,8 @@
 import { getLocs, Locs, LocsChild } from "@/lib/locs";
 import { queryKeys } from "@/lib/query-keys";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { FetchError } from "ofetch";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
 
 export type SortOrder = "type" | "locs";
@@ -34,17 +34,22 @@ export function useLocs(
 		}),
 		queryFn: () => getLocs({ owner, repo, branch: branch!, filter }),
 		enabled: !!branch,
-		keepPreviousData: true,
-		onError(error: FetchError<{ error: string }>) {
-			let message: string;
-			if (error.data?.error) {
-				message = `Failed to load LOC stats: ${error.data.error}`;
-			} else {
-				message = "Failed to load LOC stats.";
-			}
-			toast.error(message);
-		},
+		placeholderData: keepPreviousData,
 	});
+
+	useEffect(() => {
+		if (!query.error) return;
+
+		const error = query.error as FetchError<{ error: string }>;
+
+		let message: string;
+		if (error.data?.error) {
+			message = `Failed to load LOC stats: ${error.data.error}`;
+		} else {
+			message = "Failed to load LOC stats.";
+		}
+		toast.error(message);
+	}, [query.error]);
 
 	const locs = query.data ?? null;
 

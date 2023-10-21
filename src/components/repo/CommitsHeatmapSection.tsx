@@ -8,7 +8,7 @@ import { queryKeys } from "@/lib/query-keys";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { FetchError } from "ofetch";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import toast from "react-hot-toast";
 import { Block } from "../Block";
 import { Heading } from "../Heading";
@@ -27,7 +27,7 @@ export const CommitsHeatmapSection = ({
 	repo,
 	enabled = true,
 }: Props) => {
-	const { data, error, isLoading, isLoadingError, failureCount } = useQuery({
+	const { data, error, isLoading, failureCount } = useQuery({
 		queryKey: queryKeys.commitActivity({ owner, repo }),
 		queryFn: () => getCommitActivity({ owner, repo }),
 		enabled,
@@ -38,10 +38,11 @@ export const CommitsHeatmapSection = ({
 			);
 		},
 		retryDelay: 7500,
-		onError(error) {
-			toast.error("Failed to load commit activity.");
-		},
 	});
+
+	useEffect(() => {
+		if (error) toast.error("Failed to load commit activity.");
+	}, [error]);
 
 	const totalCommits = useMemo(() => {
 		if (!data) return data;
