@@ -4,7 +4,7 @@ import { ToastsList } from "@/components/ToastsList";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import "@/styles/globals.css";
 import {
-	Hydrate,
+	HydrationBoundary,
 	QueryClient,
 	QueryClientProvider,
 } from "@tanstack/react-query";
@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			<Analytics />
 
 			<QueryClientProvider client={queryClient}>
-				<Hydrate state={pageProps.dehydratedState}>
+				<HydrationBoundary state={pageProps.dehydratedState}>
 					<ThemeProvider>
 						<Head>
 							<title>ghloc | Count lines of code</title>
@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 							<Component {...pageProps} />
 						</AppShell>
 					</ThemeProvider>
-				</Hydrate>
+				</HydrationBoundary>
 			</QueryClientProvider>
 		</>
 	);

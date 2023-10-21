@@ -7,6 +7,7 @@ import type { FetchError } from "ofetch";
 import toast from "react-hot-toast";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
+import { useEffect } from "react";
 
 type Props = {
 	owner: string;
@@ -49,17 +50,14 @@ const HealthEntry = ({ text, url }: { text: string; url?: string }) => {
 };
 
 export const RepoHealthSection = ({ owner, repo, className }: Props) => {
-	const {
-		data: health,
-		isLoadingError,
-		error,
-	} = useQuery({
+	const { data: health, error } = useQuery({
 		queryKey: queryKeys.repoHealth({ owner, repo }),
 		queryFn: () => getCommunityProfile({ owner, repo }),
-		onError() {
-			toast.error("Failed to load repo health.");
-		},
 	});
+
+	useEffect(() => {
+		if (error) toast.error("Failed to load repo health.");
+	}, [error]);
 
 	const {
 		license,

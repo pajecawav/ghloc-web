@@ -19,17 +19,14 @@ export const ReposList = ({ user }: Props) => {
 		fetchNextPage,
 		hasNextPage,
 		isFetchingNextPage,
-	} = useInfiniteQuery<ReposResponse, FetchError>(
-		["user", user, "repos"],
-		({ pageParam: page }) =>
+	} = useInfiniteQuery({
+		queryKey: ["user", user, "repos"],
+		queryFn: ({ pageParam: page }) =>
 			getUserRepos({ user, perPage: REPOS_PER_PAGE, page }),
-		{
-			getNextPageParam: (lastPage, allPages) =>
-				lastPage.length === REPOS_PER_PAGE
-					? allPages.length + 1
-					: false,
-		},
-	);
+		initialPageParam: 1,
+		getNextPageParam: (lastPage, allPages) =>
+			lastPage.length === REPOS_PER_PAGE ? allPages.length + 1 : null,
+	});
 
 	const repos = useMemo(() => {
 		if (!reposData) {
