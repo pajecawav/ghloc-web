@@ -54,7 +54,7 @@ export const ReposList = ({ user }: Props) => {
 								className="h-32 border border-normal rounded-md"
 								key={index}
 							/>
-					  ))
+						))
 					: repos.map(repo => <RepoCard repo={repo} key={repo.id} />)}
 			</div>
 			{hasNextPage &&
