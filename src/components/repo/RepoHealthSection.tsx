@@ -25,7 +25,7 @@ const HealthEntry = ({ text, url }: { text: string; url?: string }) => {
 				href: url,
 				target: "_blank",
 				rel: "noreferrer noopener",
-		  }
+			}
 		: {};
 
 	return (
@@ -103,7 +103,9 @@ export const RepoHealthSection = ({ owner, repo, className }: Props) => {
 						text={
 							coc
 								? `Code of conduct` +
-								  (coc.key === "other" ? "" : ` (${coc.name})`)
+									(coc.key === "other"
+										? ""
+										: ` (${coc.name})`)
 								: "No code of conduct"
 						}
 						url={coc?.html_url}
