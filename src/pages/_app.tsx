@@ -9,6 +9,7 @@ import {
 	QueryClientProvider,
 } from "@tanstack/react-query";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { AppProps } from "next/app";
@@ -44,6 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 			`}</style>
 
 			<Analytics />
+			<SpeedInsights />
 
 			<QueryClientProvider client={queryClient}>
 				<HydrationBoundary state={pageProps.dehydratedState}>

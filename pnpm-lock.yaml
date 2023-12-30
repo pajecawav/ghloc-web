@@ -20,6 +20,9 @@ dependencies:
   '@vercel/og':
     specifier: ^0.6.1
     version: 0.6.1
+  '@vercel/speed-insights':
+    specifier: ^1.0.2
+    version: 1.0.2
   classnames:
     specifier: ^2.3.2
     version: 2.3.2
@@ -893,6 +896,11 @@ packages:
       '@resvg/resvg-wasm': 2.6.0
       satori: 0.10.9
       yoga-wasm-web: 0.3.3
+    dev: false
+
+  /@vercel/speed-insights@1.0.2:
+    resolution: {integrity: sha512-y5HWeB6RmlyVYxJAMrjiDEz8qAIy2cit0fhBq+MD78WaUwQvuBnQlX4+5MuwVTWi46bV3klaRMq83u9zUy1KOg==}
+    requiresBuild: true
     dev: false
 
   /@webassemblyjs/ast@1.11.6:
