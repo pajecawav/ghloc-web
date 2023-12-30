@@ -19,11 +19,11 @@
 	"dependencies": {
 		"@headlessui/react": "^1.7.17",
 		"@heroicons/react": "^1.0.6",
-		"@tanstack/react-query": "^5.14.2",
+		"@tanstack/react-query": "^5.15.0",
 		"@vercel/analytics": "^1.1.1",
 		"@vercel/og": "^0.6.1",
 		"@vercel/speed-insights": "^1.0.2",
-		"classnames": "^2.3.2",
+		"classnames": "^2.4.0",
 		"dayjs": "^1.11.10",
 		"next": "^14.0.4",
 		"nprogress": "^0.2.0",
