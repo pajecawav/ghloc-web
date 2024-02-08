@@ -10,17 +10,16 @@ export function isClient() {
 	return typeof window !== "undefined";
 }
 
-export function timeoutPromise<TData, TError>(
+export function timeoutPromise<TData>(
 	promise: Promise<TData>,
 	ms: number,
-	error?: TError,
-) {
+): Promise<TData> {
 	let timeoutId: NodeJS.Timeout | undefined = undefined;
 
 	return Promise.race([
 		promise,
-		new Promise((_, reject) => {
-			timeoutId = setTimeout(reject, ms, error);
+		new Promise<never>((_, reject) => {
+			timeoutId = setTimeout(reject, ms, new Error("Promise timeout"));
 		}),
 	]).then(value => {
 		clearTimeout(timeoutId);

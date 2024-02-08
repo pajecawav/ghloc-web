@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps<
 	const branch = (query!.branch as string | undefined) ?? null;
 	const filter = query!.filter as string | undefined;
 
-	if (!shouldEnableSsr() || !branch) {
+	if (!shouldEnableSsr()) {
 		return {
 			props: { owner, repo, branch, filter: filter ?? null },
 		};
@@ -54,20 +54,25 @@ export const getServerSideProps: GetServerSideProps<
 
 	// TODO: bundlephobia and packagephobia are unstable so we timeout all requests to avoid hitting
 	// Vercel's 10s limit for functions
-	const prefetch = <T,>(label: string, fn: () => Promise<T>) => {
+	const prefetch = <T,>(label: string, fn: () => Promise<T>): Promise<T> => {
 		return timing.timeAsync(label, () => {
 			return timeoutPromise(fn(), 6_000);
 		});
 	};
 
+	const fetchRepo = () =>
+		prefetch("repo", () =>
+			client.fetchQuery({
+				queryKey: queryKeys.repo(repo),
+				queryFn: () => getRepo({ owner, repo }),
+			}),
+		);
+
 	try {
+		const resolvedBranch = branch ?? (await fetchRepo()).default_branch;
+
 		await Promise.allSettled([
-			prefetch("repo", () =>
-				client.prefetchQuery({
-					queryKey: queryKeys.repo(repo),
-					queryFn: () => getRepo({ owner, repo }),
-				}),
-			),
+			branch && fetchRepo(),
 			prefetch("health", () =>
 				client.prefetchQuery({
 					queryKey: queryKeys.repoHealth({ owner, repo }),
@@ -82,31 +87,18 @@ export const getServerSideProps: GetServerSideProps<
 			),
 			prefetch("info", () =>
 				client.prefetchQuery({
-					queryKey: queryKeys.packageInfo({ owner, repo, branch }),
+					queryKey: queryKeys.packageInfo({
+						owner,
+						repo,
+						branch: resolvedBranch,
+					}),
 					queryFn: () =>
-						getPackageInfo({ owner, repo, branch }, timing),
+						getPackageInfo(
+							{ owner, repo, branch: resolvedBranch },
+							timing,
+						),
 				}),
 			),
-			// timing.timeAsync("locs", () =>
-			// 	client.prefetchQuery({
-			// 		queryKey: queryKeys.locs({
-			// 			owner,
-			// 			repo,
-			// 			branch,
-			// 			filter: filter ?? null,
-			// 		}),
-			// 		queryFn: () => {
-			// 			const promise = getLocs({
-			// 				owner,
-			// 				repo,
-			// 				branch,
-			// 				filter,
-			// 			});
-			// 			// if locs request takes too long do not wait for result
-			// 			return timeoutPromise(promise, 8_000);
-			// 		},
-			// 	})
-			// ),
 		]);
 	} catch (e: unknown) {
 		console.error("Failed to prefetch all queries:", e);
@@ -125,7 +117,7 @@ export const getServerSideProps: GetServerSideProps<
 	};
 };
 
-export const RepoPage = ({
+const RepoPage = ({
 	owner,
 	repo: repoName,
 	branch: branchProp,
