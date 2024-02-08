@@ -4,8 +4,8 @@
 	"scripts": {
 		"dev": "pnpm build:languages && next dev",
 		"build": "FORCE_COLOR=1 run-s -l build:languages build:sitemap build:app",
-		"build:languages": "tsx scripts/languages.ts",
-		"build:sitemap": "tsx scripts/sitemap.ts",
+		"build:languages": "tsx scripts/build-languages.ts",
+		"build:sitemap": "tsx scripts/build-sitemap.ts",
 		"build:app": "next build",
 		"start": "next start",
 		"prepare": "husky install",
