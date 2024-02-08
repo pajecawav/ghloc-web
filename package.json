@@ -31,8 +31,7 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-hot-toast": "^2.4.1",
-		"tiny-server-timing": "^0.1.5",
-		"zustand": "^4.5.0"
+		"tiny-server-timing": "^0.1.5"
 	},
 	"devDependencies": {
 		"@types/js-cookie": "^3.0.6",

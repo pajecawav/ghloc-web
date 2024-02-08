@@ -1,4 +1,3 @@
-import { useTokenStore } from "@/stores/useTokenStore";
 import { isClient } from "@/utils";
 import dayjs from "dayjs";
 import { $fetch, createFetchError } from "ofetch";
@@ -8,12 +7,6 @@ import { GITHUB_TOKEN } from "./ssr";
 function createClientFetcher() {
 	return $fetch.create({
 		retry: 0,
-		async onRequest({ options }) {
-			options.headers = {
-				...(options.headers || {}),
-				...getGitHubAuthHeaders(),
-			};
-		},
 		async onResponseError(error) {
 			if (error.response?.status === 403) {
 				const limit = parseInt(
@@ -63,18 +56,6 @@ function createServerFetcher() {
 const ghFetcher = isClient() ? createClientFetcher() : createServerFetcher();
 
 export class GitHubActivityCalculationStartedError extends Error {}
-
-function getGitHubAuthHeaders(): Record<string, string> {
-	const { token } = useTokenStore.getState();
-
-	if (!token) {
-		return {};
-	}
-
-	return {
-		Authorization: `token ${token}`,
-	};
-}
 
 export function getRawGitHubUrl({
 	owner,

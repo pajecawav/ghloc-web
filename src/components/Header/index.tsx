@@ -14,10 +14,6 @@ import { ReactNode, useState } from "react";
 import { FirefoxIcon } from "../icons/FirefoxIcon";
 import { track } from "@vercel/analytics";
 
-const GitHubTokenModal = dynamic(() =>
-	import("../GitHubTokenModal").then(mod => mod.GitHubTokenModal),
-);
-
 type Props = {
 	className?: string;
 };
@@ -54,20 +50,6 @@ export const Header = ({ className }: Props) => {
 						{theme === Theme.light ? <MoonIcon /> : <SunIcon />}
 					</button>
 				</HeaderItem>
-				{/* <HeaderItem> */}
-				{/* 	<button */}
-				{/* 		className="w-full h-full" */}
-				{/* 		onClick={() => setIsTokenModalOpen(true)} */}
-				{/* 		title="Open GitHub token settings" */}
-				{/* 	> */}
-				{/* 		<CogIcon /> */}
-				{/* 	</button> */}
-				{/* 	{isTokenModalOpen && ( */}
-				{/* 		<GitHubTokenModal */}
-				{/* 			onClose={() => setIsTokenModalOpen(false)} */}
-				{/* 		/> */}
-				{/* 	)} */}
-				{/* </HeaderItem> */}
 				<HeaderItem>
 					<a
 						href="https://github.com/pajecawav/ghloc-web"
