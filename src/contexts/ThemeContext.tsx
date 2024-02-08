@@ -3,14 +3,13 @@ import {
 	ReactNode,
 	useCallback,
 	useEffect,
+	useMemo,
 	useState,
 } from "react";
 
 export const THEME_KEY = "ghloc.theme";
 
-export const ThemeContext = createContext<ThemeContextValue>(
-	{} as ThemeContextValue,
-);
+export const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export type ThemeContextValue = {
 	theme?: Theme;
@@ -42,7 +41,7 @@ const getTheme = (): Theme | undefined => {
 };
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-	const [theme, setTheme] = useState<Theme>();
+	const [theme, setTheme] = useState<Theme | undefined>(getTheme);
 
 	const rawSetTheme = (theme: Theme) => {
 		const root = document.documentElement;
@@ -56,22 +55,23 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
 		localStorage.setItem(THEME_KEY, theme);
 	};
 
-	const toggleTheme = useCallback(() => {
-		setTheme(theme => (theme === Theme.dark ? Theme.light : Theme.dark));
-	}, []);
-
-	useEffect(() => {
-		setTheme(getTheme());
-	}, []);
-
 	useEffect(() => {
 		if (theme) {
 			rawSetTheme(theme);
 		}
 	}, [theme]);
 
+	const toggleTheme = useCallback(() => {
+		setTheme(theme => (theme === Theme.dark ? Theme.light : Theme.dark));
+	}, []);
+
+	const contextValue = useMemo(
+		() => ({ theme, setTheme, toggleTheme }),
+		[theme, toggleTheme],
+	);
+
 	return (
-		<ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
+		<ThemeContext.Provider value={contextValue}>
 			{children}
 		</ThemeContext.Provider>
 	);
