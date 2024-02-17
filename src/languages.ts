@@ -14,9 +14,5 @@ export function getLanguageFromExtension(extension: string): string | null {
 
 	extension = extension.toLowerCase();
 
-	return (
-		languages.extensions[extension] ??
-		languages.filenames[extension] ??
-		null
-	);
+	return languages.extensions[extension] ?? languages.filenames[extension] ?? null;
 }

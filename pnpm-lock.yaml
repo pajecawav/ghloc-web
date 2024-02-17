@@ -52,6 +52,9 @@ dependencies:
     version: 0.1.5
 
 devDependencies:
+  '@pajecawav/prettier-config':
+    specifier: ^1.0.0
+    version: 1.0.0
   '@types/js-cookie':
     specifier: ^3.0.6
     version: 3.0.6
@@ -584,6 +587,10 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
+    dev: true
+
+  /@pajecawav/prettier-config@1.0.0:
+    resolution: {integrity: sha512-TG9anWvgxoZruEbBuE5WBLEahE4CaUnqlPiTh3HB6tt9ZPj4Zq2F6DcD8Nmr13qLti0WjtMaL9YAephHbT+nRA==}
     dev: true
 
   /@pkgjs/parseargs@0.11.0:

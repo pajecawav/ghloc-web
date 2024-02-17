@@ -41,9 +41,7 @@ export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
 					))}
 				</div>
 			) : !data ? (
-				<p className="text-muted">
-					No npm package detected in the project root.
-				</p>
+				<p className="text-muted">No npm package detected in the project root.</p>
 			) : (
 				<ul>
 					<li>
@@ -56,18 +54,11 @@ export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
 							{data.name}
 						</a>
 					</li>
-					<li>
-						Version:{" "}
-						{data.bundle?.version ??
-							data.package?.version ??
-							failedLabel}
-					</li>
+					<li>Version: {data.bundle?.version ?? data.package?.version ?? failedLabel}</li>
 					<li>
 						Downloads:{" "}
 						{data.npm
-							? `${formatNumber(
-									data.npm.downloadsLastWeek,
-								)} (last week)`
+							? `${formatNumber(data.npm.downloadsLastWeek)} (last week)`
 							: failedLabel}
 					</li>
 					<li>
@@ -81,9 +72,7 @@ export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
 						</a>
 						:{" "}
 						{data.bundle
-							? `${formatSize(
-									data.bundle.size,
-								)} minified (${formatSize(
+							? `${formatSize(data.bundle.size)} minified (${formatSize(
 									data.bundle.gzip,
 								)} gzipped)`
 							: failedLabel}
@@ -97,10 +86,7 @@ export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
 						>
 							Install size
 						</a>
-						:{" "}
-						{data.package
-							? formatSize(data.package.install.bytes)
-							: failedLabel}
+						: {data.package ? formatSize(data.package.install.bytes) : failedLabel}
 					</li>
 					<li>
 						<a
@@ -111,10 +97,7 @@ export const PackageInfo = ({ owner, repo, branch }: PackageInfoProps) => {
 						>
 							Publish size
 						</a>
-						:{" "}
-						{data.package
-							? formatSize(data.package.publish.bytes)
-							: failedLabel}
+						: {data.package ? formatSize(data.package.publish.bytes) : failedLabel}
 					</li>
 				</ul>
 			)}

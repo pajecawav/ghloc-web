@@ -1,10 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export function useDebounce(
-	cb: () => void,
-	ms: number | null,
-	dependencies: unknown[] = [],
-) {
+export function useDebounce(cb: () => void, ms: number | null, dependencies: unknown[] = []) {
 	const cbRef = useRef(cb);
 	const timeoutIdRef = useRef<number | undefined>(undefined);
 

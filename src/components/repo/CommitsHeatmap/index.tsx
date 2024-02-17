@@ -32,21 +32,12 @@ export const CommitsHeatmap = memo(({ data }: Props) => {
 
 	return (
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 863 128">
-			<g
-				fill="currentColor"
-				transform={`translate(${weekDaysOffset}, ${headerOffset})`}
-			>
+			<g fill="currentColor" transform={`translate(${weekDaysOffset}, ${headerOffset})`}>
 				{data.map((week, weekIndex) => (
-					<g
-						transform={`translate(${weekIndex * cellSize}, 0)`}
-						key={week.week}
-					>
+					<g transform={`translate(${weekIndex * cellSize}, 0)`} key={week.week}>
 						{week.days.map((value, dayIndex) => (
 							<rect
-								className={classNames(
-									styles.cell,
-									getSquareColor(value),
-								)}
+								className={classNames(styles.cell, getSquareColor(value))}
 								width="11"
 								height="11"
 								rx="2"

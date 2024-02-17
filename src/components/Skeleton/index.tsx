@@ -10,19 +10,10 @@ type Props = {
 	children?: ReactNode | (() => ReactNode);
 };
 
-export const Skeleton = ({
-	className,
-	isLoading = true,
-	isText,
-	children,
-}: Props) => {
+export const Skeleton = ({ className, isLoading = true, isText, children }: Props) => {
 	return isLoading ? (
 		<div
-			className={classNames(
-				"bg-accent2 animate-pulse",
-				isText && "scale-y-[0.7]",
-				className,
-			)}
+			className={classNames("bg-accent2 animate-pulse", isText && "scale-y-[0.7]", className)}
 		/>
 	) : (
 		<>{typeof children === "function" ? children() : children}</>

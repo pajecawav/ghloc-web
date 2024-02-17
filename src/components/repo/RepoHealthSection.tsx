@@ -70,10 +70,7 @@ export const RepoHealthSection = ({ owner, repo, className }: Props) => {
 
 	return (
 		<div className={classNames("flex flex-col gap-1", className)}>
-			<Heading>
-				Repo health{" "}
-				{health && `(${health.health_percentage.toFixed(0)}%)`}
-			</Heading>
+			<Heading>Repo health {health && `(${health.health_percentage.toFixed(0)}%)`}</Heading>
 
 			{!health ? (
 				<div className="flex flex-col">
@@ -87,34 +84,24 @@ export const RepoHealthSection = ({ owner, repo, className }: Props) => {
 				</div>
 			) : (
 				<ul className="flex flex-col">
-					<HealthEntry
-						text={readme ? "Readme" : "No Readme"}
-						url={readme?.html_url}
-					/>
+					<HealthEntry text={readme ? "Readme" : "No Readme"} url={readme?.html_url} />
 					<HealthEntry
 						text={
-							(license?.key === "other"
-								? "License"
-								: license?.name) || "No license"
+							(license?.key === "other" ? "License" : license?.name) || "No license"
 						}
 						url={license?.html_url}
 					/>
 					<HealthEntry
 						text={
 							coc
-								? `Code of conduct` +
-									(coc.key === "other"
-										? ""
-										: ` (${coc.name})`)
+								? `Code of conduct` + (coc.key === "other" ? "" : ` (${coc.name})`)
 								: "No code of conduct"
 						}
 						url={coc?.html_url}
 					/>
 					<HealthEntry
 						text={
-							contributing
-								? "Contribution guildelines"
-								: "No contribution guidelines"
+							contributing ? "Contribution guildelines" : "No contribution guidelines"
 						}
 						url={contributing?.html_url}
 					/>
@@ -123,11 +110,7 @@ export const RepoHealthSection = ({ owner, repo, className }: Props) => {
 						url={issue?.html_url}
 					/>
 					<HealthEntry
-						text={
-							pr
-								? "Pull request template"
-								: "No pull request template"
-						}
+						text={pr ? "Pull request template" : "No pull request template"}
 						url={pr?.html_url}
 					/>
 				</ul>

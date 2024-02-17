@@ -10,11 +10,7 @@ export default class MyDocument extends Document {
 
 					<link rel="icon" href="/favicon.ico" sizes="any" />
 					<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-					<link
-						rel="apple-touch-icon"
-						sizes="180x180"
-						href="/apple-touch-icon.png"
-					/>
+					<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 					<meta name="application-name" content="ghloc" />
 					<link rel="manifest" href="/manifest.json" />
 
@@ -22,10 +18,7 @@ export default class MyDocument extends Document {
 						name="google-site-verification"
 						content="FnhvmqWUsfbh_7kFL_8bcS5_wOYRnaQD1dY4IB3WT7s"
 					/>
-					<meta
-						name="yandex-verification"
-						content="e046d5fbc4099ee0"
-					/>
+					<meta name="yandex-verification" content="e046d5fbc4099ee0" />
 
 					<link
 						rel="search"

@@ -11,8 +11,7 @@ interface MetaTagsProps {
 }
 
 export function MetaTags({ title, description, image, path }: MetaTagsProps) {
-	const origin =
-		typeof window === "undefined" ? DEFAULT_ORIGIN : window.location.origin;
+	const origin = typeof window === "undefined" ? DEFAULT_ORIGIN : window.location.origin;
 	const defaultImage = `${origin}/android-chrome-512x512.png`;
 
 	return (

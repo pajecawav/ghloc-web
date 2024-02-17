@@ -17,14 +17,7 @@ type Props = {
 	title?: string;
 };
 
-export const Select = ({
-	value,
-	options,
-	onChange,
-	label,
-	className,
-	title,
-}: Props) => {
+export const Select = ({ value, options, onChange, label, className, title }: Props) => {
 	const selected = options[value as keyof typeof options];
 
 	return (
@@ -57,9 +50,7 @@ export const Select = ({
 							}
 							value={optionValue}
 						>
-							<span className="block truncate">
-								{option.name}
-							</span>
+							<span className="block truncate">{option.name}</span>
 						</Listbox.Option>
 					))}
 				</Listbox.Options>

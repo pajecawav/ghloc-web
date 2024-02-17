@@ -92,11 +92,7 @@ export const getServerSideProps: GetServerSideProps<
 						repo,
 						branch: resolvedBranch,
 					}),
-					queryFn: () =>
-						getPackageInfo(
-							{ owner, repo, branch: resolvedBranch },
-							timing,
-						),
+					queryFn: () => getPackageInfo({ owner, repo, branch: resolvedBranch }, timing),
 				}),
 			),
 		]);
@@ -117,12 +113,7 @@ export const getServerSideProps: GetServerSideProps<
 	};
 };
 
-const RepoPage = ({
-	owner,
-	repo: repoName,
-	branch: branchProp,
-	filter,
-}: PageProps) => {
+const RepoPage = ({ owner, repo: repoName, branch: branchProp, filter }: PageProps) => {
 	const router = useRouter();
 	const isSmallOrLarger = useMediaQuery("sm");
 	const branch = (router.query.branch as string | undefined) ?? branchProp;
@@ -172,10 +163,7 @@ const RepoPage = ({
 					>
 						<GithubIcon />
 					</a>
-					<Link
-						href={`/${owner}`}
-						className="block text-link-normal hover:underline"
-					>
+					<Link href={`/${owner}`} className="block text-link-normal hover:underline">
 						{owner}
 					</Link>{" "}
 					/{" "}
@@ -207,11 +195,7 @@ const RepoPage = ({
 								Fork
 							</Badge>
 						)}
-						<Badge
-							className="flex-shrink-0 text-xs"
-							color="outlined"
-							title="Repo size"
-						>
+						<Badge className="flex-shrink-0 text-xs" color="outlined" title="Repo size">
 							{formatRepoSize(repo.size)}
 						</Badge>
 
@@ -229,11 +213,7 @@ const RepoPage = ({
 			{!repo ? (
 				<div className="flex flex-wrap gap-2">
 					{Array.from({ length: 3 }).map((_, index) => (
-						<Skeleton
-							className="h-6 w-14 rounded-md"
-							isText={true}
-							key={index}
-						/>
+						<Skeleton className="h-6 w-14 rounded-md" isText={true} key={index} />
 					))}
 				</div>
 			) : (

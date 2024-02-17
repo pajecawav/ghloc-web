@@ -38,15 +38,7 @@ const UnsupportedFile = ({ url, size }: { url: string; size: number }) => {
 	);
 };
 
-const PlainTextFile = ({
-	text,
-	loc,
-	size,
-}: {
-	text: string;
-	loc: number;
-	size: number;
-}) => {
+const PlainTextFile = ({ text, loc, size }: { text: string; loc: number; size: number }) => {
 	// TODO: is this even correct?
 	// ignore traling empty line
 	const lines = text.split("\n").slice(0, -1);
@@ -55,8 +47,7 @@ const PlainTextFile = ({
 		<div>
 			<FileHeading>
 				{lines.length} lines ({loc} sloc){" "}
-				<span className="inline-block text-muted mx-1">|</span>{" "}
-				{formatSize(size)}
+				<span className="inline-block text-muted mx-1">|</span> {formatSize(size)}
 			</FileHeading>
 			<div className="py-1 overflow-auto">
 				<table className="text-sm font-mono whitespace-nowrap">
@@ -83,11 +74,7 @@ const ImageFile = ({ url, size }: { url: string; size: number }) => {
 		<div>
 			<FileHeading>{formatSize(size)}</FileHeading>
 			<div className="grid place-items-center">
-				<img
-					className="object-contain object-center"
-					src={url}
-					alt=""
-				/>
+				<img className="object-contain object-center" src={url} alt="" />
 			</div>
 		</div>
 	);

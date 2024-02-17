@@ -29,13 +29,7 @@ const sortOrders: Record<SortOrder, SelectOption> = {
 	locs: { name: "Locs" },
 } as const;
 
-export const RepoLocsSection = ({
-	owner,
-	repo,
-	branch,
-	defaultBranch,
-	initialFilter,
-}: Props) => {
+export const RepoLocsSection = ({ owner, repo, branch, defaultBranch, initialFilter }: Props) => {
 	const router = useRouter();
 
 	const [filter, setFilter] = useState<string>(initialFilter ?? "");
@@ -63,9 +57,7 @@ export const RepoLocsSection = ({
 	);
 
 	const [sortOrder, setSortOrder] = useState<SortOrder>("type");
-	const [selectedLanguage, setSelectedLanguage] = useState<string | null>(
-		null,
-	);
+	const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 
 	let path: string[];
 	try {
@@ -107,9 +99,7 @@ export const RepoLocsSection = ({
 				<PathBreadcrumb
 					className="flex-grow break-all w-full xs:w-auto"
 					path={[repo, ...path]}
-					onSelect={index =>
-						setPath(index === 0 ? [] : path.slice(0, index))
-					}
+					onSelect={index => setPath(index === 0 ? [] : path.slice(0, index))}
 				/>
 
 				<div className="flex gap-2 flex-nowrap  ml-auto w-full xs:w-auto">
@@ -164,10 +154,7 @@ export const RepoLocsSection = ({
 								loc={locs}
 							/>
 						) : (
-							<Skeleton
-								className="h-80 rounded-md"
-								isLoading={!locs}
-							>
+							<Skeleton className="h-80 rounded-md" isLoading={!locs}>
 								<FileTree
 									locs={locs!}
 									onSelect={name => setPath([...path, name])}
@@ -181,15 +168,10 @@ export const RepoLocsSection = ({
 				{!isFile && (
 					<div className="flex flex-col gap-1 self-start">
 						<Heading>
-							Lines of code{" "}
-							{locs?.loc !== undefined &&
-								`(${formatNumber(locs.loc)})`}
+							Lines of code {locs?.loc !== undefined && `(${formatNumber(locs.loc)})`}
 						</Heading>
 						<Block>
-							<Skeleton
-								className="h-80 rounded-md"
-								isLoading={!locs}
-							>
+							<Skeleton className="h-80 rounded-md" isLoading={!locs}>
 								{() => (
 									<LocsTree
 										locs={locs!}

@@ -18,8 +18,4 @@ const sitemap = `\
     ${repos.map(repo => buildEntry(repo)).join("\n")}
 </urlset>`.trim();
 
-fs.writeFileSync(
-	path.resolve(__dirname, "..", "public/sitemap.xml"),
-	sitemap,
-	"utf8",
-);
+fs.writeFileSync(path.resolve(__dirname, "..", "public/sitemap.xml"), sitemap, "utf8");

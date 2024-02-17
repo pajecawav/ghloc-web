@@ -1,13 +1,7 @@
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { Theme } from "@/contexts/ThemeContext";
 import { useTheme } from "@/hooks/useTheme";
-import {
-	CodeIcon,
-	CogIcon,
-	MoonIcon,
-	SearchIcon,
-	SunIcon,
-} from "@heroicons/react/outline";
+import { CodeIcon, CogIcon, MoonIcon, SearchIcon, SunIcon } from "@heroicons/react/outline";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ReactNode, useState } from "react";

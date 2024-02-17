@@ -46,15 +46,7 @@
 		},
 		"AspNet": {
 			"name": "ASP.NET",
-			"extensions": [
-				"asax",
-				"ascx",
-				"asmx",
-				"aspx",
-				"master",
-				"sitemap",
-				"webinfo"
-			]
+			"extensions": ["asax", "ascx", "asmx", "aspx", "master", "sitemap", "webinfo"]
 		},
 		"Ats": {
 			"name": "ATS",
@@ -245,19 +237,7 @@
 			"extensions": ["fst"]
 		},
 		"Forth": {
-			"extensions": [
-				"4th",
-				"forth",
-				"fr",
-				"frt",
-				"fth",
-				"f83",
-				"fb",
-				"fpm",
-				"e4",
-				"rx",
-				"ft"
-			]
+			"extensions": ["4th", "forth", "fr", "frt", "fth", "f83", "fb", "fpm", "e4", "rx", "ft"]
 		},
 		"FortranLegacy": {
 			"name": "FORTRAN Legacy",
@@ -584,15 +564,7 @@
 			"extensions": ["p", "pro"]
 		},
 		"PowerShell": {
-			"extensions": [
-				"ps1",
-				"psm1",
-				"psd1",
-				"ps1xml",
-				"cdxml",
-				"pssc",
-				"psc1"
-			]
+			"extensions": ["ps1", "psm1", "psd1", "ps1xml", "cdxml", "pssc", "psc1"]
 		},
 		"PSL": {
 			"name": "PSL Assertion",

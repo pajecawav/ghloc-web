@@ -62,32 +62,19 @@ export const FileTree = ({ locs, onSelect, selectedLanguage }: Props) => {
 	const totalLocsOfSelectedLanguage = selectedLanguage
 		? locs.locByLangs[selectedLanguage] || 0
 		: 0;
-	const getLocsPercentageOfSelectedLanguage = (
-		name: string,
-		node: LocsChild,
-	) => {
+	const getLocsPercentageOfSelectedLanguage = (name: string, node: LocsChild) => {
 		if (!selectedLanguage || !totalLocsOfSelectedLanguage) return 0;
 
 		if (!isFolder(node)) {
-			return name.endsWith(selectedLanguage)
-				? (node / totalLocsOfSelectedLanguage) * 100
-				: 0;
+			return name.endsWith(selectedLanguage) ? (node / totalLocsOfSelectedLanguage) * 100 : 0;
 		}
-		return (
-			(node.locByLangs[selectedLanguage] / totalLocsOfSelectedLanguage) *
-				100 || 0
-		);
+		return (node.locByLangs[selectedLanguage] / totalLocsOfSelectedLanguage) * 100 || 0;
 	};
 
 	const entries = Object.entries(locs.children ?? {});
 
 	return (
-		<ul
-			className={classNames(
-				"divide-y divide-normal",
-				!entries.length && "h-40",
-			)}
-		>
+		<ul className={classNames("divide-y divide-normal", !entries.length && "h-40")}>
 			{entries.map(([name, child]) => (
 				<li
 					className={classNames(

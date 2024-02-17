@@ -13,10 +13,12 @@ interface PageProps {
 	owner: string;
 }
 
-export const getServerSideProps: GetServerSideProps<
-	PageProps,
-	{ owner: string }
-> = async ({ req, res, params, query }) => {
+export const getServerSideProps: GetServerSideProps<PageProps, { owner: string }> = async ({
+	req,
+	res,
+	params,
+	query,
+}) => {
 	res.setHeader("cache-control", "public, max-age=300");
 
 	const owner = params!.owner;
@@ -64,10 +66,7 @@ export const getServerSideProps: GetServerSideProps<
 const UserReposPage = ({ owner }: PageProps) => {
 	return (
 		<div className="flex flex-col gap-5">
-			<MetaTags
-				title={formatTitle(`${owner}`)}
-				path={`/${owner}`.toLowerCase()}
-			/>
+			<MetaTags title={formatTitle(`${owner}`)} path={`/${owner}`.toLowerCase()} />
 
 			<div className="flex items-center">
 				<h1 className="text-2xl">

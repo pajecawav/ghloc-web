@@ -20,9 +20,7 @@ const PathBreadcrumbEntry = ({
 		<button
 			className={classNames(
 				"text-left",
-				last
-					? "font-medium cursor-text"
-					: "text-link-normal hover:underline",
+				last ? "font-medium cursor-text" : "text-link-normal hover:underline",
 			)}
 			onClick={onSelect}
 			disabled={last}

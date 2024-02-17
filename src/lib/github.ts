@@ -9,25 +9,15 @@ function createClientFetcher() {
 		retry: 0,
 		async onResponseError(error) {
 			if (error.response?.status === 403) {
-				const limit = parseInt(
-					error.response.headers.get("x-ratelimit-remaining")!,
-					10,
-				);
-				const reset =
-					parseInt(
-						error.response.headers.get("x-ratelimit-reset")!,
-						10,
-					) * 1000;
+				const limit = parseInt(error.response.headers.get("x-ratelimit-remaining")!, 10);
+				const reset = parseInt(error.response.headers.get("x-ratelimit-reset")!, 10) * 1000;
 
 				// show toast with an error when GitHub API limit is reached
 				if (limit === 0) {
-					toast.error(
-						`GitHub API limit reached. Reset ${dayjs().to(reset)}.`,
-						{
-							duration: Infinity,
-							id: "error_github-limit-reached",
-						},
-					);
+					toast.error(`GitHub API limit reached. Reset ${dayjs().to(reset)}.`, {
+						duration: Infinity,
+						id: "error_github-limit-reached",
+					});
 				}
 			} else if (error.response?.status === 401) {
 				toast.error("Invalid GitHub API token.", {
@@ -76,20 +66,11 @@ export type RepoDetails = {
 	repo: string;
 };
 
-export function searchRepos({
-	query,
-	perPage = 10,
-}: {
-	query: string;
-	perPage?: number;
-}) {
-	return ghFetcher<ReposSearchResponse>(
-		"https://api.github.com/search/repositories",
-		{
-			method: "GET",
-			params: { q: query, per_page: perPage },
-		},
-	);
+export function searchRepos({ query, perPage = 10 }: { query: string; perPage?: number }) {
+	return ghFetcher<ReposSearchResponse>("https://api.github.com/search/repositories", {
+		method: "GET",
+		params: { q: query, per_page: perPage },
+	});
 }
 
 export function getUserRepos({
@@ -101,18 +82,13 @@ export function getUserRepos({
 	perPage: number;
 	page: number;
 }) {
-	return ghFetcher<ReposResponse>(
-		`https://api.github.com/users/${user}/repos`,
-		{
-			params: { per_page: perPage, page, sort: "updated" },
-		},
-	);
+	return ghFetcher<ReposResponse>(`https://api.github.com/users/${user}/repos`, {
+		params: { per_page: perPage, page, sort: "updated" },
+	});
 }
 
 export function getRepo({ owner, repo }: RepoDetails) {
-	return ghFetcher<RepoResponse>(
-		`https://api.github.com/repos/${owner}/${repo}`,
-	);
+	return ghFetcher<RepoResponse>(`https://api.github.com/repos/${owner}/${repo}`);
 }
 
 export function getCommunityProfile({ owner, repo }: RepoDetails) {

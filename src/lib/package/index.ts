@@ -51,10 +51,8 @@ export async function getPackageInfo(
 		timing.timeAsync("npm", () => fetchNpmData(pkg.name)),
 	]);
 
-	const bundleInfo =
-		bundleData.status === "fulfilled" ? bundleData.value : null;
-	const packageInfo =
-		packageData.status === "fulfilled" ? packageData.value : null;
+	const bundleInfo = bundleData.status === "fulfilled" ? bundleData.value : null;
+	const packageInfo = packageData.status === "fulfilled" ? packageData.value : null;
 	const npmInfo = npmData.status === "fulfilled" ? npmData.value : null;
 
 	return {

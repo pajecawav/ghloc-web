@@ -21,23 +21,13 @@ export const RepoCard = ({ repo }: Props) => {
 		>
 			<div className="flex gap-2">
 				<div className="flex-grow break-all">{repo.name}</div>
-				{repo.fork && (
-					<Badge className="self-start flex-shrink-0 text-xs">
-						Fork
-					</Badge>
-				)}
+				{repo.fork && <Badge className="self-start flex-shrink-0 text-xs">Fork</Badge>}
 			</div>
-			{repo.description && (
-				<div className="text-sm text-muted mb-1">
-					{repo.description}
-				</div>
-			)}
+			{repo.description && <div className="text-sm text-muted mb-1">{repo.description}</div>}
 
 			<Spacer />
 
-			<div className="text-xs text-normal">
-				Updated {dayjs(repo.updated_at).fromNow()}
-			</div>
+			<div className="text-xs text-normal">Updated {dayjs(repo.updated_at).fromNow()}</div>
 
 			<div className="flex items-center gap-2 text-sm text-normal">
 				{repo.language && (

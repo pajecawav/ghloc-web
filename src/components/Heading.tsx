@@ -7,9 +7,5 @@ type Props = {
 };
 
 export const Heading = ({ className, children }: Props) => {
-	return (
-		<h2 className={classNames("text-lg font-semibold", className)}>
-			{children}
-		</h2>
-	);
+	return <h2 className={classNames("text-lg font-semibold", className)}>{children}</h2>;
 };

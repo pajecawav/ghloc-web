@@ -21,12 +21,7 @@ type Props = {
 	enabled?: boolean;
 };
 
-export const CommitsHeatmapSection = ({
-	className,
-	owner,
-	repo,
-	enabled = true,
-}: Props) => {
+export const CommitsHeatmapSection = ({ className, owner, repo, enabled = true }: Props) => {
 	const { data, error, isLoading, failureCount } = useQuery({
 		queryKey: queryKeys.commitActivity({ owner, repo }),
 		queryFn: () => getCommitActivity({ owner, repo }),
@@ -52,8 +47,7 @@ export const CommitsHeatmapSection = ({
 	return (
 		<div className={classNames("flex flex-col gap-1", className)}>
 			<Heading>
-				Commits{" "}
-				{totalCommits !== undefined && ` (${totalCommits} last year)`}
+				Commits {totalCommits !== undefined && ` (${totalCommits} last year)`}
 			</Heading>
 			<Skeleton className="h-36 rounded-md" isLoading={!data}>
 				{() => (

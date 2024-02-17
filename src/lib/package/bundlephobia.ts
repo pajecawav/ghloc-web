@@ -1,6 +1,4 @@
-export async function fetchBundlephobiaData(
-	name: string,
-): Promise<BundlephobiaData> {
+export async function fetchBundlephobiaData(name: string): Promise<BundlephobiaData> {
 	const res = await fetch(
 		`https://bundlephobia.com/api/size?package=${encodeURIComponent(name)}`,
 	);

@@ -15,16 +15,8 @@ function renderLoc(loc: number, total: number): string {
 	return `${formatNumber(loc)} (${((100 * loc) / total).toFixed(1)}%)`;
 }
 
-export const LocsTree = ({
-	locs,
-	className,
-	selectedLanguage,
-	onSelectLanguage,
-}: Props) => {
-	const totalLocs = Object.values(locs.locByLangs).reduce(
-		(sum, loc) => sum + loc,
-		0,
-	);
+export const LocsTree = ({ locs, className, selectedLanguage, onSelectLanguage }: Props) => {
+	const totalLocs = Object.values(locs.locByLangs).reduce((sum, loc) => sum + loc, 0);
 
 	const handleSelectLanguage = useCallback(
 		(language: string) => {
@@ -36,13 +28,7 @@ export const LocsTree = ({
 	const entries = Object.entries(locs.locByLangs);
 
 	return (
-		<ul
-			className={classNames(
-				"divide-y divide-normal",
-				className,
-				!entries.length && "h-40",
-			)}
-		>
+		<ul className={classNames("divide-y divide-normal", className, !entries.length && "h-40")}>
 			{entries.map(([lang, loc]) => (
 				<li
 					className={classNames(

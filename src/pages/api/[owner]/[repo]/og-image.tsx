@@ -129,13 +129,7 @@ function TotalLocs({ totalLocs }: { totalLocs: number }) {
 	);
 }
 
-function LangsList({
-	topLangs,
-	totalLocs,
-}: {
-	topLangs: [string, number][];
-	totalLocs: number;
-}) {
+function LangsList({ topLangs, totalLocs }: { topLangs: [string, number][]; totalLocs: number }) {
 	return (
 		<div
 			style={{

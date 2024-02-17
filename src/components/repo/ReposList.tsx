@@ -21,8 +21,7 @@ export const ReposList = ({ user }: Props) => {
 		isFetchingNextPage,
 	} = useInfiniteQuery({
 		queryKey: ["user", user, "repos"],
-		queryFn: ({ pageParam: page }) =>
-			getUserRepos({ user, perPage: REPOS_PER_PAGE, page }),
+		queryFn: ({ pageParam: page }) => getUserRepos({ user, perPage: REPOS_PER_PAGE, page }),
 		initialPageParam: 1,
 		getNextPageParam: (lastPage, allPages) =>
 			lastPage.length === REPOS_PER_PAGE ? allPages.length + 1 : null,
@@ -44,8 +43,7 @@ export const ReposList = ({ user }: Props) => {
 			<div
 				className="grid gap-4"
 				style={{
-					gridTemplateColumns:
-						"repeat(auto-fill, minmax(12rem, 1fr))",
+					gridTemplateColumns: "repeat(auto-fill, minmax(12rem, 1fr))",
 				}}
 			>
 				{!repos

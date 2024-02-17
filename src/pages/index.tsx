@@ -5,11 +5,7 @@ import { RepoStats } from "@/components/repo/RepoStats";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { formatTitle } from "@/lib/format";
-import {
-	ReposResponseItem,
-	ReposSearchResponse,
-	searchRepos,
-} from "@/lib/github";
+import { ReposResponseItem, ReposSearchResponse, searchRepos } from "@/lib/github";
 import { queryKeys } from "@/lib/query-keys";
 import { Combobox } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/outline";
@@ -21,18 +17,13 @@ import type { FetchError } from "ofetch";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-const githubUrlRegex =
-	/(https?:\/\/)?github.com\/(?<owner>[^\/]+)\/(?<repo>[^\/]+)(\/[^\$]+)?/;
+const githubUrlRegex = /(https?:\/\/)?github.com\/(?<owner>[^\/]+)\/(?<repo>[^\/]+)(\/[^\$]+)?/;
 
 interface PageProps {
 	query: string;
 }
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async ({
-	req,
-	res,
-	query,
-}) => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async ({ req, res, query }) => {
 	res.setHeader("cache-control", "public, max-age=300");
 	return {
 		props: {
@@ -119,11 +110,7 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 							spellCheck={false}
 						/>
 						<div className="absolute top-0 bottom-0 right-2 m-auto w-8 h-8 text-muted transition-[border-color] duration-100 group-focus-within:text-border-active2">
-							{isFetching ? (
-								<SpinnerIcon className="animate-spin" />
-							) : (
-								<SearchIcon />
-							)}
+							{isFetching ? <SpinnerIcon className="animate-spin" /> : <SearchIcon />}
 						</div>
 					</div>
 
@@ -131,9 +118,7 @@ export const HomePage = ({ query: initialQuery }: PageProps) => {
 						className={classNames(
 							"flex-grow h-0 md:max-h-[36rem] bg-normal",
 							"pointer-events-none group-focus-within:pointer-events-auto",
-							results &&
-								!isMediumOrLarger &&
-								"!pointer-events-auto",
+							results && !isMediumOrLarger && "!pointer-events-auto",
 						)}
 					>
 						<Combobox.Options

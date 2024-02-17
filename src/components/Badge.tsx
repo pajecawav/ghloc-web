@@ -10,12 +10,7 @@ type Props = ComponentProps<"div"> & {
 	color?: keyof typeof colorClassNames;
 };
 
-export const Badge = ({
-	className,
-	children,
-	color = "normal",
-	...props
-}: Props) => {
+export const Badge = ({ className, children, color = "normal", ...props }: Props) => {
 	return (
 		<div
 			className={classNames(

@@ -3,11 +3,7 @@ import { NavigationProgressBar } from "@/components/NavigationProgressBar";
 import { ToastsList } from "@/components/ToastsList";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import "@/styles/globals.css";
-import {
-	HydrationBoundary,
-	QueryClient,
-	QueryClientProvider,
-} from "@tanstack/react-query";
+import { HydrationBoundary, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import dayjs from "dayjs";

@@ -4,15 +4,10 @@ export const queryKeys = {
 		{ owner, repo },
 	],
 
-	packageInfo: ({
-		owner,
-		repo,
-		branch,
-	}: {
-		owner: string;
-		repo: string;
-		branch: string;
-	}) => ["packageInfo", { owner, repo }],
+	packageInfo: ({ owner, repo, branch }: { owner: string; repo: string; branch: string }) => [
+		"packageInfo",
+		{ owner, repo },
+	],
 
 	commitActivity: ({ owner, repo }: { owner: string; repo: string }) => [
 		"commitActivity",

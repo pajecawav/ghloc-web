@@ -41,31 +41,27 @@ export const FilterHelpTooltip = ({ className, tooltipClassName }: Props) => {
 				<h3 className="text-base mb-1">Filter syntax examples</h3>
 				<ul className="leading-relaxed list-disc list-inside">
 					<li>
-						<Code>.js</Code> will only include paths containing{" "}
-						<Code>.js</Code>.
+						<Code>.js</Code> will only include paths containing <Code>.js</Code>.
 					</li>
 					<li>
-						<Code>.js$</Code> will only include files with{" "}
-						<Code>.js</Code> extension.
+						<Code>.js$</Code> will only include files with <Code>.js</Code> extension.
 					</li>
 					<li>
-						<Code>!test,!.lock</Code> will ignore paths containing{" "}
-						<Code>test</Code> or <Code>.lock</Code>.
+						<Code>!test,!.lock</Code> will ignore paths containing <Code>test</Code> or{" "}
+						<Code>.lock</Code>.
 					</li>
 					<li>
-						<Code>!.test.js$,!^docs/</Code> will ignore paths ending
-						with <Code>.test.js</Code> or starting with{" "}
-						<Code>docs/</Code>.
+						<Code>!.test.js$,!^docs/</Code> will ignore paths ending with{" "}
+						<Code>.test.js</Code> or starting with <Code>docs/</Code>.
 					</li>
 					<li>
-						<Code>!.md$,^README.md$</Code> will ignore all Markdown
-						files (i.e. ending with <Code>.md</Code>) except for{" "}
-						<Code>README.md</Code> in the root of the repository.
+						<Code>!.md$,^README.md$</Code> will ignore all Markdown files (i.e. ending
+						with <Code>.md</Code>) except for <Code>README.md</Code> in the root of the
+						repository.
 					</li>
 					<li>
-						<Code>^src/</Code> will exclude all paths, except for
-						the ones starting with <Code>src/</Code> (i.e. placed in
-						the <Code>src</Code> folder).
+						<Code>^src/</Code> will exclude all paths, except for the ones starting with{" "}
+						<Code>src/</Code> (i.e. placed in the <Code>src</Code> folder).
 					</li>
 				</ul>
 				<p className="mt-1">
