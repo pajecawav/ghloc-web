@@ -1,4 +1,4 @@
-name: Build
+name: CI
 
 on:
     pull_request:
@@ -7,7 +7,7 @@ on:
         branches: [master]
 
 jobs:
-    Lint:
+    ci:
         runs-on: ubuntu-latest
 
         steps:
@@ -15,7 +15,7 @@ jobs:
 
             - uses: pnpm/action-setup@v2
               with:
-                  version: 8
+                  version: 9
 
             - name: Setup Node
               uses: actions/setup-node@v4
@@ -38,24 +38,5 @@ jobs:
             - name: Lint
               run: pnpm lint
 
-    Build:
-        runs-on: ubuntu-latest
-
-        steps:
-            - uses: actions/checkout@v4
-
-            - uses: pnpm/action-setup@v2
-              with:
-                  version: 8
-
-            - name: Setup Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 18
-                  cache: pnpm
-
-            - name: Install dependencies
-              run: pnpm install --frozen-lockfile
-
-            - name: Build project
+            - name: Build
               run: pnpm build
