@@ -16,7 +16,7 @@ function renderLoc(loc: number, total: number): string {
 }
 
 export const LocsTree = ({ locs, className, selectedLanguage, onSelectLanguage }: Props) => {
-	const totalLocs = Object.values(locs.locByLangs).reduce((sum, loc) => sum + loc, 0);
+	const totalLocs = Object.values(locs.locByLangs ?? {}).reduce((sum, loc) => sum + loc, 0);
 
 	const handleSelectLanguage = useCallback(
 		(language: string) => {
@@ -25,7 +25,7 @@ export const LocsTree = ({ locs, className, selectedLanguage, onSelectLanguage }
 		[selectedLanguage, onSelectLanguage],
 	);
 
-	const entries = Object.entries(locs.locByLangs);
+	const entries = Object.entries(locs.locByLangs ?? {});
 
 	return (
 		<ul className={classNames("divide-y divide-normal", className, !entries.length && "h-40")}>

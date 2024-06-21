@@ -42,7 +42,7 @@ export default async function handler(req: NextRequest) {
 	}
 
 	const totalLocs = locs.loc;
-	const topLangs = Object.entries(locs.locByLangs).slice(0, 6);
+	const topLangs = Object.entries(locs.locByLangs ?? {}).slice(0, 6);
 
 	return new ImageResponse(
 		(
