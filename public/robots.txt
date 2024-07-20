@@ -2,3 +2,6 @@ User-agent: *
 Allow: /*
 Allow: /api/*/*/og-image
 Disallow: /api/*
+
+User-agent: SemrushBot
+Disallow: /
