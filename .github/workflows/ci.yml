@@ -13,14 +13,14 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - uses: pnpm/action-setup@v2
+            - uses: pnpm/action-setup@v4
               with:
                   version: 9
 
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
-                  node-version: 18
+                  node-version: 20
                   cache: pnpm
 
             - name: Install dependencies
@@ -40,3 +40,10 @@ jobs:
 
             - name: Build
               run: pnpm build
+              env:
+                  ANALYZE: true
+
+            - name: Upload Statoscope report
+              uses: actions/upload-artifact@v4
+              with:
+                  path: .next/statoscope/
