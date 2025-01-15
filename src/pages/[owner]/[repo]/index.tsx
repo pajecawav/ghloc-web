@@ -33,7 +33,7 @@ interface PageProps {
 export const getServerSideProps: GetServerSideProps<
 	PageProps,
 	{ owner: string; repo: string }
-> = async ({ req, res, params, query }) => {
+> = async ({ res, params, query }) => {
 	res.setHeader("cache-control", "public, max-age=300");
 
 	const owner = params!.owner;

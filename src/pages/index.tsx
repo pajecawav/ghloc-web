@@ -5,7 +5,7 @@ import { RepoStats } from "@/components/repo/RepoStats";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { formatTitle } from "@/lib/format";
-import { ReposResponseItem, ReposSearchResponse, searchRepos } from "@/lib/github";
+import { ReposResponseItem, searchRepos } from "@/lib/github";
 import { queryKeys } from "@/lib/query-keys";
 import { Combobox } from "@headlessui/react";
 import { SearchIcon } from "@heroicons/react/outline";
@@ -13,7 +13,6 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import type { FetchError } from "ofetch";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -23,7 +22,7 @@ interface PageProps {
 	query: string;
 }
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async ({ req, res, query }) => {
+export const getServerSideProps: GetServerSideProps<PageProps> = async ({ res, query }) => {
 	res.setHeader("cache-control", "public, max-age=300");
 	return {
 		props: {

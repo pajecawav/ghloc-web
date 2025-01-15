@@ -1,7 +1,7 @@
 import { Listbox } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import classNames from "classnames";
-import React, { ComponentType, Fragment } from "react";
+import { ComponentType } from "react";
 
 export type SelectOption = {
 	name: string;

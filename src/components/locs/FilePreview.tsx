@@ -1,11 +1,10 @@
 import { formatSize } from "@/lib/format";
 import { getRawGitHubUrl } from "@/lib/github";
+import { useQuery } from "@tanstack/react-query";
+import { $fetch } from "ofetch";
 import { ReactNode, useEffect } from "react";
 import toast from "react-hot-toast";
-import { useQuery } from "@tanstack/react-query";
 import { Skeleton } from "../Skeleton";
-import { $fetch, FetchError } from "ofetch";
-import { queryKeys } from "@/lib/query-keys";
 
 type FileType = "text" | "image";
 

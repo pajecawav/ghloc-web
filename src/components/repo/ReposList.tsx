@@ -1,11 +1,10 @@
-import { getUserRepos, ReposResponse } from "@/lib/github";
-import { useMemo } from "react";
+import { getUserRepos } from "@/lib/github";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 import { Button } from "../Button";
 import { LoadingPlaceholder } from "../LoadingPlaceholder";
 import { Skeleton } from "../Skeleton";
 import { RepoCard } from "./RepoCard";
-import type { FetchError } from "ofetch";
 
 type Props = {
 	user: string;

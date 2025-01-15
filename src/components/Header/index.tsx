@@ -1,12 +1,11 @@
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { Theme } from "@/contexts/ThemeContext";
 import { useTheme } from "@/hooks/useTheme";
-import { CodeIcon, CogIcon, MoonIcon, SearchIcon, SunIcon } from "@heroicons/react/outline";
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import { ReactNode, useState } from "react";
-import { FirefoxIcon } from "../icons/FirefoxIcon";
+import { CodeIcon, MoonIcon, SearchIcon, SunIcon } from "@heroicons/react/outline";
 import { track } from "@vercel/analytics";
+import Link from "next/link";
+import { ReactNode } from "react";
+import { FirefoxIcon } from "../icons/FirefoxIcon";
 
 type Props = {
 	className?: string;
@@ -22,7 +21,6 @@ const HeaderItem = ({ children }: { children: ReactNode }) => {
 
 export const Header = ({ className }: Props) => {
 	const { theme, toggleTheme } = useTheme();
-	const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
 
 	return (
 		<header className={className}>

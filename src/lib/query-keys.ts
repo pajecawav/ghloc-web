@@ -1,18 +1,12 @@
 export const queryKeys = {
-	repoHealth: ({ owner, repo }: { owner: string; repo: string }) => [
-		"repoHealth",
-		{ owner, repo },
-	],
+	repoHealth: (params: { owner: string; repo: string }) => ["repoHealth", params],
 
-	packageInfo: ({ owner, repo, branch }: { owner: string; repo: string; branch: string }) => [
+	packageInfo: (params: { owner: string; repo: string; branch: string }) => [
 		"packageInfo",
-		{ owner, repo },
+		params,
 	],
 
-	commitActivity: ({ owner, repo }: { owner: string; repo: string }) => [
-		"commitActivity",
-		{ owner, repo },
-	],
+	commitActivity: (params: { owner: string; repo: string }) => ["commitActivity", params],
 
 	repo: (repo: string) => ["repo", repo],
 
@@ -20,15 +14,8 @@ export const queryKeys = {
 
 	search: (query: string) => ["search", { query }],
 
-	locs: ({
-		owner,
-		repo,
-		branch,
-		filter,
-	}: {
-		owner: string;
-		repo: string;
-		branch: string;
-		filter: string | null;
-	}) => ["locs", { owner, repo, branch, filter }],
+	locs: (params: { owner: string; repo: string; branch: string; filter: string | null }) => [
+		"locs",
+		params,
+	],
 };

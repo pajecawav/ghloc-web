@@ -21,7 +21,7 @@ export function formatSize(bytes: number, precision: number = 1): string {
 		bytes = Math.floor(bytes);
 	}
 
-	let bytesStr = bytes.toFixed(precision);
+	const bytesStr = bytes.toFixed(precision);
 
 	return `${parseFloat(bytesStr)} ${suffix}`;
 }

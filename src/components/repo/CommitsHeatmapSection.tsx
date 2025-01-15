@@ -1,9 +1,5 @@
 import { Skeleton } from "@/components/Skeleton";
-import {
-	CommitActivity,
-	getCommitActivity,
-	GitHubActivityCalculationStartedError,
-} from "@/lib/github";
+import { getCommitActivity, GitHubActivityCalculationStartedError } from "@/lib/github";
 import { queryKeys } from "@/lib/query-keys";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
@@ -22,7 +18,7 @@ type Props = {
 };
 
 export const CommitsHeatmapSection = ({ className, owner, repo, enabled = true }: Props) => {
-	const { data, error, isLoading, failureCount } = useQuery({
+	const { data, error } = useQuery({
 		queryKey: queryKeys.commitActivity({ owner, repo }),
 		queryFn: () => getCommitActivity({ owner, repo }),
 		enabled,

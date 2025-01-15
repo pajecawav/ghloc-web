@@ -3,7 +3,6 @@ import { MetaTags } from "@/components/MetaTags";
 import { ReposList } from "@/components/repo/ReposList";
 import { formatTitle } from "@/lib/format";
 import { getUserRepos } from "@/lib/github";
-import { queryKeys } from "@/lib/query-keys";
 import { shouldEnableSsr } from "@/lib/ssr";
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import { GetServerSideProps } from "next";
@@ -14,10 +13,8 @@ interface PageProps {
 }
 
 export const getServerSideProps: GetServerSideProps<PageProps, { owner: string }> = async ({
-	req,
 	res,
 	params,
-	query,
 }) => {
 	res.setHeader("cache-control", "public, max-age=300");
 

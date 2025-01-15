@@ -37,7 +37,7 @@ export async function getPackageInfo(
 	let pkg: { name: string; private: boolean };
 	try {
 		pkg = await res.json();
-	} catch (e) {
+	} catch {
 		return null;
 	}
 

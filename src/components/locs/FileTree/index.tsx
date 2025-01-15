@@ -48,20 +48,10 @@ export const FileTree = ({ locs, onSelect, selectedLanguage }: Props) => {
 		[locs],
 	);
 
-	const getLocsOfSelectedLanguage = (name: string, node: LocsChild) => {
-		if (!selectedLanguage) {
-			return 0;
-		}
-
-		if (typeof node === "number") {
-			return name.endsWith(selectedLanguage) ? node : 0;
-		}
-
-		return node.locByLangs?.[selectedLanguage] ?? 0;
-	};
 	const totalLocsOfSelectedLanguage = selectedLanguage
 		? locs.locByLangs?.[selectedLanguage] || 0
 		: 0;
+
 	const getLocsPercentageOfSelectedLanguage = (name: string, node: LocsChild) => {
 		if (!selectedLanguage || !totalLocsOfSelectedLanguage) return 0;
 

@@ -62,7 +62,7 @@ export const RepoLocsSection = ({ owner, repo, branch, defaultBranch, initialFil
 	let path: string[];
 	try {
 		path = JSON.parse(router.query.locsPath as string);
-	} catch (e) {
+	} catch {
 		path = [];
 	}
 	const setPath = (newPath: string[]) => {

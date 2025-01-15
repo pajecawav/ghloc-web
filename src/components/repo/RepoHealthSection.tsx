@@ -1,13 +1,12 @@
-import { getCommunityProfile, RepoHealthResponse } from "@/lib/github";
+import { getCommunityProfile } from "@/lib/github";
 import { queryKeys } from "@/lib/query-keys";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/solid";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
-import type { FetchError } from "ofetch";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";
-import { useEffect } from "react";
 
 type Props = {
 	owner: string;

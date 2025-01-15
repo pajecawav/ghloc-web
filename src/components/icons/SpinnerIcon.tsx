@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-interface SpinnerIconProps extends ComponentProps<"svg"> {}
+type SpinnerIconProps = ComponentProps<"svg">;
 
 export function SpinnerIcon(props: SpinnerIconProps) {
 	return (

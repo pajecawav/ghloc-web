@@ -35,10 +35,7 @@ function createServerFetcher() {
 		async onRequest({ options }) {
 			if (!GITHUB_TOKEN) return;
 
-			options.headers = {
-				...(options.headers || {}),
-				Authorization: `token ${GITHUB_TOKEN}`,
-			};
+			options.headers.append("Authorization", `token ${GITHUB_TOKEN}`);
 		},
 	});
 }
@@ -103,7 +100,7 @@ export async function getCommitActivity({ owner, repo }: RepoDetails) {
 	);
 
 	if (!response.ok) {
-		throw createFetchError({ request: "", options: {}, response });
+		throw createFetchError({ request: "", options: { headers: new Headers() }, response });
 	}
 
 	// 202 response status means that GitHub started calculating commit
@@ -194,7 +191,7 @@ export interface ReposResponseItem {
 	default_branch: string;
 }
 
-export interface ReposResponse extends Array<ReposResponseItem> {}
+export type ReposResponse = Array<ReposResponseItem>;
 
 export interface RepoResponse {
 	id: number;
@@ -247,7 +244,7 @@ export interface CommitActivityEntry {
 	days: number[];
 }
 
-export interface CommitActivity extends Array<CommitActivityEntry> {}
+export type CommitActivity = Array<CommitActivityEntry>;
 
 export interface ReposSearchResponse {
 	total_count: number;

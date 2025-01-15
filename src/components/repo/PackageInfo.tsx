@@ -3,7 +3,6 @@ import { PackageInfo as PackageInfoResponse } from "@/lib/package";
 import { queryKeys } from "@/lib/query-keys";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
-import dayjs from "dayjs";
 import { $fetch } from "ofetch";
 import { Heading } from "../Heading";
 import { Skeleton } from "../Skeleton";

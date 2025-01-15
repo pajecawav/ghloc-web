@@ -1,4 +1,4 @@
-import { ComponentProps, ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const Queries = {
 	xs: {
