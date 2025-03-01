@@ -46,6 +46,14 @@ this README has the following URL and only counts files with `.ts` or `.tsx` ext
 https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/pajecawav/ghloc-web/badge?filter=.ts$,.tsx$
 ```
 
+To humanize LOC count you can add `format=human` to search params. So to a produce badge like [![lines
+count](https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/pajecawav/ghloc-web/badge?format=human)](https://ghloc.vercel.app/pajecawav/ghloc-web)
+you can use following URL:
+
+```
+https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/pajecawav/ghloc-web/badge?format=human
+```
+
 ## Development
 
 You can start a dev server by running following commands:

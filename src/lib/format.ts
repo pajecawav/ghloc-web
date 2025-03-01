@@ -34,3 +34,20 @@ export function formatRepoStat(stat: number): string {
 export function formatNumber(value: number): string {
 	return new Intl.NumberFormat().format(value);
 }
+
+export function humanize(value: number): string {
+	let suffix = "";
+	for (const suff of ["", "k", "M"]) {
+		if (value < 1000) {
+			suffix = suff;
+			break;
+		} else {
+			value /= 1000;
+		}
+	}
+
+	const precision = value < 50 ? 1 : 0;
+	let str = value.toFixed(precision).replace(/\.0+/, "");
+
+	return `${str}${suffix}`;
+}

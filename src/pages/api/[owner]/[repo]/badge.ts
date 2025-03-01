@@ -1,3 +1,4 @@
+import { humanize } from "@/lib/format";
 import { getRepo } from "@/lib/github";
 import { getLocs, Locs } from "@/lib/locs";
 import { NextRequest } from "next/server";
@@ -12,6 +13,7 @@ export default async function handler(req: NextRequest) {
 	const repo = searchParams.get("repo")!;
 	let branch = searchParams.get("branch");
 	const filter = searchParams.get("filter") ?? undefined;
+	const format = searchParams.get("format");
 
 	let locs: Locs;
 	try {
@@ -29,7 +31,7 @@ export default async function handler(req: NextRequest) {
 		JSON.stringify({
 			schemaVersion: 1,
 			label: "lines",
-			message: locs.loc.toString(),
+			message: format === "human" ? humanize(locs.loc) : locs.loc.toString(),
 		}),
 		{
 			status: 200,
