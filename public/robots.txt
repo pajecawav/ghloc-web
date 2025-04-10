@@ -4,4 +4,8 @@ Allow: /api/*/*/og-image
 Disallow: /api/*
 
 User-agent: SemrushBot
+User-agent: Meta-ExternalAgent
+User-agent: Claude-Web
+User-agent: ClaudeBot
+User-agent: anthropic-ai
 Disallow: /
