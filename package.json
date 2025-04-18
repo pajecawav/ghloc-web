@@ -46,7 +46,7 @@
 		"is-ci": "^3.0.1",
 		"lint-staged": "^15.2.8",
 		"next-statoscope": "^1.0.1",
-		"npm-run-all": "^4.1.5",
+		"npm-run-all2": "^5.0.0",
 		"postcss": "^8.4.41",
 		"prettier": "^3.3.3",
 		"tailwindcss": "^3.4.8",
