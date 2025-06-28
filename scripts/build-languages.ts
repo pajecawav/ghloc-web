@@ -33,7 +33,7 @@ function buildLanguagesMap() {
 	};
 
 	fs.writeFileSync(
-		resolve(__dirname, "..", "src/languages-map.json"),
+		resolve(import.meta.dirname, "..", "src/languages-map.json"),
 		JSON.stringify(languagesMap),
 		"utf8",
 	);

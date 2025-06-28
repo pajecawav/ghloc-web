@@ -1,11 +1,4 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["github>pajecawav/renovate-config"],
-	"packageRules": [
-		{
-			"matchPackagePatterns": ["heroicons"],
-			"matchManagers": ["npm"],
-			"enabled": false
-		}
-	]
+	"extends": ["github>pajecawav/renovate-config"]
 }
