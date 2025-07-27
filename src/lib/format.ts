@@ -1,0 +1,40 @@
+export function formatBytes(bytes: number, precision: number = 1): string {
+	let suffix = "GB";
+	for (const suff of ["B", "KB", "MB"]) {
+		if (bytes < 1024) {
+			suffix = suff;
+			break;
+		} else {
+			bytes /= 1024;
+		}
+	}
+
+	if (bytes > 10) {
+		bytes = Math.floor(bytes);
+	}
+
+	const bytesStr = bytes.toFixed(precision);
+
+	return `${parseFloat(bytesStr)} ${suffix}`;
+}
+
+export function humanize(value: number): string {
+	let suffix = "";
+	for (const suff of ["", "k", "M"]) {
+		if (value < 1000) {
+			suffix = suff;
+			break;
+		} else {
+			value /= 1000;
+		}
+	}
+
+	const precision = value < 50 ? 1 : 0;
+	const str = value.toFixed(precision).replace(/\.0+/, "");
+
+	return `${str}${suffix}`;
+}
+
+export function formatNumber(value: number): string {
+	return new Intl.NumberFormat().format(value);
+}

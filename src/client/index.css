@@ -1,1 +1,32 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+	--breakpoint-xs: 30rem;
+
+	--color-link: var(--color-blue-600);
+	--color-muted: var(--color-neutral-500);
+	--color-subtle: var(--color-neutral-200);
+	--color-success: var(--color-green-600);
+	--color-error: var(--color-red-500);
+	--color-tree-active: var(--color-sky-100);
+}
+
+:where(.dark) {
+	--color-link: var(--color-blue-500);
+	--color-muted: var(--color-neutral-400);
+	--color-subtle: var(--color-neutral-300);
+	--color-success: var(--color-green-400);
+	--color-error: var(--color-red-400);
+	--color-tree-active: #2f3335;
+}
+
+html {
+	color-scheme: light;
+	scrollbar-gutter: stable;
+}
+
+html.dark {
+	color-scheme: dark;
+}

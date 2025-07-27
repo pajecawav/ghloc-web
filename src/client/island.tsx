@@ -1,10 +1,8 @@
 import { parse } from "devalue";
 import { FC, render } from "hono/jsx/dom";
-// TODO: is this needed?
-// import "vite/modulepreload-polyfill";
 import { ensureLeadingSlash } from "~/lib/utils";
 
-const ISLANDS = import.meta.glob<FC>("/src/islands/*.tsx", { import: "default" });
+const ISLANDS = import.meta.glob<FC>("/src/**/*.island.ts(x)?", { import: "default" });
 
 customElements.define(
 	"ghloc-island",

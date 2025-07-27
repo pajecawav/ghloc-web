@@ -42,7 +42,7 @@ export default defineConfig({
 		tailwindcss(),
 		VitePWA({
 			manifest,
-			injectRegister: "inline",
+			injectRegister: "auto",
 			workbox: {
 				globPatterns: ["**/*.{js,css,ico,png,svg}"],
 			},

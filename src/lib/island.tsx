@@ -10,7 +10,8 @@ interface IslandProps<P> {
 export const Island = <P,>({ Component, props }: IslandProps<P>) => {
 	const { manifest } = useSSRContext();
 
-	const src = Object.entries(manifest).find(([, chunk]) => chunk.name === Component.name)?.[0];
+	const islandRe = new RegExp(`/${Component.name}.island.tsx?$`);
+	const src = Object.keys(manifest).find(path => islandRe.test(path));
 
 	if (!src) {
 		throw new Error(`Missing island definition in manifest for island ${Component.name}`);
@@ -18,6 +19,7 @@ export const Island = <P,>({ Component, props }: IslandProps<P>) => {
 
 	return (
 		<ghloc-island island-props={stringify(props)} island-src={src}>
+			{/* @ts-expect-error can't be bothered to figure out */}
 			<Component {...props} />
 		</ghloc-island>
 	);

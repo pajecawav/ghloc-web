@@ -2,7 +2,7 @@ import path from "path";
 import { CLIENT_ENTRY } from "./config";
 
 export default defineNitroConfig({
-	compatibilityDate: "2025-06-28",
+	compatibilityDate: "2025-07-22",
 	srcDir: "src",
 	errorHandler: "~/error",
 	compressPublicAssets: {
@@ -12,7 +12,6 @@ export default defineNitroConfig({
 	runtimeConfig: {
 		clientEntry: path.normalize(CLIENT_ENTRY),
 	},
-
 	publicAssets: [
 		{
 			baseURL: "assets",
@@ -32,7 +31,7 @@ export default defineNitroConfig({
 	typescript: {
 		tsConfig: {
 			compilerOptions: {
-				skipLibCheck: true,
+				strict: true,
 				jsx: "react-jsx",
 				// dumb workaround because nitro's default tsconfig for some reason contains
 				// jsxFactory/jsxFragmentFactory for nano-jsx

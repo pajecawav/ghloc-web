@@ -1,8 +1,9 @@
-import type { ManifestChunk, Manifest } from "vite";
+import { EventHandlerRequest, H3Event } from "h3";
+import type { Manifest, ManifestChunk } from "vite";
 import { ensureLeadingSlash } from "./lib/utils";
 
 interface GetAssetsOptions {
-	manifest: Manifest | null;
+	manifest: Manifest;
 	clientEntry: string;
 }
 
@@ -14,7 +15,7 @@ export interface Assets {
 
 export const getAssets = ({ manifest, clientEntry }: GetAssetsOptions): Assets => {
 	const chunk = manifest[clientEntry];
-	const script = chunk.file;
+	const script = ensureLeadingSlash(chunk.file);
 
 	const css = chunk.css?.map(link => ensureLeadingSlash(link)) ?? [];
 	const preloads = [];
@@ -49,4 +50,14 @@ const getImportedChunks = (manifest: Manifest, name: string): ManifestChunk[] =>
 	};
 
 	return innerGetImportedChunks(manifest[name]);
+};
+
+export const sendEarlyHints = (event: H3Event<EventHandlerRequest>, assets: Assets) => {
+	const hints = [
+		`<${assets.script}>; rel=preload; as=script`,
+		...assets.css.map(css => `<${css}>; rel=preload; as=style`),
+	];
+
+	// TODO: debug why early hints don't show up in chrome devtools
+	writeEarlyHints(event, hints);
 };

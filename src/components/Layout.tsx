@@ -3,9 +3,9 @@ import { Header } from "./Header";
 
 export const Layout = ({ children }: PropsWithChildren) => {
 	return (
-		<main className="max-w-3xl min-h-full flex flex-col mx-auto p-2">
+		<main class="mx-auto flex min-h-full max-w-3xl flex-col p-2">
 			<Header />
-			{children}
+			<div>{children}</div>
 		</main>
 	);
 };
