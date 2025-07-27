@@ -23,6 +23,7 @@
 		"prepare:nitro": "nitropack prepare"
 	},
 	"dependencies": {
+		"@vercel/analytics": "^1.5.0",
 		"@vercel/og": "^0.6.8",
 		"dayjs": "^1.11.13",
 		"devalue": "^5.1.1",
