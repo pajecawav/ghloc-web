@@ -10,6 +10,7 @@ export interface SSRContextValue {
 	assets: Assets;
 	manifest: Manifest;
 	timing: ServerTiming;
+	ogImage?: string;
 	theme: Theme;
 }
 

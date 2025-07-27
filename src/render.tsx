@@ -13,9 +13,10 @@ import { Router } from "./lib/router/Router";
 interface RenderPageOptions {
 	title?: string;
 	event: H3Event<EventHandlerRequest>;
+	ogImage?: string;
 }
 
-export const renderPage = async (page: Child, { title, event }: RenderPageOptions) => {
+export const renderPage = async (page: Child, { title, event, ogImage }: RenderPageOptions) => {
 	const timing = new ServerTiming({ autoEnd: false });
 	const url = getRequestURL(event);
 
@@ -39,6 +40,7 @@ export const renderPage = async (page: Child, { title, event }: RenderPageOption
 		assets,
 		manifest,
 		timing,
+		ogImage,
 		// TODO: retrieve theme from request
 		theme: DEFAULT_THEME,
 	};

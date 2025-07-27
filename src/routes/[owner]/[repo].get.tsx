@@ -18,5 +18,6 @@ export default defineEventHandler(async event => {
 	return renderPage(<RepoPage owner={owner} repo={repo} branch={branch} />, {
 		event,
 		title: `${owner}/${repo}`,
+		ogImage: `api/${owner}/${repo}/og-image?branch=${encodeURIComponent(branch)}`,
 	});
 });
