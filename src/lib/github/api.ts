@@ -27,15 +27,19 @@ export type GHApiGetRepoHealthResponse =
 export type GHApiGetCommitActivityResponse =
 	Endpoints["GET /repos/{owner}/{repo}/stats/commit_activity"]["response"]["data"];
 
+export type GHApiSearchReposResponse = Endpoints["GET /search/repositories"]["response"]["data"];
+
 export const ghApi = {
 	getRepo: cachedApiFunction("ghApi.getRepo", (owner: string, repo: string) => {
 		return fetcher<GHApiGetRepoResponse>(`https://api.github.com/repos/${owner}/${repo}`);
 	}),
+
 	getRepoHealth: cachedApiFunction("ghApi.getRepoHealth", (owner: string, repo: string) => {
 		return fetcher<GHApiGetRepoHealthResponse>(
 			`https://api.github.com/repos/${owner}/${repo}/community/profile`,
 		);
 	}),
+
 	getFile: cachedApiFunction(
 		"ghApi.getFile",
 		(owner: string, repo: string, path: string, branch: string) => {
@@ -44,6 +48,7 @@ export const ghApi = {
 			});
 		},
 	),
+
 	getFileMeta: cachedApiFunction(
 		"ghApi.getFile",
 		async (owner: string, repo: string, path: string, branch: string) => {
@@ -65,6 +70,7 @@ export const ghApi = {
 			return { type, size };
 		},
 	),
+
 	getCommitActivity: cachedApiFunction(
 		"ghApi.getCommitActivity",
 		async (owner: string, repo: string) => {
@@ -88,4 +94,10 @@ export const ghApi = {
 			return request();
 		},
 	),
+
+	searchRepos: cachedApiFunction("ghApi.searchRepos", async (query: string, perPage = 10) => {
+		return fetcher<GHApiSearchReposResponse>("https://api.github.com/search/repositories", {
+			params: { q: query, per_page: perPage },
+		});
+	}),
 };

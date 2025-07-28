@@ -8,18 +8,28 @@
 	--color-link: var(--color-blue-600);
 	--color-muted: var(--color-neutral-500);
 	--color-subtle: var(--color-neutral-200);
+
 	--color-success: var(--color-green-600);
 	--color-error: var(--color-red-500);
+
 	--color-tree-active: var(--color-sky-100);
+
+	--color-border: var(--color-neutral-200);
+	--color-border-focus: var(--color-black);
 }
 
 :where(.dark) {
 	--color-link: var(--color-blue-500);
 	--color-muted: var(--color-neutral-400);
 	--color-subtle: var(--color-neutral-300);
+
 	--color-success: var(--color-green-400);
 	--color-error: var(--color-red-400);
+
 	--color-tree-active: #2f3335;
+
+	--color-border: var(--color-neutral-700);
+	--color-border-focus: var(--color-neutral-400);
 }
 
 html {
@@ -29,4 +39,18 @@ html {
 
 html.dark {
 	color-scheme: dark;
+}
+
+html,
+body {
+	/* fallback */
+	height: 100vh;
+	height: 100dvh;
+	/* it's recommended to use 'stretch' and use postcss to add vendor prefixes
+	 * but '-moz-fill-available' doesn't work on desktop for some reason */
+	height: -webkit-fill-available;
+}
+
+ghloc-island {
+	display: contents;
 }

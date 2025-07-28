@@ -1,6 +1,6 @@
 import { useMemo } from "hono/jsx";
 import { ghlocApi, Locs, LocsChild } from "~/lib/ghloc/api";
-import { useQuery } from "~/lib/query";
+import { useQuery } from "~/lib/query/useQuery";
 
 export type SortOrder = "type" | "locs";
 

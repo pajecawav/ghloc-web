@@ -26,7 +26,7 @@ export const FilterHelpTooltip = () => {
 
 			<div
 				class={cn(
-					"absolute top-2 -right-2 z-10 mt-8 h-max w-96 max-w-[calc(100vw-1rem)] origin-top-right rounded-md border border-neutral-200 bg-white px-4 py-2 text-xs shadow-lg dark:border-neutral-700 dark:bg-neutral-900",
+					"border-border absolute top-2 -right-2 z-10 mt-8 h-max w-96 max-w-[calc(100vw-1rem)] origin-top-right rounded-md border bg-white px-4 py-2 text-xs shadow-lg dark:bg-neutral-900",
 					"scale-95 opacity-0 transition duration-75 ease-out select-none",
 					"group-focus-within:scale-100 group-focus-within:opacity-100 group-focus-within:duration-100 group-focus-within:select-text",
 					"group-hover:scale-100 group-hover:opacity-100 group-hover:duration-100 group-hover:select-text",

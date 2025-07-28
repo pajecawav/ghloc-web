@@ -4,7 +4,7 @@ import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
 import { Heading } from "~/components/Heading";
 import { Skeleton } from "~/components/Skeleton";
 import { ghApi, GHApiGetCommitActivityResponse } from "~/lib/github/api";
-import { useQuery } from "~/lib/query";
+import { useQuery } from "~/lib/query/useQuery";
 import { cn } from "~/lib/utils";
 import { Section } from "~/pages/repo/components/Section";
 import { CommonSectionProps } from "~/pages/repo/types";
@@ -81,7 +81,7 @@ const Heatmap = memo(({ activity }: { activity: GHApiGetCommitActivityResponse }
 	};
 
 	return (
-		<div class="grid h-36 place-items-center overflow-x-auto rounded-md border border-neutral-200 p-4 dark:border-neutral-700">
+		<div class="border-border grid h-36 place-items-center overflow-x-auto rounded-md border p-4">
 			<svg class="min-w-[700px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 863 128">
 				<g class="hidden">
 					{Array.from({ length: maxLevel + 1 }, (_, level) => (

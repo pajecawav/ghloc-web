@@ -8,6 +8,7 @@ export interface SSRContextValue {
 	url: URL;
 	title?: string;
 	assets: Assets;
+	preconnect: string[];
 	manifest: Manifest;
 	timing: ServerTiming;
 	ogImage?: string;

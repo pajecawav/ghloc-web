@@ -22,9 +22,9 @@ customElements.define(
 			}
 
 			loader().then(Component => {
-				const el = document.createElement("div");
-				render(<Component {...islandProps} />, el);
-				this.replaceWith(el);
+				// const el = document.createElement('div');
+				// const el = document.createDocumentFragment();
+				render(<Component {...islandProps} />, this);
 			});
 		}
 	},

@@ -3,12 +3,12 @@ import { html, raw } from "hono/html";
 import { Child } from "hono/jsx";
 import { renderToReadableStream } from "hono/jsx/streaming";
 import { ServerTiming } from "tiny-server-timing";
-import { getAssets, sendEarlyHints } from "./assets";
+import { getAssets } from "./assets";
 import { App } from "./components/App";
 import { SSRContext, SSRContextValue } from "./lib/context";
+import { Router } from "./lib/router/Router";
 import { DEFAULT_THEME } from "./lib/theme";
 import { useManifest } from "./manifest";
-import { Router } from "./lib/router/Router";
 
 interface RenderPageOptions {
 	title?: string;
@@ -28,8 +28,7 @@ export const renderPage = async (page: Child, { title, event, ogImage }: RenderP
 	}
 
 	const assets = getAssets({ manifest, clientEntry });
-
-	sendEarlyHints(event, assets);
+	const preconnect = ["https://api.github.com", "https://ghloc.ifels.dev"];
 
 	// TODO: cookie or ls?
 	// const theme = (getCookie(event, THEME_COOKIE) ?? DEFAULT_THEME) as Theme;
@@ -38,6 +37,7 @@ export const renderPage = async (page: Child, { title, event, ogImage }: RenderP
 		url: getRequestURL(event),
 		title,
 		assets,
+		preconnect,
 		manifest,
 		timing,
 		ogImage,

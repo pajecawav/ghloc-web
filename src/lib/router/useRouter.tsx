@@ -41,13 +41,13 @@ export const useRouter = () => {
 	const _pathname = useSyncExternalStore(
 		subscribe,
 		getPathname,
-		ctx?.ssrPath ? () => ctx?.ssrPath ?? "" : getPathname,
+		ctx?.ssrPath !== undefined ? () => ctx?.ssrPath ?? "" : getPathname,
 	);
 
 	const _search = useSyncExternalStore(
 		subscribe,
 		getSearch,
-		ctx?.ssrSearch ? () => new URLSearchParams(ctx?.ssrSearch ?? "") : getSearch,
+		ctx?.ssrSearch !== undefined ? () => new URLSearchParams(ctx?.ssrSearch ?? "") : getSearch,
 	);
 
 	const navigate = (pathname: string, search: URLSearchParams, options?: NavigateOptions) => {

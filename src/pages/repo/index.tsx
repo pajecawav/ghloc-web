@@ -12,7 +12,7 @@ interface RepoPageProps extends CommonSectionProps {
 
 export const RepoPage = (props: RepoPageProps) => {
 	return (
-		<div class="space-y-2">
+		<div class="flex flex-col gap-2">
 			<InfoSection {...props} />
 
 			<div class="grid grid-cols-1 gap-2 sm:grid-cols-2">

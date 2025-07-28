@@ -1,3 +1,3 @@
-const DEFAULT_TITLE = "ghloc | Count lines of code";
+const DEFAULT_TITLE = "Count lines of code";
 
-export const buildPageTitle = (title?: string) => (title ? `${title} | ghloc` : DEFAULT_TITLE);
+export const buildPageTitle = (title?: string) => `${title ?? DEFAULT_TITLE} | ghloc`;

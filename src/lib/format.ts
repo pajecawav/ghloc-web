@@ -1,6 +1,6 @@
 export function formatBytes(bytes: number, precision: number = 1): string {
-	let suffix = "GB";
-	for (const suff of ["B", "KB", "MB"]) {
+	let suffix = "MB";
+	for (const suff of ["B", "KB"]) {
 		if (bytes < 1024) {
 			suffix = suff;
 			break;
@@ -15,7 +15,7 @@ export function formatBytes(bytes: number, precision: number = 1): string {
 
 	const bytesStr = bytes.toFixed(precision);
 
-	return `${parseFloat(bytesStr)} ${suffix}`;
+	return `${formatNumber(parseFloat(bytesStr))} ${suffix}`;
 }
 
 export function humanize(value: number): string {

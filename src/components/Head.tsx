@@ -6,7 +6,7 @@ const DESCRIPTION = "Count lines of code in a GitHub repository.";
 const DEFAULT_IMAGE = "android-chrome-512x512.png";
 
 export const Head = () => {
-	const { title, theme, assets, ogImage, url } = useSSRContext();
+	const { title, theme, assets, preconnect, ogImage, url } = useSSRContext();
 	const image = `${url.origin}/${ogImage ?? DEFAULT_IMAGE}`;
 	const canonical = url.origin + url.pathname;
 
@@ -14,12 +14,13 @@ export const Head = () => {
 		<head>
 			<meta charset="UTF-8" />
 
-			<link rel="preconnect" href="https://api.github.com" />
-			<link rel="preconnect" href="https://ghloc.ifels.dev" />
+			{preconnect.map(url => (
+				<link rel="preconnect" href={url} />
+			))}
 
 			<meta
 				name="viewport"
-				content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content"
+				content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
 			/>
 			<meta name="application-name" content="ghloc" />
 			<meta name="theme-color" content={getThemeColor(theme)} />

@@ -4,7 +4,7 @@ import { Skeleton } from "~/components/Skeleton";
 import { formatBytes } from "~/lib/format";
 import { ghApi } from "~/lib/github/api";
 import { getRawGitHubFileUrl } from "~/lib/github/utils";
-import { useQuery } from "~/lib/query";
+import { useQuery } from "~/lib/query/useQuery";
 
 interface FilePreviewProps {
 	owner: string;
@@ -47,7 +47,7 @@ export const FilePreview = ({ owner, repo, branch, path: pathProp, loc }: FilePr
 
 const Header = ({ children }: PropsWithChildren) => {
 	return (
-		<div className="text-muted rounded-t-md border-b border-neutral-200 bg-gray-100 px-4 py-2 text-xs dark:border-neutral-700 dark:bg-neutral-800">
+		<div className="text-muted border-border rounded-t-md border-b bg-gray-100 px-4 py-2 text-xs dark:bg-neutral-800">
 			{children}
 		</div>
 	);

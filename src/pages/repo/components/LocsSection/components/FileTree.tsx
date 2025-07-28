@@ -64,12 +64,7 @@ export const FileTree = ({ locs, onSelect, selectedLanguage }: FileTreeProps) =>
 	const entries = Object.entries(locs.children ?? {});
 
 	return (
-		<ul
-			class={cn(
-				"divide-y divide-neutral-200 dark:divide-neutral-700",
-				!entries.length && "h-40",
-			)}
-		>
+		<ul class={cn("divide-border divide-y", !entries.length && "h-40")}>
 			{entries.map(([name, child]) => (
 				<TreeItem
 					key={name}
