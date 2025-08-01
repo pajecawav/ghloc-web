@@ -21,6 +21,7 @@ export interface UseQueryOptions<TData, TKey extends QueryKey> {
 	enabled?: boolean;
 }
 
+// TODO: notify on cache change (not really needed)
 const cache = new Map<string, any>();
 
 const getHash = (key: QueryKey): string => {
@@ -62,7 +63,7 @@ export const useQuery = <TData, TKey extends QueryKey>({
 
 		const ac = new AbortController();
 
-		setState(s => ({ status: "fetching", data: "data" in s ? s.data : undefined }));
+		setState(prev => ({ status: "fetching", data: prev.data }));
 
 		queryFn({ queryKey, signal: ac.signal })
 			.then(data => {

@@ -35,6 +35,7 @@
 html {
 	color-scheme: light;
 	scrollbar-gutter: stable;
+	touch-action: manipulation;
 }
 
 html.dark {

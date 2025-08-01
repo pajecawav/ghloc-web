@@ -25,7 +25,7 @@ export const SearchResults = ({ items }: SearchResultsProps) => {
 				<a
 					class={cn(
 						"relative block cursor-pointer px-6 py-3 !outline-none select-none",
-						"hover:bg-tree-active",
+						"hover:bg-tree-active focus-visible:bg-tree-active",
 					)}
 					href={`/${result.full_name}?branch=${encodeURIComponent(result.default_branch)}`}
 					key={result.id}
