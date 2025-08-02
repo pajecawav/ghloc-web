@@ -1,9 +1,9 @@
-import { ErrorBoundary, PropsWithChildren } from "hono/jsx";
+import { PropsWithChildren } from "hono/jsx";
 import { useSSRContext } from "~/lib/context";
-import { Head } from "./Head";
-import { Layout } from "./Layout";
-import { InlineScript } from "./InlineScript";
 import { cn } from "~/lib/utils";
+import { Head } from "./Head";
+import { InlineScript } from "./InlineScript";
+import { Layout } from "./Layout";
 
 export const App = ({ children }: PropsWithChildren) => {
 	const { theme } = useSSRContext();
@@ -21,9 +21,7 @@ export const App = ({ children }: PropsWithChildren) => {
 			<body>
 				<InlineScript />
 
-				<ErrorBoundary fallback="Something went wrong...">
-					<Layout>{children}</Layout>
-				</ErrorBoundary>
+				<Layout>{children}</Layout>
 			</body>
 		</html>
 	);
