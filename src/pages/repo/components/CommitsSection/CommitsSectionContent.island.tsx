@@ -68,10 +68,6 @@ const Heatmap = memo(({ activity }: { activity: GHApiGetCommitActivityResponse }
 	const valueToLevel = (value: number) =>
 		value ? Math.min(Math.floor(value / 5) + 1, maxLevel) : 0;
 
-	const levelToId = (level: number) => {
-		return `hs-${level}`;
-	};
-
 	const levelToClass: Record<number, string> = {
 		0: "text-neutral-100 dark:text-neutral-800",
 		1: "text-green-300 dark:text-green-900",
@@ -83,29 +79,20 @@ const Heatmap = memo(({ activity }: { activity: GHApiGetCommitActivityResponse }
 	return (
 		<div class="border-border grid h-36 place-items-center overflow-x-auto rounded-md border p-4">
 			<svg class="min-w-[700px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 863 128">
-				<g class="hidden">
-					{Array.from({ length: maxLevel + 1 }, (_, level) => (
-						<rect
-							id={levelToId(level)}
-							class={cn(
-								"outline -outline-offset-1 outline-[#6b728010]",
-								levelToClass[level],
-							)}
-							width="11"
-							height="11"
-							rx="2"
-							ry="2"
-							key={level}
-						/>
-					))}
-				</g>
-
 				<g fill="currentColor" transform={`translate(${weekDaysOffset}, ${headerOffset})`}>
 					{activity.map((week, weekIndex) => (
 						<g transform={`translate(${weekIndex * cellSize}, 0)`} key={week.week}>
 							{week.days.map((value, dayIndex) => (
-								<use
-									href={`#${levelToId(valueToLevel(value))}`}
+								<rect
+									key={dayIndex}
+									class={cn(
+										"outline -outline-offset-1 outline-[#6b728010]",
+										levelToClass[valueToLevel(value)],
+									)}
+									width="11"
+									height="11"
+									rx="2"
+									ry="2"
 									y={dayIndex * cellSize}
 								>
 									<title>
@@ -113,7 +100,7 @@ const Heatmap = memo(({ activity }: { activity: GHApiGetCommitActivityResponse }
 											(week.week + dayIndex * DAY_IN_SECONDS) * 1000,
 										).format("MMM D, YYYY")}`}
 									</title>
-								</use>
+								</rect>
 							))}
 						</g>
 					))}
