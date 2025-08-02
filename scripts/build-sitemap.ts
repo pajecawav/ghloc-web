@@ -1,7 +1,9 @@
 import fs from "fs";
 import path from "path";
 
-console.log("Building sitemap...");
+const out = path.resolve(import.meta.dirname, "..", "public/sitemap.xml");
+
+console.log(`Generating sitemap to ${out}`);
 
 const data = fs.readFileSync(path.resolve(import.meta.dirname, "./repos.txt"), "utf8");
 const repos = data.trim().split("\n");
@@ -18,4 +20,4 @@ const sitemap = `\
     ${repos.map(repo => buildEntry(repo)).join("\n")}
 </urlset>`.trim();
 
-fs.writeFileSync(path.resolve(import.meta.dirname, "..", "public/sitemap.xml"), sitemap, "utf8");
+fs.writeFileSync(out, sitemap, "utf8");

@@ -15,6 +15,8 @@ export default defineEventHandler(async event => {
 		return sendRedirect(event, url.toString());
 	}
 
+	setHeader(event, "cache-control", "public, max-age=60");
+
 	return renderPage(<RepoPage owner={owner} repo={repo} branch={branch} />, {
 		event,
 		title: `${owner}/${repo}`,

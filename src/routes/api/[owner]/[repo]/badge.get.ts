@@ -24,6 +24,8 @@ export default defineEventHandler(async event => {
 		throw createError({ statusCode: 500, statusMessage: "Failed to fetch locs" });
 	}
 
+	setHeader(event, "cache-control", "public, max-age=60");
+
 	return {
 		schemaVersion: 1,
 		label: "lines",
