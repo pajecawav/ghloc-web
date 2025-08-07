@@ -1,5 +1,7 @@
 import { PropsWithChildren } from "hono/jsx";
 import { Header } from "./Header";
+import { Island } from "~/lib/island";
+import Toaster from "./Toaster.island";
 
 export const Layout = ({ children }: PropsWithChildren) => {
 	return (
@@ -7,6 +9,8 @@ export const Layout = ({ children }: PropsWithChildren) => {
 			<Header />
 
 			{children}
+
+			<Island Component={Toaster} props={{}} />
 		</main>
 	);
 };

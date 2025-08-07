@@ -24,7 +24,6 @@ export default function IndexPageContent() {
 
 	useEffect(() => {
 		inputRef.current?.focus();
-		console.log(inputRef.current);
 	}, []);
 
 	const onChange = (e: Event) => {

@@ -1,8 +1,33 @@
+import dayjs from "dayjs/esm";
+import relativeTime from "dayjs/esm/plugin/relativeTime";
+
 import { Endpoints } from "@octokit/types";
 import { $fetch } from "ofetch";
 import { cachedApiFunction } from "../cache";
+import { toast } from "../toasts/toasts";
 import { isClient, sleep } from "../utils";
 import { getRawGitHubFileUrl } from "./utils";
+
+dayjs.extend(relativeTime);
+
+const createClientFetcher = () => {
+	return $fetch.create({
+		async onResponseError(error) {
+			if (error.response?.status === 403) {
+				const limit = parseInt(error.response.headers.get("x-ratelimit-remaining")!, 10);
+				const reset = parseInt(error.response.headers.get("x-ratelimit-reset")!, 10) * 1000;
+
+				if (limit === 0) {
+					toast.show({
+						id: "github-api-limit",
+						type: "error",
+						content: `GitHub API limit reached. Reset ${dayjs().to(reset)}.`,
+					});
+				}
+			}
+		},
+	});
+};
 
 const createServerFetcher = () => {
 	return $fetch.create({
@@ -17,7 +42,7 @@ const createServerFetcher = () => {
 	});
 };
 
-const fetcher = isClient ? $fetch : createServerFetcher();
+const fetcher = isClient ? createClientFetcher() : createServerFetcher();
 
 export type GHApiGetRepoResponse = Endpoints["GET /repos/{owner}/{repo}"]["response"]["data"];
 
