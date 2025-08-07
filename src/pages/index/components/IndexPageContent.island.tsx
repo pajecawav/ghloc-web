@@ -1,16 +1,18 @@
+import { useEffect, useRef } from "hono/jsx";
 import { SearchIcon } from "~/components/icons/SearchIcon";
 import { SpinnerIcon } from "~/components/icons/SpinnerIcon";
 import { Input } from "~/components/Input";
-import { cn } from "~/lib/utils";
-import { SearchResults } from "./SearchResults";
-import { useQuery } from "~/lib/query/useQuery";
-import { useRouter } from "~/lib/router/useRouter";
 import { useDebouncedValue } from "~/lib/debounce";
 import { ghApi } from "~/lib/github/api";
+import { useQuery } from "~/lib/query/useQuery";
+import { useRouter } from "~/lib/router/useRouter";
+import { cn } from "~/lib/utils";
+import { SearchResults } from "./SearchResults";
 
 export default function IndexPageContent() {
 	const router = useRouter();
 
+	const inputRef = useRef<HTMLInputElement>(null);
 	const queryValue = router.search.get("query") ?? "";
 	const debouncedQuery = useDebouncedValue(queryValue, 750);
 
@@ -19,6 +21,11 @@ export default function IndexPageContent() {
 		queryFn: () => ghApi.searchRepos(debouncedQuery),
 		enabled: !!debouncedQuery,
 	});
+
+	useEffect(() => {
+		inputRef.current?.focus();
+		console.log(inputRef.current);
+	}, []);
 
 	const onChange = (e: Event) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -40,6 +47,7 @@ export default function IndexPageContent() {
 
 			<div class="flex-shrink-0">
 				<Input
+					ref={inputRef}
 					value={queryValue}
 					onChange={onChange}
 					inputClass="py-3 text-center text-2xl font-light"
