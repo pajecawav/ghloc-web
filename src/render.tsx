@@ -5,7 +5,7 @@ import { renderToReadableStream } from "hono/jsx/streaming";
 import { ServerTiming } from "tiny-server-timing";
 import { getAssets } from "./assets";
 import { App } from "./components/App";
-import { SSRContext, SSRContextValue } from "./lib/context";
+import { PreloadEntry, SSRContext, SSRContextValue } from "./lib/context";
 import { Router } from "./lib/router/Router";
 import { DEFAULT_THEME } from "./lib/theme";
 import { useManifest } from "./manifest";
@@ -14,9 +14,13 @@ interface RenderPageOptions {
 	title?: string;
 	event: H3Event<EventHandlerRequest>;
 	ogImage?: string;
+	preload?: PreloadEntry[];
 }
 
-export const renderPage = async (page: Child, { title, event, ogImage }: RenderPageOptions) => {
+export const renderPage = async (
+	page: Child,
+	{ title, event, ogImage, preload }: RenderPageOptions,
+) => {
 	const timing = new ServerTiming({ autoEnd: false });
 	const url = getRequestURL(event);
 
@@ -38,6 +42,7 @@ export const renderPage = async (page: Child, { title, event, ogImage }: RenderP
 		title,
 		assets,
 		preconnect,
+		preload,
 		manifest,
 		timing,
 		ogImage,

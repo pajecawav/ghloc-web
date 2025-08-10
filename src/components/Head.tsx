@@ -6,7 +6,7 @@ const DESCRIPTION = "Count lines of code in a GitHub repository.";
 const DEFAULT_IMAGE = "android-chrome-512x512.png";
 
 export const Head = () => {
-	const { title, theme, assets, preconnect, ogImage, url } = useSSRContext();
+	const { title, theme, assets, preconnect, preload, ogImage, url } = useSSRContext();
 	const image = `${url.origin}/${ogImage ?? DEFAULT_IMAGE}`;
 	const canonical = url.origin + url.pathname;
 
@@ -16,6 +16,9 @@ export const Head = () => {
 
 			{preconnect.map(url => (
 				<link rel="preconnect" href={url} />
+			))}
+			{preload?.map(p => (
+				<link rel="preload" href={p.href} as={p.as} crossorigin={p.crossorigin} />
 			))}
 
 			<meta

@@ -18,22 +18,26 @@ export interface GhlocApiGetLocsParams {
 	filter?: string;
 }
 
+export const getGhlocGetLocsUrl = ({ owner, repo, branch, filter }: GhlocApiGetLocsParams) => {
+	const url = new URL(`https://ghloc.ifels.dev/${owner}/${repo}`);
+
+	if (branch) {
+		url.pathname += `/${branch}`;
+	}
+
+	if (filter) {
+		url.searchParams.set("match", filter);
+	}
+
+	url.searchParams.set("pretty", "false");
+
+	return url;
+};
+
 export const ghlocApi = {
-	getLocs: cachedApiFunction(
-		"ghlocApi.getLocs",
-		({ owner, repo, branch, filter }: GhlocApiGetLocsParams) => {
-			let url = `https://ghloc.ifels.dev/${owner}/${repo}`;
+	getLocs: cachedApiFunction("ghlocApi.getLocs", (params: GhlocApiGetLocsParams) => {
+		const url = getGhlocGetLocsUrl(params);
 
-			if (branch) {
-				url += `/${branch}`;
-			}
-
-			return $fetch<GhlocApiGetLocsResponse>(url, {
-				query: {
-					...(filter && { match: filter }),
-					pretty: false,
-				},
-			});
-		},
-	),
+		return $fetch<GhlocApiGetLocsResponse>(url.toString());
+	}),
 };
