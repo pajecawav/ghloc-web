@@ -1,4 +1,5 @@
 import { Child } from "hono/jsx";
+import { toast } from "~/lib/toasts/toasts";
 import { Toast } from "~/lib/toasts/types";
 import { useToasts } from "~/lib/toasts/useToasts";
 import { cn } from "~/lib/utils";
@@ -24,8 +25,9 @@ export default function Toaster() {
 						class={cn(
 							"border-border relative flex max-w-sm items-center gap-2 rounded-md border py-3 pr-4 pl-3 shadow",
 							typeClasses[t.type],
-							t.dismissed ? "animate-toast-appear" : "animate-toast-dismiss",
+							t.dismissed ? "animate-toast-dismiss" : "animate-toast-appear",
 						)}
+						onAnimationEnd={t.dismissed ? () => toast.remove(t.id) : undefined}
 					>
 						<div class="h-6 w-6 flex-shrink-0">{typeIcons[t.type]}</div>
 						<div>{t.content}</div>

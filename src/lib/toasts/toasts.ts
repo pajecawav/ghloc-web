@@ -14,17 +14,19 @@ export class Toasts {
 	};
 
 	public show = (options: ToastOptions) => {
-		const id = options.id ?? `__${nextId++}`;
+		const id = options.id || `__${nextId++}`;
 
-		this.toasts = [...this.toasts, { ...options, id, dismissed: true }];
+		const existingToast = options.id ? this.findToast(options.id) : undefined;
 
-		this.dismissTimeouts.delete(id);
+		if (!existingToast) {
+			this.toasts = [...this.toasts, { ...options, id, dismissed: false }];
+		}
+
+		window.clearTimeout(this.dismissTimeouts.get(id));
 
 		const dismiss = () => this.dismiss(id);
 		const dismissTimeout = window.setTimeout(dismiss, DISMISS_MS);
 		this.dismissTimeouts.set(id, dismissTimeout);
-
-		// TODO: remove dismissed toasts from array
 
 		this.notify();
 
@@ -32,10 +34,10 @@ export class Toasts {
 	};
 
 	public dismiss = (id: string) => {
-		const toast = this.toasts.find(toast => toast.id == id);
+		const toast = this.findToast(id);
 
 		if (toast) {
-			toast.dismissed = false;
+			toast.dismissed = true;
 		}
 
 		this.toasts = [...this.toasts];
@@ -57,6 +59,10 @@ export class Toasts {
 
 	private notify = () => {
 		this.subscribers.forEach(cb => cb());
+	};
+
+	private findToast = (id: string) => {
+		return this.toasts.find(toast => toast.id === id && !toast.dismissed);
 	};
 }
 
