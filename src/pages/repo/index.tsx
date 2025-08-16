@@ -2,7 +2,7 @@ import { Island } from "~/lib/island";
 import { CommitsSection } from "./components/CommitsSection";
 import { HealthSection } from "./components/HealthSection";
 import { InfoSection } from "./components/InfoSection";
-import LocsSection from "./components/LocsSection/LocsSection.island";
+import LocsSection from "./components/LocsSection/LocsSection.island.lazy";
 import { PackageSection } from "./components/PackageSection";
 import { CommonSectionProps } from "./types";
 

@@ -3,7 +3,7 @@ import { ghApi } from "~/lib/github/api";
 import { Island } from "~/lib/island";
 import { CommonSectionProps } from "../../types";
 import { Section } from "../Section";
-import CommitsSectionContent from "./CommitsSectionContent.island";
+import CommitsSectionContent from "./CommitsSectionContent.island.lazy";
 
 type CommitsSectionProps = CommonSectionProps;
 

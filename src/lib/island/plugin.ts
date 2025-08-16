@@ -28,7 +28,7 @@ export const islands = createUnplugin(() => {
 		name: "ghloc-islands",
 		enforce: "pre",
 		transform(code, id) {
-			if (!/\.island\.tsx?$/.test(id)) {
+			if (!/\.island(\.lazy)?\.tsx?$/.test(id)) {
 				return;
 			}
 
