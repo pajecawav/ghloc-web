@@ -6,8 +6,10 @@ const DESCRIPTION = "Count lines of code in a GitHub repository.";
 const DEFAULT_IMAGE = "android-chrome-512x512.png";
 
 export const Head = () => {
-	const { title, theme, assets, preconnect, preload, ogImage, url } = useSSRContext();
-	const image = `${url.origin}/${ogImage ?? DEFAULT_IMAGE}`;
+	const { meta, theme, assets, preconnect, preload, url } = useSSRContext();
+
+	const title = buildPageTitle(meta?.title);
+	const image = `${url.origin}/${meta?.ogImage ?? DEFAULT_IMAGE}`;
 	const canonical = url.origin + url.pathname;
 
 	return (
@@ -18,7 +20,12 @@ export const Head = () => {
 				<link rel="preconnect" href={url} />
 			))}
 			{preload?.map(p => (
-				<link rel="preload" href={p.href} as={p.as} crossorigin={p.crossorigin} />
+				<link
+					rel={p.rel ?? "preload"}
+					href={p.href}
+					as={p.as}
+					crossorigin={p.crossorigin}
+				/>
 			))}
 
 			<meta
@@ -40,7 +47,7 @@ export const Head = () => {
 				<link rel="modulepreload" href={href} />
 			))}
 
-			<title>{buildPageTitle(title)}</title>
+			<title>{title}</title>
 			<meta name="description" content={DESCRIPTION} />
 
 			<link rel="canonical" href={canonical} />

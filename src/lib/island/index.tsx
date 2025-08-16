@@ -1,8 +1,8 @@
 import { stringify } from "devalue";
-import { FC } from "hono/jsx";
+import { IslandFC } from "./types";
 
 interface IslandProps<P> {
-	Component: FC<P> & { src?: string };
+	Component: IslandFC<P>;
 	props: P;
 }
 
@@ -10,7 +10,7 @@ export const Island = <P,>({ Component, props }: IslandProps<P>) => {
 	const src = Component.src;
 
 	if (!src) {
-		throw new Error(`Missing island definition in manifest for island ${Component.name}`);
+		throw new Error(`Missing island src for island ${Component.name}`);
 	}
 
 	return (

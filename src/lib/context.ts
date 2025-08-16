@@ -1,24 +1,19 @@
-import { createContext, JSX, useContext } from "hono/jsx";
-import { ServerTiming } from "tiny-server-timing";
+import { createContext, useContext } from "hono/jsx";
 import { Manifest } from "vite";
 import { Assets } from "~/assets";
+import { PreloadEntry } from "./preload";
 import { Theme } from "./theme";
-
-export interface PreloadEntry {
-	href: string;
-	as: string;
-	crossorigin?: JSX.CrossOrigin;
-}
 
 export interface SSRContextValue {
 	url: URL;
-	title?: string;
+	meta?: {
+		title?: string;
+		ogImage?: string;
+	};
 	assets: Assets;
 	preconnect: string[];
 	preload?: PreloadEntry[];
 	manifest: Manifest;
-	timing: ServerTiming;
-	ogImage?: string;
 	theme: Theme;
 }
 

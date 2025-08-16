@@ -2,10 +2,11 @@ import { EventHandlerRequest, H3Event } from "h3";
 import { html, raw } from "hono/html";
 import { Child } from "hono/jsx";
 import { renderToReadableStream } from "hono/jsx/streaming";
-import { ServerTiming } from "tiny-server-timing";
 import { getAssets } from "./assets";
 import { App } from "./components/App";
-import { PreloadEntry, SSRContext, SSRContextValue } from "./lib/context";
+import { SSRContext, SSRContextValue } from "./lib/context";
+import { IslandFC } from "./lib/island/types";
+import { getPreloadForModule, PreloadEntry } from "./lib/preload";
 import { Router } from "./lib/router/Router";
 import { DEFAULT_THEME } from "./lib/theme";
 import { useManifest } from "./manifest";
@@ -15,13 +16,13 @@ interface RenderPageOptions {
 	event: H3Event<EventHandlerRequest>;
 	ogImage?: string;
 	preload?: PreloadEntry[];
+	preloadIslands?: IslandFC[];
 }
 
 export const renderPage = async (
 	page: Child,
-	{ title, event, ogImage, preload }: RenderPageOptions,
+	{ title, event, ogImage, preload = [], preloadIslands }: RenderPageOptions,
 ) => {
-	const timing = new ServerTiming({ autoEnd: false });
 	const url = getRequestURL(event);
 
 	const clientEntry = useRuntimeConfig(event).clientEntry;
@@ -34,18 +35,27 @@ export const renderPage = async (
 	const assets = getAssets({ manifest, clientEntry });
 	const preconnect = ["https://api.github.com", "https://ghloc.ifels.dev"];
 
+	if (preloadIslands) {
+		const islandPreloads = preloadIslands
+			.map(island => island.src && getPreloadForModule(island.src, manifest))
+			.filter(v => !!v);
+
+		preload = [...preload, ...islandPreloads].flat();
+	}
+
 	// TODO: cookie or ls?
 	// const theme = (getCookie(event, THEME_COOKIE) ?? DEFAULT_THEME) as Theme;
 
 	const context: SSRContextValue = {
 		url: getRequestURL(event),
-		title,
+		meta: {
+			title,
+			ogImage,
+		},
 		assets,
 		preconnect,
 		preload,
 		manifest,
-		timing,
-		ogImage,
 		// TODO: retrieve theme from request
 		theme: DEFAULT_THEME,
 	};

@@ -1,4 +1,5 @@
 import { IndexPage } from "~/pages/index";
+import IndexPageContent from "~/pages/index/components/IndexPageContent.island.lazy";
 import { renderPage } from "~/render";
 
 export default defineEventHandler(event => {
@@ -6,5 +7,6 @@ export default defineEventHandler(event => {
 
 	return renderPage(<IndexPage />, {
 		event,
+		preloadIslands: [IndexPageContent],
 	});
 });
