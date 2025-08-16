@@ -1,5 +1,6 @@
 import path from "path";
 import { CLIENT_ENTRY } from "./config";
+import { islands } from "./src/lib/island/plugin";
 
 export default defineNitroConfig({
 	compatibilityDate: "2025-07-22",
@@ -11,6 +12,9 @@ export default defineNitroConfig({
 	},
 	runtimeConfig: {
 		clientEntry: path.normalize(CLIENT_ENTRY),
+	},
+	rollupConfig: {
+		plugins: [islands.rollup()],
 	},
 	publicAssets: [
 		{

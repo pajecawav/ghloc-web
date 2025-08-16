@@ -1,17 +1,13 @@
 import { stringify } from "devalue";
 import { FC } from "hono/jsx";
-import { useSSRContext } from "./context";
 
 interface IslandProps<P> {
-	Component: FC<P>;
+	Component: FC<P> & { src?: string };
 	props: P;
 }
 
 export const Island = <P,>({ Component, props }: IslandProps<P>) => {
-	const { manifest } = useSSRContext();
-
-	const islandRe = new RegExp(`/${Component.name}.island.tsx?$`);
-	const src = Object.keys(manifest).find(path => islandRe.test(path));
+	const src = Component.src;
 
 	if (!src) {
 		throw new Error(`Missing island definition in manifest for island ${Component.name}`);

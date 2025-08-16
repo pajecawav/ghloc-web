@@ -1,7 +1,8 @@
-import tsconfigPaths from "vite-tsconfig-paths";
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import { ManifestOptions, VitePWA } from "vite-plugin-pwa";
+import tsconfigPaths from "vite-tsconfig-paths";
+import { islands } from "./src/lib/island/plugin";
 import { CLIENT_ENTRY } from "./config";
 
 const manifest: Partial<ManifestOptions> = {
@@ -38,6 +39,7 @@ export default defineConfig({
 		},
 	},
 	plugins: [
+		islands.vite(),
 		tsconfigPaths(),
 		tailwindcss(),
 		VitePWA({

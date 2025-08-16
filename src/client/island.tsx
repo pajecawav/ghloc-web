@@ -1,5 +1,6 @@
 import { parse } from "devalue";
-import { FC, render } from "hono/jsx/dom";
+import { FC } from "hono/jsx/dom";
+import { hydrateRoot } from "hono/jsx/dom/client";
 import { ensureLeadingSlash } from "~/lib/utils";
 
 const ISLANDS = import.meta.glob<FC>("/src/**/*.island.ts(x)?", { import: "default" });
@@ -22,9 +23,7 @@ customElements.define(
 			}
 
 			loader().then(Component => {
-				// const el = document.createElement('div');
-				// const el = document.createDocumentFragment();
-				render(<Component {...islandProps} />, this);
+				hydrateRoot(this, <Component {...islandProps} />);
 			});
 		}
 	},
