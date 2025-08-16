@@ -12,7 +12,7 @@ export interface PreloadEntry {
 export const getPreloadForModule = (src: string, manifest: Manifest): PreloadEntry[] | null => {
 	const chunk = manifest[removeLeadingSlash(src)];
 
-	if (!chunk) {
+	if (!chunk || chunk.isEntry) {
 		return null;
 	}
 
@@ -26,9 +26,23 @@ export const getPreloadForModule = (src: string, manifest: Manifest): PreloadEnt
 	];
 
 	// TODO: check nested preloads are needed
-	// for (const imp of chunk.imports ?? []) {
-	// 	preload.push(...(getPreloadForModule(imp, manifest) ?? []));
-	// }
+	for (const imp of chunk.imports ?? []) {
+		preload.push(...(getPreloadForModule(imp, manifest) ?? []));
+	}
 
 	return preload;
+};
+
+export const dedupePreload = (preload: PreloadEntry[]): PreloadEntry[] => {
+	const hrefs = new Set<string>();
+
+	return preload.filter(p => {
+		if (hrefs.has(p.href)) {
+			return false;
+		}
+
+		hrefs.add(p.href);
+
+		return true;
+	});
 };

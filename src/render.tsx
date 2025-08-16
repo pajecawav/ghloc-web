@@ -6,7 +6,7 @@ import { getAssets } from "./assets";
 import { App } from "./components/App";
 import { SSRContext, SSRContextValue } from "./lib/context";
 import { IslandFC } from "./lib/island/types";
-import { getPreloadForModule, PreloadEntry } from "./lib/preload";
+import { dedupePreload, getPreloadForModule, PreloadEntry } from "./lib/preload";
 import { Router } from "./lib/router/Router";
 import { DEFAULT_THEME } from "./lib/theme";
 import { useManifest } from "./manifest";
@@ -40,7 +40,7 @@ export const renderPage = async (
 			.map(island => island.src && getPreloadForModule(island.src, manifest))
 			.filter(v => !!v);
 
-		preload = [...preload, ...islandPreloads].flat();
+		preload = dedupePreload([...preload, ...islandPreloads].flat());
 	}
 
 	// TODO: cookie or ls?
