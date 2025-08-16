@@ -1,12 +1,7 @@
-// https://github.com/element-plus/element-plus-nuxt/issues/95#issuecomment-2065970469
-import dayjs from "dayjs/esm";
-import relativeTime from "dayjs/esm/plugin/relativeTime";
-
 import { Badge } from "~/components/Badge";
 import { RepoStats } from "~/components/RepoStats";
+import { dayjs } from "~/lib/dayjs";
 import { GHApiGetReposResponse } from "~/lib/github/api";
-
-dayjs.extend(relativeTime);
 
 interface RepoCardProps {
 	repo: GHApiGetReposResponse[number];

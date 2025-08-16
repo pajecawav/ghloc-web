@@ -1,14 +1,10 @@
-import dayjs from "dayjs/esm";
-import relativeTime from "dayjs/esm/plugin/relativeTime";
-
 import { Endpoints } from "@octokit/types";
 import { $fetch } from "ofetch";
 import { cachedApiFunction } from "../cache";
+import { dayjs } from "../dayjs";
 import { toast } from "../toasts/toasts";
 import { isClient, sleep } from "../utils";
 import { getRawGitHubFileUrl } from "./utils";
-
-dayjs.extend(relativeTime);
 
 const createClientFetcher = () => {
 	return $fetch.create({

@@ -1,8 +1,8 @@
-import dayjs from "dayjs";
 import { memo } from "hono/jsx";
 import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
 import { Heading } from "~/components/Heading";
 import { Skeleton } from "~/components/Skeleton";
+import { dayjs } from "~/lib/dayjs";
 import { ghApi, GHApiGetCommitActivityResponse } from "~/lib/github/api";
 import { useQuery } from "~/lib/query/useQuery";
 import { cn } from "~/lib/utils";
