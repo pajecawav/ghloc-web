@@ -1,5 +1,5 @@
 import { Endpoints } from "@octokit/types";
-import { $fetch } from "ofetch";
+import { $fetch, FetchError } from "ofetch";
 import { cachedApiFunction } from "../cache";
 import { dayjs } from "../dayjs";
 import { toast } from "../toasts/toasts";
@@ -65,10 +65,18 @@ export const ghApi = {
 
 	getFile: cachedApiFunction(
 		"ghApi.getFile",
-		(owner: string, repo: string, path: string, branch: string) => {
-			return $fetch(getRawGitHubFileUrl(owner, repo, branch, path), {
-				responseType: "text",
-			});
+		async (owner: string, repo: string, path: string, branch: string) => {
+			try {
+				return await $fetch(getRawGitHubFileUrl(owner, repo, branch, path), {
+					responseType: "text",
+				});
+			} catch (error) {
+				if (error instanceof FetchError && error.statusCode === 404) {
+					return "{}";
+				}
+
+				throw error;
+			}
 		},
 	),
 
