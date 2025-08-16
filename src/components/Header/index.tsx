@@ -1,83 +1,52 @@
-import { GithubIcon } from "@/components/icons/GithubIcon";
-import { Theme } from "@/contexts/ThemeContext";
-import { useTheme } from "@/hooks/useTheme";
-import { CodeIcon, CogIcon, MoonIcon, SearchIcon, SunIcon } from "@heroicons/react/outline";
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import { ReactNode, useState } from "react";
+import { Island } from "~/lib/island";
+import { CodeIcon } from "../icons/CodeIcon";
 import { FirefoxIcon } from "../icons/FirefoxIcon";
-import { track } from "@vercel/analytics";
+import { GitHubIcon } from "../icons/GitHubIcon";
+import { SearchIcon } from "../icons/SearchIcon";
+import { HeaderItem } from "./HeaderItem";
+import ThemeToggle from "./ThemeToggle.island";
 
-type Props = {
-	className?: string;
-};
-
-const HeaderItem = ({ children }: { children: ReactNode }) => {
+export const Header = () => {
 	return (
-		<li className="w-8 h-8 p-[0.3em] rounded-md transition-colors duration-100 hover:bg-accent">
-			{children}
-		</li>
-	);
-};
-
-export const Header = ({ className }: Props) => {
-	const { theme, toggleTheme } = useTheme();
-	const [isTokenModalOpen, setIsTokenModalOpen] = useState(false);
-
-	return (
-		<header className={className}>
-			<ul className="flex items-center justify-end h-8">
-				<HeaderItem>
-					<Link href="/" title="Search repos">
+		<header class="mb-1">
+			<div class="xs:gap-0 flex justify-end gap-1">
+				<a href="/" title="Search repos">
+					<HeaderItem>
 						<SearchIcon />
-					</Link>
-				</HeaderItem>
-				<HeaderItem>
-					<button
-						className="w-full h-full"
-						onClick={toggleTheme}
-						title="Toggle dark mode"
-						// this thing doesn't silence mismatch in icons. we are ok with the mismatch
-						// because we inject a ThemeScript on the client
-						suppressHydrationWarning
-					>
-						{theme === Theme.light ? <MoonIcon /> : <SunIcon />}
-					</button>
-				</HeaderItem>
-				<HeaderItem>
-					<a
-						href="https://github.com/pajecawav/ghloc-web"
-						target="_blank"
-						rel="noopener noreferrer"
-						title="Project source code"
-						onClick={() => track("github")}
-					>
-						<GithubIcon />
-					</a>
-				</HeaderItem>
-				<HeaderItem>
-					<a
-						href="https://addons.mozilla.org/firefox/addon/github-lines-of-code"
-						target="_blank"
-						rel="noopener noreferrer"
-						title="Firefox addon"
-						onClick={() => track("firefox")}
-					>
+					</HeaderItem>
+				</a>
+				<Island Component={ThemeToggle} props={{}} />
+				<a
+					href="https://github.com/pajecawav/ghloc-web"
+					target="_blank"
+					rel="noopener"
+					title="Project source code"
+				>
+					<HeaderItem>
+						<GitHubIcon />
+					</HeaderItem>
+				</a>
+				<a
+					href="https://addons.mozilla.org/firefox/addon/github-lines-of-code"
+					target="_blank"
+					rel="noopener"
+					title="Firefox addon"
+				>
+					<HeaderItem>
 						<FirefoxIcon />
-					</a>
-				</HeaderItem>
-				<HeaderItem>
-					<a
-						href="https://gist.github.com/pajecawav/70ffe72bf4aa0968aa9f97318976138f"
-						target="_blank"
-						rel="noopener noreferrer"
-						title="Userscript link"
-						onClick={() => track("userscript")}
-					>
+					</HeaderItem>
+				</a>
+				<a
+					href="https://gist.github.com/pajecawav/70ffe72bf4aa0968aa9f97318976138f"
+					target="_blank"
+					rel="noopener"
+					title="Userscript link"
+				>
+					<HeaderItem>
 						<CodeIcon />
-					</a>
-				</HeaderItem>
-			</ul>
+					</HeaderItem>
+				</a>
+			</div>
 		</header>
 	);
 };

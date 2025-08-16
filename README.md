@@ -5,11 +5,11 @@
 
 A [website](https://ghloc.vercel.app/) to display GitHub repository info:
 
--   Total repo size
--   Repo health calculated by GitHub (`README.md`, license, etc)
--   Repo commit activity for the past year
--   Bundle size of an `npm` package
--   Total lines of code by file extension (provided by [ghloc](https://github.com/subtle-byte/ghloc))
+- Total repo size
+- Repo health calculated by GitHub (`README.md`, license, etc)
+- Repo commit activity for the past year
+- Bundle size of an `npm` package
+- Total lines of code by file extension (provided by [ghloc](https://github.com/subtle-byte/ghloc))
 
 [![Screenshot](https://user-images.githubusercontent.com/18193831/199794714-a4c7d8c1-17c3-4be9-8de4-dc0fb745ea2d.png)](https://ghloc.vercel.app/facebook/react)
 

@@ -1,8 +1,6 @@
-import { ComponentProps } from "react";
+import { JSX } from "hono/jsx";
 
-type Props = ComponentProps<"svg">;
-
-export const GitForkIcon = (props: Props) => {
+export const GitForkIcon = (props: JSX.HTMLAttributes) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

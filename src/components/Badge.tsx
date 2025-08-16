@@ -1,26 +1,24 @@
-import classNames from "classnames";
-import { ComponentProps } from "react";
+import { JSX } from "hono/jsx";
+import { cn } from "~/lib/utils";
 
-const colorClassNames = {
-	normal: "text-badge-normal-text bg-badge-normal-bg",
-	outlined: "text-badge-outlined-text bg-badge-outlined-bg",
+const modeClasses = {
+	outline: "text-muted border-neutral-200",
+	accent: "text-neutral-700 bg-blue-100 dark:bg-neutral-800 border-neutral-100 dark:text-neutral-200",
 };
 
-type Props = ComponentProps<"div"> & {
-	color?: keyof typeof colorClassNames;
+type BadgeProps = JSX.IntrinsicElements["div"] & {
+	mode?: keyof typeof modeClasses;
 };
 
-export const Badge = ({ className, children, color = "normal", ...props }: Props) => {
+export const Badge = ({ class: _class, mode = "outline", ...props }: BadgeProps) => {
 	return (
 		<div
-			className={classNames(
-				"px-2 py-0.5 border border-normal rounded-full min-w-[2rem] text-center",
-				colorClassNames[color],
-				className,
+			class={cn(
+				"flex min-w-8 items-center rounded-full border px-2 py-0.5 text-center text-xs dark:border-neutral-700",
+				_class,
+				modeClasses[mode],
 			)}
 			{...props}
-		>
-			{children}
-		</div>
+		/>
 	);
 };

@@ -1,11 +1,11 @@
-import classNames from "classnames";
-import { ReactNode } from "react";
+import { Child } from "hono/jsx";
+import { cn } from "~/lib/utils";
 
-type Props = {
-	className?: string;
-	children: ReactNode;
-};
+interface HeadingProps {
+	class?: string;
+	children: Child;
+}
 
-export const Heading = ({ className, children }: Props) => {
-	return <h2 className={classNames("text-lg font-semibold", className)}>{children}</h2>;
+export const Heading = ({ class: _class, children }: HeadingProps) => {
+	return <h2 class={cn("mb-0.5 text-lg font-semibold", _class)}>{children}</h2>;
 };

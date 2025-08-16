@@ -1,23 +1,9 @@
-import { ComponentProps } from "react";
+import { JSX } from "hono/jsx";
 
-interface SpinnerIconProps extends ComponentProps<"svg"> {}
-
-export function SpinnerIcon(props: SpinnerIconProps) {
+export const SpinnerIcon = (props: JSX.HTMLAttributes) => {
 	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			fill="none"
-			viewBox="0 0 24 24"
-			stroke="currentColor"
-			strokeWidth={2}
-			aria-hidden="true"
-			{...props}
-		>
-			<path
-				strokeLinecap="round"
-				strokeLinejoin="round"
-				d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10"
-			/>
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+			<path d="M10.72,19.9a8,8,0,0,1-6.5-9.79A7.77,7.77,0,0,1,10.4,4.16a8,8,0,0,1,9.49,6.52A1.54,1.54,0,0,0,21.38,12h.13a1.37,1.37,0,0,0,1.38-1.54,11,11,0,1,0-12.7,12.39A1.54,1.54,0,0,0,12,21.34h0A1.47,1.47,0,0,0,10.72,19.9Z" />
 		</svg>
 	);
-}
+};

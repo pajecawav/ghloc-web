@@ -1,22 +1,30 @@
-import classNames from "classnames";
-import { ComponentPropsWithoutRef, forwardRef } from "react";
+import { Child, JSX } from "hono/jsx";
+import { cn } from "~/lib/utils";
 
-type Props = ComponentPropsWithoutRef<"input">;
+type InputProps = JSX.IntrinsicElements["input"] & {
+	after?: Child;
+	inputClass?: string;
+};
 
-export const Input = forwardRef<HTMLInputElement, Props>(function Input(
-	{ className, ...props }: Props,
-	ref,
-) {
+export const Input = ({ class: _class, inputClass, after, ...props }: InputProps) => {
 	return (
-		<input
-			className={classNames(
-				"px-3 py-0.5 transition-[border-color] duration-100 rounded-md !outline-none appearance-none font-sm text-normal bg-normal placeholder-text-muted",
-				"border-2 border-normal focus:border-active",
-				className,
+		<div
+			class={cn(
+				"relative flex items-center rounded-md transition-colors duration-100",
+				"border-border focus-within:border-border-focus border-2",
+				after && "pr-7",
+				_class,
 			)}
-			size={1}
-			ref={ref}
-			{...props}
-		/>
+		>
+			<input
+				class={cn(
+					"font-sm placeholder-muted w-full appearance-none px-3 py-0.5 !outline-none",
+					inputClass,
+				)}
+				size={1}
+				{...props}
+			/>
+			{after && <span class="absolute right-2">{after}</span>}
+		</div>
 	);
-});
+};

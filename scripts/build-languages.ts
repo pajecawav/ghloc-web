@@ -4,6 +4,8 @@ import languagesJson from "./languages.json";
 
 const languages = languagesJson.languages;
 
+const out = resolve(import.meta.dirname, "..", "src/languages-map.json");
+
 type ExtensionsMap = Record<string, string>;
 type FilenamesMap = Record<string, string>;
 
@@ -32,12 +34,8 @@ function buildLanguagesMap() {
 		extensions: extensionsMap,
 	};
 
-	fs.writeFileSync(
-		resolve(__dirname, "..", "src/languages-map.json"),
-		JSON.stringify(languagesMap),
-		"utf8",
-	);
+	fs.writeFileSync(out, JSON.stringify(languagesMap), "utf8");
 }
 
-console.log("Building languages map...");
+console.log(`Generating languages map to ${out}`);
 buildLanguagesMap();
