@@ -73,7 +73,7 @@ export const ghApi = {
 	),
 
 	getFileMeta: cachedApiFunction(
-		"ghApi.getFile",
+		"ghApi.getFileMeta",
 		async (owner: string, repo: string, path: string, branch: string) => {
 			const url = getRawGitHubFileUrl(owner, repo, branch, path);
 
