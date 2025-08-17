@@ -12,13 +12,18 @@ export default defineEventHandler(async event => {
 		format?: string;
 	}>(event);
 
+	const { timing } = event.context;
+
 	let locs: Locs;
 	try {
 		if (!branch) {
-			branch = (await ghApi.getRepo(owner, repo)).default_branch;
+			branch = (await timing.timeAsync("branch", () => ghApi.getRepo(owner, repo)))
+				.default_branch;
 		}
 
-		locs = await ghlocApi.getLocs({ owner, repo, branch, filter });
+		locs = await timing.timeAsync("locs", () =>
+			ghlocApi.getLocs({ owner, repo, branch, filter }),
+		);
 	} catch (e) {
 		console.error("Failed to fetch locs", e);
 		throw createError({ statusCode: 500, statusMessage: "Failed to fetch locs" });

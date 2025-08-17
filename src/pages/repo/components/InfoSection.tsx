@@ -8,13 +8,16 @@ import { formatBytes } from "~/lib/format";
 import { ghApi } from "~/lib/github/api";
 import { removeProtocol } from "~/lib/utils";
 import { CommonSectionProps } from "../types";
+import { useSSRContext } from "~/lib/context";
 
 type InfoSectionProps = CommonSectionProps;
 
 export const InfoSection = async ({ owner, repo }: InfoSectionProps) => {
+	const { timing } = useSSRContext();
+
 	let data;
 	try {
-		data = await ghApi.getRepo(owner, repo);
+		data = await timing.timeAsync("repo", () => ghApi.getRepo(owner, repo));
 	} catch (error) {
 		console.error(error);
 

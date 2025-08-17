@@ -1,4 +1,5 @@
 import { Heading } from "~/components/Heading";
+import { useSSRContext } from "~/lib/context";
 import { ghApi } from "~/lib/github/api";
 import { RepoCard } from "./components/RepoCard";
 
@@ -7,7 +8,9 @@ interface OwnerPageProps {
 }
 
 export const OwnerPage = async ({ owner }: OwnerPageProps) => {
-	const repos = await ghApi.getRepos(owner);
+	const { timing } = useSSRContext();
+
+	const repos = await timing.timeAsync("repos", () => ghApi.getRepos(owner));
 
 	return (
 		<div className="flex flex-col gap-5">

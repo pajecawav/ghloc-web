@@ -5,6 +5,7 @@ import { cn } from "~/lib/utils";
 import { CommonSectionProps } from "../types";
 import { Section } from "./Section";
 import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
+import { useSSRContext } from "~/lib/context";
 
 type HealthSectionProps = CommonSectionProps;
 
@@ -43,9 +44,11 @@ const HealthSectionItem = ({ text, url }: { text: string; url?: string }) => {
 };
 
 export const HealthSection = async ({ owner, repo }: HealthSectionProps) => {
+	const { timing } = useSSRContext();
+
 	let health;
 	try {
-		health = await ghApi.getRepoHealth(owner, repo);
+		health = await timing.timeAsync("heatlh", () => ghApi.getRepoHealth(owner, repo));
 	} catch (error) {
 		console.error(error);
 

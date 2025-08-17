@@ -97,8 +97,8 @@ importers:
         specifier: ^4.1.12
         version: 4.1.12
       tiny-server-timing:
-        specifier: ^0.1.5
-        version: 0.1.5
+        specifier: ^0.1.6
+        version: 0.1.6
       tsx:
         specifier: ^4.20.4
         version: 4.20.4
@@ -4934,8 +4934,8 @@ packages:
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
 
-  tiny-server-timing@0.1.5:
-    resolution: {integrity: sha512-wyFV0KRAdV6qUHoJVutTLdPj4P+DMQeG1IiO0hGKbUrfl7GGUiNiesq2mRQLSsVl5bL10Y7wSGdY93+Kzmdf1g==}
+  tiny-server-timing@0.1.6:
+    resolution: {integrity: sha512-LumUbE/KO6jCifLWMoz5tTVKqmdjyWYZuD/d/s7mEv1GIHta94CUlwT3lE0Am+yHx1vMg6ou4ao4ByBoHpy3jg==}
 
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
@@ -10547,7 +10547,7 @@ snapshots:
 
   tiny-inflate@1.0.3: {}
 
-  tiny-server-timing@0.1.5: {}
+  tiny-server-timing@0.1.6: {}
 
   tinyexec@0.3.2: {}
 

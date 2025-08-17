@@ -46,12 +46,15 @@ export const renderPage = async (
 	// TODO: cookie or ls?
 	// const theme = (getCookie(event, THEME_COOKIE) ?? DEFAULT_THEME) as Theme;
 
+	const timing = event.context.timing;
+
 	const context: SSRContextValue = {
 		url: getRequestURL(event),
 		meta: {
 			title,
 			ogImage,
 		},
+		timing,
 		assets,
 		preconnect,
 		preload,

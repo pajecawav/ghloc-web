@@ -1,4 +1,5 @@
 import { createContext, useContext } from "hono/jsx";
+import { ServerTiming } from "tiny-server-timing";
 import { Manifest } from "vite";
 import { Assets } from "~/assets";
 import { PreloadEntry } from "./preload";
@@ -10,6 +11,7 @@ export interface SSRContextValue {
 		title?: string;
 		ogImage?: string;
 	};
+	timing: ServerTiming;
 	assets: Assets;
 	preconnect: string[];
 	preload?: PreloadEntry[];

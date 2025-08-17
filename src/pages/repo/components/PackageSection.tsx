@@ -6,15 +6,20 @@ import { npmApi } from "~/lib/npm/api";
 import { CommonSectionProps } from "../types";
 import { PackageSectionFallback } from "./PackageSectionFallback";
 import { Section } from "./Section";
+import { useSSRContext } from "~/lib/context";
 
 interface PackageSectionProps extends CommonSectionProps {
 	branch: string;
 }
 
 export const PackageSection = async ({ owner, repo, branch }: PackageSectionProps) => {
+	const { timing } = useSSRContext();
+
 	let packageJsonRaw;
 	try {
-		packageJsonRaw = await ghApi.getFile(owner, repo, "package.json", branch);
+		packageJsonRaw = await timing.timeAsync("pkgJson", () =>
+			ghApi.getFile(owner, repo, "package.json", branch),
+		);
 	} catch (error) {
 		console.error(error);
 
@@ -38,8 +43,8 @@ export const PackageSection = async ({ owner, repo, branch }: PackageSectionProp
 	}
 
 	const [bundle, npm] = await Promise.all([
-		bundleJsApi.getPackageSize(pkg.name).catch(() => null),
-		npmApi.getPackage(pkg.name).catch(() => null),
+		timing.timeAsync("bundle", () => bundleJsApi.getPackageSize(pkg.name).catch(() => null)),
+		timing.timeAsync("npm", () => npmApi.getPackage(pkg.name).catch(() => null)),
 	]);
 
 	const version = bundle?.version.split("@").at(-1);

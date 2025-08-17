@@ -9,8 +9,12 @@ export default defineEventHandler(async event => {
 	const { owner, repo } = getRouterParams(event);
 	const { branch, filter } = getQuery<{ branch?: string; filter?: string }>(event);
 
+	const { timing } = event.context;
+
 	if (!branch) {
-		const { default_branch } = await ghApi.getRepo(owner, repo);
+		const { default_branch } = await timing.timeAsync("branch", () =>
+			ghApi.getRepo(owner, repo),
+		);
 
 		const url = new URL(getRequestURL(event));
 		url.searchParams.set("branch", default_branch);
