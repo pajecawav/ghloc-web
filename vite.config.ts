@@ -36,9 +36,9 @@ export default defineConfig({
 		rollupOptions: {
 			input: [CLIENT_ENTRY],
 			preserveEntrySignatures: "allow-extension",
-			// output: {
-			// 	experimentalMinChunkSize: 10_000,
-			// },
+			output: {
+				experimentalMinChunkSize: 10_000,
+			},
 		},
 	},
 	plugins: [
