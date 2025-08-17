@@ -11,3 +11,4 @@ dist-vite
 .cache
 .output
 .env
+.vercel
