@@ -52,7 +52,7 @@ export const InfoSection = async ({ owner, repo }: InfoSectionProps) => {
 				/>
 			</div>
 
-			{data.topics && (
+			{data.topics && data.topics.length !== 0 && (
 				<div class="flex flex-wrap gap-1">
 					{data.topics.map(topic => (
 						<Badge mode="accent" class="px-3">
@@ -62,21 +62,23 @@ export const InfoSection = async ({ owner, repo }: InfoSectionProps) => {
 				</div>
 			)}
 
-			<div class="flex flex-col gap-1">
-				<p>{data.description}</p>
+			{(data.description || data.homepage) && (
+				<div class="flex flex-col gap-1">
+					{data.description && <p>{data.description}</p>}
 
-				{data.homepage && (
-					<Link
-						class="text-link flex max-w-full items-center gap-1 self-start hover:underline"
-						href={data.homepage}
-						target="_blank"
-						rel="noreferrer"
-					>
-						<ExternalLinkIcon class="inline-block h-4 w-4 shrink-0" />
-						<span class="truncate">{removeProtocol(data.homepage)}</span>
-					</Link>
-				)}
-			</div>
+					{data.homepage && (
+						<Link
+							class="text-link flex max-w-full items-center gap-1 self-start hover:underline"
+							href={data.homepage}
+							target="_blank"
+							rel="noreferrer"
+						>
+							<ExternalLinkIcon class="inline-block h-4 w-4 shrink-0" />
+							<span class="truncate">{removeProtocol(data.homepage)}</span>
+						</Link>
+					)}
+				</div>
+			)}
 		</>
 	);
 };

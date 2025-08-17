@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
 	{
-		ignores: [".output", ".nitro", "dist", "dist-vite"],
+		ignores: [".output", ".nitro", ".vercel", "dist", "dist-vite"],
 	},
 	{
 		extends: [eslint.configs.recommended, ...tseslint.configs.recommended],
