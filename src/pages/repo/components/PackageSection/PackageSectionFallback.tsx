@@ -1,6 +1,6 @@
-import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
-import { Section } from "./Section";
 import { Child } from "hono/jsx";
+import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
+import { Section } from "../Section";
 
 interface PackageSectionFallbackProps {
 	children?: Child;

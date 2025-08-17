@@ -1,7 +1,6 @@
 import { getGhlocGetLocsUrl } from "~/lib/ghloc/api";
 import { ghApi } from "~/lib/github/api";
 import { RepoPage } from "~/pages/repo";
-import CommitsSectionContent from "~/pages/repo/components/CommitsSection/CommitsSectionContent.island.lazy";
 import LocsSection from "~/pages/repo/components/LocsSection/LocsSection.island.lazy";
 import { renderPage } from "~/render";
 
@@ -35,6 +34,6 @@ export default defineEventHandler(async event => {
 				crossorigin: "anonymous",
 			},
 		],
-		preloadIslands: [LocsSection, CommitsSectionContent],
+		preloadIslands: [LocsSection],
 	});
 });

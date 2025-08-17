@@ -1,3 +1,4 @@
+import { $fetch } from "ofetch";
 import { cachedApiFunction } from "../cache";
 
 export interface BundleJsApiGetPackageSizeResponse {
@@ -18,9 +19,13 @@ export interface BundleJsApiGetPackageSizeResponse {
 }
 
 export const bundleJsApi = {
-	getPackageSize: cachedApiFunction("bundleJsApi.getPackageSize", (pkg: string) => {
-		return $fetch<BundleJsApiGetPackageSizeResponse>(
-			`https://deno.bundlejs.com/?q=${encodeURIComponent(pkg)}`,
-		);
-	}),
+	getPackageSize: cachedApiFunction(
+		"bundleJsApi.getPackageSize",
+		(pkg: string, timeout?: number) => {
+			return $fetch<BundleJsApiGetPackageSizeResponse>(
+				`https://deno.bundlejs.com/?q=${encodeURIComponent(pkg)}`,
+				{ timeout },
+			);
+		},
+	),
 };

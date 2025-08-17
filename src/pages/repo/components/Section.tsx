@@ -2,7 +2,7 @@ import { Child } from "hono/jsx";
 import { Heading } from "~/components/Heading";
 
 interface SectionProps {
-	title: string;
+	title: Child;
 	children: Child;
 }
 

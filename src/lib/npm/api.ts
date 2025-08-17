@@ -1,6 +1,6 @@
 import { cachedApiFunction } from "../cache";
 
-interface NpmApiGetPackageResponse {
+export interface NpmApiGetPackageResponse {
 	pacakge: string;
 	downloads: number;
 	start: string;
