@@ -25,13 +25,17 @@ export default function PackageSectionContent({
 		initialData: _bundle ?? undefined,
 	});
 
+	const title = "Package";
+
+	const placeholder = <span class="text-muted">failed to load</span>;
+
 	if (status === "error") {
 		return <PackageSectionFallback />;
 	}
 
 	if (!bundle) {
 		return (
-			<Section title={<Skeleton class="inline-flex w-24" />}>
+			<Section title={title}>
 				<ul>
 					<li>
 						<Skeleton class="inline-flex w-16" />
@@ -53,10 +57,8 @@ export default function PackageSectionContent({
 		);
 	}
 
-	const placeholder = <span class="text-muted">failed to load</span>;
-
 	return (
-		<Section title="Package">
+		<Section title={title}>
 			<ul>
 				<li>
 					<Link

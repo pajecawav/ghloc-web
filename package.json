@@ -25,6 +25,7 @@
 	"dependencies": {
 		"@vercel/analytics": "^1.5.0",
 		"@vercel/og": "^0.8.5",
+		"@vercel/speed-insights": "^1.2.0",
 		"dayjs": "^1.11.13",
 		"devalue": "^5.1.1",
 		"ofetch": "^1.4.1"
