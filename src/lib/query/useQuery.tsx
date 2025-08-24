@@ -9,9 +9,9 @@ interface QueryFnContext<TKey extends QueryKey> {
 }
 
 type QueryState<TData> =
-	| { status: "pending"; data: undefined }
-	| { status: "success"; data: TData }
-	| { status: "fetching"; data?: TData }
+	| { status: "pending"; data: undefined; error: null }
+	| { status: "success"; data: TData; error: null }
+	| { status: "fetching"; data?: TData; error: null }
 	| { status: "error"; data?: TData; error: unknown };
 
 export interface UseQueryOptions<TData, TKey extends QueryKey> {
@@ -44,10 +44,10 @@ export const useQuery = <TData, TKey extends QueryKey>({
 				cache.set(key, initialData);
 			}
 
-			return { status: "success", data: initialData };
+			return { status: "success", data: initialData, error: null };
 		}
 
-		return { status: "pending", data: undefined };
+		return { status: "pending", data: undefined, error: null };
 	});
 
 	useEffect(() => {
@@ -57,18 +57,18 @@ export const useQuery = <TData, TKey extends QueryKey>({
 
 		const cachedData = cache.get(key) as TData | undefined;
 		if (cachedData !== undefined) {
-			setState({ status: "success", data: cachedData });
+			setState({ status: "success", data: cachedData, error: null });
 			return;
 		}
 
 		const ac = new AbortController();
 
-		setState(prev => ({ status: "fetching", data: prev.data }));
+		setState(prev => ({ status: "fetching", data: prev.data, error: null }));
 
 		queryFn({ queryKey, signal: ac.signal })
 			.then(data => {
 				cache.set(key, data);
-				setState({ status: "success", data });
+				setState({ status: "success", data, error: null });
 			})
 			.catch(error => {
 				// TODO: what to do on aborted

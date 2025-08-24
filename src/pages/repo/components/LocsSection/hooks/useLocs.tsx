@@ -1,6 +1,8 @@
-import { useMemo } from "hono/jsx";
+import { useEffect, useMemo } from "hono/jsx";
+import { FetchError } from "ofetch";
 import { ghlocApi, Locs, LocsChild } from "~/lib/ghloc/api";
 import { useQuery } from "~/lib/query/useQuery";
+import { toast } from "~/lib/toasts/toasts";
 
 export type SortOrder = "type" | "locs";
 
@@ -26,6 +28,21 @@ export function useLocs(
 		queryKey: ["locs", owner, repo, branch, filter],
 		queryFn: () => ghlocApi.getLocs({ owner, repo, branch, filter }),
 	});
+
+	useEffect(() => {
+		if (!query.error) {
+			return;
+		}
+
+		let content: string;
+		if (query.error instanceof FetchError) {
+			content = `Failed to load LOC stats: ${query.error.data?.error}`;
+		} else {
+			content = "Failed to load LOC stats.";
+		}
+
+		toast.show({ type: "error", content });
+	}, [query.error]);
 
 	const locs = "data" in query ? query.data : null;
 
