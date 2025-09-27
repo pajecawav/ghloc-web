@@ -48,7 +48,7 @@
 		"eslint": "^9.36.0",
 		"hono": "^4.9.8",
 		"husky": "^9.1.7",
-		"lint-staged": "^16.1.6",
+		"lint-staged": "^16.2.0",
 		"nitropack": "^2.12.6",
 		"npm-run-all": "^4.1.5",
 		"prettier": "^3.6.2",
@@ -58,11 +58,11 @@
 		"tiny-server-timing": "^0.1.6",
 		"tsx": "^4.20.5",
 		"typescript": "^5.9.2",
-		"typescript-eslint": "^8.44.0",
+		"typescript-eslint": "^8.44.1",
 		"unplugin": "^2.3.10",
-		"vite": "^7.1.6",
+		"vite": "^7.1.7",
 		"vite-plugin-pwa": "^1.0.3",
 		"vite-tsconfig-paths": "^5.1.4"
 	},
-	"packageManager": "pnpm@10.17.0+sha512.fce8a3dd29a4ed2ec566fb53efbb04d8c44a0f05bc6f24a73046910fb9c3ce7afa35a0980500668fa3573345bd644644fa98338fa168235c80f4aa17aa17fbef"
+	"packageManager": "pnpm@10.17.1+sha512.17c560fca4867ae9473a3899ad84a88334914f379be46d455cbf92e5cf4b39d34985d452d2583baf19967fa76cb5c17bc9e245529d0b98745721aa7200ecaf7a"
 }
