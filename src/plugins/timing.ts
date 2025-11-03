@@ -14,6 +14,8 @@ export default defineNitroPlugin(nitro => {
 	nitro.hooks.hook("afterResponse", event => {
 		const url = getRequestURL(event);
 
-		console.log(`${url} timings:\n`, event.context.timing.getEntries());
+		if (!url.pathname.endsWith(".js") && !url.pathname.endsWith(".css")) {
+			console.log(`${url} timings:\n`, event.context.timing.getEntries());
+		}
 	});
 });
