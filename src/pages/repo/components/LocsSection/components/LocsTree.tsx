@@ -27,7 +27,7 @@ export const LocsTree = ({ locs, selectedLanguage, onSelectLanguage }: LocsTreeP
 		<ul class={cn("divide-border divide-y", !entries.length && "h-40")}>
 			{entries.map(([lang, loc]) => (
 				<TreeItem
-					key={lang}
+					// key={lang}
 					class={cn(lang === selectedLanguage && "bg-tree-active")}
 					text={lang}
 					after={renderLoc(loc, totalLocs)}
