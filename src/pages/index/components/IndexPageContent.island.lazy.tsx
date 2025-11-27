@@ -49,6 +49,15 @@ export default function IndexPageContent() {
 		}
 	};
 
+	const onKeyDown = (e: KeyboardEvent) => {
+		if (e.key !== "Enter") return;
+
+		const singleResult = query.status === "success" ? query.data?.items?.[0] : undefined;
+		if (!singleResult || (query.data?.items?.length ?? 0) !== 1) return;
+
+		location.href = `/${singleResult.full_name}?branch=${encodeURIComponent(singleResult.default_branch)}`;
+	};
+
 	return (
 		<div class="group mx-auto flex w-full max-w-xl flex-grow flex-col gap-4 md:justify-center">
 			<div class="max-h-0.5 flex-grow md:max-h-16" />
@@ -57,6 +66,7 @@ export default function IndexPageContent() {
 
 			<div class="flex-shrink-0">
 				<Input
+					onKeyDown={onKeyDown}
 					ref={inputRef}
 					value={queryValue}
 					onChange={onChange}
