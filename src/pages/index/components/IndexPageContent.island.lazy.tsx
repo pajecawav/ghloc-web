@@ -29,9 +29,20 @@ export default function IndexPageContent() {
 	const onChange = (e: Event) => {
 		if (e.target instanceof HTMLInputElement) {
 			const newQuery = e.target.value;
+			const shouldSanitize =
+				"inputType" in e && (e as InputEvent).inputType === "insertFromPaste";
+			const sanitizedQuery = shouldSanitize
+				? newQuery
+						.trim()
+						.replace(/^https?:\/\//i, "")
+						.replace(/^www\./i, "")
+						.replace(/^github\.com\//i, "")
+						.replace(/\.git$/i, "")
+						.replace(/\/$/, "")
+				: newQuery;
 
 			router.setSearch(prev => {
-				prev.set("query", newQuery);
+				prev.set("query", sanitizedQuery);
 
 				return prev;
 			});
