@@ -8,7 +8,7 @@
 		"build:sitemap": "tsx scripts/build-sitemap.ts",
 		"build:vite": "vite build",
 		"build:nitro": "nitro build",
-		"dev": "cross-env FORCE_COLOR=1 npm-run-all -l -s prepare:nitro -p dev:*",
+		"dev": "cross-env FORCE_COLOR=1 npm-run-all -l -s build:languages prepare:nitro -p dev:*",
 		"dev:vite": "vite --watch build",
 		"dev:nitro": "cross-env NODE_OPTIONS=--enable-source-maps nitro dev",
 		"preview": "cross-env NODE_OPTIONS=--enable-source-maps node .output/server/index.mjs",
