@@ -6,6 +6,9 @@ export default defineNitroConfig({
 	compatibilityDate: "2025-07-22",
 	srcDir: "src",
 	errorHandler: "~/error",
+	experimental: {
+		wasm: true,
+	},
 	compressPublicAssets: {
 		gzip: true,
 		brotli: true,
