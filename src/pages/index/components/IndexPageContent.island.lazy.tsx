@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "hono/jsx";
+import { useEffect, useLayoutEffect, useRef, useState } from "hono/jsx";
 import { SearchIcon } from "~/components/icons/SearchIcon";
 import { SpinnerIcon } from "~/components/icons/SpinnerIcon";
 import { Input } from "~/components/Input";
@@ -18,6 +18,8 @@ export default function IndexPageContent() {
 	const queryValue = router.search.get("query") ?? "";
 	const debouncedQuery = useDebouncedValue(queryValue, 750);
 
+	const [activeIndex, setActiveIndex] = useState(0);
+
 	const query = useQuery({
 		queryKey: ["searchRepos", debouncedQuery],
 		queryFn: () => ghApi.searchRepos(debouncedQuery),
@@ -27,6 +29,10 @@ export default function IndexPageContent() {
 	useEffect(() => {
 		inputRef.current?.focus();
 	}, []);
+
+	useLayoutEffect(() => {
+		setActiveIndex(0);
+	}, [query?.data]);
 
 	const onChange = (e: Event) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -49,12 +55,19 @@ export default function IndexPageContent() {
 	};
 
 	const onKeyDown = (e: KeyboardEvent) => {
-		if (e.key !== "Enter") return;
+		if (e.key === "Enter") {
+			const item = query.data?.items[activeIndex];
 
-		const singleResult = query.status === "success" ? query.data?.items?.[0] : undefined;
-		if (!singleResult || (query.data?.items?.length ?? 0) !== 1) return;
-
-		location.href = `/${singleResult.full_name}?branch=${encodeURIComponent(singleResult.default_branch)}`;
+			if (item) {
+				location.href = `/${item.full_name}?branch=${encodeURIComponent(item.default_branch)}`;
+			}
+		} else if (e.key === "ArrowDown") {
+			setActiveIndex(Math.min(activeIndex + 1, (query.data?.items.length ?? 1) - 1));
+			e.preventDefault();
+		} else if (e.key === "ArrowUp") {
+			setActiveIndex(Math.max(activeIndex - 1, 0));
+			e.preventDefault();
+		}
 	};
 
 	return (
@@ -95,7 +108,11 @@ export default function IndexPageContent() {
 			</div>
 
 			<div class="h-0 flex-grow md:max-h-[36rem]">
-				<SearchResults items={query.data?.items} />
+				<SearchResults
+					activeIndex={activeIndex}
+					onChangeActiveIndex={setActiveIndex}
+					items={query.data?.items}
+				/>
 			</div>
 		</div>
 	);

@@ -1,12 +1,20 @@
+import { useCallback } from "hono/jsx";
 import { RepoStats } from "~/components/RepoStats";
 import { GHApiSearchReposResponse } from "~/lib/github/api";
 import { cn } from "~/lib/utils";
 
 interface SearchResultsProps {
+	activeIndex: number;
+	onChangeActiveIndex: (activeIndex: number) => void;
 	items?: GHApiSearchReposResponse["items"];
 }
 
-export const SearchResults = ({ items }: SearchResultsProps) => {
+export const SearchResults = ({ activeIndex, onChangeActiveIndex, items }: SearchResultsProps) => {
+	const scrollIntoView = useCallback((node: HTMLElement) => {
+		node?.scrollIntoView({ block: "nearest" });
+	}, []);
+	const activeItem = items?.[activeIndex];
+
 	return (
 		<div
 			class={cn(
@@ -21,22 +29,30 @@ export const SearchResults = ({ items }: SearchResultsProps) => {
 					),
 			)}
 		>
-			{items?.map(result => (
-				<a
-					class={cn(
-						"relative block cursor-pointer px-6 py-3 !outline-none select-none",
-						"hover:bg-tree-active focus-visible:bg-tree-active",
-					)}
-					href={`/${result.full_name}?branch=${encodeURIComponent(result.default_branch)}`}
-					key={result.id}
-				>
-					<div>{result.full_name}</div>
-					{result.description && (
-						<div class="text-muted text-sm">{result.description}</div>
-					)}
-					<RepoStats class="mt-1" stars={result.stargazers_count} forks={result.forks} />
-				</a>
-			))}
+			{items?.map((item, index) => {
+				const isActive = item === activeItem;
+
+				return (
+					<a
+						class={cn(
+							"relative block cursor-pointer px-6 py-3 !outline-none select-none",
+							// "hover:bg-tree-active focus-visible:bg-tree-active",
+							isActive && "bg-tree-active",
+						)}
+						href={`/${item.full_name}?branch=${encodeURIComponent(item.default_branch)}`}
+						key={item.id}
+						onPointerEnter={() => onChangeActiveIndex(index)}
+						onFocusIn={() => onChangeActiveIndex(index)}
+						ref={isActive ? scrollIntoView : undefined}
+					>
+						<div>{item.full_name}</div>
+						{item.description && (
+							<div class="text-muted text-sm">{item.description}</div>
+						)}
+						<RepoStats class="mt-1" stars={item.stargazers_count} forks={item.forks} />
+					</a>
+				);
+			})}
 		</div>
 	);
 };
