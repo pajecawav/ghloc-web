@@ -9,6 +9,8 @@ import { useRouter } from "~/lib/router/useRouter";
 import { cn } from "~/lib/utils";
 import { SearchResults } from "./SearchResults";
 
+const githubUrlRegex = /(https?:\/\/)?github.com\/(?<owner>[^/]+)\/(?<repo>[^/]+)(\/[^$]+)?/;
+
 export default function IndexPageContent() {
 	const router = useRouter();
 
@@ -28,21 +30,18 @@ export default function IndexPageContent() {
 
 	const onChange = (e: Event) => {
 		if (e.target instanceof HTMLInputElement) {
-			const newQuery = e.target.value;
-			const shouldSanitize =
-				"inputType" in e && (e as InputEvent).inputType === "insertFromPaste";
-			const sanitizedQuery = shouldSanitize
-				? newQuery
-						.trim()
-						.replace(/^https?:\/\//i, "")
-						.replace(/^www\./i, "")
-						.replace(/^github\.com\//i, "")
-						.replace(/\.git$/i, "")
-						.replace(/\/$/, "")
-				: newQuery;
+			let newQuery = e.target.value;
+
+			if ("inputType" in e && (e as InputEvent).inputType === "insertFromPaste") {
+				const match = newQuery.match(githubUrlRegex);
+				if (match?.groups) {
+					const { owner, repo } = match.groups;
+					newQuery = `${owner}/${repo}`;
+				}
+			}
 
 			router.setSearch(prev => {
-				prev.set("query", sanitizedQuery);
+				prev.set("query", newQuery);
 
 				return prev;
 			});
