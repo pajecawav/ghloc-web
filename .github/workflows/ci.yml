@@ -11,7 +11,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v5
+            - uses: actions/checkout@v6
 
             - uses: pnpm/action-setup@v4
 
@@ -28,3 +28,33 @@ jobs:
 
             - name: Lint
               run: pnpm lint
+
+    deno_deploy:
+        needs: ci
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v6
+
+            - uses: pnpm/action-setup@v4
+
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: 22.21.1
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Build for Deno
+              run: pnpm build
+              env:
+                  NITRO_PRESET: deno_deploy
+
+            - name: Deploy to Deno Deploy
+              uses: denoland/deployctl@v1
+              with:
+                  project: ghloc
+                  entrypoint: server/index.ts
+                  root: .output
