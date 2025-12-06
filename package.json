@@ -23,9 +23,9 @@
 		"prepare:nitro": "nitropack prepare"
 	},
 	"dependencies": {
-		"@vercel/analytics": "^1.5.0",
+		"@vercel/analytics": "^1.6.1",
 		"@vercel/og": "^0.8.5",
-		"@vercel/speed-insights": "^1.2.0",
+		"@vercel/speed-insights": "^1.3.1",
 		"dayjs": "^1.11.19",
 		"devalue": "^5.5.0",
 		"ofetch": "^1.5.1"
@@ -46,23 +46,23 @@
 		"@types/node": "^24.10.1",
 		"cross-env": "^10.1.0",
 		"eslint": "^9.39.1",
-		"hono": "^4.10.6",
+		"hono": "^4.10.7",
 		"husky": "^9.1.7",
-		"lint-staged": "^16.2.6",
+		"lint-staged": "^16.2.7",
 		"nitropack": "^2.12.9",
 		"npm-run-all": "^4.1.5",
-		"prettier": "^3.6.2",
-		"prettier-plugin-tailwindcss": "^0.7.1",
-		"rimraf": "^6.1.0",
+		"prettier": "^3.7.4",
+		"prettier-plugin-tailwindcss": "^0.7.2",
+		"rimraf": "^6.1.2",
 		"tailwindcss": "^4.1.17",
 		"tiny-server-timing": "^0.1.6",
-		"tsx": "^4.20.6",
+		"tsx": "^4.21.0",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.47.0",
-		"unplugin": "^2.3.10",
-		"vite": "^7.2.2",
-		"vite-plugin-pwa": "^1.1.0",
+		"typescript-eslint": "^8.48.1",
+		"unplugin": "^2.3.11",
+		"vite": "^7.2.6",
+		"vite-plugin-pwa": "^1.2.0",
 		"vite-tsconfig-paths": "^5.1.4"
 	},
-	"packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c"
+	"packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a"
 }
