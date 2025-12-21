@@ -28,3 +28,37 @@ jobs:
 
             - name: Lint
               run: pnpm lint
+
+    deno_deploy:
+        needs: ci
+
+        runs-on: ubuntu-latest
+
+        permissions:
+            id-token: write # Needed for auth with Deno Deploy
+            contents: read # Needed to clone the repository
+
+        steps:
+            - uses: actions/checkout@v6
+
+            - uses: pnpm/action-setup@v4
+
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: 24.12.0
+                  cache: pnpm
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Build for Deno
+              run: pnpm build
+              env:
+                  NITRO_PRESET: deno_deploy
+
+            - name: Deploy to Deno Deploy
+              uses: denoland/deployctl@v1
+              with:
+                  project: ghloc
+                  entrypoint: server/index.ts
+                  root: .output
