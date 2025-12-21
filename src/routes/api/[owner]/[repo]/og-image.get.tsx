@@ -42,27 +42,25 @@ export default defineEventHandler(async event => {
 	const topLangs = Object.entries(locs.locByLangs ?? {}).slice(0, 6);
 
 	return new ImageResponse(
-		(
-			<div
-				style={{
-					fontSize: 64,
-					background: colors.bg,
-					color: colors.text,
-					width: "100%",
-					height: "100%",
-					display: "flex",
-					flexDirection: "column",
-					alignItems: "stretch",
-				}}
-			>
-				<Header owner={owner} repo={repo} />
+		<div
+			style={{
+				fontSize: 64,
+				background: colors.bg,
+				color: colors.text,
+				width: "100%",
+				height: "100%",
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "stretch",
+			}}
+		>
+			<Header owner={owner} repo={repo} />
 
-				<div style={{ display: "flex", flex: 1 }}>
-					<TotalLocs totalLocs={totalLocs} />
-					<LangsList topLangs={topLangs} totalLocs={totalLocs} />
-				</div>
+			<div style={{ display: "flex", flex: 1 }}>
+				<TotalLocs totalLocs={totalLocs} />
+				<LangsList topLangs={topLangs} totalLocs={totalLocs} />
 			</div>
-		),
+		</div>,
 		{
 			headers: {
 				// override default cache
