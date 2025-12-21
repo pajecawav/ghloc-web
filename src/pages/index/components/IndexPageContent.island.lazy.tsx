@@ -9,7 +9,7 @@ import { useRouter } from "~/lib/router/useRouter";
 import { cn } from "~/lib/utils";
 import { SearchResults } from "./SearchResults";
 
-const githubUrlRegex = /(https?:\/\/)?github.com\/(?<owner>[^/]+)\/(?<repo>[^/]+)(\/[^$]+)?/;
+const githubUrlRegex = /(https?:\/\/)?github.com\/(?<owner>[^/]+)\/(?<repo>[^/?]+)(\/[^$]+)?/;
 
 export default function IndexPageContent() {
 	const router = useRouter();
