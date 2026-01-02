@@ -46,7 +46,7 @@
 		"@types/node": "^24.10.4",
 		"cross-env": "^10.1.0",
 		"eslint": "^9.39.2",
-		"hono": "^4.11.1",
+		"hono": "^4.11.3",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.2.7",
 		"nitropack": "^2.12.9",
@@ -58,11 +58,11 @@
 		"tiny-server-timing": "^0.1.6",
 		"tsx": "^4.21.0",
 		"typescript": "^5.9.3",
-		"typescript-eslint": "^8.50.0",
+		"typescript-eslint": "^8.51.0",
 		"unplugin": "^2.3.11",
 		"vite": "^7.3.0",
 		"vite-plugin-pwa": "^1.2.0",
 		"vite-tsconfig-paths": "^6.0.3"
 	},
-	"packageManager": "pnpm@10.26.0+sha512.3b3f6c725ebe712506c0ab1ad4133cf86b1f4b687effce62a9b38b4d72e3954242e643190fc51fa1642949c735f403debd44f5cb0edd657abe63a8b6a7e1e402"
+	"packageManager": "pnpm@10.26.2+sha512.0e308ff2005fc7410366f154f625f6631ab2b16b1d2e70238444dd6ae9d630a8482d92a451144debc492416896ed16f7b114a86ec68b8404b2443869e68ffda6"
 }
