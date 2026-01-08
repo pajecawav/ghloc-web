@@ -28,7 +28,7 @@ export default function ThemeToggle() {
 	const rawSetTheme = (theme: Theme) => {
 		const root = document.documentElement;
 
-		root.classList.toggle("dark", theme === Theme.DARK);
+		root.dataset.theme = theme;
 
 		localStorage.setItem(THEME_LS_KEY, theme);
 	};

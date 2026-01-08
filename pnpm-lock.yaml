@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@arborium/arborium':
+        specifier: ^2.6.0
+        version: 2.6.0
       '@vercel/analytics':
         specifier: ^1.6.1
         version: 1.6.1
@@ -131,6 +134,9 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       ajv: '>=8'
+
+  '@arborium/arborium@2.6.0':
+    resolution: {integrity: sha512-AFAj0SaNJRam427BleCBnKio4D4f5rjansARD0oL69Gx46dtCszOVXQYx4uDueUhyw3jBhw8NnevSfyX+watsA==}
 
   '@babel/code-frame@7.27.1':
     resolution: {integrity: sha512-cjQ7ZlQ0Mv3b47hABuTevyTuYN4i+loJKGeV9flcCgIK37cCXRh+L1bd3iBHlynerhQ7BhCkn2BPbQUL+rGqFg==}
@@ -4571,6 +4577,8 @@ snapshots:
       json-schema: 0.4.0
       jsonpointer: 5.0.1
       leven: 3.1.0
+
+  '@arborium/arborium@2.6.0': {}
 
   '@babel/code-frame@7.27.1':
     dependencies:

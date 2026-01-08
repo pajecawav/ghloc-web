@@ -20,7 +20,7 @@ const script = `
     const root = document.documentElement;
     const theme = getTheme();
 
-	root.classList.toggle("dark", theme === "${Theme.DARK}");
+    root.dataset.theme = theme;
 })();
 `;
 
