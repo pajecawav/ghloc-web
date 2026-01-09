@@ -1,0 +1,22 @@
+@reference "../../../../../client/index.css";
+
+@import "@arborium/arborium/themes/base.css";
+@import "@arborium/arborium/themes/github-light.css";
+@import "@arborium/arborium/themes/github-dark.css";
+
+.preview {
+	counter-reset: line;
+	counter-increment: line 0;
+	white-space: pre-wrap;
+	width: max-content;
+}
+
+.preview :global(.line)::before {
+	content: counter(line);
+	counter-increment: line;
+	text-align: right;
+	user-select: none;
+	display: inline-block;
+
+	@apply text-muted min-w-12 px-3;
+}

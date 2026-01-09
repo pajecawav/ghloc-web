@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
 	--breakpoint-xs: 30rem;
@@ -39,7 +39,7 @@
 	}
 }
 
-:where(.dark) {
+:where([data-theme="dark"]) {
 	--color-link: var(--color-blue-500);
 	--color-muted: var(--color-neutral-400);
 	--color-subtle: var(--color-neutral-300);
@@ -59,7 +59,7 @@ html {
 	touch-action: manipulation;
 }
 
-html.dark {
+html[data-theme="dark"] {
 	color-scheme: dark;
 }
 

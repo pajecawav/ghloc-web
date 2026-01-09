@@ -5,6 +5,11 @@ import { formatBytes } from "~/lib/format";
 import { ghApi } from "~/lib/github/api";
 import { getRawGitHubFileUrl } from "~/lib/github/utils";
 import { useQuery } from "~/lib/query/useQuery";
+import { CodePreview } from "./CodePreview";
+import { getLanguageFromExtension } from "~/lib/languages";
+
+// TODO: lazy import
+// const LazyCodePreview = lazy(() => import("./CodePreview"));
 
 interface FilePreviewProps {
 	owner: string;
@@ -39,7 +44,14 @@ export const FilePreview = ({ owner, repo, branch, path: pathProp, loc }: FilePr
 		case null:
 			return <UnsupportedFile url={url} size={metaQuery.data.size} />;
 		case "text":
-			return <PlainTextFile text={fileQuery.data!} size={metaQuery.data.size} loc={loc} />;
+			return (
+				<PlainTextFile
+					path={path}
+					text={fileQuery.data!}
+					size={metaQuery.data.size}
+					loc={loc}
+				/>
+			);
 		case "image":
 			return <ImageFile url={url} size={metaQuery.data.size} />;
 	}
@@ -67,9 +79,25 @@ const UnsupportedFile = ({ url, size }: { url: string; size: number }) => {
 	);
 };
 
-const PlainTextFile = ({ text, loc, size }: { text: string; loc: number; size: number }) => {
+const PlainTextFile = ({
+	path,
+	text,
+	loc,
+	size,
+}: {
+	path: string;
+	text: string;
+	loc: number;
+	size: number;
+}) => {
 	// ignore traling empty line
-	const lines = text.split("\n").slice(0, -1);
+	const lines = text.trimEnd().split("\n");
+
+	const extension = path.split(".").pop();
+	const filename = path.split("/").pop();
+	const language = extension
+		? (getLanguageFromExtension(extension, filename) ?? extension)
+		: extension;
 
 	return (
 		<div>
@@ -77,21 +105,8 @@ const PlainTextFile = ({ text, loc, size }: { text: string; loc: number; size: n
 				{lines.length} lines ({loc} sloc){" "}
 				<span className="text-muted mx-1 inline-block">|</span> {formatBytes(size)}
 			</Header>
-			<div className="overflow-x-auto py-1">
-				<table className="font-mono text-sm whitespace-nowrap">
-					<tbody>
-						{lines.map((line, index) => (
-							<tr key={index}>
-								<td className="text-muted min-w-[3rem] px-3 text-right select-none">
-									{index + 1}
-								</td>
-								<td className="pr-3">
-									<pre>{line}</pre>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+			<div className="overflow-x-auto py-1 font-mono text-sm whitespace-nowrap">
+				<CodePreview lang={language} code={text} />
 			</div>
 		</div>
 	);
