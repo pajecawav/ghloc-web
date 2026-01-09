@@ -1,14 +1,12 @@
 import path from "path";
 import { CLIENT_ENTRY } from "./config";
 import { islands } from "./src/lib/island/plugin";
+import copy from "rollup-plugin-copy";
 
 export default defineNitroConfig({
 	compatibilityDate: "2025-07-22",
 	srcDir: "src",
 	errorHandler: "~/error",
-	experimental: {
-		wasm: true,
-	},
 	compressPublicAssets: {
 		gzip: true,
 		brotli: true,
@@ -17,7 +15,20 @@ export default defineNitroConfig({
 		clientEntry: path.normalize(CLIENT_ENTRY),
 	},
 	rollupConfig: {
-		plugins: [islands.rollup()],
+		plugins: [
+			islands.rollup(),
+			copy({
+				targets: [
+					{
+						src: "node_modules/@vercel/og/dist/noto-sans-v27-latin-regular.ttf",
+						dest: "./.output/server",
+					},
+				],
+			}),
+		],
+	},
+	experimental: {
+		wasm: true,
 	},
 	timing: true,
 	publicAssets: [
