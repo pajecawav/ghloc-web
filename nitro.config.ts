@@ -1,7 +1,8 @@
+import { copyFile } from "fs/promises";
 import path from "path";
+import { createUnplugin } from "unplugin";
 import { CLIENT_ENTRY } from "./config";
 import { islands } from "./src/lib/island/plugin";
-import copy from "rollup-plugin-copy";
 
 export default defineNitroConfig({
 	compatibilityDate: "2025-07-22",
@@ -17,14 +18,15 @@ export default defineNitroConfig({
 	rollupConfig: {
 		plugins: [
 			islands.rollup(),
-			copy({
-				targets: [
-					{
-						src: "node_modules/@vercel/og/dist/noto-sans-v27-latin-regular.ttf",
-						dest: "./.output/server",
-					},
-				],
-			}),
+			createUnplugin(() => ({
+				name: "copy-font",
+				async buildEnd() {
+					await copyFile(
+						"node_modules/@vercel/og/dist/noto-sans-v27-latin-regular.ttf",
+						"./.output/server/noto-sans-v27-latin-regular.ttf",
+					);
+				},
+			})).rollup(),
 		],
 	},
 	experimental: {

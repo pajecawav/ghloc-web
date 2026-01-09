@@ -55,7 +55,6 @@
 		"prettier": "^3.7.4",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"rimraf": "^6.1.2",
-		"rollup-plugin-copy": "^3.5.0",
 		"tailwindcss": "^4.1.18",
 		"tiny-server-timing": "^0.1.6",
 		"tsx": "^4.21.0",
