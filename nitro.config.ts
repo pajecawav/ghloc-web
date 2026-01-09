@@ -1,4 +1,6 @@
+import { copyFile } from "fs/promises";
 import path from "path";
+import { createUnplugin } from "unplugin";
 import { CLIENT_ENTRY } from "./config";
 import { islands } from "./src/lib/island/plugin";
 
@@ -14,7 +16,23 @@ export default defineNitroConfig({
 		clientEntry: path.normalize(CLIENT_ENTRY),
 	},
 	rollupConfig: {
-		plugins: [islands.rollup()],
+		plugins: [
+			islands.rollup(),
+			createUnplugin(() => ({
+				name: "copy-font",
+				async buildEnd() {
+					if (process.env.NITRO_PRESET === "deno_deploy") {
+						await copyFile(
+							"node_modules/@vercel/og/dist/noto-sans-v27-latin-regular.ttf",
+							"./.output/server/noto-sans-v27-latin-regular.ttf",
+						);
+					}
+				},
+			})).rollup(),
+		],
+	},
+	experimental: {
+		wasm: true,
 	},
 	timing: true,
 	publicAssets: [
