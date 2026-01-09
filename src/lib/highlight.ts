@@ -11,6 +11,18 @@ const LANGUAGE_OVERRIDES: Record<string, string | undefined> = {
 	patch: "diff",
 	gv: "dot",
 	"emacs lisp": "elisp",
+	sass: "scss",
+	"nginx configuration": "nginx",
+	"objective-c++": "objc",
+	ps: "postscript",
+	res: "rescript",
+	"rusty object notation": "ron",
+	racket: "scheme",
+	bazel: "starlark",
+	"tla+": "tlaplus",
+	"visual basic": "vb",
+	systemverilog: "verilog",
+	"vim script": "vim",
 };
 
 export const highlightCode = async (code: string, language?: string | null) => {

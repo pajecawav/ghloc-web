@@ -72,6 +72,10 @@
 			"name": "BASH",
 			"extensions": ["bash"]
 		},
+		"Bazel": {
+			"name": "Bazel",
+			"extensions": ["bzl"]
+		},
 		"BrightScript": {
 			"extensions": ["brs"]
 		},
@@ -543,6 +547,10 @@
 			"name": "Not Quite Perl",
 			"extensions": ["nqp"]
 		},
+		"Nginx": {
+			"name": "Nginx Configuration",
+			"filenames": ["nginx.conf"]
+		},
 		"Php": {
 			"name": "PHP",
 			"extensions": ["php"]
@@ -714,6 +722,10 @@
 		"Thrift": {
 			"extensions": ["thrift"]
 		},
+		"Tla+": {
+			"name": "TLA+",
+			"extensions": ["tla"]
+		},
 		"Toml": {
 			"name": "TOML",
 			"extensions": ["toml"]
@@ -725,6 +737,10 @@
 		"Ttcn": {
 			"name": "TTCN-3",
 			"extensions": ["ttcn", "ttcn3", "ttcnpp"]
+		},
+		"Typst": {
+			"name": "Typst",
+			"extensions": ["typ"]
 		},
 		"Twig": {
 			"name": "Twig",
@@ -836,6 +852,10 @@
 		"XSL": {
 			"name": "XSL",
 			"extensions": ["xsl", "xslt"]
+		},
+		"Matlab": {
+			"name": "Matlab",
+			"extensions": ["m"]
 		},
 		"MsBuild": {
 			"name": "MSBuild",

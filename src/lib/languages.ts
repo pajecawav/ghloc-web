@@ -7,7 +7,12 @@ interface LanguagesMap {
 
 const languages = languagesJson as LanguagesMap;
 
-export const getLanguageFromExtension = (extension: string): string | null => {
+export const getLanguageFromExtension = (extension: string, filename?: string): string | null => {
+	filename = filename?.toLowerCase();
+	if (filename && languages.filenames[filename]) {
+		return languages.filenames[filename];
+	}
+
 	if (extension.startsWith(".")) {
 		extension = extension.slice(1);
 	}

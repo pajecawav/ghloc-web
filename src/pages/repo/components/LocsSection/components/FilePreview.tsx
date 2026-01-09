@@ -94,7 +94,10 @@ const PlainTextFile = ({
 	const lines = text.trimEnd().split("\n");
 
 	const extension = path.split(".").pop();
-	const language = extension ? (getLanguageFromExtension(extension) ?? extension) : extension;
+	const filename = path.split("/").pop();
+	const language = extension
+		? (getLanguageFromExtension(extension, filename) ?? extension)
+		: extension;
 
 	return (
 		<div>
