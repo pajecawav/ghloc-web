@@ -21,10 +21,12 @@ export default defineNitroConfig({
 			createUnplugin(() => ({
 				name: "copy-font",
 				async buildEnd() {
-					await copyFile(
-						"node_modules/@vercel/og/dist/noto-sans-v27-latin-regular.ttf",
-						"./.output/server/noto-sans-v27-latin-regular.ttf",
-					);
+					if (process.env.NITRO_PRESET === "deno_deploy") {
+						await copyFile(
+							"node_modules/@vercel/og/dist/noto-sans-v27-latin-regular.ttf",
+							"./.output/server/noto-sans-v27-latin-regular.ttf",
+						);
+					}
 				},
 			})).rollup(),
 		],
