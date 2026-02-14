@@ -5,22 +5,13 @@ import { GitHubIcon } from "~/components/icons/GitHubIcon";
 import { Link } from "~/components/Link";
 import { RepoStats } from "~/components/RepoStats";
 import { formatBytes } from "~/lib/format";
-import { ghApi } from "~/lib/github/api";
 import { removeProtocol } from "~/lib/utils";
 import { CommonSectionProps } from "../types";
-import { useSSRContext } from "~/lib/context";
 
 type InfoSectionProps = CommonSectionProps;
 
-export const InfoSection = async ({ owner, repo }: InfoSectionProps) => {
-	const { timing } = useSSRContext();
-
-	let data;
-	try {
-		data = await timing.timeAsync("repo", () => ghApi.getRepo(owner, repo));
-	} catch (error) {
-		console.error(error);
-
+export const InfoSection = async ({ owner, repo, data }: InfoSectionProps) => {
+	if (!data) {
 		return <ErrorPlaceholder>Failed to load repo info</ErrorPlaceholder>;
 	}
 
@@ -74,7 +65,7 @@ export const InfoSection = async ({ owner, repo }: InfoSectionProps) => {
 							class="text-link flex max-w-full items-center gap-1 self-start hover:underline"
 							href={data.homepage}
 							target="_blank"
-							rel="noreferrer"
+							rel="noopener"
 						>
 							<ExternalLinkIcon class="inline-block h-4 w-4 shrink-0" />
 							<span class="truncate">{removeProtocol(data.homepage)}</span>
