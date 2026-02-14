@@ -18,7 +18,7 @@ const HealthSectionItem = ({ text, url }: { text: string; url?: string }) => {
 		? {
 				href: url,
 				target: "_blank",
-				rel: "noreferrer",
+				rel: "noopener",
 			}
 		: {};
 
@@ -43,8 +43,18 @@ const HealthSectionItem = ({ text, url }: { text: string; url?: string }) => {
 	);
 };
 
-export const HealthSection = async ({ owner, repo }: HealthSectionProps) => {
+export const HealthSection = async ({ owner, repo, data }: HealthSectionProps) => {
 	const { timing } = useSSRContext();
+
+	const title = "Repo health";
+
+	if (data?.fork) {
+		return (
+			<Section title={title}>
+				<ErrorPlaceholder>Health is disabled for forked repos</ErrorPlaceholder>
+			</Section>
+		);
+	}
 
 	let health;
 	try {
@@ -53,7 +63,7 @@ export const HealthSection = async ({ owner, repo }: HealthSectionProps) => {
 		console.error(error);
 
 		return (
-			<Section title="Repo health">
+			<Section title={title}>
 				<ErrorPlaceholder>Failed to load repo health</ErrorPlaceholder>
 			</Section>
 		);
@@ -69,7 +79,7 @@ export const HealthSection = async ({ owner, repo }: HealthSectionProps) => {
 	} = health?.files ?? {};
 
 	return (
-		<Section title={`Repo health (${health.health_percentage.toFixed(0)}%)`}>
+		<Section title={`${title} (${health.health_percentage.toFixed(0)}%)`}>
 			<ul class="flex flex-col items-start">
 				<HealthSectionItem text={readme ? "Readme" : "No Readme"} url={readme?.html_url} />
 				<HealthSectionItem

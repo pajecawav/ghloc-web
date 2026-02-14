@@ -8,7 +8,7 @@ import CommitsSectionContent from "./CommitsSectionContent.island.lazy";
 
 type CommitsSectionProps = CommonSectionProps;
 
-export const CommitsSection = async ({ owner, repo }: CommitsSectionProps) => {
+export const CommitsSection = async ({ owner, repo, ...rest }: CommitsSectionProps) => {
 	const { timing } = useSSRContext();
 
 	let activity;
@@ -25,10 +25,13 @@ export const CommitsSection = async ({ owner, repo }: CommitsSectionProps) => {
 	}
 
 	if (activity) {
-		return <CommitsSectionContent owner={owner} repo={repo} activity={activity} />;
+		return <CommitsSectionContent owner={owner} repo={repo} activity={activity} {...rest} />;
 	}
 
 	return (
-		<Island Component={CommitsSectionContent} props={{ owner, repo, activity: undefined }} />
+		<Island
+			Component={CommitsSectionContent}
+			props={{ owner, repo, activity: undefined, ...rest }}
+		/>
 	);
 };

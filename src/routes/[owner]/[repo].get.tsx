@@ -10,20 +10,27 @@ export default defineEventHandler(async event => {
 
 	const { timing } = event.context;
 
+	const data = await timing
+		.timeAsync("repo", () => ghApi.getRepo(owner, repo))
+		.catch(error => {
+			console.error("Failed to fetch repo:", error);
+			return null;
+		});
+
 	if (!branch) {
-		const { default_branch } = await timing.timeAsync("branch", () =>
-			ghApi.getRepo(owner, repo),
-		);
+		if (!data) {
+			throw createError({ statusCode: 500, statusMessage: "Failed to fetch repo" });
+		}
 
 		const url = new URL(getRequestURL(event));
-		url.searchParams.set("branch", default_branch);
+		url.searchParams.set("branch", data.default_branch);
 
 		return sendRedirect(event, url.toString());
 	}
 
 	setHeader(event, "cache-control", "public, max-age=60");
 
-	return renderPage(<RepoPage owner={owner} repo={repo} branch={branch} />, {
+	return renderPage(<RepoPage owner={owner} repo={repo} branch={branch} data={data} />, {
 		event,
 		title: `${owner}/${repo}`,
 		ogImage: `api/${owner}/${repo}/og-image?branch=${encodeURIComponent(branch)}`,
