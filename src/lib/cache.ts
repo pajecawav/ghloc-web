@@ -5,7 +5,7 @@ export const cachedApiFunction = <TArgs extends unknown[], TResult>(
 	fn: (...args: TArgs) => Promise<TResult>,
 ) => {
 	if (isServer) {
-		return defineCachedFunction(fn, { name, maxAge: 1 * 60, swr: false });
+		return defineCachedFunction(fn, { name, maxAge: 5 * 60, swr: false });
 	}
 
 	return fn;
