@@ -35,6 +35,9 @@ const createServerFetcher = () => {
 				options.headers.append("Authorization", `token ${token}`);
 			}
 		},
+		headers: {
+			"User-Agent": "ghloc",
+		},
 	});
 };
 
