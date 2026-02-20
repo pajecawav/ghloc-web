@@ -17,6 +17,9 @@ export default defineNitroConfig({
 		plugins: [islands.rollup()],
 	},
 	timing: true,
+	experimental: {
+		wasm: true,
+	},
 	publicAssets: [
 		{
 			baseURL: "assets",
