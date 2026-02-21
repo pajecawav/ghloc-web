@@ -35,5 +35,6 @@ export default defineEventHandler(async event => {
 		schemaVersion: 1,
 		label: "lines",
 		message: format === "human" ? humanize(locs.loc) : locs.loc.toString(),
+		cacheSeconds: 15 * 60,
 	};
 });
