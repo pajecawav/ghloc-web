@@ -42,7 +42,7 @@ export const Head = () => {
 			{assets.css.map(href => (
 				<link rel="stylesheet" href={href} />
 			))}
-			<script type="module" async src={assets.script} />
+			<script type="module" src={assets.script} />
 			{assets.preloads.map(href => (
 				<link rel="modulepreload" href={href} />
 			))}

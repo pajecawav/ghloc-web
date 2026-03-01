@@ -50,6 +50,7 @@ export default defineConfig({
 			injectRegister: "auto",
 			workbox: {
 				globPatterns: ["**/*.{js,css,ico,png,svg}"],
+				navigateFallback: null,
 			},
 		}),
 	],
