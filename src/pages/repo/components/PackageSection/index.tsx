@@ -44,7 +44,7 @@ export const PackageSection = async ({ owner, repo, branch }: PackageSectionProp
 
 	const [bundle, npm] = await Promise.all([
 		timing.timeAsync("bundle", () =>
-			bundleJsApi.getPackageSize(pkg.name, 3_000).catch(() => null),
+			bundleJsApi.getPackageSize(pkg.name, 1_000).catch(() => null),
 		),
 		timing.timeAsync("npm", () => npmApi.getPackage(pkg.name).catch(() => null)),
 	]);
