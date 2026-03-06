@@ -1,5 +1,5 @@
-import { $fetch } from "ofetch";
 import { cachedApiFunction } from "../cache";
+import { baseFetcher } from "../fetcher";
 
 export type LocsChild = Locs | number;
 
@@ -38,6 +38,6 @@ export const ghlocApi = {
 	getLocs: cachedApiFunction("ghlocApi.getLocs", (params: GhlocApiGetLocsParams) => {
 		const url = getGhlocGetLocsUrl(params);
 
-		return $fetch<GhlocApiGetLocsResponse>(url.toString());
+		return baseFetcher<GhlocApiGetLocsResponse>(url.toString());
 	}),
 };

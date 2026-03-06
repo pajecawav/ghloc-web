@@ -1,13 +1,14 @@
 import { Endpoints } from "@octokit/types";
-import { $fetch, FetchError } from "ofetch";
+import { FetchError } from "ofetch";
 import { cachedApiFunction } from "../cache";
 import { dayjs } from "../dayjs";
 import { toast } from "../toasts/toasts";
 import { isClient, sleep } from "../utils";
 import { getRawGitHubFileUrl } from "./utils";
+import { baseFetcher } from "../fetcher";
 
 const createClientFetcher = () => {
-	return $fetch.create({
+	return baseFetcher.create({
 		async onResponseError(error) {
 			if (error.response?.status === 403) {
 				const limit = parseInt(error.response.headers.get("x-ratelimit-remaining")!, 10);
@@ -26,7 +27,7 @@ const createClientFetcher = () => {
 };
 
 const createServerFetcher = () => {
-	return $fetch.create({
+	return baseFetcher.create({
 		retry: 0,
 		async onRequest({ options }) {
 			const token = import.meta.env.NITRO_GITHUB_TOKEN;
@@ -70,7 +71,7 @@ export const ghApi = {
 		"ghApi.getFile",
 		async (owner: string, repo: string, path: string, branch: string) => {
 			try {
-				return await $fetch(getRawGitHubFileUrl(owner, repo, branch, path), {
+				return await baseFetcher(getRawGitHubFileUrl(owner, repo, branch, path), {
 					responseType: "text",
 				});
 			} catch (error) {
@@ -88,7 +89,7 @@ export const ghApi = {
 		async (owner: string, repo: string, path: string, branch: string) => {
 			const url = getRawGitHubFileUrl(owner, repo, branch, path);
 
-			const response = await $fetch.raw(url, { method: "HEAD" });
+			const response = await baseFetcher.raw(url, { method: "HEAD" });
 
 			const contentType = response.headers.get("content-type")!;
 			const contentLength = response.headers.get("content-length");
@@ -113,7 +114,7 @@ export const ghApi = {
 			};
 
 			const request = async () => {
-				const result = await $fetch.raw<GHApiGetCommitActivityResponse>(
+				const result = await baseFetcher.raw<GHApiGetCommitActivityResponse>(
 					`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`,
 				);
 
