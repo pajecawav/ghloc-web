@@ -37,7 +37,7 @@ export const highlightCode = async (code: string, language?: string | null) => {
 	}
 
 	return await highlight(normalizeLanguage(language.toLowerCase()), code, {
-		cdn: "https://esm.sh",
+		// cdn: "https://esm.sh",
 		manual: true,
 	});
 };
