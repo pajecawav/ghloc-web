@@ -3,3 +3,4 @@ onlyBuiltDependencies:
     - "@tailwindcss/oxide"
     - "@vercel/speed-insights"
     - esbuild
+    - sharp
