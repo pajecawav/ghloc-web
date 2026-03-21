@@ -1,7 +1,6 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import { ManifestOptions, VitePWA } from "vite-plugin-pwa";
-import tsconfigPaths from "vite-tsconfig-paths";
 import { islands } from "./src/lib/island/plugin";
 import { CLIENT_ENTRY } from "./config";
 
@@ -36,14 +35,13 @@ export default defineConfig({
 		rollupOptions: {
 			input: [CLIENT_ENTRY],
 			preserveEntrySignatures: "allow-extension",
-			output: {
-				experimentalMinChunkSize: 10_000,
-			},
 		},
+	},
+	resolve: {
+		tsconfigPaths: true,
 	},
 	plugins: [
 		islands.vite(),
-		tsconfigPaths(),
 		tailwindcss(),
 		VitePWA({
 			manifest,
