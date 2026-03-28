@@ -1,4 +1,7 @@
 {
 	"extends": "./.nitro/types/tsconfig.json",
+	"compilerOptions": {
+		"types": ["vite/client", "vite-plugin-pwa/client"]
+	},
 	"exclude": ["dist-vite"]
 }
