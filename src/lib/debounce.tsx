@@ -4,7 +4,7 @@ export const useDebouncedValue = <T,>(value: T, ms: number) => {
 	const [_value, setValue] = useState(value);
 
 	useEffect(() => {
-		if (!ms) {
+		if (!ms || _value === value) {
 			return;
 		}
 
@@ -15,5 +15,5 @@ export const useDebouncedValue = <T,>(value: T, ms: number) => {
 		};
 	}, [value, ms]);
 
-	return _value;
+	return [_value, setValue] as const;
 };

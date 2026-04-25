@@ -26,7 +26,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	const [sortOrder, setSortOrder] = useState<SortOrder>("type");
 	const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 	const filter = router.search.get("filter") ?? "";
-	const debouncedFilter = useDebouncedValue(filter, 750);
+	const [debouncedFilter] = useDebouncedValue(filter, 750);
 
 	let path: string[] = [];
 	try {

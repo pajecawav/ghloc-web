@@ -16,7 +16,7 @@ export default function IndexPageContent() {
 
 	const inputRef = useRef<HTMLInputElement>(null);
 	const queryValue = router.search.get("query") ?? "";
-	const debouncedQuery = useDebouncedValue(queryValue, 750);
+	const [debouncedQuery, setDebouncedQuery] = useDebouncedValue(queryValue, 750);
 
 	const [activeIndex, setActiveIndex] = useState(0);
 
@@ -44,6 +44,8 @@ export default function IndexPageContent() {
 					const { owner, repo } = match.groups;
 					newQuery = `${owner}/${repo}`;
 				}
+
+				setDebouncedQuery(newQuery);
 			}
 
 			router.setSearch(prev => {
