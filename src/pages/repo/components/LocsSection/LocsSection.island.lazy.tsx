@@ -15,6 +15,7 @@ import { formatNumber } from "~/lib/format";
 import { FileTree } from "./components/FileTree";
 import { LocsTree } from "./components/LocsTree";
 import { FilterHelpTooltip } from "./components/FilterTooltip";
+import { SpinnerIcon } from "~/components/icons/SpinnerIcon";
 
 interface LocsSectionProps extends CommonSectionProps {
 	branch: string;
@@ -38,7 +39,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 		/* empty */
 	}
 
-	const locs = useLocs(path, {
+	const { locs, query } = useLocs(path, {
 		sortOrder,
 		filter: debouncedFilter,
 		owner,
@@ -108,7 +109,14 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 									setFilter(e.target.value);
 								}
 							}}
-							after={<FilterHelpTooltip />}
+							after={
+								(query.status === "fetching" || query.status === "pending") &&
+								locs !== null ? (
+									<SpinnerIcon class="text-muted h-5 w-5 animate-spin" />
+								) : (
+									<FilterHelpTooltip />
+								)
+							}
 						/>
 					</div>
 				</div>

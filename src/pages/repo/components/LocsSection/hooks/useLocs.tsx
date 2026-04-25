@@ -106,5 +106,5 @@ export function useLocs(
 		return { ...pathLocs, children: sortedChildren };
 	}, [pathLocs, sortOrder]);
 
-	return sortedLocs;
+	return { locs: sortedLocs, query };
 }
