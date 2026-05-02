@@ -119,7 +119,7 @@ export const ghApi = {
 				);
 
 				if (isClient && result.status === 202) {
-					await sleep(7500);
+					await sleep(10_000);
 					return request();
 				}
 
