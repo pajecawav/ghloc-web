@@ -4,6 +4,9 @@ import { ExternalLinkIcon } from "~/components/icons/ExternalLinkIcon";
 import { GitHubIcon } from "~/components/icons/GitHubIcon";
 import { Link } from "~/components/Link";
 import { RepoStats } from "~/components/RepoStats";
+import { Island } from "~/lib/island";
+import ExportReport from "~/components/ExportReport.island";
+import TrackVisit from "~/components/TrackVisit.island";
 import { formatBytes } from "~/lib/format";
 import { removeProtocol } from "~/lib/utils";
 import { CommonSectionProps } from "../types";
@@ -39,11 +42,24 @@ export const InfoSection = async ({ owner, repo, data }: InfoSectionProps) => {
 					<Badge title="Repo size">{formatBytes(data.size * 1024, 0)}</Badge>
 				</div>
 
-				<RepoStats
-					watchers={data.subscribers_count}
-					stars={data.stargazers_count}
-					forks={data.forks}
-				/>
+				<div class="flex items-center gap-2">
+					<RepoStats
+						watchers={data.subscribers_count}
+						stars={data.stargazers_count}
+						forks={data.forks}
+					/>
+
+					<Island
+						Component={ExportReport}
+						props={{ owner, repo, data, defaultBranch: data.default_branch }}
+					/>
+
+					{/* Track visit (client-side only) */}
+					<Island
+						Component={TrackVisit}
+						props={{ owner, repo, defaultBranch: data.default_branch }}
+					/>
+				</div>
 			</div>
 
 			{data.topics && data.topics.length !== 0 && (
