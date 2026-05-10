@@ -28,6 +28,19 @@ export default function IndexPageContent() {
 
 	useEffect(() => {
 		inputRef.current?.focus();
+
+		const onKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+				e.preventDefault();
+				inputRef.current?.focus();
+			}
+		};
+
+		document.addEventListener("keydown", onKeyDown);
+
+		return () => {
+			document.removeEventListener("keydown", onKeyDown);
+		};
 	}, []);
 
 	useLayoutEffect(() => {
