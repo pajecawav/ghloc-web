@@ -113,17 +113,32 @@ export const ghApi = {
 				return result && Array.isArray(result) ? result : null;
 			};
 
-			const request = async () => {
-				const result = await baseFetcher.raw<GHApiGetCommitActivityResponse>(
+			const MAX_RETRIES = 5;
+			const BASE_DELAY = 2000;
+
+			const request = async (attempt = 1) => {
+				const result = await fetcher.raw<GHApiGetCommitActivityResponse>(
 					`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`,
 				);
 
-				if (isClient && result.status === 202) {
-					await sleep(10_000);
-					return request();
+				if (result.status !== 202 || !isClient) {
+					return clean(result._data);
 				}
 
-				return clean(result._data);
+				if (attempt >= MAX_RETRIES) {
+					console.warn(
+						`Commit activity timeout for ${owner}/${repo} after ${MAX_RETRIES} attempts`,
+					);
+					return null;
+				}
+
+				// 2s, 4s, 8s, 16s, 32s
+				const delay = BASE_DELAY * Math.pow(2, attempt - 1);
+				console.log(
+					`Commit activity still processing, retry ${attempt}/${MAX_RETRIES} in ${delay}ms`,
+				);
+				await sleep(delay);
+				return request(attempt + 1);
 			};
 
 			return request();

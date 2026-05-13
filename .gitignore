@@ -12,3 +12,4 @@ dist-vite
 .output
 .env
 .vercel
+.env.local
