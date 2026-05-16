@@ -11,14 +11,14 @@ export const Input = ({ class: _class, inputClass, after, ...props }: InputProps
 		<div
 			class={cn(
 				"relative flex items-center rounded-md transition-colors duration-100",
-				"border-border focus-within:border-border-focus border-2",
+				"border-2 border-border focus-within:border-border-focus",
 				after && "pr-7",
 				_class,
 			)}
 		>
 			<input
 				class={cn(
-					"font-sm placeholder-muted w-full appearance-none px-3 py-0.5 !outline-none",
+					"font-sm w-full appearance-none px-3 py-0.5 placeholder-muted !outline-none",
 					inputClass,
 				)}
 				size={1}

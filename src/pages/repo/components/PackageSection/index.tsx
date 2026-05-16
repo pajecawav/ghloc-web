@@ -3,10 +3,10 @@ import { useSSRContext } from "~/lib/context";
 import { ghApi } from "~/lib/github/api";
 import { Island } from "~/lib/island";
 import { npmApi } from "~/lib/npm/api";
+import { CommonSectionProps } from "../../types";
 import PackageSectionContent from "./PackageSectionContent.island.lazy";
 import { PackageSectionFallback } from "./PackageSectionFallback";
 import { PackageJson } from "./types";
-import { CommonSectionProps } from "../../types";
 
 interface PackageSectionProps extends CommonSectionProps {
 	branch: string;

@@ -4,9 +4,9 @@ import { Skeleton } from "~/components/Skeleton";
 import { formatBytes } from "~/lib/format";
 import { ghApi } from "~/lib/github/api";
 import { getRawGitHubFileUrl } from "~/lib/github/utils";
+import { getLanguageFromExtension } from "~/lib/languages";
 import { useQuery } from "~/lib/query/useQuery";
 import { CodePreview } from "./CodePreview";
-import { getLanguageFromExtension } from "~/lib/languages";
 
 // TODO: lazy import
 // const LazyCodePreview = lazy(() => import("./CodePreview"));
@@ -59,7 +59,7 @@ export const FilePreview = ({ owner, repo, branch, path: pathProp, loc }: FilePr
 
 const Header = ({ children }: PropsWithChildren) => {
 	return (
-		<div className="text-muted border-border rounded-t-md border-b bg-gray-100 px-4 py-2 text-xs dark:bg-neutral-800">
+		<div className="rounded-t-md border-b border-border bg-gray-100 px-4 py-2 text-xs text-muted dark:bg-neutral-800">
 			{children}
 		</div>
 	);
@@ -103,7 +103,7 @@ const PlainTextFile = ({
 		<div>
 			<Header>
 				{lines.length} lines ({loc} sloc){" "}
-				<span className="text-muted mx-1 inline-block">|</span> {formatBytes(size)}
+				<span className="mx-1 inline-block text-muted">|</span> {formatBytes(size)}
 			</Header>
 			<div className="overflow-x-auto py-1 font-mono text-sm whitespace-nowrap">
 				<CodePreview lang={language} code={text} />

@@ -1,8 +1,8 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import { ManifestOptions, VitePWA } from "vite-plugin-pwa";
-import { islands } from "./src/lib/island/plugin";
 import { CLIENT_ENTRY } from "./config";
+import { islands } from "./src/lib/island/plugin";
 
 const manifest: Partial<ManifestOptions> = {
 	name: "ghloc",

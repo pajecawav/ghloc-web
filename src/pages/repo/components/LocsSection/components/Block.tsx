@@ -7,5 +7,5 @@ interface BlockProps {
 }
 
 export const Block = ({ class: _class, children }: BlockProps) => {
-	return <div class={cn("border-border rounded-md border", _class)}>{children}</div>;
+	return <div class={cn("rounded-md border border-border", _class)}>{children}</div>;
 };

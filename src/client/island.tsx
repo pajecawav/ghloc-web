@@ -27,7 +27,7 @@ customElements.define(
 				hydrate(ISLANDS[src]);
 			} else if (LAZY_ISLANDS[src]) {
 				const loader = LAZY_ISLANDS[src];
-				loader().then(hydrate);
+				void loader().then(hydrate);
 			} else {
 				throw new Error("Invalid island-src attribute");
 			}

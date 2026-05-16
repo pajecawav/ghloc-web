@@ -1,21 +1,21 @@
-import { useDebouncedValue } from "~/lib/debounce";
-import { useRouter } from "~/lib/router/useRouter";
-import { CommonSectionProps } from "~/pages/repo/types";
-import { isFolder, SortOrder, useLocs } from "./hooks/useLocs";
-import { PathBreadcrums } from "./components/PathBreadcrumbs";
-import { Select } from "~/components/Select";
 import { useState } from "hono/jsx";
-import { Input } from "~/components/Input";
-import { cn } from "~/lib/utils";
 import { Heading } from "~/components/Heading";
+import { SpinnerIcon } from "~/components/icons/SpinnerIcon";
+import { Input } from "~/components/Input";
+import { Select } from "~/components/Select";
+import { Skeleton } from "~/components/Skeleton";
+import { useDebouncedValue } from "~/lib/debounce";
+import { formatNumber } from "~/lib/format";
+import { useRouter } from "~/lib/router/useRouter";
+import { cn } from "~/lib/utils";
+import { CommonSectionProps } from "~/pages/repo/types";
 import { Block } from "./components/Block";
 import { FilePreview } from "./components/FilePreview";
-import { Skeleton } from "~/components/Skeleton";
-import { formatNumber } from "~/lib/format";
 import { FileTree } from "./components/FileTree";
-import { LocsTree } from "./components/LocsTree";
 import { FilterHelpTooltip } from "./components/FilterTooltip";
-import { SpinnerIcon } from "~/components/icons/SpinnerIcon";
+import { LocsTree } from "./components/LocsTree";
+import { PathBreadcrums } from "./components/PathBreadcrumbs";
+import { isFolder, SortOrder, useLocs } from "./hooks/useLocs";
 
 interface LocsSectionProps extends CommonSectionProps {
 	branch: string;
@@ -84,7 +84,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 					onSelect={index => setPath(index === 0 ? [] : path.slice(0, index))}
 				/>
 
-				<div class="xs:w-auto ml-auto flex w-full flex-nowrap gap-2">
+				<div class="ml-auto flex w-full flex-nowrap gap-2 xs:w-auto">
 					<Select
 						class="w-28"
 						value={sortOrder}
@@ -99,7 +99,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 						<option value="locs">Locs</option>
 					</Select>
 
-					<div class="xs:w-48 w-full sm:flex-shrink-0 sm:flex-grow-0">
+					<div class="w-full xs:w-48 sm:flex-shrink-0 sm:flex-grow-0">
 						<Input
 							class="w-full"
 							placeholder="Filter"
@@ -112,7 +112,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 							after={
 								(query.status === "fetching" || query.status === "pending") &&
 								locs !== null ? (
-									<SpinnerIcon class="text-muted h-5 w-5 animate-spin" />
+									<SpinnerIcon class="h-5 w-5 animate-spin text-muted" />
 								) : (
 									<FilterHelpTooltip />
 								)

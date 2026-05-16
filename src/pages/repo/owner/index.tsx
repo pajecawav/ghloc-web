@@ -22,7 +22,7 @@ export const OwnerPage = async ({ owner }: OwnerPageProps) => {
 						target="_blank"
 						rel="noopener"
 					>
-						<div className="border-border h-10 w-10 overflow-hidden rounded-full border-2">
+						<div className="h-10 w-10 overflow-hidden rounded-full border-2 border-border">
 							<img
 								className="object-cover"
 								src={`https://github.com/${owner}.png?size=64`}

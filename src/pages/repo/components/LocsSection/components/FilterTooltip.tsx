@@ -16,7 +16,7 @@ export const FilterHelpTooltip = () => {
 		<div class="group relative grid">
 			<button
 				class={cn(
-					"not-focus:text-muted relative h-5 w-5 cursor-pointer transition-colors duration-75 outline-none",
+					"relative h-5 w-5 cursor-pointer transition-colors duration-75 outline-none not-focus:text-muted",
 					"after:absolute after:top-0 after:right-0 after:hidden after:h-[calc(100%+1.25rem)] after:w-[200%] group-focus-within:after:block group-hover:after:block",
 				)}
 				aria-label="Show filter syntax help"
@@ -26,7 +26,7 @@ export const FilterHelpTooltip = () => {
 
 			<div
 				class={cn(
-					"border-border absolute top-2 -right-2 z-10 mt-8 h-max w-96 max-w-[calc(100vw-1rem)] origin-top-right rounded-md border bg-white px-4 py-2 text-xs shadow-lg dark:bg-neutral-900",
+					"absolute top-2 -right-2 z-10 mt-8 h-max w-96 max-w-[calc(100vw-1rem)] origin-top-right rounded-md border border-border bg-white px-4 py-2 text-xs shadow-lg dark:bg-neutral-900",
 					"scale-95 opacity-0 transition duration-75 ease-out select-none",
 					"group-focus-within:scale-100 group-focus-within:opacity-100 group-focus-within:duration-100 group-focus-within:select-text",
 					"group-hover:scale-100 group-hover:opacity-100 group-hover:duration-100 group-hover:select-text",

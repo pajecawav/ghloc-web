@@ -2,10 +2,10 @@ import { Endpoints } from "@octokit/types";
 import { FetchError } from "ofetch";
 import { cachedApiFunction } from "../cache";
 import { dayjs } from "../dayjs";
+import { baseFetcher } from "../fetcher";
 import { toast } from "../toasts/toasts";
 import { isClient, sleep } from "../utils";
 import { getRawGitHubFileUrl } from "./utils";
-import { baseFetcher } from "../fetcher";
 
 const createClientFetcher = () => {
 	return baseFetcher.create({

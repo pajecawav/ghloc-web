@@ -64,13 +64,13 @@ export const FileTree = ({ locs, onSelect, selectedLanguage }: FileTreeProps) =>
 	const entries = Object.entries(locs.children ?? {});
 
 	return (
-		<ul class={cn("divide-border divide-y", !entries.length && "h-40")}>
+		<ul class={cn("divide-y divide-border", !entries.length && "h-40")}>
 			{entries.map(([name, child]) => (
 				<TreeItem
 					key={name}
 					class={cn(
-						"hover:bg-tree-active first:rounded-t-md last:rounded-b-md",
-						"from-tree-active to-tree-active bg-gradient-to-r bg-no-repeat transition-[background-size] duration-[0.4s]",
+						"first:rounded-t-md last:rounded-b-md hover:bg-tree-active",
+						"bg-gradient-to-r from-tree-active to-tree-active bg-no-repeat transition-[background-size] duration-[0.4s]",
 					)}
 					icon={renderIcon(isFolder(child))}
 					text={name}

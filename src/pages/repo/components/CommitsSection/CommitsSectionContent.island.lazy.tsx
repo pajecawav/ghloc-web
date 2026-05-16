@@ -77,7 +77,7 @@ const Heatmap = memo(({ activity }: { activity: GHApiGetCommitActivityResponse }
 	};
 
 	return (
-		<div class="border-border grid h-36 place-items-center overflow-x-auto rounded-md border p-4">
+		<div class="grid h-36 place-items-center overflow-x-auto rounded-md border border-border p-4">
 			<svg class="min-w-[700px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 863 128">
 				<g fill="currentColor" transform={`translate(${weekDaysOffset}, ${headerOffset})`}>
 					{activity.map((week, weekIndex) => (
