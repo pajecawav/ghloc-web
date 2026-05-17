@@ -17,13 +17,13 @@ export const RepoCard = ({ repo }: RepoCardProps) => {
 	return (
 		<a
 			href={href}
-			class="border-border hover:border-border-focus focus:border-border-focus flex min-h-[8rem] flex-col gap-1 rounded-md border px-4 py-2 transition-colors duration-100 outline-none"
+			class="flex min-h-[8rem] flex-col gap-1 rounded-md border border-border px-4 py-2 transition-colors duration-100 outline-none hover:border-border-focus focus:border-border-focus"
 		>
 			<div class="flex gap-2">
 				<div class="flex-grow break-all">{repo.name}</div>
 				{repo.fork && <Badge class="flex-shrink-0 self-start text-xs">Fork</Badge>}
 			</div>
-			{repo.description && <div class="text-muted mb-1 text-sm">{repo.description}</div>}
+			{repo.description && <div class="mb-1 text-sm text-muted">{repo.description}</div>}
 
 			<div class="text-normal mt-auto text-xs">
 				Updated {dayjs(repo.updated_at).fromNow()}

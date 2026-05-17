@@ -9,7 +9,7 @@ import ThemeToggle from "./ThemeToggle.island";
 export const Header = () => {
 	return (
 		<header class="mb-1">
-			<div class="xs:gap-0 flex justify-end gap-1">
+			<div class="flex justify-end gap-1 xs:gap-0">
 				<a href="/" title="Search repos">
 					<HeaderItem>
 						<SearchIcon />

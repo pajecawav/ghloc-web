@@ -1,3 +1,4 @@
+import path from "path";
 import _generate from "@babel/generator";
 import { parse } from "@babel/parser";
 import _traverse from "@babel/traverse";
@@ -13,13 +14,10 @@ import {
 	variableDeclaration,
 	variableDeclarator,
 } from "@babel/types";
-import path from "path";
 import { createUnplugin } from "unplugin";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const generate = (_generate.default as typeof _generate) ?? _generate;
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const traverse = (_traverse.default as typeof _traverse) ?? _traverse;
 

@@ -18,9 +18,9 @@ export const InfoSection = async ({ owner, repo, data }: InfoSectionProps) => {
 	return (
 		<>
 			<div class="flex flex-wrap items-center gap-2 sm:flex-nowrap">
-				<div class="text-muted xs:w-auto flex w-full flex-0 items-center gap-1 text-xl whitespace-nowrap">
+				<div class="flex w-full flex-0 items-center gap-1 text-xl whitespace-nowrap text-muted xs:w-auto">
 					<a
-						class="hover:text-link h-6 w-6 transition-colors duration-100"
+						class="h-6 w-6 transition-colors duration-100 hover:text-link"
 						href={`https://github.com/${owner}/${repo}`}
 						target="_blank"
 						rel="noopener"
@@ -62,7 +62,7 @@ export const InfoSection = async ({ owner, repo, data }: InfoSectionProps) => {
 
 					{data.homepage && (
 						<Link
-							class="text-link flex max-w-full items-center gap-1 self-start hover:underline"
+							class="flex max-w-full items-center gap-1 self-start text-link hover:underline"
 							href={data.homepage}
 							target="_blank"
 							rel="noopener"

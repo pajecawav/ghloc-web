@@ -26,7 +26,7 @@ export const TreeItem = ({
 		<li class={cn("first:rounded-t-md last:rounded-b-md", _class)} style={style}>
 			<button
 				onClick={onClick}
-				class="hover:bg-tree-active flex w-full items-center gap-2 px-2 py-1 enabled:cursor-pointer disabled:bg-transparent"
+				class="flex w-full items-center gap-2 px-2 py-1 hover:bg-tree-active enabled:cursor-pointer disabled:bg-transparent"
 				disabled={disabled}
 				title={name}
 			>

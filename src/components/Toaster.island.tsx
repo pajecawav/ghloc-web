@@ -22,7 +22,7 @@ export default function Toaster() {
 				<div
 					key={t.id}
 					class={cn(
-						"border-border relative flex max-w-sm items-center gap-2 rounded-md border py-3 pr-4 pl-3 shadow",
+						"relative flex max-w-sm items-center gap-2 rounded-md border border-border py-3 pr-4 pl-3 shadow",
 						typeClasses[t.type],
 						t.dismissed ? "animate-toast-dismiss" : "animate-toast-appear",
 					)}

@@ -8,7 +8,7 @@ interface PathBreadcrumbsProps {
 
 export const PathBreadcrums = ({ path, onSelect }: PathBreadcrumbsProps) => {
 	return (
-		<div class="xs:w-auto w-full flex-grow break-all">
+		<div class="w-full flex-grow break-all xs:w-auto">
 			{path.map((name, index) => {
 				const isLast = index + 1 === path.length;
 
@@ -17,7 +17,7 @@ export const PathBreadcrums = ({ path, onSelect }: PathBreadcrumbsProps) => {
 						<button
 							class={cn(
 								"text-left",
-								isLast ? "font-medium" : "text-link cursor-pointer hover:underline",
+								isLast ? "font-medium" : "cursor-pointer text-link hover:underline",
 							)}
 							onClick={() => onSelect(index)}
 							disabled={isLast}

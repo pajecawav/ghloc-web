@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "hono/jsx";
 import { useSSRContext } from "~/lib/context";
+import { Theme } from "~/lib/theme";
 import { cn } from "~/lib/utils";
 import { Head } from "./Head";
 import { InlineScript } from "./InlineScript";
@@ -12,7 +13,7 @@ export const App = ({ children }: PropsWithChildren) => {
 		<html
 			lang="en"
 			class={cn(
-				theme === "dark" && "dark",
+				theme === Theme.DARK && "dark",
 				"bg-white dark:bg-neutral-900 dark:text-gray-200",
 			)}
 		>

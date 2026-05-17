@@ -1,7 +1,0 @@
-src/languages-map.json
-dist
-dist-vite
-.output
-.nitro
-pnpm-lock.yaml
-

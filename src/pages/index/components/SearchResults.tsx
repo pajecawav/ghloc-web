@@ -19,7 +19,7 @@ export const SearchResults = ({ activeIndex, onChangeActiveIndex, items }: Searc
 		<div
 			class={cn(
 				"h-max max-h-full overflow-y-auto rounded-md",
-				"border-border divide-border divide-y border",
+				"divide-y divide-border border border-border",
 				"origin-top -translate-y-2 transition duration-100 ease-out",
 				"empty:hidden",
 				items?.length &&
@@ -47,7 +47,7 @@ export const SearchResults = ({ activeIndex, onChangeActiveIndex, items }: Searc
 					>
 						<div>{item.full_name}</div>
 						{item.description && (
-							<div class="text-muted text-sm">{item.description}</div>
+							<div class="text-sm text-muted">{item.description}</div>
 						)}
 						<RepoStats class="mt-1" stars={item.stargazers_count} forks={item.forks} />
 					</a>

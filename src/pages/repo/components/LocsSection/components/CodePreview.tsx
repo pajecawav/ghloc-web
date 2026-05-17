@@ -15,7 +15,7 @@ export const CodePreview = memo(({ code, lang }: CodePreviewProps) => {
 
 		const ac = new AbortController();
 
-		highlightCode(code.trimEnd(), lang).then(html => {
+		void highlightCode(code.trimEnd(), lang).then(html => {
 			if (html !== null && !ac.signal.aborted) {
 				setHtml(html);
 			}

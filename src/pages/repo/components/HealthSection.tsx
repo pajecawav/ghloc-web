@@ -1,11 +1,11 @@
+import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
 import { CheckCircleIcon } from "~/components/icons/CheckCircleIcon";
 import { XCircleIcon } from "~/components/icons/XCircleIcon";
+import { useSSRContext } from "~/lib/context";
 import { ghApi } from "~/lib/github/api";
 import { cn } from "~/lib/utils";
 import { CommonSectionProps } from "../types";
 import { Section } from "./Section";
-import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
-import { useSSRContext } from "~/lib/context";
 
 type HealthSectionProps = CommonSectionProps;
 

@@ -5,7 +5,6 @@ import { ghApi } from "~/lib/github/api";
 
 export default defineEventHandler(async event => {
 	const { owner, repo } = getRouterParams(event);
-	// eslint-disable-next-line prefer-const
 	let { branch, filter, format } = getQuery<{
 		branch?: string;
 		filter?: string;

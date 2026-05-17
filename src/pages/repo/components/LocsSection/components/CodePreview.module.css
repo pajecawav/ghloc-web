@@ -18,5 +18,5 @@
 	user-select: none;
 	display: inline-block;
 
-	@apply text-muted min-w-12 px-3;
+	@apply min-w-12 px-3 text-muted;
 }

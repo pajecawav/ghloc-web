@@ -14,7 +14,6 @@ const colors = {
 
 export default defineEventHandler(async event => {
 	const { owner, repo } = getRouterParams(event);
-	// eslint-disable-next-line prefer-const
 	let { branch, filter } = getQuery<{
 		branch?: string;
 		filter?: string;

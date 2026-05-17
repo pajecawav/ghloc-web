@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "hono/jsx";
-import { Header } from "./Header";
 import { Island } from "~/lib/island";
+import { Header } from "./Header";
 import Toaster from "./Toaster.island";
 
 export const Layout = ({ children }: PropsWithChildren) => {
