@@ -74,9 +74,13 @@ export const HealthSection = async ({ owner, repo, data }: HealthSectionProps) =
 		readme,
 		code_of_conduct: coc,
 		contributing,
-		issue_template: issue,
 		pull_request_template: pr,
 	} = health?.files ?? {};
+	let issue = health?.files?.issue_template;
+
+	if (!issue) {
+		issue = await timing.timeAsync("issue_template", () => ghApi.getIssueTemplate(owner, repo));
+	}
 
 	return (
 		<Section title={`${title} (${health.health_percentage.toFixed(0)}%)`}>
