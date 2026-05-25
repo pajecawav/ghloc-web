@@ -48,7 +48,7 @@
 		"husky": "^9.1.7",
 		"lint-staged": "^17.0.4",
 		"nitropack": "^2.13.4",
-		"npm-run-all2": "^8.0.4",
+		"npm-run-all2": "^9.0.1",
 		"oxfmt": "^0.50.0",
 		"oxlint": "^1.65.0",
 		"oxlint-tsgolint": "^0.22.1",
