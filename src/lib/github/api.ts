@@ -56,6 +56,42 @@ export type GHApiSearchReposResponse = Endpoints["GET /search/repositories"]["re
 
 export type GHApiGetReposResponse = Endpoints["GET /users/{username}/repos"]["response"]["data"];
 
+type GHApiRepoHealthFile = NonNullable<
+	NonNullable<GHApiGetRepoHealthResponse["files"]>["issue_template"]
+>;
+
+type GHApiContentItem = {
+	name: string;
+	type: string;
+	url: string;
+	html_url: string | null;
+};
+
+const issueTemplateFileRegex = /\.(?:md|ya?ml)$/i;
+const issueTemplateConfigRegex = /^config\.ya?ml$/i;
+
+const getContents = async (owner: string, repo: string, path: string) => {
+	try {
+		return await fetcher<GHApiContentItem | GHApiContentItem[]>(
+			`https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
+		);
+	} catch (error) {
+		if (error instanceof FetchError && error.statusCode === 404) {
+			return null;
+		}
+
+		throw error;
+	}
+};
+
+const isIssueTemplateFile = (item: GHApiContentItem) => {
+	return (
+		item.type === "file" &&
+		issueTemplateFileRegex.test(item.name) &&
+		!issueTemplateConfigRegex.test(item.name)
+	);
+};
+
 export const ghApi = {
 	getRepo: cachedApiFunction("ghApi.getRepo", (owner: string, repo: string) => {
 		return fetcher<GHApiGetRepoResponse>(`https://api.github.com/repos/${owner}/${repo}`);
@@ -66,6 +102,32 @@ export const ghApi = {
 			`https://api.github.com/repos/${owner}/${repo}/community/profile`,
 		);
 	}),
+
+	getIssueTemplate: cachedApiFunction(
+		"ghApi.getIssueTemplate",
+		async (owner: string, repo: string): Promise<GHApiRepoHealthFile | null> => {
+			const contents = await getContents(owner, repo, ".github/ISSUE_TEMPLATE");
+
+			if (!Array.isArray(contents)) {
+				return null;
+			}
+
+			const template = contents.find(isIssueTemplateFile);
+
+			if (!template) {
+				return null;
+			}
+
+			if (!template.html_url) {
+				return null;
+			}
+
+			return {
+				url: template.url,
+				html_url: template.html_url,
+			};
+		},
+	),
 
 	getFile: cachedApiFunction(
 		"ghApi.getFile",
