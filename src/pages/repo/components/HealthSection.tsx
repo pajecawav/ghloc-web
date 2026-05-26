@@ -83,7 +83,7 @@ export const HealthSection = async ({ owner, repo, data }: HealthSectionProps) =
 	}
 
 	return (
-		<Section title={`${title} (${health.health_percentage.toFixed(0)}%)`}>
+		<Section title={title}>
 			<ul class="flex flex-col items-start">
 				<HealthSectionItem text={readme ? "Readme" : "No Readme"} url={readme?.html_url} />
 				<HealthSectionItem
