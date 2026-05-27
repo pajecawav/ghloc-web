@@ -175,13 +175,18 @@ export const ghApi = {
 				return result && Array.isArray(result) ? result : null;
 			};
 
+			const delayStep = 5_000;
+			let delay = 10_000;
+
 			const request = async () => {
 				const result = await baseFetcher.raw<GHApiGetCommitActivityResponse>(
 					`https://api.github.com/repos/${owner}/${repo}/stats/commit_activity`,
 				);
 
 				if (isClient && result.status === 202) {
-					await sleep(10_000);
+					await sleep(delay);
+					delay += delayStep;
+
 					return request();
 				}
 
