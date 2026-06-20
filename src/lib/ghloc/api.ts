@@ -210,6 +210,6 @@ export const ghlocApi = {
 		const url = getGhlocGetLocsUrl(params);
 		const data = await baseFetcher<GhlocApiGetLocsResponse>(url.toString());
 		const activeFilters = params.activeFilters ?? [];
-		return activeFilters.length > 0 ? (filterIgnoredFiles(data, activeFilters) || { loc: 0 }) : data;
+		return activeFilters.length > 0 ? (filterIgnoredFiles(data, activeFilters) || { loc: 0, children: {} }) : data;
 	}),
 };
