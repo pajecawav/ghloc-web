@@ -28,6 +28,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 	const filter = router.search.get("filter") ?? "";
 	const [debouncedFilter] = useDebouncedValue(filter, 750);
+	const ignoreConfigs = router.search.get("ignoreConfigs") !== "false";
 
 	let path: string[] = [];
 	try {
@@ -42,6 +43,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	const { locs, query } = useLocs(path, {
 		sortOrder,
 		filter: debouncedFilter,
+		ignoreConfigs,
 		owner,
 		repo,
 		branch,
@@ -84,41 +86,67 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 					onSelect={index => setPath(index === 0 ? [] : path.slice(0, index))}
 				/>
 
-				<div class="ml-auto flex w-full flex-nowrap gap-2 xs:w-auto">
-					<Select
-						class="w-28"
-						value={sortOrder}
-						onChange={e => {
-							if (e.target instanceof HTMLSelectElement) {
-								setSortOrder(e.target.value as SortOrder);
-							}
-						}}
-						title="Sort order"
-					>
-						<option value="type">Type</option>
-						<option value="locs">Locs</option>
-					</Select>
-
-					<div class="w-full xs:w-48 sm:flex-shrink-0 sm:flex-grow-0">
-						<Input
-							class="w-full"
-							placeholder="Filter"
-							value={filter}
+				<div class="ml-auto flex w-full flex-col items-end gap-2 xs:w-auto">
+					<div class="flex w-full flex-nowrap gap-2">
+						<Select
+							class="w-28"
+							value={sortOrder}
 							onChange={e => {
-								if (e.target instanceof HTMLInputElement) {
-									setFilter(e.target.value);
+								if (e.target instanceof HTMLSelectElement) {
+									setSortOrder(e.target.value as SortOrder);
 								}
 							}}
-							after={
-								(query.status === "fetching" || query.status === "pending") &&
-								locs !== null ? (
-									<SpinnerIcon class="h-5 w-5 animate-spin text-muted" />
-								) : (
-									<FilterHelpTooltip />
-								)
-							}
-						/>
+							title="Sort order"
+						>
+							<option value="type">Type</option>
+							<option value="locs">Locs</option>
+						</Select>
+
+						<div class="w-full xs:w-48 sm:flex-shrink-0 sm:flex-grow-0">
+							<Input
+								class="w-full"
+								placeholder="Filter"
+								value={filter}
+								onChange={e => {
+									if (e.target instanceof HTMLInputElement) {
+										setFilter(e.target.value);
+									}
+								}}
+								after={
+									(query.status === "fetching" || query.status === "pending") &&
+									locs !== null ? (
+										<SpinnerIcon class="h-5 w-5 animate-spin text-muted" />
+									) : (
+										<FilterHelpTooltip />
+									)
+								}
+							/>
+						</div>
 					</div>
+					<label class="flex cursor-pointer items-center gap-1.5 text-sm text-muted hover:text-foreground transition-colors">
+						<input
+							type="checkbox"
+							checked={ignoreConfigs}
+							onChange={e => {
+								if (e.target instanceof HTMLInputElement) {
+									const checked = e.target.checked;
+									router.setSearch(
+										prev => {
+											if (checked) {
+												prev.delete("ignoreConfigs");
+											} else {
+												prev.set("ignoreConfigs", "false");
+											}
+											return prev;
+										},
+										{ replace: true }
+									);
+								}
+							}}
+							class="rounded border-border text-primary focus:ring-primary h-4 w-4"
+						/>
+						Ignore config files
+					</label>
 				</div>
 			</div>
 
