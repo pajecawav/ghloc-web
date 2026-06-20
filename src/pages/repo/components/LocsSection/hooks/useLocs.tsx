@@ -14,6 +14,7 @@ export interface UseLocsOptions {
 	owner: string;
 	repo: string;
 	branch?: string;
+	ignoreConfigs?: boolean;
 }
 
 export function isFolder(child: LocsChild): child is Locs {
@@ -22,11 +23,11 @@ export function isFolder(child: LocsChild): child is Locs {
 
 export function useLocs(
 	path: string[],
-	{ sortOrder, filter, owner, repo, branch }: UseLocsOptions,
+	{ sortOrder, filter, owner, repo, branch, ignoreConfigs }: UseLocsOptions,
 ) {
 	const query = useQuery({
-		queryKey: ["locs", owner, repo, branch, filter],
-		queryFn: () => ghlocApi.getLocs({ owner, repo, branch, filter }),
+		queryKey: ["locs", owner, repo, branch, filter, String(ignoreConfigs)],
+		queryFn: () => ghlocApi.getLocs({ owner, repo, branch, filter, ignoreConfigs }),
 	});
 
 	useEffect(() => {
@@ -78,25 +79,31 @@ export function useLocs(
 			return pathLocs;
 		}
 
-		if (sortOrder === "locs") {
-			return pathLocs;
-		}
-
 		const names = Object.keys(children);
 
-		names.sort((nameA, nameB) => {
-			const a = children[nameA] as Locs;
-			const b = children[nameB] as Locs;
+		if (sortOrder === "locs") {
+			names.sort((nameA, nameB) => {
+				const a = children[nameA];
+				const b = children[nameB];
+				const locA = typeof a === "number" ? a : a.loc;
+				const locB = typeof b === "number" ? b : b.loc;
+				return locB - locA;
+			});
+		} else {
+			names.sort((nameA, nameB) => {
+				const a = children[nameA] as Locs;
+				const b = children[nameB] as Locs;
 
-			const isFolderA = isFolder(a);
-			const isFolderB = isFolder(b);
+				const isFolderA = isFolder(a);
+				const isFolderB = isFolder(b);
 
-			if (isFolderA !== isFolderB) {
-				return Number(isFolderB) - Number(isFolderA);
-			}
+				if (isFolderA !== isFolderB) {
+					return Number(isFolderB) - Number(isFolderA);
+				}
 
-			return nameA < nameB ? -1 : 1;
-		});
+				return nameA < nameB ? -1 : 1;
+			});
+		}
 
 		const sortedChildren: Record<string, LocsChild> = {};
 		for (const name of names) {
