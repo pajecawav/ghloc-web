@@ -16,7 +16,7 @@ export interface GhlocApiGetLocsParams {
 	repo: string;
 	branch?: string;
 	filter?: string;
-	ignoreConfigs?: boolean;
+	activeFilters?: string[];
 }
 
 export const getGhlocGetLocsUrl = ({ owner, repo, branch, filter }: GhlocApiGetLocsParams) => {
@@ -35,53 +35,96 @@ export const getGhlocGetLocsUrl = ({ owner, repo, branch, filter }: GhlocApiGetL
 	return url;
 };
 
-const IGNORED_PATTERNS = [
-	/^package\.json$/i,
-	/^tsconfig.*\.json$/i,
-	/^jsconfig.*\.json$/i,
-	/^composer\.json$/i,
-	/^angular\.json$/i,
-	/^nx\.json$/i,
-	/^lerna\.json$/i,
-	/lock$/i,
-	/pnpm-lock\.yaml$/i,
-	/gradle$/i,
-	/^gradlew$/i,
-	/^gradlew\.bat$/i,
-	/\.tsbuildinfo$/i,
-	/\.properties$/i,
-	/\.pro$/i,
-	/^makefile$/i,
-	/^pom\.xml$/i,
-	/^build\.xml$/i,
-	/^cargo\.toml$/i,
-	/vite\.config\./i,
-	/webpack\.config\./i,
-	/rollup\.config\./i,
-	/jest\.config\./i,
-	/babel\.config\./i,
-	/tailwind\.config\./i,
-	/postcss\.config\./i,
-	/^go\.mod$/i,
-	/^go\.sum$/i,
-	/^gemfile$/i,
-	/^\.gitignore$/i,
-	/^\.gitattributes$/i,
-	/^\.editorconfig$/i,
-	/^\.env/i,
-	/^dockerfile$/i,
-	/^docker-compose\./i,
-	/^requirements\.txt$/i,
-	/^pyproject\.toml$/i,
-	/^setup\.py$/i,
-	/^\.eslintrc/i,
-	/^\.prettierrc/i,
-	/^jenkinsfile$/i,
-	/\.(png|jpe?g|gif|svg|webp|ico|zip|tar|gz|rar|7z)$/i,
+export const FILTER_CATEGORIES = [
+	{
+		id: "jsonConfigs",
+		label: "JSON Configs",
+		patterns: [
+			/^package\.json$/i,
+			/^tsconfig.*\.json$/i,
+			/^jsconfig.*\.json$/i,
+			/^composer\.json$/i,
+			/^angular\.json$/i,
+			/^nx\.json$/i,
+			/^lerna\.json$/i,
+		],
+	},
+	{
+		id: "lockfiles",
+		label: "Lockfiles",
+		patterns: [
+			/lock$/i,
+			/pnpm-lock\.yaml$/i,
+			/^go\.sum$/i,
+		],
+	},
+	{
+		id: "buildScripts",
+		label: "Build Scripts",
+		patterns: [
+			/gradle$/i,
+			/^gradlew$/i,
+			/^gradlew\.bat$/i,
+			/^makefile$/i,
+			/^pom\.xml$/i,
+			/^build\.xml$/i,
+			/^cargo\.toml$/i,
+			/vite\.config\./i,
+			/webpack\.config\./i,
+			/rollup\.config\./i,
+			/jest\.config\./i,
+			/babel\.config\./i,
+			/tailwind\.config\./i,
+			/postcss\.config\./i,
+			/^go\.mod$/i,
+		],
+	},
+	{
+		id: "environment",
+		label: "Environment & CI/CD",
+		patterns: [
+			/^\.env/i,
+			/^dockerfile$/i,
+			/^docker-compose\./i,
+			/^jenkinsfile$/i,
+			/^gemfile$/i,
+			/^requirements\.txt$/i,
+			/^pyproject\.toml$/i,
+			/^setup\.py$/i,
+		],
+	},
+	{
+		id: "editorGit",
+		label: "Editor & Git",
+		patterns: [
+			/^\.gitignore$/i,
+			/^\.gitattributes$/i,
+			/^\.editorconfig$/i,
+			/^\.eslintrc/i,
+			/^\.prettierrc/i,
+		],
+	},
+	{
+		id: "cachesAndBinaries",
+		label: "Caches & Assets",
+		patterns: [
+			/\.tsbuildinfo$/i,
+			/\.properties$/i,
+			/\.pro$/i,
+			/\.(png|jpe?g|gif|svg|webp|ico|zip|tar|gz|rar|7z)$/i,
+		],
+	},
 ];
 
-function isIgnored(filename: string): boolean {
-	return IGNORED_PATTERNS.some((p) => p.test(filename));
+function isIgnored(filename: string, activeFilters: string[]): boolean {
+	for (const category of FILTER_CATEGORIES) {
+		if (activeFilters.includes(category.id)) {
+			if (category.patterns.some((p) => p.test(filename))) {
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 function guessLanguageBucket(filename: string): string {
@@ -92,8 +135,8 @@ function guessLanguageBucket(filename: string): string {
 	return filename;
 }
 
-function filterIgnoredFiles(locs: Locs, name = ""): Locs | null {
-	if (name && isIgnored(name)) return null;
+function filterIgnoredFiles(locs: Locs, activeFilters: string[], name = ""): Locs | null {
+	if (name && isIgnored(name, activeFilters)) return null;
 
 	const newLocs: Locs = {
 		loc: locs.loc,
@@ -104,7 +147,7 @@ function filterIgnoredFiles(locs: Locs, name = ""): Locs | null {
 	if (locs.children) {
 		const newChildren: Record<string, LocsChild> = {};
 		for (const [childName, childValue] of Object.entries(locs.children)) {
-			if (isIgnored(childName)) {
+			if (isIgnored(childName, activeFilters)) {
 				let droppedLoc = typeof childValue === "number" ? childValue : childValue.loc;
 				newLocs.loc -= droppedLoc;
 
@@ -130,7 +173,7 @@ function filterIgnoredFiles(locs: Locs, name = ""): Locs | null {
 				}
 			} else {
 				if (typeof childValue !== "number") {
-					const filteredChild = filterIgnoredFiles(childValue, childName);
+					const filteredChild = filterIgnoredFiles(childValue, activeFilters, childName);
 					if (filteredChild) {
 						newChildren[childName] = filteredChild;
 						const diff = childValue.loc - filteredChild.loc;
@@ -166,7 +209,7 @@ export const ghlocApi = {
 	getLocs: cachedApiFunction("ghlocApi.getLocs", async (params: GhlocApiGetLocsParams) => {
 		const url = getGhlocGetLocsUrl(params);
 		const data = await baseFetcher<GhlocApiGetLocsResponse>(url.toString());
-		const shouldIgnore = params.ignoreConfigs ?? true;
-		return shouldIgnore ? (filterIgnoredFiles(data) || { loc: 0 }) : data;
+		const activeFilters = params.activeFilters ?? [];
+		return activeFilters.length > 0 ? (filterIgnoredFiles(data, activeFilters) || { loc: 0 }) : data;
 	}),
 };

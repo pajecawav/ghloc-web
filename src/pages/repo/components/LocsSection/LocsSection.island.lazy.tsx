@@ -15,6 +15,7 @@ import { FileTree } from "./components/FileTree";
 import { FilterHelpTooltip } from "./components/FilterTooltip";
 import { LocsTree } from "./components/LocsTree";
 import { PathBreadcrums } from "./components/PathBreadcrumbs";
+import { FILTER_CATEGORIES } from "~/lib/ghloc/api";
 import { isFolder, SortOrder, useLocs } from "./hooks/useLocs";
 
 interface LocsSectionProps extends CommonSectionProps {
@@ -28,7 +29,8 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 	const filter = router.search.get("filter") ?? "";
 	const [debouncedFilter] = useDebouncedValue(filter, 750);
-	const ignoreConfigs = router.search.get("ignoreConfigs") !== "false";
+	const activeFiltersRaw = router.search.get("activeFilters");
+	const activeFilters = activeFiltersRaw ? activeFiltersRaw.split(",") : [];
 
 	let path: string[] = [];
 	try {
@@ -43,7 +45,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	const { locs, query } = useLocs(path, {
 		sortOrder,
 		filter: debouncedFilter,
-		ignoreConfigs,
+		activeFilters,
 		owner,
 		repo,
 		branch,
@@ -123,30 +125,49 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 							/>
 						</div>
 					</div>
-					<label class="flex cursor-pointer items-center gap-1.5 text-sm text-muted hover:text-foreground transition-colors">
-						<input
-							type="checkbox"
-							checked={ignoreConfigs}
-							onChange={e => {
-								if (e.target instanceof HTMLInputElement) {
-									const checked = e.target.checked;
-									router.setSearch(
-										prev => {
-											if (checked) {
-												prev.delete("ignoreConfigs");
-											} else {
-												prev.set("ignoreConfigs", "false");
+					<details class="text-sm text-muted group mt-1">
+						<summary class="cursor-pointer select-none hover:text-foreground transition-colors outline-none list-none flex items-center justify-end gap-1">
+							Advanced Filters
+							<svg class="h-4 w-4 transform transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+							</svg>
+						</summary>
+						<div class="mt-2 flex flex-col gap-2 rounded-md border border-border p-3 bg-bg">
+							{FILTER_CATEGORIES.map(category => (
+								<label key={category.id} class="flex cursor-pointer items-center gap-2 text-muted hover:text-foreground transition-colors">
+									<input
+										type="checkbox"
+										checked={activeFilters.includes(category.id)}
+										onChange={e => {
+											if (e.target instanceof HTMLInputElement) {
+												const checked = e.target.checked;
+												router.setSearch(
+													prev => {
+														let filters = prev.get("activeFilters") ? prev.get("activeFilters")!.split(",") : [];
+														if (checked) {
+															if (!filters.includes(category.id)) filters.push(category.id);
+														} else {
+															filters = filters.filter(f => f !== category.id);
+														}
+
+														if (filters.length > 0) {
+															prev.set("activeFilters", filters.join(","));
+														} else {
+															prev.delete("activeFilters");
+														}
+														return prev;
+													},
+													{ replace: true }
+												);
 											}
-											return prev;
-										},
-										{ replace: true }
-									);
-								}
-							}}
-							class="rounded border-border text-primary focus:ring-primary h-4 w-4"
-						/>
-						Ignore config files
-					</label>
+										}}
+										class="rounded border-border text-primary focus:ring-primary h-4 w-4"
+									/>
+									<span class="flex-1">Ignore {category.label}</span>
+								</label>
+							))}
+						</div>
+					</details>
 				</div>
 			</div>
 
