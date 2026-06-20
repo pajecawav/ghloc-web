@@ -82,57 +82,58 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 
 	return (
 		<div class="flex flex-col gap-2">
-			<div class="flex flex-wrap items-center gap-2">
-				<PathBreadcrums
-					path={[repo, ...path]}
-					onSelect={index => setPath(index === 0 ? [] : path.slice(0, index))}
-				/>
+			<div class="flex flex-wrap items-start gap-2">
+				<div class="flex items-center min-h-[32px] pt-0.5">
+					<PathBreadcrums
+						path={[repo, ...path]}
+						onSelect={index => setPath(index === 0 ? [] : path.slice(0, index))}
+					/>
+				</div>
 
-				<div class="ml-auto flex w-full flex-col items-end gap-2 xs:w-auto">
-					<div class="flex w-full flex-nowrap gap-2">
-						<Select
-							class="w-28"
-							value={sortOrder}
+				<div class="ml-auto flex w-full flex-nowrap items-center gap-2 xs:w-auto">
+					<Select
+						class="w-28"
+						value={sortOrder}
+						onChange={e => {
+							if (e.target instanceof HTMLSelectElement) {
+								setSortOrder(e.target.value as SortOrder);
+							}
+						}}
+						title="Sort order"
+					>
+						<option value="type">Type</option>
+						<option value="locs">Locs</option>
+					</Select>
+
+					<div class="w-full xs:w-48 sm:flex-shrink-0 sm:flex-grow-0">
+						<Input
+							class="w-full"
+							placeholder="Filter"
+							value={filter}
 							onChange={e => {
-								if (e.target instanceof HTMLSelectElement) {
-									setSortOrder(e.target.value as SortOrder);
+								if (e.target instanceof HTMLInputElement) {
+									setFilter(e.target.value);
 								}
 							}}
-							title="Sort order"
-						>
-							<option value="type">Type</option>
-							<option value="locs">Locs</option>
-						</Select>
-
-						<div class="w-full xs:w-48 sm:flex-shrink-0 sm:flex-grow-0">
-							<Input
-								class="w-full"
-								placeholder="Filter"
-								value={filter}
-								onChange={e => {
-									if (e.target instanceof HTMLInputElement) {
-										setFilter(e.target.value);
-									}
-								}}
-								after={
-									(query.status === "fetching" || query.status === "pending") &&
-									locs !== null ? (
-										<SpinnerIcon class="h-5 w-5 animate-spin text-muted" />
-									) : (
-										<FilterHelpTooltip />
-									)
-								}
-							/>
-						</div>
+							after={
+								(query.status === "fetching" || query.status === "pending") &&
+								locs !== null ? (
+									<SpinnerIcon class="h-5 w-5 animate-spin text-muted" />
+								) : (
+									<FilterHelpTooltip />
+								)
+							}
+						/>
 					</div>
-					<details class="text-sm text-muted group mt-1">
+
+					<details class="text-sm text-muted group relative">
 						<summary class="cursor-pointer select-none hover:text-foreground transition-colors outline-none list-none flex items-center justify-end gap-1">
-							Advanced Filters
+							Filters
 							<svg class="h-4 w-4 transform transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
 							</svg>
 						</summary>
-						<div class="mt-2 flex flex-col gap-2 rounded-md border border-border p-3 bg-bg">
+						<div class="absolute right-0 top-[calc(100%+0.5rem)] z-50 flex w-max flex-col gap-2 rounded-md border border-border bg-white p-3 shadow-lg dark:bg-neutral-900">
 							{FILTER_CATEGORIES.map(category => (
 								<label key={category.id} class="flex cursor-pointer items-center gap-2 text-muted hover:text-foreground transition-colors">
 									<input
