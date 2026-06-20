@@ -36,7 +36,13 @@ export const getGhlocGetLocsUrl = ({ owner, repo, branch, filter }: GhlocApiGetL
 };
 
 const IGNORED_PATTERNS = [
-	/\.json$/i,
+	/^package\.json$/i,
+	/^tsconfig.*\.json$/i,
+	/^jsconfig.*\.json$/i,
+	/^composer\.json$/i,
+	/^angular\.json$/i,
+	/^nx\.json$/i,
+	/^lerna\.json$/i,
 	/lock$/i,
 	/pnpm-lock\.yaml$/i,
 	/gradle$/i,
