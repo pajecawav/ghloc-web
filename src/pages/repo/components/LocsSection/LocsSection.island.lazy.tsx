@@ -128,7 +128,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 
 					<details class="text-sm text-muted group relative">
 						<summary class="cursor-pointer select-none hover:text-foreground transition-colors outline-none list-none flex items-center justify-end gap-1">
-							Filters
+							Exclude
 							<svg class="h-4 w-4 transform transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
 							</svg>
