@@ -14,7 +14,7 @@ export interface UseLocsOptions {
 	owner: string;
 	repo: string;
 	branch?: string;
-	ignoreConfigs?: boolean;
+	activeFilters?: string[];
 }
 
 export function isFolder(child: LocsChild): child is Locs {
@@ -23,11 +23,11 @@ export function isFolder(child: LocsChild): child is Locs {
 
 export function useLocs(
 	path: string[],
-	{ sortOrder, filter, owner, repo, branch, ignoreConfigs }: UseLocsOptions,
+	{ sortOrder, filter, owner, repo, branch, activeFilters }: UseLocsOptions,
 ) {
 	const query = useQuery({
-		queryKey: ["locs", owner, repo, branch, filter, String(ignoreConfigs)],
-		queryFn: () => ghlocApi.getLocs({ owner, repo, branch, filter, ignoreConfigs }),
+		queryKey: ["locs", owner, repo, branch, filter, JSON.stringify(activeFilters)],
+		queryFn: () => ghlocApi.getLocs({ owner, repo, branch, filter, activeFilters }),
 	});
 
 	useEffect(() => {
