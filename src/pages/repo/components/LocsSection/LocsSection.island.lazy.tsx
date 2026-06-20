@@ -15,6 +15,7 @@ import { FileTree } from "./components/FileTree";
 import { FilterHelpTooltip } from "./components/FilterTooltip";
 import { LocsTree } from "./components/LocsTree";
 import { PathBreadcrums } from "./components/PathBreadcrumbs";
+import { FILTER_CATEGORIES } from "~/lib/ghloc/api";
 import { isFolder, SortOrder, useLocs } from "./hooks/useLocs";
 
 interface LocsSectionProps extends CommonSectionProps {
@@ -28,6 +29,8 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 	const filter = router.search.get("filter") ?? "";
 	const [debouncedFilter] = useDebouncedValue(filter, 750);
+	const activeFiltersRaw = router.search.get("activeFilters");
+	const activeFilters = activeFiltersRaw ? activeFiltersRaw.split(",") : [];
 
 	let path: string[] = [];
 	try {
@@ -42,6 +45,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	const { locs, query } = useLocs(path, {
 		sortOrder,
 		filter: debouncedFilter,
+		activeFilters,
 		owner,
 		repo,
 		branch,
@@ -78,13 +82,15 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 
 	return (
 		<div class="flex flex-col gap-2">
-			<div class="flex flex-wrap items-center gap-2">
-				<PathBreadcrums
-					path={[repo, ...path]}
-					onSelect={index => setPath(index === 0 ? [] : path.slice(0, index))}
-				/>
+			<div class="flex flex-wrap items-start gap-2">
+				<div class="flex items-center min-h-[32px] pt-0.5">
+					<PathBreadcrums
+						path={[repo, ...path]}
+						onSelect={index => setPath(index === 0 ? [] : path.slice(0, index))}
+					/>
+				</div>
 
-				<div class="ml-auto flex w-full flex-nowrap gap-2 xs:w-auto">
+				<div class="ml-auto flex w-full flex-nowrap items-center gap-2 xs:w-auto">
 					<Select
 						class="w-28"
 						value={sortOrder}
@@ -119,6 +125,50 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 							}
 						/>
 					</div>
+
+					<details class="text-sm text-muted group relative">
+						<summary class="cursor-pointer select-none hover:text-foreground transition-colors outline-none list-none flex items-center justify-end gap-1">
+							Exclude
+							<svg class="h-4 w-4 transform transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+							</svg>
+						</summary>
+						<div class="absolute right-0 top-[calc(100%+0.5rem)] z-50 flex w-max flex-col gap-2 rounded-md border border-border bg-white p-3 shadow-lg dark:bg-neutral-900">
+							{FILTER_CATEGORIES.map(category => (
+								<label key={category.id} class="flex cursor-pointer items-center gap-2 text-muted hover:text-foreground transition-colors">
+									<input
+										type="checkbox"
+										checked={activeFilters.includes(category.id)}
+										onChange={e => {
+											if (e.target instanceof HTMLInputElement) {
+												const checked = e.target.checked;
+												router.setSearch(
+													prev => {
+														let filters = prev.get("activeFilters") ? prev.get("activeFilters")!.split(",") : [];
+														if (checked) {
+															if (!filters.includes(category.id)) filters.push(category.id);
+														} else {
+															filters = filters.filter(f => f !== category.id);
+														}
+
+														if (filters.length > 0) {
+															prev.set("activeFilters", filters.join(","));
+														} else {
+															prev.delete("activeFilters");
+														}
+														return prev;
+													},
+													{ replace: true }
+												);
+											}
+										}}
+										class="rounded border-border text-primary focus:ring-primary h-4 w-4"
+									/>
+									<span class="flex-1">Ignore {category.label}</span>
+								</label>
+							))}
+						</div>
+					</details>
 				</div>
 			</div>
 
