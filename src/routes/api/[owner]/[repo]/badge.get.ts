@@ -5,11 +5,11 @@ import { ghApi } from "~/lib/github/api";
 
 export default defineEventHandler(async event => {
 	const { owner, repo } = getRouterParams(event);
-	let { branch, filter, format, ignoreConfigs } = getQuery<{
+	let { branch, filter, format, activeFilters } = getQuery<{
 		branch?: string;
 		filter?: string;
 		format?: string;
-		ignoreConfigs?: string;
+		activeFilters?: string;
 	}>(event);
 
 	const { timing } = event.context;
@@ -27,7 +27,7 @@ export default defineEventHandler(async event => {
 				repo, 
 				branch, 
 				filter, 
-				ignoreConfigs: ignoreConfigs !== "false" 
+				activeFilters: activeFilters ? activeFilters.split(",") : []
 			}),
 		);
 	} catch (e) {
