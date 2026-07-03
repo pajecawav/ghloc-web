@@ -21,6 +21,24 @@ interface LocsSectionProps extends CommonSectionProps {
 	branch: string;
 }
 
+function parseLocsPath(value: string | null): string[] {
+	if (!value) {
+		return [];
+	}
+
+	try {
+		const parsed: unknown = JSON.parse(value);
+
+		if (Array.isArray(parsed) && parsed.every(segment => typeof segment === "string")) {
+			return parsed;
+		}
+	} catch {
+		/* ignore malformed locsPath */
+	}
+
+	return [];
+}
+
 export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	const router = useRouter();
 
@@ -29,15 +47,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	const filter = router.search.get("filter") ?? "";
 	const [debouncedFilter] = useDebouncedValue(filter, 750);
 
-	let path: string[] = [];
-	try {
-		const locsPath = router.search.get("locsPath");
-		if (locsPath) {
-			path = JSON.parse(locsPath);
-		}
-	} catch {
-		/* empty */
-	}
+	const path = parseLocsPath(router.search.get("locsPath"));
 
 	const { locs, query } = useLocs(path, {
 		sortOrder,
