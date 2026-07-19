@@ -1,12 +1,13 @@
 {
 	"compilerOptions": {
 		"target": "ESNext",
+		"useDefineForClassFields": true,
 		"module": "ESNext",
-		"moduleResolution": "bundler",
 		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"types": ["vite/client", "node"],
 		"skipLibCheck": true,
 
+		"moduleResolution": "bundler",
 		"allowImportingTsExtensions": true,
 		"moduleDetection": "force",
 		"noEmit": true,
@@ -17,6 +18,7 @@
 			"~/*": ["./src/*"]
 		},
 
+		/* Linting */
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
