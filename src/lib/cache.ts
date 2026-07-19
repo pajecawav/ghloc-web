@@ -1,3 +1,4 @@
+import { defineCachedFunction } from "nitro/cache";
 import { isServer } from "./utils";
 
 export const cachedApiFunction = <TArgs extends unknown[], TResult>(

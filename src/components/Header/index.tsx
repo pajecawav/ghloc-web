@@ -1,4 +1,3 @@
-import { Island } from "~/lib/island";
 import { CodeIcon } from "../icons/CodeIcon";
 import { FirefoxIcon } from "../icons/FirefoxIcon";
 import { GitHubIcon } from "../icons/GitHubIcon";
@@ -15,7 +14,7 @@ export const Header = () => {
 						<SearchIcon />
 					</HeaderItem>
 				</a>
-				<Island Component={ThemeToggle} props={{}} />
+				<ThemeToggle />
 				<a
 					href="https://github.com/pajecawav/ghloc-web"
 					target="_blank"

@@ -1,7 +1,9 @@
 import { ImageResponse } from "@vercel/og";
+import { HTTPError } from "nitro/h3";
+import { defineHandler, getQuery, getRouterParams, withServerTiming } from "nitro/h3";
 import { GitHubIcon } from "~/components/icons/GitHubIcon";
 import { formatNumber } from "~/lib/format";
-import { Locs, ghlocApi } from "~/lib/ghloc/api";
+import { type Locs, ghlocApi } from "~/lib/ghloc/api";
 import { ghApi } from "~/lib/github/api";
 import { getLanguageFromExtension } from "~/lib/languages";
 
@@ -12,7 +14,7 @@ const colors = {
 	highlight: "#2f3335",
 };
 
-export default defineEventHandler(async event => {
+export default defineHandler(async event => {
 	const { owner, repo } = getRouterParams(event);
 	let { branch, filter } = getQuery<{
 		branch?: string;
@@ -20,21 +22,19 @@ export default defineEventHandler(async event => {
 		format?: string;
 	}>(event);
 
-	const { timing } = event.context;
-
 	let locs: Locs;
 	try {
 		if (!branch) {
-			branch = (await timing.timeAsync("branch", () => ghApi.getRepo(owner, repo)))
+			branch = (await withServerTiming(event, "branch", () => ghApi.getRepo(owner, repo)))
 				.default_branch;
 		}
 
-		locs = await timing.timeAsync("locs", () =>
+		locs = await withServerTiming(event, "locs", () =>
 			ghlocApi.getLocs({ owner, repo, branch, filter }),
 		);
 	} catch (e) {
 		console.error("Failed to fetch locs", e);
-		throw createError({ statusCode: 500, statusMessage: "Failed to fetch locs" });
+		throw new HTTPError({ statusCode: 500, statusMessage: "Failed to fetch locs" });
 	}
 
 	const totalLocs = locs.loc;

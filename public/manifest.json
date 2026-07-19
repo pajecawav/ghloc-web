@@ -1,5 +1,5 @@
 {
-	"$schema": "https://json.schemastore.org/web-manifest-combined.json",
+	"$schema": "https://www.schemastore.org/web-manifest-combined.json",
 	"name": "ghloc",
 	"short_name": "ghloc",
 	"description": "Count lines of code",
