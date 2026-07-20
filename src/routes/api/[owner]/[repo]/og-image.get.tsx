@@ -14,10 +14,11 @@ const colors = {
 
 export default defineEventHandler(async event => {
 	const { owner, repo } = getRouterParams(event);
-	let { branch, filter } = getQuery<{
+	let { branch, filter, format, activeFilters } = getQuery<{
 		branch?: string;
 		filter?: string;
 		format?: string;
+		activeFilters?: string;
 	}>(event);
 
 	const { timing } = event.context;
@@ -30,7 +31,13 @@ export default defineEventHandler(async event => {
 		}
 
 		locs = await timing.timeAsync("locs", () =>
-			ghlocApi.getLocs({ owner, repo, branch, filter }),
+			ghlocApi.getLocs({ 
+				owner, 
+				repo, 
+				branch, 
+				filter, 
+				activeFilters: activeFilters ? activeFilters.split(",") : []
+			}),
 		);
 	} catch (e) {
 		console.error("Failed to fetch locs", e);

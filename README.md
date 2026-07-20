@@ -46,6 +46,12 @@ this README has the following URL and only counts files with `.ts` or `.tsx` ext
 https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/pajecawav/ghloc-web/badge?filter=.ts$,.tsx$
 ```
 
+You can exclude specific types of files from the calculation by using the `activeFilters` search param with a comma-separated list of categories (`jsonConfigs`, `lockfiles`, `buildScripts`, `environment`, `editorGit`, `cachesAndBinaries`). For example, to exclude config and lock files:
+
+```
+https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/OWNER/REPO/badge?activeFilters=jsonConfigs,lockfiles
+```
+
 To humanize LOC count you can add `format=human` to search params. So to a produce badge like [![lines
 count](https://img.shields.io/endpoint?url=https://ghloc.vercel.app/api/pajecawav/ghloc-web/badge?format=human)](https://ghloc.vercel.app/pajecawav/ghloc-web)
 you can use following URL:
