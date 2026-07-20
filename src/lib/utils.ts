@@ -1,4 +1,4 @@
-export const isServer = typeof window === "undefined";
+export const isServer = import.meta.env.SSR;
 export const isClient = !isServer;
 
 export const cn = (...values: unknown[]): string => {
