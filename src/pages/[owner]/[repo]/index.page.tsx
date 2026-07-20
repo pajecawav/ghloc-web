@@ -1,12 +1,16 @@
 import { definePage } from "@pajecawav/yamf";
 import { HTTPError, HTTPResponse, getQuery, setHeader, withServerTiming } from "nitro/h3";
-import { RepoPage } from "~/components/repo";
 import { getGhlocGetLocsUrl } from "~/lib/ghloc/api";
 import { ghApi } from "~/lib/github/api";
 import { buildPageTitle } from "~/lib/title";
+import { CommitsSection } from "./components/CommitsSection";
+import { HealthSection } from "./components/HealthSection";
+import { InfoSection } from "./components/InfoSection";
+import LocsSection from "./components/LocsSection/LocsSection.island";
+import { PackageSection } from "./components/PackageSection";
+import type { CommonSectionProps } from "./types";
 
 export default definePage({
-	// @ts-expect-error TS2322: TODO fix types in yamf
 	render: async (event: any, { head }: any) => {
 		const owner = event.context.params?.owner;
 		const repo = event.context.params?.repo;
@@ -66,3 +70,25 @@ export default definePage({
 		return <RepoPage owner={owner} repo={repo} branch={branch} data={data} />;
 	},
 });
+
+interface RepoPageProps extends CommonSectionProps {
+	branch: string;
+}
+
+export const RepoPage = (props: RepoPageProps) => {
+	return (
+		<div class="flex flex-col gap-2">
+			<InfoSection {...props} />
+
+			<div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+				<HealthSection {...props} />
+
+				<PackageSection {...props} />
+			</div>
+
+			<CommitsSection {...props} />
+
+			<LocsSection {...props} />
+		</div>
+	);
+};

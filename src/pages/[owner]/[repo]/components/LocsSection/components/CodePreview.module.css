@@ -1,4 +1,4 @@
-@reference "../../../../../root/index.css";
+@reference "../../../../../../root/index.css";
 
 @import "@arborium/arborium/themes/base.css";
 @import "@arborium/arborium/themes/github-light.css";

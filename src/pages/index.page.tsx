@@ -1,5 +1,5 @@
 import { definePage } from "@pajecawav/yamf";
-import IndexPageContent from "~/components/index-page/IndexPageContent.island";
+import IndexPageContent from "./components/IndexPageContent.island";
 
 export default definePage({
 	render: () => {

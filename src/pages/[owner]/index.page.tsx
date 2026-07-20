@@ -1,8 +1,23 @@
+import { definePage } from "@pajecawav/yamf";
 import { useEvent } from "@pajecawav/yamf";
 import { withServerTiming } from "nitro/h3";
+import { setHeader } from "nitro/h3";
 import { Heading } from "~/components/Heading";
 import { ghApi } from "~/lib/github/api";
+import { buildPageTitle } from "~/lib/title";
 import { RepoCard } from "./components/RepoCard";
+
+export default definePage({
+	render: (event, { head }) => {
+		const { owner } = event.context.params ?? {};
+
+		setHeader(event, "cache-control", "public, max-age=60");
+
+		head.push({ title: buildPageTitle(owner) });
+
+		return <OwnerPage owner={owner} />;
+	},
+});
 
 interface OwnerPageProps {
 	owner: string;

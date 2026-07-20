@@ -30,7 +30,7 @@
 	"devDependencies": {
 		"@octokit/types": "^16.0.0",
 		"@pajecawav/tools": "^0.0.5",
-		"@pajecawav/yamf": "^0.0.4",
+		"@pajecawav/yamf": "^0.0.5",
 		"@tailwindcss/vite": "^4.3.2",
 		"@types/js-cookie": "^3.0.6",
 		"@types/node": "^24.13.3",

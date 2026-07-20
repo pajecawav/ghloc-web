@@ -37,8 +37,8 @@ importers:
         specifier: ^0.0.5
         version: 0.0.5(chokidar@5.0.0)(dotenv@17.3.1)(giget@3.2.0)(jiti@2.7.0)(magicast@0.5.2)(oxfmt@0.58.0)(oxlint@1.73.0(oxlint-tsgolint@0.24.0))
       '@pajecawav/yamf':
-        specifier: ^0.0.4
-        version: 0.0.4(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
+        specifier: ^0.0.5
+        version: 0.0.5(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
       '@tailwindcss/vite':
         specifier: ^4.3.2
         version: 4.3.2(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
@@ -794,8 +794,8 @@ packages:
       prettier:
         optional: true
 
-  '@pajecawav/yamf@0.0.4':
-    resolution: {integrity: sha512-gvUz+fOsWmfFp2e3jahI7DKyEskRbw7IijFMkstDEEGRJQik6A1/t+6mnDh+2CCKNkqZUKdGDXpmu96UKSZWiA==}
+  '@pajecawav/yamf@0.0.5':
+    resolution: {integrity: sha512-KMVE9UQjW+VcGPtcDkuEJUPsJoe7dxEFB9raJ9SHaW8WAlnuh1SRidZ0AIfzIi4Tp1PCk6xSfTxq+70dAnT0ew==}
     peerDependencies:
       hono: ^4.12.23
       vite: ^8.0.16
@@ -1832,6 +1832,9 @@ packages:
   rou3@0.8.1:
     resolution: {integrity: sha512-ePa+XGk00/3HuCqrEnK3LxJW7I0SdNg6EFzKUJG73hMAdDcOUC/i/aSz7LSDwLrGr33kal/rqOGydzwl6U7zBA==}
 
+  rou3@0.9.1:
+    resolution: {integrity: sha512-z/sSmzvtwMDDnxsPVhfWMuG6F6mbmhFDXoVqLmMfbpDD9qfV3GDmSQpf0+W296/ZDIpW2wcMmBfpVFzcnOi/nA==}
+
   satori@0.25.0:
     resolution: {integrity: sha512-utINfLxrYrmSnLvxFT4ZwgwWa8KOjrz7ans32V5wItgHVmzESl/9i33nE38uG0miycab8hUqQtDlOpqrIpB/iw==}
     engines: {node: '>=16'}
@@ -2614,17 +2617,17 @@ snapshots:
       - jiti
       - magicast
 
-  '@pajecawav/yamf@0.0.4(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))':
+  '@pajecawav/yamf@0.0.5(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))':
     dependencies:
       '@babel/generator': 7.29.7
       '@babel/parser': 7.29.7
       '@babel/traverse': 7.29.7
       '@babel/types': 7.29.7
       devalue: 5.8.1
-      exsolve: 1.0.8
+      exsolve: 1.1.0
       hono: 4.12.28
       nitro: 3.0.260610-beta(chokidar@5.0.0)(dotenv@17.3.1)(giget@3.2.0)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
-      rou3: 0.8.1
+      rou3: 0.9.1
       ufo: 1.6.4
       unhead: 3.1.8(esbuild@0.28.0)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
       vite: 8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0)
@@ -3458,7 +3461,7 @@ snapshots:
   pkg-types@2.3.1:
     dependencies:
       confbox: 0.2.4
-      exsolve: 1.0.8
+      exsolve: 1.1.0
       pathe: 2.0.3
 
   postcss-value-parser@4.2.0: {}
@@ -3528,6 +3531,8 @@ snapshots:
       '@rolldown/binding-win32-x64-msvc': 1.1.4
 
   rou3@0.8.1: {}
+
+  rou3@0.9.1: {}
 
   satori@0.25.0:
     dependencies:

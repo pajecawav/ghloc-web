@@ -3,10 +3,10 @@ import { withServerTiming } from "nitro/h3";
 import { bundleJsApi } from "~/lib/bundlejs/api";
 import { ghApi } from "~/lib/github/api";
 import { npmApi } from "~/lib/npm/api";
-import type { CommonSectionProps } from "../../types";
+import { CommonSectionProps } from "../../types";
 import PackageSectionContent from "./PackageSectionContent.island";
 import { PackageSectionFallback } from "./PackageSectionFallback";
-import type { PackageJson } from "./types";
+import { PackageJson } from "./types";
 
 interface PackageSectionProps extends CommonSectionProps {
 	branch: string;

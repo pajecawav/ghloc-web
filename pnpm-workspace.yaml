@@ -5,3 +5,5 @@ allowBuilds:
     "@vercel/speed-insights": true
     esbuild: true
     sharp: true
+minimumReleaseAgeExclude:
+    - "@pajecawav/yamf@0.0.5"

@@ -1,13 +1,13 @@
 import { memo } from "hono/jsx";
 import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
 import { Heading } from "~/components/Heading";
-import { Section } from "~/components/repo/components/Section";
-import type { CommonSectionProps } from "~/components/repo/types";
 import { Skeleton } from "~/components/Skeleton";
 import { dayjs } from "~/lib/dayjs";
 import { ghApi, type GHApiGetCommitActivityResponse } from "~/lib/github/api";
 import { useQuery } from "~/lib/query/useQuery";
 import { cn } from "~/lib/utils";
+import type { CommonSectionProps } from "../../types";
+import { Section } from "../Section";
 
 const DAY_IN_SECONDS = 60 * 60 * 24;
 
