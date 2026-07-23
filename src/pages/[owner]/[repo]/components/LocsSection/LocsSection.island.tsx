@@ -1,4 +1,5 @@
 import { useState } from "hono/jsx";
+import { useSearchParams } from "wouter";
 import { Heading } from "~/components/Heading";
 import { SpinnerIcon } from "~/components/icons/SpinnerIcon";
 import { Input } from "~/components/Input";
@@ -6,7 +7,6 @@ import { Select } from "~/components/Select";
 import { Skeleton } from "~/components/Skeleton";
 import { useDebouncedValue } from "~/lib/debounce";
 import { formatNumber } from "~/lib/format";
-import { useRouter } from "~/lib/router/useRouter";
 import { cn } from "~/lib/utils";
 import { CommonSectionProps } from "../../types";
 import { Block } from "./components/Block";
@@ -40,14 +40,14 @@ function parseLocsPath(value: string | null): string[] {
 }
 
 export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
-	const router = useRouter();
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	const [sortOrder, setSortOrder] = useState<SortOrder>("type");
 	const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
-	const filter = router.search.get("filter") ?? "";
+	const filter = searchParams.get("filter") ?? "";
 	const [debouncedFilter] = useDebouncedValue(filter, 750);
 
-	const path = parseLocsPath(router.search.get("locsPath"));
+	const path = parseLocsPath(searchParams.get("locsPath"));
 
 	const { locs, query } = useLocs(path, {
 		sortOrder,
@@ -58,7 +58,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	});
 
 	const setPath = (newPath: string[]) => {
-		router.setSearch(prev => {
+		setSearchParams(prev => {
 			if (newPath.length) {
 				prev.set("locsPath", JSON.stringify(newPath));
 			} else {
@@ -70,7 +70,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 	};
 
 	const setFilter = (newFilter: string) => {
-		router.setSearch(
+		setSearchParams(
 			prev => {
 				if (newFilter) {
 					prev.set("filter", newFilter);

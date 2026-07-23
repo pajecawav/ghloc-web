@@ -1,21 +1,21 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "hono/jsx";
+import { useSearchParams } from "wouter";
 import { SearchIcon } from "~/components/icons/SearchIcon";
 import { SpinnerIcon } from "~/components/icons/SpinnerIcon";
 import { Input } from "~/components/Input";
 import { useDebouncedValue } from "~/lib/debounce";
 import { ghApi } from "~/lib/github/api";
 import { useQuery } from "~/lib/query/useQuery";
-import { useRouter } from "~/lib/router/useRouter";
 import { cn } from "~/lib/utils";
 import { SearchResults } from "./SearchResults";
 
 const githubUrlRegex = /(https?:\/\/)?github.com\/(?<owner>[^/]+)\/(?<repo>[^/#?]+)(\/[^$]+)?/;
 
 export default function IndexPageContent() {
-	const router = useRouter();
+	const [searchParams, setSearchParams] = useSearchParams();
 
 	const inputRef = useRef<HTMLInputElement>(null);
-	const queryValue = router.search.get("query") ?? "";
+	const queryValue = searchParams.get("query") ?? "";
 	const [debouncedQuery, setDebouncedQuery] = useDebouncedValue(queryValue, 750);
 
 	const [activeIndex, setActiveIndex] = useState(0);
@@ -61,7 +61,7 @@ export default function IndexPageContent() {
 				setDebouncedQuery(newQuery);
 			}
 
-			router.setSearch(prev => {
+			setSearchParams(prev => {
 				prev.set("query", newQuery);
 
 				return prev;
