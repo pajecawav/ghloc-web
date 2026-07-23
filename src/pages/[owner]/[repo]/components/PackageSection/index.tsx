@@ -49,5 +49,12 @@ export const PackageSection = async ({ owner, repo, branch }: PackageSectionProp
 		withServerTiming(event, "npm", () => npmApi.getPackage(pkg.name).catch(() => null)),
 	]);
 
-	return <PackageSectionContent pkg={pkg} bundle={bundle} npm={npm} />;
+	return (
+		<PackageSectionContent
+			yamf-client={!pkg || !bundle || !npm}
+			pkg={pkg}
+			bundle={bundle}
+			npm={npm}
+		/>
+	);
 };

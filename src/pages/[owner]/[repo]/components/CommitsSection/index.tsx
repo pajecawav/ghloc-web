@@ -18,5 +18,13 @@ export const CommitsSection = async ({ owner, repo, ...rest }: CommitsSectionPro
 		console.error(error);
 	}
 
-	return <CommitsSectionContent owner={owner} repo={repo} activity={activity} {...rest} />;
+	return (
+		<CommitsSectionContent
+			yamf-client={!activity}
+			owner={owner}
+			repo={repo}
+			activity={activity}
+			{...rest}
+		/>
+	);
 };
