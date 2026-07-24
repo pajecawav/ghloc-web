@@ -25,7 +25,8 @@
 		"@vercel/speed-insights": "^2.0.0",
 		"dayjs": "^1.11.21",
 		"devalue": "^5.8.1",
-		"ofetch": "^1.5.1"
+		"ofetch": "^1.5.1",
+		"swr": "^2.4.2"
 	},
 	"devDependencies": {
 		"@octokit/types": "^16.0.0",

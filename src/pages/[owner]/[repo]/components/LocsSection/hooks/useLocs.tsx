@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "hono/jsx";
 import { FetchError } from "ofetch";
+import useSWRImmutable from "swr/immutable";
 import { ghlocApi, Locs, LocsChild } from "~/lib/ghloc/api";
-import { useQuery } from "~/lib/query/useQuery";
 import { toast } from "~/lib/toasts/toasts";
 
 export type SortOrder = "type" | "locs";
@@ -24,27 +24,28 @@ export function useLocs(
 	path: string[],
 	{ sortOrder, filter, owner, repo, branch }: UseLocsOptions,
 ) {
-	const query = useQuery({
-		queryKey: ["locs", owner, repo, branch, filter],
-		queryFn: () => ghlocApi.getLocs({ owner, repo, branch, filter }),
-	});
+	const { data, error, isValidating } = useSWRImmutable(
+		["locs", owner, repo, branch, filter],
+		() => ghlocApi.getLocs({ owner, repo, branch, filter }),
+		{ keepPreviousData: true },
+	);
 
 	useEffect(() => {
-		if (!query.error) {
+		if (!error) {
 			return;
 		}
 
 		let content: string;
-		if (query.error instanceof FetchError) {
-			content = `Failed to load LOC stats: ${query.error.data?.error}`;
+		if (error instanceof FetchError) {
+			content = `Failed to load LOC stats: ${error.data?.error}`;
 		} else {
 			content = "Failed to load LOC stats.";
 		}
 
 		toast.show({ type: "error", content });
-	}, [query.error]);
+	}, [error]);
 
-	const locs = "data" in query ? query.data : null;
+	const locs = data;
 
 	const pathLocs = useMemo<Locs | number | null>(() => {
 		if (!locs) {
@@ -106,5 +107,5 @@ export function useLocs(
 		return { ...pathLocs, children: sortedChildren };
 	}, [pathLocs, sortOrder]);
 
-	return { locs: sortedLocs, query };
+	return { locs: sortedLocs, isValidating };
 }

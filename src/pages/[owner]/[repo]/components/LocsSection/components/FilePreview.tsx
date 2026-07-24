@@ -1,11 +1,11 @@
 import { PropsWithChildren } from "hono/jsx";
+import useSWRImmutable from "swr/immutable";
 import { Link } from "~/components/Link";
 import { Skeleton } from "~/components/Skeleton";
 import { formatBytes } from "~/lib/format";
 import { ghApi } from "~/lib/github/api";
 import { getRawGitHubFileUrl } from "~/lib/github/utils";
 import { getLanguageFromExtension } from "~/lib/languages";
-import { useQuery } from "~/lib/query/useQuery";
 import { CodePreview } from "./CodePreview";
 
 // TODO: lazy import
@@ -23,37 +23,31 @@ export const FilePreview = ({ owner, repo, branch, path: pathProp, loc }: FilePr
 	const path = pathProp.join("/");
 	const url = getRawGitHubFileUrl(owner, repo, branch, path);
 
-	const metaQuery = useQuery({
-		queryKey: ["fileMeta", owner, repo, branch, path],
-		queryFn: () => ghApi.getFileMeta(owner, repo, path, branch),
-	});
+	const { data: metaData } = useSWRImmutable(
+		["fileMeta", owner, repo, branch, path],
+		() => ghApi.getFileMeta(owner, repo, path, branch),
+		{ keepPreviousData: true },
+	);
 
-	const isSupported = metaQuery.data?.type;
+	const isSupported = metaData?.type;
 
-	const fileQuery = useQuery({
-		queryKey: ["file", owner, repo, branch, path],
-		queryFn: () => ghApi.getFile(owner, repo, path, branch),
-		enabled: !!isSupported,
-	});
+	const { data: fileData } = useSWRImmutable(
+		isSupported ? ["file", owner, repo, branch, path] : null,
+		() => ghApi.getFile(owner, repo, path, branch),
+		{ keepPreviousData: true },
+	);
 
-	if (!metaQuery.data || (isSupported && fileQuery.data === undefined)) {
+	if (!metaData || (isSupported && fileData === undefined)) {
 		return <Skeleton class="h-96" />;
 	}
 
-	switch (metaQuery.data.type) {
+	switch (metaData.type) {
 		case null:
-			return <UnsupportedFile url={url} size={metaQuery.data.size} />;
+			return <UnsupportedFile url={url} size={metaData.size} />;
 		case "text":
-			return (
-				<PlainTextFile
-					path={path}
-					text={fileQuery.data!}
-					size={metaQuery.data.size}
-					loc={loc}
-				/>
-			);
+			return <PlainTextFile path={path} text={fileData!} size={metaData.size} loc={loc} />;
 		case "image":
-			return <ImageFile url={url} size={metaQuery.data.size} />;
+			return <ImageFile url={url} size={metaData.size} />;
 	}
 };
 

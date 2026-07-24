@@ -1,9 +1,9 @@
+import useSWRImmutable from "swr/immutable";
 import { Link } from "~/components/Link";
 import { Skeleton } from "~/components/Skeleton";
 import { bundleJsApi, type BundleJsApiGetPackageSizeResponse } from "~/lib/bundlejs/api";
 import { humanize } from "~/lib/format";
 import type { NpmApiGetPackageResponse } from "~/lib/npm/api";
-import { useQuery } from "~/lib/query/useQuery";
 import { Section } from "../Section";
 import { PackageSectionFallback } from "./PackageSectionFallback";
 import type { PackageJson } from "./types";
@@ -19,17 +19,17 @@ export default function PackageSectionContent({
 	bundle: _bundle,
 	npm,
 }: PackageSectionContentProps) {
-	const { data: bundle, status } = useQuery({
-		queryKey: ["bundle", pkg.name],
-		queryFn: () => bundleJsApi.getPackageSize(pkg.name),
-		initialData: _bundle ?? undefined,
-	});
+	const { data: bundle, error } = useSWRImmutable(
+		_bundle === null ? ["bundle", pkg.name] : null,
+		() => bundleJsApi.getPackageSize(pkg.name),
+		{ fallbackData: _bundle ?? undefined },
+	);
 
 	const title = "Package";
 
 	const placeholder = <span class="text-muted">failed to load</span>;
 
-	if (status === "error") {
+	if (error) {
 		return <PackageSectionFallback />;
 	}
 

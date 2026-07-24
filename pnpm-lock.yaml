@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  hono: 2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0
+
 importers:
 
   .:
@@ -29,6 +32,9 @@ importers:
       ofetch:
         specifier: ^1.5.1
         version: 1.5.1
+      swr:
+        specifier: ^2.4.2
+        version: 2.4.2(react@19.2.8)
     devDependencies:
       '@octokit/types':
         specifier: ^16.0.0
@@ -38,7 +44,7 @@ importers:
         version: 0.0.5(chokidar@5.0.0)(dotenv@17.3.1)(giget@3.2.0)(jiti@2.7.0)(magicast@0.5.2)(oxfmt@0.58.0)(oxlint@1.73.0(oxlint-tsgolint@0.24.0))
       '@pajecawav/yamf':
         specifier: ^0.0.6
-        version: 0.0.6(@hono/react-compat@0.0.3(hono@4.12.28))(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
+        version: 0.0.6(@hono/react-compat@0.0.3(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)))(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
       '@tailwindcss/vite':
         specifier: ^4.3.2
         version: 4.3.2(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
@@ -56,7 +62,7 @@ importers:
         version: 10.1.0
       hono:
         specifier: ^4.12.28
-        version: 4.12.28
+        version: 4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -1311,6 +1317,10 @@ packages:
     resolution: {integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==}
     engines: {node: '>=0.10'}
 
+  dequal@2.0.3:
+    resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
+    engines: {node: '>=6'}
+
   destr@2.0.5:
     resolution: {integrity: sha512-ugFTXCtDZunbzasqBxrK93Ik/DRYsO6S/fedkWEMKqt04xZ4csmnmwGDBAb07QWNaGMAmnTIemsYZCksjATwsA==}
 
@@ -1934,6 +1944,11 @@ packages:
     resolution: {integrity: sha512-aulFJcD6YK8V1G7iRB5tigAP4TsHBZZrOV8pjV++zdUwmeV8uzbY7yn6h9MswN62adStNZFuCIx4haBnRuMDaw==}
     engines: {node: '>=18'}
 
+  swr@2.4.2:
+    resolution: {integrity: sha512-ej644Y2bvkIajfR32KGeSSdBXQW+ScjGjkybZgSE7kFpk9eGnV44XY9FJylXi+W75pavSX1PVNB57W5EbhGIYw==}
+    peerDependencies:
+      react: ^16.11.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+
   tailwindcss@4.3.2:
     resolution: {integrity: sha512-WtctNNSH8A9jlMIqxzuYumOHU5uGZyRv0Q5svQl+oEPy5w84YpBxdb7MdqyiSPQge5jTJ6zFQLq0PFygdccSBA==}
 
@@ -2351,9 +2366,9 @@ snapshots:
   '@esbuild/win32-x64@0.28.0':
     optional: true
 
-  '@hono/react-compat@0.0.3(hono@4.12.28)':
+  '@hono/react-compat@0.0.3(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))':
     dependencies:
-      hono: 4.12.28
+      hono: 4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)
 
   '@img/colour@1.1.0':
     optional: true
@@ -2651,16 +2666,16 @@ snapshots:
       - jiti
       - magicast
 
-  '@pajecawav/yamf@0.0.6(@hono/react-compat@0.0.3(hono@4.12.28))(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))':
+  '@pajecawav/yamf@0.0.6(@hono/react-compat@0.0.3(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)))(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))':
     dependencies:
       '@babel/generator': 7.29.7
       '@babel/parser': 7.29.7
       '@babel/traverse': 7.29.7
       '@babel/types': 7.29.7
-      '@hono/react-compat': 0.0.3(hono@4.12.28)
+      '@hono/react-compat': 0.0.3(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))
       devalue: 5.8.2
       exsolve: 1.1.0
-      hono: 4.12.28
+      hono: 4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)
       nitro: 3.0.260610-beta(chokidar@5.0.0)(dotenv@17.3.1)(giget@3.2.0)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
       rou3: 0.9.1
       ufo: 1.6.4
@@ -3029,6 +3044,8 @@ snapshots:
   denque@2.1.0:
     optional: true
 
+  dequal@2.0.3: {}
+
   destr@2.0.5: {}
 
   detect-libc@2.1.2: {}
@@ -3156,7 +3173,7 @@ snapshots:
 
   hex-rgb@4.3.0: {}
 
-  hono@4.12.28: {}
+  hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0): {}
 
   hookable@6.1.1: {}
 
@@ -3688,6 +3705,12 @@ snapshots:
       ansi-regex: 6.2.2
 
   strip-final-newline@4.0.0: {}
+
+  swr@2.4.2(react@19.2.8):
+    dependencies:
+      dequal: 2.0.3
+      react: 19.2.8
+      use-sync-external-store: 1.6.0(react@19.2.8)
 
   tailwindcss@4.3.2: {}
 

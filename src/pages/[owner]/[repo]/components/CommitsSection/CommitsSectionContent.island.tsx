@@ -1,10 +1,10 @@
 import { memo } from "hono/jsx";
+import useSWRImmutable from "swr/immutable";
 import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
 import { Heading } from "~/components/Heading";
 import { Skeleton } from "~/components/Skeleton";
 import { dayjs } from "~/lib/dayjs";
 import { ghApi, type GHApiGetCommitActivityResponse } from "~/lib/github/api";
-import { useQuery } from "~/lib/query/useQuery";
 import { cn } from "~/lib/utils";
 import type { CommonSectionProps } from "../../types";
 import { Section } from "../Section";
@@ -20,13 +20,13 @@ export default function CommitsSectionContent({
 	repo,
 	activity: initialData,
 }: CommitsSectionContentProps) {
-	const query = useQuery({
-		queryKey: ["activity", owner, repo],
-		queryFn: () => ghApi.getCommitActivity(owner, repo),
-		initialData,
-	});
+	const { data: activity, error } = useSWRImmutable<GHApiGetCommitActivityResponse | null>(
+		["activity", owner, repo],
+		() => ghApi.getCommitActivity(owner, repo),
+		{ fallbackData: initialData ?? undefined },
+	);
 
-	if (query.status === "error") {
+	if (error) {
 		return (
 			<Section title="Commits">
 				<ErrorPlaceholder>Failed to load commit activity</ErrorPlaceholder>
@@ -34,7 +34,7 @@ export default function CommitsSectionContent({
 		);
 	}
 
-	if (query.status === "pending" || !query.data) {
+	if (!activity) {
 		return (
 			<div>
 				<Heading>Commits</Heading>
@@ -42,8 +42,6 @@ export default function CommitsSectionContent({
 			</div>
 		);
 	}
-
-	const activity = query.data;
 
 	const totalCommits = activity.reduce((total, entry) => total + entry.total, 0);
 

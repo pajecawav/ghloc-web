@@ -1,11 +1,11 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "hono/jsx";
+import useSWRImmutable from "swr/immutable";
 import { useSearchParams } from "wouter";
 import { SearchIcon } from "~/components/icons/SearchIcon";
 import { SpinnerIcon } from "~/components/icons/SpinnerIcon";
 import { Input } from "~/components/Input";
 import { useDebouncedValue } from "~/lib/debounce";
 import { ghApi } from "~/lib/github/api";
-import { useQuery } from "~/lib/query/useQuery";
 import { cn } from "~/lib/utils";
 import { SearchResults } from "./SearchResults";
 
@@ -20,11 +20,11 @@ export default function IndexPageContent() {
 
 	const [activeIndex, setActiveIndex] = useState(0);
 
-	const query = useQuery({
-		queryKey: ["searchRepos", debouncedQuery],
-		queryFn: () => ghApi.searchRepos(debouncedQuery),
-		enabled: !!debouncedQuery,
-	});
+	const { data, isValidating } = useSWRImmutable(
+		debouncedQuery ? ["searchRepos", debouncedQuery] : null,
+		() => ghApi.searchRepos(debouncedQuery),
+		{ keepPreviousData: true },
+	);
 
 	useEffect(() => {
 		inputRef.current?.focus();
@@ -45,7 +45,7 @@ export default function IndexPageContent() {
 
 	useLayoutEffect(() => {
 		setActiveIndex(0);
-	}, [query?.data]);
+	}, [data]);
 
 	const onChange = (e: Event) => {
 		if (e.target instanceof HTMLInputElement) {
@@ -71,13 +71,13 @@ export default function IndexPageContent() {
 
 	const onKeyDown = (e: KeyboardEvent) => {
 		if (e.key === "Enter") {
-			const item = query.data?.items[activeIndex];
+			const item = data?.items[activeIndex];
 
 			if (item) {
 				location.href = `/${item.full_name}?branch=${encodeURIComponent(item.default_branch)}`;
 			}
 		} else if (e.key === "ArrowDown") {
-			setActiveIndex(Math.min(activeIndex + 1, (query.data?.items.length ?? 1) - 1));
+			setActiveIndex(Math.min(activeIndex + 1, (data?.items.length ?? 1) - 1));
 			e.preventDefault();
 		} else if (e.key === "ArrowUp") {
 			setActiveIndex(Math.max(activeIndex - 1, 0));
@@ -112,11 +112,7 @@ export default function IndexPageContent() {
 								"text-neutral-400 group-focus-within:text-black dark:text-neutral-500 dark:group-focus-within:text-neutral-400",
 							)}
 						>
-							{query.status === "fetching" ? (
-								<SpinnerIcon class="animate-spin" />
-							) : (
-								<SearchIcon />
-							)}
+							{isValidating ? <SpinnerIcon class="animate-spin" /> : <SearchIcon />}
 						</div>
 					}
 				/>
@@ -126,7 +122,7 @@ export default function IndexPageContent() {
 				<SearchResults
 					activeIndex={activeIndex}
 					onChangeActiveIndex={setActiveIndex}
-					items={query.data?.items}
+					items={data?.items}
 				/>
 			</div>
 		</div>

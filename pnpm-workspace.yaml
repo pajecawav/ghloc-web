@@ -7,3 +7,5 @@ allowBuilds:
     sharp: true
 minimumReleaseAgeExclude:
     - "@pajecawav/yamf@0.0.5 || 0.0.6"
+patchedDependencies:
+    hono: patches/hono.patch

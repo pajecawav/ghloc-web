@@ -49,7 +49,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 
 	const path = parseLocsPath(searchParams.get("locsPath"));
 
-	const { locs, query } = useLocs(path, {
+	const { locs, isValidating } = useLocs(path, {
 		sortOrder,
 		filter: debouncedFilter,
 		owner,
@@ -120,8 +120,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 								}
 							}}
 							after={
-								(query.status === "fetching" || query.status === "pending") &&
-								locs !== null ? (
+								isValidating && locs !== null ? (
 									<SpinnerIcon class="h-5 w-5 animate-spin text-muted" />
 								) : (
 									<FilterHelpTooltip />
