@@ -30,17 +30,28 @@ export default defineEventHandler(async event => {
 
 	setHeader(event, "cache-control", "public, max-age=60");
 
-	return renderPage(<RepoPage owner={owner} repo={repo} branch={branch} data={data} />, {
-		event,
-		title: `${owner}/${repo}`,
-		ogImage: `api/${owner}/${repo}/og-image?branch=${encodeURIComponent(branch)}`,
-		preload: [
-			{
-				href: getGhlocGetLocsUrl({ owner, repo, branch, filter }).toString(),
-				as: "fetch",
-				crossorigin: "anonymous",
-			},
-		],
-		preloadIslands: [LocsSection],
-	});
+	const branches = await timing
+		.timeAsync("branches", () => ghApi.getBranches(owner, repo))
+		.then(res => res.map(b => b.name))
+		.catch(error => {
+			console.error("Failed to fetch branches:", error);
+			return [] as string[];
+		});
+
+	return renderPage(
+		<RepoPage owner={owner} repo={repo} branch={branch} branches={branches} data={data} />,
+		{
+			event,
+			title: `${owner}/${repo}`,
+			ogImage: `api/${owner}/${repo}/og-image?branch=${encodeURIComponent(branch)}`,
+			preload: [
+				{
+					href: getGhlocGetLocsUrl({ owner, repo, branch, filter }).toString(),
+					as: "fetch",
+					crossorigin: "anonymous",
+				},
+			],
+			preloadIslands: [LocsSection],
+		},
+	);
 });

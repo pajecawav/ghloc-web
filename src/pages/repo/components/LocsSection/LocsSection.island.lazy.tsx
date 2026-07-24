@@ -1,4 +1,4 @@
-import { useState } from "hono/jsx";
+import { useMemo, useState } from "hono/jsx";
 import { Heading } from "~/components/Heading";
 import { SpinnerIcon } from "~/components/icons/SpinnerIcon";
 import { Input } from "~/components/Input";
@@ -19,6 +19,7 @@ import { isFolder, SortOrder, useLocs } from "./hooks/useLocs";
 
 interface LocsSectionProps extends CommonSectionProps {
 	branch: string;
+	branches?: string[];
 }
 
 function parseLocsPath(value: string | null): string[] {
@@ -39,13 +40,25 @@ function parseLocsPath(value: string | null): string[] {
 	return [];
 }
 
-export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
+export default function LocsSection({ owner, repo, branch, branches = [] }: LocsSectionProps) {
 	const router = useRouter();
 
+	const branchName = router.search.get("branch") ?? branch;
 	const [sortOrder, setSortOrder] = useState<SortOrder>("type");
 	const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
 	const filter = router.search.get("filter") ?? "";
 	const [debouncedFilter] = useDebouncedValue(filter, 750);
+
+	const availableBranches = useMemo(() => {
+		const set = new Set<string>();
+		if (branch) set.add(branch);
+		if (branchName) set.add(branchName);
+		for (const b of branches) {
+			set.add(b);
+		}
+
+		return Array.from(set);
+	}, [branch, branchName, branches]);
 
 	const path = parseLocsPath(router.search.get("locsPath"));
 
@@ -54,7 +67,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 		filter: debouncedFilter,
 		owner,
 		repo,
-		branch,
+		branch: branchName,
 	});
 
 	const setPath = (newPath: string[]) => {
@@ -84,6 +97,22 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 		);
 	};
 
+	const setBranchName = (newBranch: string) => {
+		router.setSearch(
+			prev => {
+				if (newBranch) {
+					prev.set("branch", newBranch);
+				} else {
+					prev.delete("branch");
+				}
+				prev.delete("locsPath");
+
+				return prev;
+			},
+			{ replace: false },
+		);
+	};
+
 	const isFile = locs !== null && !isFolder(locs);
 
 	return (
@@ -95,6 +124,21 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 				/>
 
 				<div class="ml-auto flex w-full flex-nowrap gap-2 xs:w-auto">
+					<Select
+						class="w-32"
+						value={branchName}
+						onChange={e => {
+							if (e.target instanceof HTMLSelectElement) {
+								setBranchName(e.target.value);
+							}
+						}}
+						title="Branch"
+					>
+						{availableBranches.map(b => (
+							<option value={b}>{b}</option>
+						))}
+					</Select>
+
 					<Select
 						class="w-28"
 						value={sortOrder}
@@ -146,7 +190,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 								<FilePreview
 									owner={owner}
 									repo={repo}
-									branch={branch}
+									branch={branchName}
 									path={path}
 									loc={locs}
 								/>
