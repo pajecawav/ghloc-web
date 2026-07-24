@@ -1,6 +1,7 @@
 import yamf from "@pajecawav/yamf/vite";
 import tailwindcss from "@tailwindcss/vite";
 import { rolldown } from "rolldown";
+import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig, type PluginOption } from "vite";
 
 export default defineConfig({
@@ -20,6 +21,8 @@ export default defineConfig({
 		}),
 		tailwindcss(),
 		bundledStringPlugin(),
+		process.env.ANALYZE &&
+			visualizer({ open: true, filename: "node_modules/.cache/visualizer.html" }),
 	],
 });
 

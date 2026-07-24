@@ -1,11 +1,10 @@
 import { defineCachedFunction } from "ocache";
-import { isServer } from "./utils";
 
 export const cachedApiFunction = <TArgs extends unknown[], TResult>(
 	name: string,
 	fn: (...args: TArgs) => Promise<TResult>,
 ) => {
-	if (isServer) {
+	if (import.meta.env.SSR) {
 		return defineCachedFunction(fn, { name, maxAge: 5 * 60, swr: false });
 	}
 

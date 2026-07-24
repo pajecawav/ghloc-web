@@ -30,7 +30,7 @@ const createServerFetcher = () => {
 	return baseFetcher.create({
 		retry: 0,
 		async onRequest({ options }) {
-			const token = import.meta.env.NITRO_GITHUB_TOKEN;
+			const token = process.env.NITRO_GITHUB_TOKEN;
 
 			if (token) {
 				options.headers.append("Authorization", `token ${token}`);
