@@ -8,6 +8,7 @@ import { CommonSectionProps } from "./types";
 
 interface RepoPageProps extends CommonSectionProps {
 	branch: string;
+	branches?: string[];
 }
 
 export const RepoPage = (props: RepoPageProps) => {

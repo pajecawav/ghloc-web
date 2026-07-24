@@ -56,6 +56,9 @@ export type GHApiSearchReposResponse = Endpoints["GET /search/repositories"]["re
 
 export type GHApiGetReposResponse = Endpoints["GET /users/{username}/repos"]["response"]["data"];
 
+export type GHApiGetBranchesResponse =
+	Endpoints["GET /repos/{owner}/{repo}/branches"]["response"]["data"];
+
 type GHApiRepoHealthFile = NonNullable<
 	NonNullable<GHApiGetRepoHealthResponse["files"]>["issue_template"]
 >;
@@ -207,5 +210,14 @@ export const ghApi = {
 		return fetcher<GHApiGetReposResponse>(`https://api.github.com/users/${owner}/repos`, {
 			params: { per_page: limit, sort: "updated" },
 		});
+	}),
+
+	getBranches: cachedApiFunction("ghApi.getBranches", async (owner: string, repo: string) => {
+		return fetcher<GHApiGetBranchesResponse>(
+			`https://api.github.com/repos/${owner}/${repo}/branches`,
+			{
+				params: { per_page: 100 },
+			},
+		);
 	}),
 };
