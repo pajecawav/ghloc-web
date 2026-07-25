@@ -43,8 +43,8 @@ importers:
         specifier: ^0.0.5
         version: 0.0.5(chokidar@5.0.0)(dotenv@17.3.1)(giget@3.2.0)(jiti@2.7.0)(magicast@0.5.2)(oxfmt@0.58.0)(oxlint@1.73.0(oxlint-tsgolint@0.24.0))
       '@pajecawav/yamf':
-        specifier: ^0.0.6
-        version: 0.0.6(@hono/react-compat@0.0.3(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)))(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
+        specifier: ^0.0.7
+        version: 0.0.7(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
       '@tailwindcss/vite':
         specifier: ^4.3.2
         version: 4.3.2(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
@@ -105,18 +105,6 @@ packages:
   '@arborium/arborium@2.18.1':
     resolution: {integrity: sha512-v6WuWy2yd/+R5OFT7g+asDXKImOrUdnTmEvGZwaBgOE2DSFKcksa2Us4QxxIr3C2ohVguRJf/rtbnZska6/UKg==}
 
-  '@babel/code-frame@7.29.7':
-    resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/generator@7.29.7':
-    resolution: {integrity: sha512-DkXD5OJQaAQIdZ1bt3UZdEnHAn9Imd3IVBdX03UFe+ony9Ojw5pzr9YVKGDY1jt+Gcn/FnGkNf8r+Vj5NOJWtQ==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/helper-globals@7.29.7':
-    resolution: {integrity: sha512-3nQVUAtvkKH9zahfWgw96Jc/uFOmjACE1kQz82E2lqWmHBgjzbNlsC22nuQTfahmWeQtTq5nQ/4Nnd2A1wj4zA==}
-    engines: {node: '>=6.9.0'}
-
   '@babel/helper-string-parser@7.29.7':
     resolution: {integrity: sha512-Pb5ijPrZ89GDH8223L4UP8i6QApWxs04RbPQJTeWDV0/keR2E36MeKnyr6LYmUUvqRRI+Iv87SuF1W6ErINzYw==}
     engines: {node: '>=6.9.0'}
@@ -129,14 +117,6 @@ packages:
     resolution: {integrity: sha512-hnORnjP/1P/zFEndoeX+n+t1RwWRJiJpM/jO7FW32Kn9r5+sJB2JWOdYo4L6k78j15eCwY3Gm/7364B1EMwtNg==}
     engines: {node: '>=6.0.0'}
     hasBin: true
-
-  '@babel/template@7.29.7':
-    resolution: {integrity: sha512-puq+Gf35oI24FeN11LkoUQFqv9uwNeWpxXZi/Ji3rRIoKAzKnxRaZ+Gkj0vKS9ZCiTESfng1N9LyOyXvo+m+Gg==}
-    engines: {node: '>=6.9.0'}
-
-  '@babel/traverse@7.29.7':
-    resolution: {integrity: sha512-EhlfNQtZ+NK22w5BM61ciuiq1m58ed33Wr1Xan//ZRTy6hgjnwyCffRYwzsGXdASJSUJ1guZILsErh1eQcl+zw==}
-    engines: {node: '>=6.9.0'}
 
   '@babel/types@7.29.7':
     resolution: {integrity: sha512-4zBIxpPzowiZpusoFkyGVwakdRJUyuH5PxQ/PrqghfdFWWasvnCdPfQXHrenDai+gyLARulZjZowCOj6fjT4pA==}
@@ -805,10 +785,9 @@ packages:
       prettier:
         optional: true
 
-  '@pajecawav/yamf@0.0.6':
-    resolution: {integrity: sha512-pY0JC789/l6/efMy2MfDtPnJV++HhltCkReXDm5gMgYe5c6GixIg7YKf3cMDJ2K75I/x3BiKKYWiEISJoQGDaQ==}
+  '@pajecawav/yamf@0.0.7':
+    resolution: {integrity: sha512-U+pK0l1T6lpsyItHcgiuhSGyrsINuTs3bygRM6dUkO2wIGnJeeHURPlNTcTBmtyO9zBvsEqYau5UCgNUF1BwnA==}
     peerDependencies:
-      '@hono/react-compat': ^0.0.3
       hono: ^4.12.30
       vite: ^8.1.5
 
@@ -1544,14 +1523,6 @@ packages:
     resolution: {integrity: sha512-AC/7JofJvZGrrneWNaEnJeOLUx+JlGt7tNa0wZiRPT4MY1wmfKjt2+6O2p2uz2+skll8OZZmJMNqeke7kKbNgQ==}
     hasBin: true
 
-  js-tokens@4.0.0:
-    resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
-
-  jsesc@3.1.0:
-    resolution: {integrity: sha512-/sM3dO2FOzXjKQhJuo0Q173wf2KOo8t4I8vHy6lF9poUp7bKT0/NHE8fPX23PwfhnykfqnC2xRxOnVw5XuGIaA==}
-    engines: {node: '>=6'}
-    hasBin: true
-
   json-parse-even-better-errors@6.0.0:
     resolution: {integrity: sha512-2/8adwnK1/+Fdjyts4r6wSpfANWw8zdNhU9U/Llk59c6O+DjSisPWPykwoL8gZmocP9Dy64S7oie2g+Mia123A==}
     engines: {node: ^22.22.2 || ^24.15.0 || >=26.0.0}
@@ -1658,6 +1629,9 @@ packages:
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
+
+  magic-string@1.1.0:
+    resolution: {integrity: sha512-kS3VHe0nEPST2saQV4Rbkchcd3UBRkVTQHo1D3h/ZTwFDhai/mfKkmtPAtD129EOI7K3HlHIsFOt0WrI2/oU9g==}
 
   magicast@0.5.2:
     resolution: {integrity: sha512-E3ZJh4J3S9KfwdjZhe2afj6R9lGIN5Pher1pF39UGrXRqq/VDaGVIGN13BjHd2u8B61hArAGOnso7nBOouW3TQ==}
@@ -1889,6 +1863,15 @@ packages:
     resolution: {integrity: sha512-LKg+Cr2ZF61fkcaK1UdkH2yEBBKnYjTyWzTJT6KNPcSPaiT7HSdhtMXQuN5wkTX0Xu72KQ1l8S42rlmexS2hSA==}
     engines: {node: 20 || >=22}
     hasBin: true
+
+  rolldown-string@0.3.1:
+    resolution: {integrity: sha512-dv8GOXkYqUQdI0rsXB8hmzO95pKWSuX2eg5/JSJa9czfEVIFuKNR7ZJDfat8LlmD35RAhWY+evS7/wXXqFDfSg==}
+    engines: {node: '>=20.19.0'}
+    peerDependencies:
+      rolldown: '*'
+    peerDependenciesMeta:
+      rolldown:
+        optional: true
 
   rolldown@1.1.4:
     resolution: {integrity: sha512-IjZYiLxZwpnhwhdBH2ugdTGVSdhCQUmLxLoqyjiL0JxYjyRst+5a0P3xfrTxJ5F638j4Mvvw5FAX5XE6eHpXbA==}
@@ -2278,52 +2261,22 @@ snapshots:
 
   '@arborium/arborium@2.18.1': {}
 
-  '@babel/code-frame@7.29.7':
-    dependencies:
-      '@babel/helper-validator-identifier': 7.29.7
-      js-tokens: 4.0.0
-      picocolors: 1.1.1
+  '@babel/helper-string-parser@7.29.7':
+    optional: true
 
-  '@babel/generator@7.29.7':
-    dependencies:
-      '@babel/parser': 7.29.7
-      '@babel/types': 7.29.7
-      '@jridgewell/gen-mapping': 0.3.13
-      '@jridgewell/trace-mapping': 0.3.31
-      jsesc: 3.1.0
-
-  '@babel/helper-globals@7.29.7': {}
-
-  '@babel/helper-string-parser@7.29.7': {}
-
-  '@babel/helper-validator-identifier@7.29.7': {}
+  '@babel/helper-validator-identifier@7.29.7':
+    optional: true
 
   '@babel/parser@7.29.7':
     dependencies:
       '@babel/types': 7.29.7
-
-  '@babel/template@7.29.7':
-    dependencies:
-      '@babel/code-frame': 7.29.7
-      '@babel/parser': 7.29.7
-      '@babel/types': 7.29.7
-
-  '@babel/traverse@7.29.7':
-    dependencies:
-      '@babel/code-frame': 7.29.7
-      '@babel/generator': 7.29.7
-      '@babel/helper-globals': 7.29.7
-      '@babel/parser': 7.29.7
-      '@babel/template': 7.29.7
-      '@babel/types': 7.29.7
-      debug: 4.4.3
-    transitivePeerDependencies:
-      - supports-color
+    optional: true
 
   '@babel/types@7.29.7':
     dependencies:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
+    optional: true
 
   '@commitlint/config-conventional@21.0.2':
     dependencies:
@@ -2731,17 +2684,14 @@ snapshots:
       - jiti
       - magicast
 
-  '@pajecawav/yamf@0.0.6(@hono/react-compat@0.0.3(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)))(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))':
+  '@pajecawav/yamf@0.0.7(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))':
     dependencies:
-      '@babel/generator': 7.29.7
-      '@babel/parser': 7.29.7
-      '@babel/traverse': 7.29.7
-      '@babel/types': 7.29.7
       '@hono/react-compat': 0.0.3(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))
       devalue: 5.8.2
       exsolve: 1.1.0
       hono: 4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)
       nitro: 3.0.260610-beta(chokidar@5.0.0)(dotenv@17.3.1)(giget@3.2.0)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
+      rolldown-string: 0.3.1(rolldown@1.1.4)
       rou3: 0.9.1
       ufo: 1.6.4
       unhead: 3.2.3(esbuild@0.28.0)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
@@ -2787,7 +2737,6 @@ snapshots:
       - rolldown
       - rollup
       - sqlite3
-      - supports-color
       - unloader
       - uploadthing
       - webpack
@@ -3113,6 +3062,7 @@ snapshots:
   debug@4.4.3:
     dependencies:
       ms: 2.1.3
+    optional: true
 
   default-browser-id@5.0.1: {}
 
@@ -3310,10 +3260,6 @@ snapshots:
 
   jiti@2.7.0: {}
 
-  js-tokens@4.0.0: {}
-
-  jsesc@3.1.0: {}
-
   json-parse-even-better-errors@6.0.0: {}
 
   lightningcss-android-arm64@1.32.0:
@@ -3407,6 +3353,10 @@ snapshots:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
 
+  magic-string@1.1.0:
+    dependencies:
+      '@jridgewell/sourcemap-codec': 1.5.5
+
   magicast@0.5.2:
     dependencies:
       '@babel/parser': 7.29.7
@@ -3428,7 +3378,8 @@ snapshots:
 
   mitt@3.0.1: {}
 
-  ms@2.1.3: {}
+  ms@2.1.3:
+    optional: true
 
   nanoid@3.3.12: {}
 
@@ -3674,6 +3625,12 @@ snapshots:
     dependencies:
       glob: 13.0.6
       package-json-from-dist: 1.0.1
+
+  rolldown-string@0.3.1(rolldown@1.1.4):
+    dependencies:
+      magic-string: 1.1.0
+    optionalDependencies:
+      rolldown: 1.1.4
 
   rolldown@1.1.4:
     dependencies:

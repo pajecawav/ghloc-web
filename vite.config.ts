@@ -22,7 +22,12 @@ export default defineConfig({
 		tailwindcss(),
 		bundledStringPlugin(),
 		process.env.ANALYZE &&
-			visualizer({ open: true, filename: "node_modules/.cache/visualizer.html" }),
+			visualizer({
+				open: true,
+				filename: "node_modules/.cache/visualizer.html",
+				gzipSize: true,
+				brotliSize: true,
+			}),
 	],
 });
 
