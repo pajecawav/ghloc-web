@@ -1,3 +1,4 @@
+import { IslandProps } from "@pajecawav/yamf";
 import useSWRImmutable from "swr/immutable";
 import { Link } from "~/components/Link";
 import { Skeleton } from "~/components/Skeleton";
@@ -6,22 +7,23 @@ import { humanize } from "~/lib/format";
 import type { NpmApiGetPackageResponse } from "~/lib/npm/api";
 import { Section } from "../Section";
 import { PackageSectionFallback } from "./PackageSectionFallback";
-import type { PackageJson } from "./types";
 
-interface PackageSectionContentProps {
-	pkg: PackageJson;
+interface PackageSectionContentProps extends IslandProps {
+	packageName: string;
+	packageVersion: string;
 	bundle: BundleJsApiGetPackageSizeResponse | null;
 	npm: NpmApiGetPackageResponse | null;
 }
 
 export default function PackageSectionContent({
-	pkg,
+	packageName,
+	packageVersion,
 	bundle: _bundle,
 	npm,
 }: PackageSectionContentProps) {
 	const { data: bundle, error } = useSWRImmutable(
-		_bundle === null ? ["bundle", pkg.name] : null,
-		() => bundleJsApi.getPackageSize(pkg.name),
+		_bundle === null ? ["bundle", packageName] : null,
+		() => bundleJsApi.getPackageSize(packageName),
 		{ fallbackData: _bundle ?? undefined },
 	);
 
@@ -61,15 +63,15 @@ export default function PackageSectionContent({
 		<Section title={title}>
 			<ul>
 				<li>
-					<Link href={`https://npmx.dev/${pkg.name}`} target="_blank" rel="noopener">
-						{pkg.name}
+					<Link href={`https://npmx.dev/${packageName}`} target="_blank" rel="noopener">
+						{packageName}
 					</Link>
 				</li>
-				<li>Version: {pkg.version}</li>
+				<li>Version: {packageVersion}</li>
 				<li>Downloads: {npm ? `${humanize(npm.downloads)} (last week)` : placeholder}</li>
 				<li>
 					<Link
-						href={`https://bundlejs.com/?q=${encodeURIComponent(pkg.name)}`}
+						href={`https://bundlejs.com/?q=${encodeURIComponent(packageName)}`}
 						target="_blank"
 						rel="noopener"
 					>
@@ -82,7 +84,7 @@ export default function PackageSectionContent({
 				</li>
 				<li>
 					<Link
-						href={`https://bundlejs.com/?q=${encodeURIComponent(pkg.name)}`}
+						href={`https://bundlejs.com/?q=${encodeURIComponent(packageName)}`}
 						target="_blank"
 						rel="noopener"
 					>

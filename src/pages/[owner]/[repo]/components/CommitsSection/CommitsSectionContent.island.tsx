@@ -1,3 +1,4 @@
+import { IslandProps } from "@pajecawav/yamf";
 import { memo } from "hono/jsx";
 import useSWRImmutable from "swr/immutable";
 import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
@@ -11,7 +12,7 @@ import { Section } from "../Section";
 
 const DAY_IN_SECONDS = 60 * 60 * 24;
 
-interface CommitsSectionContentProps extends CommonSectionProps {
+interface CommitsSectionContentProps extends CommonSectionProps, IslandProps {
 	activity: GHApiGetCommitActivityResponse | null | undefined;
 }
 

@@ -52,7 +52,8 @@ export const PackageSection = async ({ owner, repo, branch }: PackageSectionProp
 	return (
 		<PackageSectionContent
 			yamf-client={!pkg || !bundle || !npm}
-			pkg={pkg}
+			packageName={pkg?.name}
+			packageVersion={pkg?.version}
 			bundle={bundle}
 			npm={npm}
 		/>

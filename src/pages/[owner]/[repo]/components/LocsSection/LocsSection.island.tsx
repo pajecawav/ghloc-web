@@ -1,3 +1,4 @@
+import { IslandProps } from "@pajecawav/yamf";
 import { useState } from "hono/jsx";
 import { useSearchParams } from "wouter";
 import { Heading } from "~/components/Heading";
@@ -17,7 +18,7 @@ import { LocsTree } from "./components/LocsTree";
 import { PathBreadcrums } from "./components/PathBreadcrumbs";
 import { isFolder, type SortOrder, useLocs } from "./hooks/useLocs";
 
-interface LocsSectionProps extends CommonSectionProps {
+interface LocsSectionProps extends CommonSectionProps, IslandProps {
 	branch: string;
 }
 
