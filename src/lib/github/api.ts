@@ -1,8 +1,8 @@
 import { Endpoints } from "@octokit/types";
 import { FetchError } from "ofetch";
 import { cachedApiFunction } from "../cache";
-import { dayjs } from "../dayjs";
 import { baseFetcher } from "../fetcher";
+import { formatRelativeTime } from "../format";
 import { toast } from "../toasts/toasts";
 import { isClient, sleep } from "../utils";
 import { getRawGitHubFileUrl } from "./utils";
@@ -18,7 +18,7 @@ const createClientFetcher = () => {
 					toast.show({
 						id: "github-api-limit",
 						type: "error",
-						content: `GitHub API limit reached. Reset ${dayjs().to(reset)}.`,
+						content: `GitHub API limit reached. Reset ${formatRelativeTime(reset)}.`,
 					});
 				}
 			}

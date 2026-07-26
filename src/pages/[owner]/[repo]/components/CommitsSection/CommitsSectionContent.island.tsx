@@ -4,7 +4,7 @@ import useSWRImmutable from "swr/immutable";
 import { ErrorPlaceholder } from "~/components/ErrorPlaceholder";
 import { Heading } from "~/components/Heading";
 import { Skeleton } from "~/components/Skeleton";
-import { dayjs } from "~/lib/dayjs";
+import { formatDate, formatMonth } from "~/lib/format";
 import { ghApi, type GHApiGetCommitActivityResponse } from "~/lib/github/api";
 import { cn } from "~/lib/utils";
 import type { CommonSectionProps } from "../../types";
@@ -95,9 +95,11 @@ const Heatmap = memo(({ activity }: { activity: GHApiGetCommitActivityResponse }
 									y={dayIndex * cellSize}
 								>
 									<title>
-										{`${value} commits on ${dayjs(
-											(week.week + dayIndex * DAY_IN_SECONDS) * 1000,
-										).format("MMM D, YYYY")}`}
+										{`${value} commits on ${formatDate(
+											new Date(
+												(week.week + dayIndex * DAY_IN_SECONDS) * 1000,
+											),
+										)}`}
 									</title>
 								</rect>
 							))}
@@ -111,10 +113,13 @@ const Heatmap = memo(({ activity }: { activity: GHApiGetCommitActivityResponse }
 					transform={`translate(${weekDaysOffset}, 0)`}
 				>
 					{activity.map((week, index) => {
-						const date = dayjs(week.week * 1000);
-						const dateEnd = date.add(1, "week");
+						const date = new Date(week.week * 1000);
+						const dateEnd = new Date(date.getTime() + 7 * DAY_IN_SECONDS * 1000);
 
-						if (date.isSame(dateEnd, "month")) {
+						if (
+							date.getMonth() === dateEnd.getMonth() &&
+							date.getFullYear() === dateEnd.getFullYear()
+						) {
 							return null;
 						}
 
@@ -130,7 +135,7 @@ const Heatmap = memo(({ activity }: { activity: GHApiGetCommitActivityResponse }
 								dx={index * cellSize}
 								key={index}
 							>
-								{dateEnd.format("MMM")}
+								{formatMonth(dateEnd)}
 							</text>
 						);
 					})}

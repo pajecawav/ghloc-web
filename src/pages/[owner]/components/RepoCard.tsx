@@ -1,6 +1,6 @@
 import { Badge } from "~/components/Badge";
 import { RepoStats } from "~/components/RepoStats";
-import { dayjs } from "~/lib/dayjs";
+import { formatRelativeTime } from "~/lib/format";
 import { GHApiGetReposResponse } from "~/lib/github/api";
 
 interface RepoCardProps {
@@ -25,9 +25,11 @@ export const RepoCard = ({ repo }: RepoCardProps) => {
 			</div>
 			{repo.description && <div class="mb-1 text-sm text-muted">{repo.description}</div>}
 
-			<div class="text-normal mt-auto text-xs">
-				Updated {dayjs(repo.updated_at).fromNow()}
-			</div>
+			{repo.updated_at && (
+				<div class="text-normal mt-auto text-xs">
+					Updated {formatRelativeTime(new Date(repo.updated_at).getTime())}
+				</div>
+			)}
 
 			<div class="text-normal flex items-center gap-2 text-sm">
 				{repo.language && (
