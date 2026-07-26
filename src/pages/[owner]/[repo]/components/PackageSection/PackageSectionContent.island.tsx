@@ -63,7 +63,11 @@ export default function PackageSectionContent({
 		<Section title={title}>
 			<ul>
 				<li>
-					<Link href={`https://npmx.dev/${packageName}`} target="_blank" rel="noopener">
+					<Link
+						href={`https://npmx.dev/package/${packageName}`}
+						target="_blank"
+						rel="noopener"
+					>
 						{packageName}
 					</Link>
 				</li>
