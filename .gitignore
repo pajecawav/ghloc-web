@@ -5,11 +5,10 @@ public/sitemap.xml
 
 node_modules
 dist
-dist-vite
+.output
 .data
 .nitro
 .cache
-.output
 .env
 .vercel
 *.tsbuildinfo
