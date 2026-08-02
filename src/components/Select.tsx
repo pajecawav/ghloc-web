@@ -9,7 +9,7 @@ export function Select({ class: _class, ...props }: SelectProps) {
 		<div class="relative w-max">
 			<select
 				class={cn(
-					"font-sm appearance-none rounded-md border bg-transparent py-0.5 pr-8 pl-3 transition-colors duration-100 !outline-none",
+					"font-sm appearance-none rounded-md border bg-transparent py-0.5 pr-8 pl-3 transition-colors duration-100 !outline-none dark:bg-neutral-900",
 					"border-2 border-border focus-within:border-border-focus",
 					_class,
 				)}
