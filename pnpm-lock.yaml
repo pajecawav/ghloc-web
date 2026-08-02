@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-patchedDependencies:
-  hono: 2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0
-
 importers:
 
   .:
@@ -41,7 +38,7 @@ importers:
         version: 0.0.5(chokidar@5.0.0)(dotenv@17.3.1)(giget@3.2.0)(jiti@2.7.0)(magicast@0.5.2)(oxfmt@0.58.0)(oxlint@1.73.0(oxlint-tsgolint@0.24.0))
       '@pajecawav/yamf':
         specifier: ^0.0.7
-        version: 0.0.7(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
+        version: 0.0.7(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.33)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
       '@tailwindcss/vite':
         specifier: ^4.3.2
         version: 4.3.2(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
@@ -58,8 +55,8 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0
       hono:
-        specifier: ^4.12.28
-        version: 4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)
+        specifier: ^4.12.33
+        version: 4.12.33
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -1445,8 +1442,8 @@ packages:
     resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
     engines: {node: '>=6'}
 
-  hono@4.12.28:
-    resolution: {integrity: sha512-YwUvVpSF7m1yOblFPrU3Hbo8XhPheBoiyfGuII6z19LnOr6JpDnyyp7LFNrfV56wS8tpvtBFGRISHN02pDdLOA==}
+  hono@4.12.33:
+    resolution: {integrity: sha512-+SwvkaiJtxsiPjhy9LivY/1m7UsNqCJetM1BrZl9A5DkQhlbHQDU730mMiDPWjnoCYOM8Chf3WrCJw27kNTPFQ==}
     engines: {node: '>=16.9.0'}
 
   hookable@6.1.1:
@@ -2378,9 +2375,9 @@ snapshots:
   '@esbuild/win32-x64@0.28.0':
     optional: true
 
-  '@hono/react-compat@0.0.3(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))':
+  '@hono/react-compat@0.0.3(hono@4.12.33)':
     dependencies:
-      hono: 4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)
+      hono: 4.12.33
 
   '@img/colour@1.1.0':
     optional: true
@@ -2678,12 +2675,12 @@ snapshots:
       - jiti
       - magicast
 
-  '@pajecawav/yamf@0.0.7(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))':
+  '@pajecawav/yamf@0.0.7(chokidar@5.0.0)(dotenv@17.3.1)(esbuild@0.28.0)(giget@3.2.0)(hono@4.12.33)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(react@19.2.8)(rolldown@1.1.4)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))':
     dependencies:
-      '@hono/react-compat': 0.0.3(hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0))
+      '@hono/react-compat': 0.0.3(hono@4.12.33)
       devalue: 5.8.2
       exsolve: 1.1.0
-      hono: 4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0)
+      hono: 4.12.33
       nitro: 3.0.260610-beta(chokidar@5.0.0)(dotenv@17.3.1)(giget@3.2.0)(ioredis@5.10.1)(jiti@2.7.0)(lru-cache@11.2.7)(vite@8.1.4(@types/node@24.13.3)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.0)(yaml@2.9.0))
       rolldown-string: 0.3.1(rolldown@1.1.4)
       rou3: 0.9.1
@@ -3197,7 +3194,7 @@ snapshots:
 
   hex-rgb@4.3.0: {}
 
-  hono@4.12.28(patch_hash=2e63807e533bda4fd48ffdb2d42190ce81ce620630a2bdd1715d271447f80be0): {}
+  hono@4.12.33: {}
 
   hookable@6.1.1: {}
 

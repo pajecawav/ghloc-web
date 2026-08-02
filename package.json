@@ -36,7 +36,7 @@
 		"@types/node": "^24.13.3",
 		"@typescript/native-preview": "7.0.0-dev.20260707.2",
 		"cross-env": "^10.1.0",
-		"hono": "^4.12.28",
+		"hono": "^4.12.33",
 		"husky": "^9.1.7",
 		"lint-staged": "^17.0.8",
 		"nitro": "3.0.260610-beta",
