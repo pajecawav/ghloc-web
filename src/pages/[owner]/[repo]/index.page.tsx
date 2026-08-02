@@ -54,7 +54,7 @@ export default definePage({
 			meta: [
 				{
 					property: "og:image",
-					content: `api/${owner}/${repo}/og-image?branch=${encodeURIComponent(branch)}`,
+					content: `/api/${owner}/${repo}/og-image?branch=${encodeURIComponent(branch)}`,
 				},
 			],
 			link: [
