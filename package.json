@@ -4,8 +4,8 @@
 	"type": "module",
 	"scripts": {
 		"build": "cross-env FORCE_COLOR=1 run-s -l build:languages build:sitemap build:vite",
-		"build:languages": "tsx scripts/build-languages.ts",
-		"build:sitemap": "tsx scripts/build-sitemap.ts",
+		"build:languages": "node scripts/build-languages.ts",
+		"build:sitemap": "node scripts/build-sitemap.ts",
 		"build:vite": "vite build",
 		"dev": "cross-env FORCE_COLOR=1 npm-run-all -l -s build:languages dev:vite",
 		"dev:vite": "vite",
@@ -47,7 +47,6 @@
 		"rimraf": "^6.1.3",
 		"rollup-plugin-visualizer": "^7.0.1",
 		"tailwindcss": "^4.3.3",
-		"tsx": "^4.23.9",
 		"vite": "^8.2.0"
 	},
 	"packageManager": "pnpm@11.20.0+sha512.9a6f330a95b66446ea088faf1521405a8a01f07fde7124cc9958dfed52d4bb436737e65b08f85f37b46fcba375092558ac51262b816844b22f63406ed166bfee"

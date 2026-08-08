@@ -1,6 +1,6 @@
 import fs from "fs";
 import { resolve } from "path";
-import languagesJson from "./languages.json";
+import languagesJson from "./languages.json" with { type: "json" };
 
 const languages = languagesJson.languages;
 
