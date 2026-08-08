@@ -25,7 +25,7 @@
 		"@vercel/speed-insights": "^2.0.0",
 		"devalue": "^5.9.0",
 		"ofetch": "^1.5.1",
-		"swr": "^2.4.2"
+		"swr": "^2.5.0"
 	},
 	"devDependencies": {
 		"@octokit/types": "^17.0.0",
@@ -36,19 +36,19 @@
 		"@types/node": "^24.13.3",
 		"@typescript/native-preview": "7.0.0-dev.20260707.2",
 		"cross-env": "^10.1.0",
-		"hono": "^4.12.33",
+		"hono": "^4.13.0",
 		"husky": "^9.1.7",
 		"lint-staged": "^17.3.0",
 		"nitro": "3.0.260610-beta",
 		"npm-run-all2": "^9.0.3",
-		"oxfmt": "^0.61.0",
-		"oxlint": "^1.76.0",
+		"oxfmt": "^0.62.0",
+		"oxlint": "^1.77.0",
 		"oxlint-tsgolint": "^7.0.2001",
 		"rimraf": "^6.1.3",
 		"rollup-plugin-visualizer": "^7.0.1",
 		"tailwindcss": "^4.3.3",
-		"tsx": "^4.23.1",
+		"tsx": "^4.23.9",
 		"vite": "^8.2.0"
 	},
-	"packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c"
+	"packageManager": "pnpm@11.20.0+sha512.9a6f330a95b66446ea088faf1521405a8a01f07fde7124cc9958dfed52d4bb436737e65b08f85f37b46fcba375092558ac51262b816844b22f63406ed166bfee"
 }
