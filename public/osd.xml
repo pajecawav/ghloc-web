@@ -2,8 +2,8 @@
     <ShortName>ghloc</ShortName>
     <Description>Search GitHub repos on ghloc</Description>
     <InputEncoding>UTF-8</InputEncoding>
-    <Image width="32" height="32" type="image/x-icon">https://ghloc.vercel.app/favicon.ico</Image>
+    <Image width="32" height="32" type="image/x-icon">https://ghloc.dev/favicon.ico</Image>
     <Tags>ghloc</Tags>
-    <Url type="text/html" template="https://ghloc.vercel.app?q={searchTerms}" />
-    <moz:SearchForm>https://ghloc.vercel.app.com</moz:SearchForm>
+    <Url type="text/html" template="https://ghloc.dev?q={searchTerms}" />
+    <moz:SearchForm>https://ghloc.dev</moz:SearchForm>
 </OpenSearchDescription>

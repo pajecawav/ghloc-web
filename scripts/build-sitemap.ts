@@ -11,7 +11,7 @@ const repos = data.trim().split("\n");
 const buildEntry = (repo: string) =>
 	`\
 <url>
-    <loc>https://ghloc.vercel.app/${repo}</loc>
+    <loc>https://ghloc.dev/${repo}</loc>
 </url>`.trim();
 
 const sitemap = `\
