@@ -2,6 +2,7 @@
 
 ![build status](https://github.com/pajecawav/ghloc-web/actions/workflows/ci.yml/badge.svg)
 [![lines count](https://img.shields.io/endpoint?url=https://ghloc.dev/api/pajecawav/ghloc-web/badge?filter=.ts$,.tsx$)](https://ghloc.dev/pajecawav/ghloc-web?filter=.ts$,.tsx$)
+[![Firefox addon version](https://img.shields.io/amo/v/ghloc)](https://addons.mozilla.org/en-US/firefox/addon/ghloc/)
 
 A [website](https://ghloc.dev/) to display GitHub repository info:
 
