@@ -26,7 +26,7 @@ export const Header = () => {
 					</HeaderItem>
 				</a>
 				<a
-					href="https://addons.mozilla.org/firefox/addon/github-lines-of-code"
+					href="https://addons.mozilla.org/en-US/firefox/addon/ghloc/"
 					target="_blank"
 					rel="noopener"
 					title="Firefox addon"

@@ -9,7 +9,7 @@
 		"build:vite": "vite build",
 		"dev": "cross-env FORCE_COLOR=1 npm-run-all -l -s build:languages dev:vite",
 		"dev:vite": "vite",
-		"preview": "node .output/server/index.mjs",
+		"preview": "vite preview",
 		"lint": "cross-env FORCE_COLOR=1 run-p -lc lint:*",
 		"lint:oxlint": "oxlint .",
 		"lint:tsc": "tsgo --noEmit",
