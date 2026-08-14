@@ -21,7 +21,7 @@
 	"dependencies": {
 		"@arborium/arborium": "^2.18.1",
 		"@vercel/analytics": "^2.0.1",
-		"@vercel/og": "^0.11.1",
+		"@vercel/og": "^1.0.1",
 		"@vercel/speed-insights": "^2.0.0",
 		"devalue": "^5.9.0",
 		"ofetch": "^1.5.1",
