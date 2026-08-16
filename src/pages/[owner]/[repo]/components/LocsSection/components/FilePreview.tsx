@@ -1,10 +1,11 @@
 import { PropsWithChildren } from "hono/jsx";
 import useSWRImmutable from "swr/immutable";
+import { ExternalLinkIcon } from "~/components/icons/ExternalLinkIcon";
 import { Link } from "~/components/Link";
 import { Skeleton } from "~/components/Skeleton";
 import { formatBytes } from "~/lib/format";
 import { ghApi } from "~/lib/github/api";
-import { getRawGitHubFileUrl } from "~/lib/github/utils";
+import { getGitHubFileUrl, getRawGitHubFileUrl } from "~/lib/github/utils";
 import { getLanguageFromExtension } from "~/lib/languages";
 import { CodePreview } from "./CodePreview";
 
@@ -45,7 +46,17 @@ export const FilePreview = ({ owner, repo, branch, path: pathProp, loc }: FilePr
 		case null:
 			return <UnsupportedFile url={url} size={metaData.size} />;
 		case "text":
-			return <PlainTextFile path={path} text={fileData!} size={metaData.size} loc={loc} />;
+			return (
+				<PlainTextFile
+					path={path}
+					text={fileData!}
+					size={metaData.size}
+					loc={loc}
+					owner={owner}
+					repo={repo}
+					branch={branch}
+				/>
+			);
 		case "image":
 			return <ImageFile url={url} size={metaData.size} />;
 	}
@@ -53,7 +64,7 @@ export const FilePreview = ({ owner, repo, branch, path: pathProp, loc }: FilePr
 
 const Header = ({ children }: PropsWithChildren) => {
 	return (
-		<div className="rounded-t-md border-b border-border bg-gray-100 px-4 py-2 text-xs text-muted dark:bg-neutral-800">
+		<div className="flex items-center gap-2 rounded-t-md border-b border-border bg-gray-100 px-4 py-2 text-xs text-muted dark:bg-neutral-800">
 			{children}
 		</div>
 	);
@@ -78,11 +89,17 @@ const PlainTextFile = ({
 	text,
 	loc,
 	size,
+	owner,
+	repo,
+	branch,
 }: {
 	path: string;
 	text: string;
 	loc: number;
 	size: number;
+	owner: string;
+	repo: string;
+	branch: string;
 }) => {
 	// ignore traling empty line
 	const lines = text.trimEnd().split("\n");
@@ -93,11 +110,24 @@ const PlainTextFile = ({
 		? (getLanguageFromExtension(extension, filename) ?? extension)
 		: extension;
 
+	const githubUrl = getGitHubFileUrl(owner, repo, branch, path);
+
 	return (
 		<div>
 			<Header>
-				{lines.length} lines ({loc} sloc){" "}
-				<span className="mx-1 inline-block text-muted">|</span> {formatBytes(size)}
+				<span>
+					{lines.length} lines ({loc} sloc){" "}
+					<span className="mx-1 inline-block text-muted">|</span> {formatBytes(size)}
+				</span>
+				<a
+					className="ml-auto transition-colors hover:text-link"
+					href={githubUrl}
+					target="_blank"
+					rel="noopener"
+					title="Open file on GitHub"
+				>
+					<ExternalLinkIcon class="h-4 w-4" />
+				</a>
 			</Header>
 			<div className="overflow-x-auto py-1 font-mono text-sm whitespace-nowrap">
 				<CodePreview lang={language} code={text} />
