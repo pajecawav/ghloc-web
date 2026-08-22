@@ -72,7 +72,9 @@ export function useLocs(
 	}, [locs, path]);
 
 	const sortedLocs = useMemo((): Locs | number | null => {
-		if (!pathLocs || !isFolder(pathLocs)) return pathLocs;
+		if (!pathLocs || !isFolder(pathLocs)) {
+			return pathLocs;
+		}
 
 		const children = pathLocs.children;
 		if (!children) {
