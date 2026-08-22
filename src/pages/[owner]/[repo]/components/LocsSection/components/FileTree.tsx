@@ -48,7 +48,9 @@ export const FileTree = ({ locs, onSelect, selectedLanguage }: FileTreeProps) =>
 		: 0;
 
 	const getLocsPercentageOfSelectedLanguage = (name: string, node: LocsChild) => {
-		if (!selectedLanguage || !totalLocsOfSelectedLanguage) return 0;
+		if (!selectedLanguage || !totalLocsOfSelectedLanguage) {
+			return 0;
+		}
 
 		if (!isFolder(node)) {
 			return name.endsWith(selectedLanguage) ? (node / totalLocsOfSelectedLanguage) * 100 : 0;
