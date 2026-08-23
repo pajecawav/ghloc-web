@@ -22,7 +22,7 @@ export const getGhlocGetLocsUrl = ({ owner, repo, branch, filter }: GhlocApiGetL
 	const url = new URL(`https://ghloc.ifels.dev/${owner}/${repo}`);
 
 	if (branch) {
-		url.pathname += `/${branch}`;
+		url.pathname += `/${encodeURIComponent(branch)}`;
 	}
 
 	if (filter) {
