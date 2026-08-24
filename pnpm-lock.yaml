@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@takumi-rs/wasm@2.12.0': bd9682fc7acf41867dae7a3b1b6b92b1c3d3c3bc7d79a3246340e2a3c7838a81
+
 importers:
 
   .:
@@ -2616,7 +2619,7 @@ snapshots:
     optionalDependencies:
       react: 19.2.8
 
-  '@takumi-rs/wasm@2.12.0(react@19.2.8)':
+  '@takumi-rs/wasm@2.12.0(patch_hash=bd9682fc7acf41867dae7a3b1b6b92b1c3d3c3bc7d79a3246340e2a3c7838a81)(react@19.2.8)':
     dependencies:
       '@takumi-rs/helpers': 2.12.0(react@19.2.8)
     transitivePeerDependencies:
@@ -3406,7 +3409,7 @@ snapshots:
     dependencies:
       '@takumi-rs/core': 2.12.0(react@19.2.8)
       '@takumi-rs/helpers': 2.12.0(react@19.2.8)
-      '@takumi-rs/wasm': 2.12.0(react@19.2.8)
+      '@takumi-rs/wasm': 2.12.0(patch_hash=bd9682fc7acf41867dae7a3b1b6b92b1c3d3c3bc7d79a3246340e2a3c7838a81)(react@19.2.8)
     transitivePeerDependencies:
       - csstype
       - preact

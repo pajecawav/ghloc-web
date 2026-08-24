@@ -1,0 +1,12 @@
+diff --git a/bundlers/workerd.js b/bundlers/workerd.js
+index bd5bfdb18052608331371346deb7a4d8ff356f48..c2aab23bca8fade64f026068e214716e286d6549 100644
+--- a/bundlers/workerd.js
++++ b/bundlers/workerd.js
+@@ -1,3 +1,6 @@
+-import module from "../pkg/takumi_wasm_bg.wasm";
++// `?module` makes bundlers (nitro/unwasm) emit this as a raw WebAssembly module
++// instead of eagerly instantiating it with an empty imports object (the wasm
++// needs wasm-bindgen glue imports, see __wbg_init).
++import module from "../pkg/takumi_wasm_bg.wasm?module";
+ 
+ export default module;

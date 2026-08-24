@@ -5,3 +5,5 @@ allowBuilds:
     "@vercel/speed-insights": true
     esbuild: true
     sharp: true
+patchedDependencies:
+    "@takumi-rs/wasm@2.12.0": patches/@takumi-rs__wasm@2.12.0.patch

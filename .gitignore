@@ -11,4 +11,5 @@ dist
 .cache
 .env
 .vercel
+.wrangler
 *.tsbuildinfo
