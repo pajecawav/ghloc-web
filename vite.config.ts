@@ -15,7 +15,7 @@ export default defineConfig({
 		yamf({
 			nitro: {
 				errorHandler: "./src/error.ts",
-				compatibilityDate: "2025-07-22",
+				compatibilityDate: "2026-08-02",
 				preset: process.env.VERCEL ? "vercel" : undefined,
 			},
 		}),

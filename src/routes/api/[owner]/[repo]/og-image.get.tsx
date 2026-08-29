@@ -1,6 +1,6 @@
-import { ImageResponse } from "@vercel/og";
 import { HTTPError } from "nitro/h3";
 import { defineHandler, getQuery, getRouterParams, withServerTiming } from "nitro/h3";
+import { ImageResponse } from "takumi-js/response";
 import { GitHubIcon } from "~/components/icons/GitHubIcon";
 import { formatNumber } from "~/lib/format";
 import { type Locs, ghlocApi } from "~/lib/ghloc/api";
@@ -61,6 +61,8 @@ export default defineHandler(async event => {
 			</div>
 		</div>,
 		{
+			width: 1200,
+			height: 630,
 			headers: {
 				// override default cache
 				"cache-control": "public, no-transform, max-age=900",
@@ -82,8 +84,8 @@ function Header({ owner, repo }: { owner: string; repo: string }) {
 			}}
 		>
 			<GitHubIcon
-				fill={colors.text}
 				style={{
+					color: colors.text,
 					width: "1.25em",
 					height: "1.25em",
 					marginRight: "10px",
