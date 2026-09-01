@@ -1,0 +1,28 @@
+const randomRepos = [
+	"react",
+	"angular",
+	"svelte",
+	"solid",
+	"next.js",
+	"vite",
+	"tailwindcss",
+	"rust",
+	"cpython",
+	"TypeScript",
+	"go",
+	"deno",
+	"fastapi",
+	"django",
+	"rails",
+	"vscode",
+	"zed",
+	"bun",
+	"ohmyzsh",
+	"kubernetes",
+	"openclaw",
+	"opencode",
+	"hermes-agent",
+	"pi",
+] as const;
+
+export const getRandomRepo = () => randomRepos[Math.floor(Math.random() * randomRepos.length)];

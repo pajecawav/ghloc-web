@@ -11,7 +11,7 @@ import { SearchResults } from "./SearchResults";
 
 const githubUrlRegex = /(https?:\/\/)?github.com\/(?<owner>[^/]+)\/(?<repo>[^/#?]+)(\/[^$]+)?/;
 
-export default function IndexPageContent() {
+export default function IndexPageContent({ placeholder }: { placeholder: string }) {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const inputRef = useRef<HTMLInputElement>(null);
@@ -99,7 +99,7 @@ export default function IndexPageContent() {
 					onChange={onChange}
 					inputClass="py-3 text-center text-2xl font-light"
 					type="text"
-					placeholder="facebook/react"
+					placeholder={placeholder}
 					autofocus
 					autocomplete="off"
 					autocorrect="off"
