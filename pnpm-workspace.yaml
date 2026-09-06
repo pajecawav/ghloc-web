@@ -6,4 +6,6 @@ allowBuilds:
     esbuild: true
     sharp: true
 patchedDependencies:
-    "@takumi-rs/wasm@2.12.0": patches/@takumi-rs__wasm@2.12.0.patch
+    "@takumi-rs/wasm@2.13.6": patches/@takumi-rs__wasm@2.13.6.patch
+minimumReleaseAgeExclude:
+    - "@pajecawav/yamf@0.0.8"
