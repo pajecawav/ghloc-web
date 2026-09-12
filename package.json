@@ -22,10 +22,10 @@
 		"@arborium/arborium": "^2.18.2",
 		"@vercel/analytics": "^2.0.1",
 		"@vercel/speed-insights": "^2.0.0",
-		"devalue": "^5.9.1",
+		"devalue": "^5.9.2",
 		"ofetch": "^1.5.1",
 		"swr": "^2.5.1",
-		"takumi-js": "^2.13.6"
+		"takumi-js": "^2.13.7"
 	},
 	"devDependencies": {
 		"@octokit/types": "^18.0.0",
@@ -33,21 +33,21 @@
 		"@pajecawav/yamf": "^0.0.8",
 		"@tailwindcss/vite": "^4.3.3",
 		"@types/js-cookie": "^3.0.6",
-		"@types/node": "^26.4.1",
+		"@types/node": "^26.5.1",
 		"@typescript/native-preview": "7.0.0-dev.20260707.2",
 		"cross-env": "^10.1.0",
 		"hono": "^4.13.7",
 		"husky": "^9.1.7",
-		"lint-staged": "^17.5.0",
+		"lint-staged": "^17.5.1",
 		"nitro": "3.0.260903-beta",
 		"npm-run-all2": "^9.0.3",
-		"oxfmt": "^0.66.0",
-		"oxlint": "^1.81.0",
+		"oxfmt": "^0.67.0",
+		"oxlint": "^1.82.0",
 		"oxlint-tsgolint": "^7.0.2001",
 		"rimraf": "^6.1.3",
 		"rollup-plugin-visualizer": "^7.1.1",
 		"tailwindcss": "^4.3.3",
-		"vite": "^8.2.2"
+		"vite": "^8.3.0"
 	},
-	"packageManager": "pnpm@12.3.4"
+	"packageManager": "pnpm@12.4.1"
 }
