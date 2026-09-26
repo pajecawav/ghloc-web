@@ -179,8 +179,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0(react@19.2.8)
       devalue:
-        specifier: ^5.9.4
-        version: 5.9.4
+        specifier: ^6.0.2
+        version: 6.0.2
       ofetch:
         specifier: ^1.5.1
         version: 1.5.1
@@ -1403,6 +1403,10 @@ packages:
 
   devalue@5.9.4:
     resolution: {integrity: sha512-sPAT4pztbu6586/hrhOnMKS17IJrvg12mXiSPSS3W5qDeN2RGgvZ0diZCm31dBbnevfVmujNO3IM2wrS4Y2Rhg==}
+
+  devalue@6.0.2:
+    resolution: {integrity: sha512-6V1HzU4to74skg//ScZR2mp9bdz+rESC9jQzVIIG/ha0HYgymHcXIQQCjH0+ivRaSuY82fa9fZ7Ro6QZT4s4uw==}
+    engines: {node: '>=22.17'}
 
   dotenv@17.3.1:
     resolution: {integrity: sha512-IO8C/dzEb6O3F9/twg6ZLXz164a2fhTnEWb95H23Dm4OuN+92NmEAlTrupP9VW6Jm3sO26tQlqyvyi4CsnY9GA==}
@@ -2861,6 +2865,8 @@ snapshots:
   detect-libc@2.1.2: {}
 
   devalue@5.9.4: {}
+
+  devalue@6.0.2: {}
 
   dotenv@17.3.1:
     optional: true
