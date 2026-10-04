@@ -1,8 +1,8 @@
-import { definePage } from "@pajecawav/yamf";
+import { definePage, useEvent } from "@pajecawav/yamf";
 import { HTTPError, getQuery, withServerTiming } from "nitro/h3";
 import { FetchError } from "ofetch";
 import { humanize, formatNumber } from "~/lib/format";
-import { type Locs, getGhlocGetLocsUrl } from "~/lib/ghloc/api";
+import { getGhlocGetLocsUrl } from "~/lib/ghloc/api";
 import { ghApi, type GHApiGetRepoResponse } from "~/lib/github/api";
 import { getLanguageFromExtension } from "~/lib/languages";
 import { locMetaToLocs, resolveLocMeta, type RepoLocMeta } from "~/lib/loc-meta";
@@ -21,6 +21,10 @@ export default definePage({
 		maxAge: 60,
 		swr: 7 * 24 * 60 * 60,
 	},
+	// stream: the shell (repo info + early SEO meta) flushes immediately while
+	// health/commits/locs stream in; numbers for the title arrive as a head
+	// patch via a suspense chunk
+	stream: true,
 	render: async (event: any, { head }: any) => {
 		const owner = event.context.params?.owner;
 		const repo = event.context.params?.repo;
@@ -32,6 +36,13 @@ export default definePage({
 		if (!owner || !repo) {
 			throw new HTTPError({ statusCode: 400, statusMessage: "Missing owner or repo" });
 		}
+
+		// kick the LOC fetch immediately — without an explicit branch ghloc
+		// redirects to the default branch itself, so this does not have to wait
+		// for the repo info
+		const locsMetaPromise = withServerTiming(event, "locs-meta", () =>
+			resolveLocMeta({ owner, repo, branch: branchParam, filter }),
+		);
 
 		let data: GHApiGetRepoResponse | null = null;
 
@@ -56,21 +67,19 @@ export default definePage({
 			});
 		}
 
-		const locMeta = await withServerTiming(event, "locs-meta", () =>
-			resolveLocMeta({ owner, repo, branch, filter }),
-		);
-
-		const title = buildRepoTitle(owner, repo, locMeta);
-		const description = buildRepoDescription(owner, repo, data, locMeta);
 		const canonical = `${event.url.origin}/${owner}/${repo}`;
 		const ownerUrl = `${event.url.origin}/${owner}`;
+		const baseDescription = buildRepoDescription(owner, repo, data, null);
+		const baseTitle = buildRepoTitle(owner, repo, null);
 
+		// early meta ships with the shell: keyword title, repo description,
+		// absolute og:image and JSON-LD are static in raw HTML for every crawler
 		head.push({
-			title,
+			title: baseTitle,
 			meta: [
-				{ name: "description", content: description },
-				{ property: "og:title", content: title },
-				{ property: "og:description", content: description },
+				{ name: "description", content: baseDescription },
+				{ property: "og:title", content: baseTitle },
+				{ property: "og:description", content: baseDescription },
 				{
 					property: "og:image",
 					content: `${event.url.origin}/api/${owner}/${repo}/og-image?branch=${encodeURIComponent(branch)}`,
@@ -86,10 +95,10 @@ export default definePage({
 							owner,
 							repo,
 							data,
-							locMeta,
+							locMeta: null,
 							canonical,
 							ownerUrl,
-							description,
+							description: baseDescription,
 						}),
 					),
 				},
@@ -104,13 +113,35 @@ export default definePage({
 			],
 		});
 
+		// when the LOC race resolves, patch the meta with real numbers — with
+		// stream: true this is emitted as an unhead suspense chunk that updates
+		// the title/description on the client; the island wrapper below awaits
+		// the same promise so the stream ordering is deterministic
+		const metaWithNumbers = locsMetaPromise.then(locMeta => {
+			if (locMeta) {
+				const title = buildRepoTitle(owner, repo, locMeta);
+				const description = buildRepoDescription(owner, repo, data, locMeta);
+
+				head.push({
+					title,
+					meta: [
+						{ name: "description", content: description },
+						{ property: "og:title", content: title },
+						{ property: "og:description", content: description },
+					],
+				});
+			}
+
+			return locMeta;
+		});
+
 		return (
 			<RepoPage
 				owner={owner}
 				repo={repo}
 				branch={branch}
 				data={data}
-				initialLocs={locMeta && !filter ? locMetaToLocs(locMeta) : null}
+				locsMetaPromise={metaWithNumbers}
 			/>
 		);
 	},
@@ -219,8 +250,36 @@ const buildJsonLd = ({
 
 interface RepoPageProps extends CommonSectionProps {
 	branch: string;
-	initialLocs: Locs | null;
+	locsMetaPromise: Promise<RepoLocMeta | null>;
 }
+
+/**
+ * Awaits the LOC race so the seeded island streams in after the numbers are
+ * known (and keeps the head patch ordered before the stream ends), the same
+ * pattern CommitsSection uses.
+ */
+const LocsSectionWrapper = async ({
+	owner,
+	repo,
+	branch,
+	data,
+	locsMetaPromise,
+}: RepoPageProps) => {
+	const event = useEvent();
+	const locMeta = await withServerTiming(event, "locs-meta-await", () => locsMetaPromise);
+
+	return (
+		<LocsSection
+			owner={owner}
+			repo={repo}
+			branch={branch}
+			data={data}
+			initialLocs={
+				locMeta && !event.url.searchParams.get("filter") ? locMetaToLocs(locMeta) : null
+			}
+		/>
+	);
+};
 
 export const RepoPage = (props: RepoPageProps) => {
 	return (
@@ -235,7 +294,7 @@ export const RepoPage = (props: RepoPageProps) => {
 
 			<CommitsSection {...props} />
 
-			<LocsSection {...props} />
+			<LocsSectionWrapper {...props} />
 		</div>
 	);
 };

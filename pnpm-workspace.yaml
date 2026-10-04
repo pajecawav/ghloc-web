@@ -8,4 +8,4 @@ allowBuilds:
 patchedDependencies:
     "@takumi-rs/wasm@2.16.2": patches/@takumi-rs__wasm@2.16.2.patch
 minimumReleaseAgeExclude:
-    - "@pajecawav/yamf@0.0.8"
+    - "@pajecawav/yamf@0.0.8 || 0.0.10 || 0.0.11"
