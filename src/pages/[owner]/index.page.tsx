@@ -1,19 +1,31 @@
 import { definePage } from "@pajecawav/yamf";
 import { useEvent } from "@pajecawav/yamf";
 import { withServerTiming } from "nitro/h3";
-import { setHeader } from "nitro/h3";
 import { Heading } from "~/components/Heading";
 import { ghApi } from "~/lib/github/api";
 import { buildPageTitle } from "~/lib/title";
 import { RepoCard } from "./components/RepoCard";
 
 export default definePage({
+	cache: {
+		maxAge: 60,
+		swr: 7 * 24 * 60 * 60,
+	},
 	render: (event, { head }) => {
 		const { owner } = event.context.params ?? {};
 
-		setHeader(event, "cache-control", "public, max-age=60");
+		const title = buildPageTitle(`${owner} GitHub repositories`);
 
-		head.push({ title: buildPageTitle(owner) });
+		head.push({
+			title,
+			meta: [
+				{
+					name: "description",
+					content: `Lines of code statistics for ${owner}'s GitHub repositories: LOC by language, repo size and commit activity.`,
+				},
+				{ property: "og:title", content: title },
+			],
+		});
 
 		return <OwnerPage owner={owner} />;
 	},
