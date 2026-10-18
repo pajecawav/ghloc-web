@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "hono/jsx";
 import { FetchError } from "ofetch";
-import useSWRImmutable from "swr/immutable";
+import useSWR from "swr";
 import { ghlocApi, Locs, LocsChild } from "~/lib/ghloc/api";
 import { toast } from "~/lib/toasts/toasts";
 
@@ -14,6 +14,8 @@ export interface UseLocsOptions {
 	owner: string;
 	repo: string;
 	branch?: string;
+	/** Server-resolved unfiltered LOC data; used until the live fetch resolves. */
+	initialLocs?: Locs | null;
 }
 
 export function isFolder(child: LocsChild): child is Locs {
@@ -22,12 +24,22 @@ export function isFolder(child: LocsChild): child is Locs {
 
 export function useLocs(
 	path: string[],
-	{ sortOrder, filter, owner, repo, branch }: UseLocsOptions,
+	{ sortOrder, filter, owner, repo, branch, initialLocs }: UseLocsOptions,
 ) {
-	const { data, error, isValidating } = useSWRImmutable(
+	const { data, error, isValidating } = useSWR(
 		["locs", owner, repo, branch, filter],
 		() => ghlocApi.getLocs({ owner, repo, branch, filter }),
-		{ keepPreviousData: true },
+		{
+			keepPreviousData: true,
+			// seeded from the server for the unfiltered view only; the full
+			// tree (folder children) is still fetched in the background —
+			// swr/immutable would skip it since fallbackData hides staleness
+			revalidateIfStale: true,
+			revalidateOnFocus: false,
+			revalidateOnReconnect: false,
+			refreshInterval: 0,
+			fallbackData: !filter ? (initialLocs ?? undefined) : undefined,
+		},
 	);
 
 	useEffect(() => {

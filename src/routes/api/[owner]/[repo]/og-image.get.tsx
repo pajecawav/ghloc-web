@@ -37,6 +37,10 @@ export default defineHandler(async event => {
 		throw new HTTPError({ statusCode: 500, statusMessage: "Failed to fetch locs" });
 	}
 
+	return buildImageResponse(owner, repo, locs);
+});
+
+function buildImageResponse(owner: string, repo: string, locs: Locs) {
 	const totalLocs = locs.loc;
 	const topLangs = Object.entries(locs.locByLangs ?? {}).slice(0, 6);
 
@@ -64,12 +68,13 @@ export default defineHandler(async event => {
 			width: 1200,
 			height: 630,
 			headers: {
-				// override default cache
-				"cache-control": "public, no-transform, max-age=900",
+				// override default cache; swr keeps the CDN warm without blocking
+				// on slow regenerations
+				"cache-control": "public, no-transform, max-age=900, stale-while-revalidate=86400",
 			},
 		},
 	);
-});
+}
 
 function Header({ owner, repo }: { owner: string; repo: string }) {
 	return (
