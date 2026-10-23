@@ -25,12 +25,12 @@
 		"devalue": "^6.0.3",
 		"ofetch": "^1.5.1",
 		"swr": "^2.5.1",
-		"takumi-js": "^2.16.2"
+		"takumi-js": "^2.17.1"
 	},
 	"devDependencies": {
 		"@octokit/types": "^18.0.0",
 		"@pajecawav/tools": "^0.1.0",
-		"@pajecawav/yamf": "^0.0.11",
+		"@pajecawav/yamf": "^0.0.12",
 		"@tailwindcss/vite": "^4.3.3",
 		"@types/js-cookie": "^3.0.6",
 		"@types/node": "^26.6.5",
@@ -40,14 +40,14 @@
 		"husky": "^9.1.7",
 		"lint-staged": "^17.6.0",
 		"nitro": "3.0.260903-beta",
-		"npm-run-all2": "^9.0.3",
-		"oxfmt": "^0.73.0",
-		"oxlint": "^1.88.0",
+		"npm-run-all2": "^9.0.4",
+		"oxfmt": "^0.74.0",
+		"oxlint": "^1.89.0",
 		"oxlint-tsgolint": "^7.0.2004",
 		"rimraf": "^6.1.3",
 		"rollup-plugin-visualizer": "^7.1.1",
 		"tailwindcss": "^4.3.3",
-		"vite": "^8.3.4"
+		"vite": "^8.3.5"
 	},
-	"packageManager": "pnpm@12.13.0"
+	"packageManager": "pnpm@12.15.0"
 }
