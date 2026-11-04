@@ -18,7 +18,7 @@ export const InfoSection = async ({ owner, repo, data }: InfoSectionProps) => {
 	return (
 		<>
 			<div class="flex flex-wrap items-center gap-2 sm:flex-nowrap">
-				<div class="flex w-full flex-0 items-center gap-1 text-xl whitespace-nowrap text-muted xs:w-auto">
+				<h1 class="flex w-full flex-0 items-center gap-1 text-xl whitespace-nowrap text-muted xs:w-auto">
 					<a
 						class="h-6 w-6 transition-colors duration-100 hover:text-link"
 						href={`https://github.com/${owner}/${repo}`}
@@ -31,7 +31,7 @@ export const InfoSection = async ({ owner, repo, data }: InfoSectionProps) => {
 					<Link href={`/${owner}`}>{owner}</Link>
 					{" / "}
 					<Link href={`/${owner}/${repo}`}>{repo}</Link>
-				</div>
+				</h1>
 
 				<div class="mr-auto flex gap-2">
 					{data.archived && <Badge title="Repo is archived">Archived</Badge>}

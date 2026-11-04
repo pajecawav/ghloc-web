@@ -13,18 +13,29 @@
 		"Ada": {
 			"extensions": ["ada", "adb", "ads", "pad"]
 		},
-		"Alex": {
-			"extensions": ["x"]
-		},
 		"Agda": {
 			"extensions": ["agda"]
+		},
+		"Alex": {
+			"extensions": ["x"]
 		},
 		"Alloy": {
 			"extensions": ["als"]
 		},
+		"Apl": {
+			"name": "APL",
+			"extensions": ["apl", "aplf", "apls"]
+		},
 		"Arduino": {
 			"name": "Arduino C++",
 			"extensions": ["ino"]
+		},
+		"ArkTS": {
+			"name": "Ark TypeScript",
+			"extensions": ["ets"]
+		},
+		"Arturo": {
+			"extensions": ["art"]
 		},
 		"AsciiDoc": {
 			"extensions": ["adoc", "asciidoc"]
@@ -32,13 +43,6 @@
 		"Asn1": {
 			"name": "ASN.1",
 			"extensions": ["asn1"]
-		},
-		"Assembly": {
-			"extensions": ["asm"]
-		},
-		"AssemblyGAS": {
-			"name": "GNU Style Assembly",
-			"extensions": ["s"]
 		},
 		"Asp": {
 			"name": "ASP",
@@ -48,6 +52,16 @@
 			"name": "ASP.NET",
 			"extensions": ["asax", "ascx", "asmx", "aspx", "master", "sitemap", "webinfo"]
 		},
+		"Assembly": {
+			"extensions": ["asm"]
+		},
+		"AssemblyGAS": {
+			"name": "GNU Style Assembly",
+			"extensions": ["s"]
+		},
+		"Astro": {
+			"extensions": ["astro"]
+		},
 		"Ats": {
 			"name": "ATS",
 			"extensions": ["dats", "hats", "sats", "atxt"]
@@ -55,50 +69,72 @@
 		"Autoconf": {
 			"extensions": ["in"]
 		},
+		"Autoit": {
+			"extensions": ["au3"]
+		},
 		"AutoHotKey": {
 			"extensions": ["ahk"]
 		},
 		"Automake": {
 			"extensions": ["am"]
 		},
+		"AvaloniaXaml": {
+			"name": "AXAML",
+			"extensions": ["axaml"]
+		},
 		"AWK": {
 			"extensions": ["awk"]
 		},
-		"Sh": {
-			"name": "Shell",
-			"extensions": ["sh"]
+		"Ballerina": {
+			"extensions": ["bal"]
 		},
 		"Bash": {
 			"name": "BASH",
 			"extensions": ["bash"]
 		},
-		"Bazel": {
-			"name": "Bazel",
-			"extensions": ["bzl"]
-		},
-		"BrightScript": {
-			"extensions": ["brs"]
-		},
-		"Elvish": {
-			"extensions": ["elv"]
-		},
-		"Fennel": {
-			"extensions": ["fnl"]
-		},
-		"Fish": {
-			"extensions": ["fish"]
-		},
 		"Batch": {
 			"extensions": ["bat", "btm", "cmd"]
+		},
+		"Bazel": {
+			"name": "Bazel",
+			"extensions": ["bzl", "bazel", "bzlmod"],
+			"filenames": ["build", "workspace", "module"]
 		},
 		"Bean": {
 			"extensions": ["bean", "beancount"]
 		},
+		"Bicep": {
+			"extensions": ["bicep", "bicepparam"]
+		},
+		"Bitbake": {
+			"name": "Bitbake",
+			"extensions": ["bb", "bbclass", "bbappend", "inc"]
+		},
+		"Blade": {
+			"name": "Blade",
+			"extensions": ["blade"]
+		},
+		"Bqn": {
+			"name": "BQN",
+			"extensions": ["bqn"]
+		},
+		"BrightScript": {
+			"extensions": ["brs"]
+		},
 		"C": {
 			"extensions": ["c", "ec", "pgc"]
 		},
+		"C3": {
+			"extensions": ["c3"]
+		},
 		"Cabal": {
 			"extensions": ["cabal"]
+		},
+		"Cairo": {
+			"extensions": ["cairo"]
+		},
+		"Cangjie": {
+			"extensions": ["cj"]
 		},
 		"Cassius": {
 			"extensions": ["cassius"]
@@ -106,18 +142,28 @@
 		"Ceylon": {
 			"extensions": ["ceylon"]
 		},
+		"Chapel": {
+			"extensions": ["chpl"]
+		},
 		"CHeader": {
 			"name": "C Header",
 			"extensions": ["h"]
 		},
+		"Cil": {
+			"name": "CIL (SELinux)",
+			"extensions": ["cil"]
+		},
+		"Circom": {
+			"extensions": ["circom"]
+		},
 		"Clojure": {
 			"extensions": ["clj"]
 		},
-		"ClojureScript": {
-			"extensions": ["cljs"]
-		},
 		"ClojureC": {
 			"extensions": ["cljc"]
+		},
+		"ClojureScript": {
+			"extensions": ["cljs"]
 		},
 		"CMake": {
 			"extensions": ["cmake"],
@@ -154,6 +200,10 @@
 			"name": "C++ Header",
 			"extensions": ["hh", "hpp", "hxx", "inl", "ipp"]
 		},
+		"CppModule": {
+			"name": "C++ Module",
+			"extensions": ["cppm", "ixx", "ccm", "mpp", "mxx", "cxxm", "hppm", "hxxm"]
+		},
 		"Crystal": {
 			"extensions": ["cr"]
 		},
@@ -169,8 +219,22 @@
 			"name": "CSS",
 			"extensions": ["css"]
 		},
+		"Cuda": {
+			"name": "CUDA",
+			"extensions": ["cu"]
+		},
+		"Cue": {
+			"name": "CUE",
+			"extensions": ["cue"]
+		},
+		"Cython": {
+			"extensions": ["pyx", "pxd", "pxi"]
+		},
 		"D": {
 			"extensions": ["d"]
+		},
+		"D2": {
+			"extensions": ["d2"]
 		},
 		"Daml": {
 			"name": "DAML",
@@ -186,9 +250,8 @@
 		"Dhall": {
 			"extensions": ["dhall"]
 		},
-		"DreamMaker": {
-			"name": "Dream Maker",
-			"extensions": ["dm", "dme"]
+		"Djot": {
+			"extensions": ["dj", "djot"]
 		},
 		"Dockerfile": {
 			"extensions": ["dockerfile", "dockerignore"],
@@ -198,12 +261,31 @@
 			"name": ".NET Resource",
 			"extensions": ["resx"]
 		},
+		"DreamMaker": {
+			"name": "Dream Maker",
+			"extensions": ["dm", "dme"]
+		},
 		"Dust": {
 			"name": "Dust.js",
 			"extensions": ["dust"]
 		},
+		"Ebuild": {
+			"extensions": ["ebuild", "eclass"]
+		},
+		"EdgeQL": {
+			"name": "EdgeQL",
+			"extensions": ["edgeql"]
+		},
+		"ESDL": {
+			"name": "EdgeDB Schema Definition",
+			"extensions": ["esdl"]
+		},
 		"Edn": {
 			"extensions": ["edn"]
+		},
+		"Eighth": {
+			"name": "8th",
+			"extensions": ["8th"]
 		},
 		"Elisp": {
 			"name": "Emacs Lisp",
@@ -214,6 +296,9 @@
 		},
 		"Elm": {
 			"extensions": ["elm"]
+		},
+		"Elvish": {
+			"extensions": ["elv"]
 		},
 		"EmacsDevEnv": {
 			"name": "Emacs Dev Env",
@@ -232,13 +317,19 @@
 			"name": "FEN",
 			"extensions": ["fen"]
 		},
+		"Fennel": {
+			"extensions": ["fnl", "fnlm"]
+		},
+		"Fish": {
+			"extensions": ["fish"]
+		},
 		"FlatBuffers": {
 			"name": "FlatBuffers Schema",
 			"extensions": ["fbs"]
 		},
-		"Fstar": {
-			"name": "F*",
-			"extensions": ["fst"]
+		"ForgeConfig": {
+			"name": "Forge Config",
+			"extensions": ["cfg"]
 		},
 		"Forth": {
 			"extensions": ["4th", "forth", "fr", "frt", "fth", "f83", "fb", "fpm", "e4", "rx", "ft"]
@@ -249,7 +340,7 @@
 		},
 		"FortranModern": {
 			"name": "FORTRAN Modern",
-			"extensions": ["f03", "f08", "f90", "f95"]
+			"extensions": ["f03", "f08", "f90", "f95", "fpp"]
 		},
 		"FreeMarker": {
 			"extensions": ["ftl", "ftlh", "ftlx"]
@@ -257,6 +348,10 @@
 		"FSharp": {
 			"name": "F#",
 			"extensions": ["fs", "fsi", "fsx", "fsscript"]
+		},
+		"Fstar": {
+			"name": "F*",
+			"extensions": ["fst", "fsti"]
 		},
 		"Futhark": {
 			"extensions": ["fut"]
@@ -277,9 +372,13 @@
 			"name": "Gleam",
 			"extensions": ["gleam"]
 		},
-		"Gml": {
-			"name": "Gml",
-			"extensions": ["gml"]
+		"GlimmerJs": {
+			"name": "Glimmer JS",
+			"extensions": ["gjs"]
+		},
+		"GlimmerTs": {
+			"name": "Glimmer TS",
+			"extensions": ["gts"]
 		},
 		"Glsl": {
 			"name": "GLSL",
@@ -301,6 +400,10 @@
 				"glsl"
 			]
 		},
+		"Gml": {
+			"name": "Gml",
+			"extensions": ["gml"]
+		},
 		"Go": {
 			"extensions": ["go"]
 		},
@@ -318,6 +421,12 @@
 		"Gwion": {
 			"extensions": ["gw"]
 		},
+		"Haml": {
+			"extensions": ["haml"]
+		},
+		"Hamlet": {
+			"extensions": ["hamlet"]
+		},
 		"Happy": {
 			"extensions": ["y", "ly"]
 		},
@@ -327,6 +436,9 @@
 		"Haskell": {
 			"extensions": ["hs"]
 		},
+		"Haxe": {
+			"extensions": ["hx"]
+		},
 		"Hcl": {
 			"name": "HCL",
 			"extensions": ["hcl", "tf", "tfvars"]
@@ -334,26 +446,36 @@
 		"Headache": {
 			"extensions": ["ha"]
 		},
+		"Hex": {
+			"name": "HEX",
+			"extensions": ["hex"]
+		},
+		"Hex0": {
+			"extensions": ["hex0"]
+		},
+		"Hex1": {
+			"extensions": ["hex1"]
+		},
+		"Hex2": {
+			"extensions": ["hex2"]
+		},
+		"HiCad": {
+			"name": "HICAD",
+			"extensions": ["MAC", "mac"]
+		},
 		"Hlsl": {
 			"name": "HLSL",
-			"extensions": ["hlsl"]
+			"extensions": ["hlsl", "fx", "fxsub"]
 		},
 		"HolyC": {
-			"extensions": ["HC", "hc"]
+			"extensions": ["HC", "hc", "ZC", "zc"]
 		},
 		"Html": {
 			"name": "HTML",
 			"extensions": ["html", "htm"]
 		},
-		"Hamlet": {
-			"extensions": ["hamlet"]
-		},
-		"Haxe": {
-			"extensions": ["hx"]
-		},
-		"Hex": {
-			"name": "HEX",
-			"extensions": ["hex"]
+		"Hy": {
+			"extensions": ["hy"]
 		},
 		"Idris": {
 			"extensions": ["idr", "lidr"]
@@ -373,15 +495,26 @@
 			"name": "JAI",
 			"extensions": ["jai"]
 		},
+		"Janet": {
+			"extensions": ["janet"]
+		},
 		"Java": {
 			"extensions": ["java"]
 		},
 		"JavaScript": {
-			"extensions": ["js", "mjs"]
+			"extensions": ["cjs", "js", "mjs"]
 		},
 		"Jinja2": {
 			"name": "Jinja2",
-			"extensions": ["j2"]
+			"extensions": ["j2", "jinja"]
+		},
+		"Jq": {
+			"name": "jq",
+			"extensions": ["jq"]
+		},
+		"JSLT": {
+			"name": "JSLT",
+			"extensions": ["jslt"]
 		},
 		"Json": {
 			"name": "JSON",
@@ -391,6 +524,7 @@
 			"extensions": ["jsonnet", "libsonnet"]
 		},
 		"Jsx": {
+			"name": "JSX",
 			"extensions": ["jsx"]
 		},
 		"Julia": {
@@ -403,6 +537,10 @@
 			"name": "Jupyter Notebooks",
 			"extensions": ["ipynb"]
 		},
+		"Just": {
+			"extensions": ["just"],
+			"filenames": ["justfile"]
+		},
 		"K": {
 			"name": "K",
 			"extensions": ["k"]
@@ -411,12 +549,23 @@
 			"name": "Kakoune script",
 			"extensions": ["kak"]
 		},
+		"Kaem": {
+			"name": "Kaem",
+			"extensions": ["kaem"]
+		},
+		"Koka": {
+			"extensions": ["kk"]
+		},
 		"Kotlin": {
 			"extensions": ["kt", "kts"]
 		},
 		"Ksh": {
 			"name": "Korn shell",
 			"extensions": ["ksh"]
+		},
+		"Lalrpop": {
+			"name": "LALRPOP",
+			"extensions": ["lalrpop"]
 		},
 		"KvLanguage": {
 			"name": "KV Language",
@@ -425,17 +574,28 @@
 		"Lean": {
 			"extensions": ["lean", "hlean"]
 		},
+		"Hledger": {
+			"name": "hledger",
+			"extensions": ["hledger"]
+		},
 		"Less": {
 			"name": "LESS",
 			"extensions": ["less"]
+		},
+		"Lex": {
+			"extensions": ["l", "lex"]
 		},
 		"Liquid": {
 			"name": "Liquid",
 			"extensions": ["liquid"]
 		},
+		"LinguaFranca": {
+			"name": "Lingua Franca",
+			"extensions": ["lf"]
+		},
 		"LinkerScript": {
 			"name": "LD Script",
-			"extensions": ["lds"]
+			"extensions": ["ld", "lds"]
 		},
 		"Lisp": {
 			"name": "Common Lisp",
@@ -455,34 +615,44 @@
 			"extensions": ["lol"]
 		},
 		"Lua": {
-			"extensions": ["lua"]
+			"extensions": ["lua", "luau"]
 		},
 		"Lucius": {
 			"extensions": ["lucius"]
+		},
+		"M1Assembly": {
+			"name": "M1 Assembly",
+			"extensions": ["m1"]
+		},
+		"M4": {
+			"extensions": ["m4"]
 		},
 		"Madlang": {
 			"extensions": ["mad"]
 		},
 		"Makefile": {
 			"extensions": ["makefile", "mak", "mk"],
-			"filenames": ["makefile"]
+			"filenames": ["gnumakefile", "makefile"]
 		},
 		"Markdown": {
 			"extensions": ["md", "markdown"]
 		},
-		"Metal": {
-			"name": "Metal Shading Language",
-			"extensions": ["metal"]
+		"Max": {
+			"extensions": ["maxpat"]
 		},
-		"ModuleDef": {
-			"name": "Module-Definition",
-			"extensions": ["def"]
+		"Mdx": {
+			"name": "MDX",
+			"extensions": ["mdx"]
 		},
-		"MoonScript": {
-			"extensions": ["moon"]
+		"Menhir": {
+			"extensions": ["mll", "mly", "vy"]
 		},
 		"Meson": {
 			"filenames": ["meson.build", "meson_options.txt"]
+		},
+		"Metal": {
+			"name": "Metal Shading Language",
+			"extensions": ["metal"]
 		},
 		"Mint": {
 			"extensions": ["mint"]
@@ -490,14 +660,52 @@
 		"Mlatu": {
 			"extensions": ["mlt"]
 		},
+		"Modelica": {
+			"extensions": ["mo", "mos"]
+		},
+		"ModuleDef": {
+			"name": "Module-Definition",
+			"extensions": ["def"]
+		},
+		"Mojo": {
+			"extensions": ["mojo", "🔥"]
+		},
+		"MonkeyC": {
+			"name": "Monkey C",
+			"extensions": ["mc"]
+		},
+		"MoonBit": {
+			"extensions": ["mbt", "mbti"]
+		},
+		"MoonScript": {
+			"extensions": ["moon"]
+		},
+		"MsBuild": {
+			"name": "MSBuild",
+			"extensions": ["csproj", "vbproj", "fsproj", "props", "targets"]
+		},
 		"Mustache": {
 			"extensions": ["mustache"]
+		},
+		"Nextflow": {
+			"extensions": ["nextflow", "nf"]
 		},
 		"Nim": {
 			"extensions": ["nim"]
 		},
 		"Nix": {
 			"extensions": ["nix"]
+		},
+		"NotQuitePerl": {
+			"name": "Not Quite Perl",
+			"extensions": ["nqp"]
+		},
+		"NuGetConfig": {
+			"name": "NuGet Config",
+			"filenames": ["nuget.config", "packages.config", "nugetdefaults.config"]
+		},
+		"Nushell": {
+			"extensions": ["nu"]
 		},
 		"ObjectiveC": {
 			"name": "Objective-C",
@@ -508,14 +716,26 @@
 			"extensions": ["mm"]
 		},
 		"OCaml": {
-			"extensions": ["ml", "mli", "mll", "mly", "re", "rei"]
+			"extensions": ["ml", "mli", "re", "rei"]
 		},
 		"Odin": {
 			"extensions": ["odin"]
 		},
+		"OpenScad": {
+			"name": "OpenSCAD",
+			"extensions": ["scad"]
+		},
 		"OpenPolicyAgent": {
 			"name": "Open Policy Agent",
 			"extensions": ["rego"]
+		},
+		"OpenCL": {
+			"name": "OpenCL",
+			"extensions": ["cl", "ocl"]
+		},
+		"OpenQasm": {
+			"name": "OpenQASM",
+			"extensions": ["qasm"]
 		},
 		"OpenType": {
 			"name": "OpenType Feature File",
@@ -527,33 +747,39 @@
 		"Oz": {
 			"extensions": ["oz"]
 		},
+		"PacmanMakepkg": {
+			"name": "Pacman's makepkg",
+			"filenames": ["pkgbuild"]
+		},
 		"Pan": {
 			"extensions": ["pan", "tpl"]
 		},
 		"Pascal": {
-			"extensions": ["pas", "pp"]
+			"extensions": ["pas"]
 		},
 		"Perl": {
 			"extensions": ["pl", "pm"]
 		},
-		"Perl6": {
-			"name": "Rakudo",
-			"extensions": ["pl6", "pm6"]
-		},
 		"Pest": {
 			"extensions": ["pest"]
 		},
-		"NotQuitePerl": {
-			"name": "Not Quite Perl",
-			"extensions": ["nqp"]
-		},
-		"Nginx": {
-			"name": "Nginx Configuration",
-			"filenames": ["nginx.conf"]
+		"Phix": {
+			"extensions": ["e", "exw"]
 		},
 		"Php": {
 			"name": "PHP",
 			"extensions": ["php"]
+		},
+		"PlantUml": {
+			"name": "PlantUML",
+			"extensions": ["puml"]
+		},
+		"Po": {
+			"name": "PO File",
+			"extensions": ["po", "pot"]
+		},
+		"Poke": {
+			"extensions": ["pk"]
 		},
 		"Polly": {
 			"extensions": ["polly"]
@@ -565,14 +791,18 @@
 			"name": "PostCSS",
 			"extensions": ["pcss", "sss"]
 		},
+		"PowerShell": {
+			"extensions": ["ps1", "psm1", "psd1", "ps1xml", "cdxml", "pssc", "psc1"]
+		},
+		"PRACTICE": {
+			"name": "Lauterbach PRACTICE Script",
+			"extensions": ["cmm"]
+		},
 		"Processing": {
 			"extensions": ["pde"]
 		},
 		"Prolog": {
 			"extensions": ["p", "pro"]
-		},
-		"PowerShell": {
-			"extensions": ["ps1", "psm1", "psd1", "ps1xml", "cdxml", "pssc", "psc1"]
 		},
 		"PSL": {
 			"name": "PSL Assertion",
@@ -585,19 +815,28 @@
 		"Pug": {
 			"extensions": ["pug"]
 		},
+		"Puppet": {
+			"extensions": ["pp"]
+		},
 		"PureScript": {
 			"extensions": ["purs"]
 		},
-		"Python": {
-			"extensions": ["py", "pyw"]
+		"Pyret": {
+			"extensions": ["arr"]
 		},
-		"Qcl": {
-			"name": "QCL",
-			"extensions": ["qcl"]
+		"Python": {
+			"extensions": ["py", "pyw", "pyi"]
+		},
+		"PRQL": {
+			"extensions": ["prql"]
 		},
 		"Q": {
 			"name": "Q",
 			"extensions": ["q"]
+		},
+		"Qcl": {
+			"name": "QCL",
+			"extensions": ["qcl"]
 		},
 		"Qml": {
 			"name": "QML",
@@ -610,15 +849,31 @@
 			"extensions": ["rkt", "scrbl"]
 		},
 		"Rakefile": {
-			"filenames": ["rakefile"],
-			"extensions": ["rake"]
+			"extensions": ["rake"],
+			"filenames": ["rakefile"]
+		},
+		"Raku": {
+			"extensions": ["raku", "rakumod", "rakutest", "pm6", "pl6", "p6"]
 		},
 		"Razor": {
-			"extensions": ["cshtml"]
+			"extensions": ["cshtml", "razor"]
+		},
+		"Redscript": {
+			"name": "Redscript",
+			"extensions": ["reds"]
 		},
 		"Renpy": {
 			"name": "Ren'Py",
 			"extensions": ["rpy"]
+		},
+		"ReScript": {
+			"extensions": ["res", "resi"]
+		},
+		"ReStructuredText": {
+			"extensions": ["rst"]
+		},
+		"Roc": {
+			"extensions": ["roc"]
 		},
 		"RON": {
 			"name": "Rusty Object Notation",
@@ -638,9 +893,6 @@
 		"Rust": {
 			"extensions": ["rs"]
 		},
-		"ReStructuredText": {
-			"extensions": ["rst"]
-		},
 		"Sass": {
 			"extensions": ["sass", "scss"]
 		},
@@ -653,9 +905,33 @@
 		"Scons": {
 			"filenames": ["sconstruct", "sconscript"]
 		},
+		"Sh": {
+			"name": "Shell",
+			"extensions": ["sh"]
+		},
+		"ShaderLab": {
+			"name": "ShaderLab",
+			"extensions": ["shader", "cginc"]
+		},
+		"SIL": {
+			"name": "SIL",
+			"extensions": ["sil"]
+		},
+		"Slang": {
+			"name": "Slang",
+			"extensions": ["slang"]
+		},
 		"Sml": {
 			"name": "Standard ML (SML)",
 			"extensions": ["sml"]
+		},
+		"Smalltalk": {
+			"name": "Smalltalk",
+			"extensions": ["cs.st", "pck.st"]
+		},
+		"Snakemake": {
+			"extensions": ["smk", "rules"],
+			"filenames": ["snakefile"]
 		},
 		"Solidity": {
 			"name": "Solidity",
@@ -673,12 +949,19 @@
 			"name": "SQL",
 			"extensions": ["sql"]
 		},
+		"Sqf": {
+			"name": "SQF",
+			"extensions": ["sqf"]
+		},
 		"SRecode": {
 			"name": "SRecode Template",
 			"extensions": ["srt"]
 		},
 		"Stan": {
 			"extensions": ["stan"]
+		},
+		"Stata": {
+			"extensions": ["do"]
 		},
 		"Stratego": {
 			"name": "Stratego/XT",
@@ -704,12 +987,22 @@
 		"SystemVerilog": {
 			"extensions": ["sv", "svh"]
 		},
+		"Slint": {
+			"extensions": ["slint"]
+		},
+		"Tact": {
+			"extensions": ["tact"]
+		},
 		"Tcl": {
 			"name": "TCL",
 			"extensions": ["tcl"]
 		},
 		"Tera": {
 			"extensions": ["tera"]
+		},
+		"Templ": {
+			"name": "Templ",
+			"extensions": ["templ", "tmpl"]
 		},
 		"Tex": {
 			"name": "TeX",
@@ -721,10 +1014,6 @@
 		},
 		"Thrift": {
 			"extensions": ["thrift"]
-		},
-		"Tla+": {
-			"name": "TLA+",
-			"extensions": ["tla"]
 		},
 		"Toml": {
 			"name": "TOML",
@@ -738,16 +1027,29 @@
 			"name": "TTCN-3",
 			"extensions": ["ttcn", "ttcn3", "ttcnpp"]
 		},
-		"Typst": {
-			"name": "Typst",
-			"extensions": ["typ"]
-		},
 		"Twig": {
 			"name": "Twig",
 			"extensions": ["twig"]
 		},
 		"TypeScript": {
-			"extensions": ["ts"]
+			"extensions": ["ts", "mts", "cts"]
+		},
+		"Typst": {
+			"name": "Typst",
+			"extensions": ["typ"]
+		},
+		"Uiua": {
+			"extensions": ["ua"]
+		},
+		"UMPL": {
+			"extensions": ["umpl"]
+		},
+		"Unison": {
+			"extensions": ["u"]
+		},
+		"UnrealDeveloperMarkdown": {
+			"name": "Unreal Markdown",
+			"extensions": ["udn"]
 		},
 		"UnrealPlugin": {
 			"name": "Unreal Plugin",
@@ -769,10 +1071,6 @@
 			"name": "Unreal Shader Header",
 			"extensions": ["ush"]
 		},
-		"UnrealDeveloperMarkdown": {
-			"name": "Unreal Markdown",
-			"extensions": ["udn"]
-		},
 		"UrWeb": {
 			"name": "Ur/Web",
 			"extensions": ["ur", "urs"]
@@ -785,8 +1083,8 @@
 			"extensions": ["vala"]
 		},
 		"VB6": {
-			"name": "VB6",
-			"extensions": ["frm", "bas", "cls"]
+			"name": "VB6/VBA",
+			"extensions": ["frm", "bas", "cls", "ctl", "dsr"]
 		},
 		"VBScript": {
 			"name": "VBScript",
@@ -807,20 +1105,23 @@
 			"name": "VHDL",
 			"extensions": ["vhd", "vhdl"]
 		},
+		"Virgil": {
+			"extensions": ["v3"]
+		},
 		"VisualBasic": {
 			"name": "Visual Basic",
 			"extensions": ["vb"]
-		},
-		"VisualStudioSolution": {
-			"name": "Visual Studio Solution",
-			"extensions": ["sln"]
 		},
 		"VisualStudioProject": {
 			"name": "Visual Studio Project",
 			"extensions": ["vcproj", "vcxproj"]
 		},
+		"VisualStudioSolution": {
+			"name": "Visual Studio Solution",
+			"extensions": ["sln"]
+		},
 		"VimScript": {
-			"name": "Vim script",
+			"name": "Vim Script",
 			"extensions": ["vim"]
 		},
 		"Vue": {
@@ -829,6 +1130,10 @@
 		},
 		"WebAssembly": {
 			"extensions": ["wat", "wast"]
+		},
+		"WenYan": {
+			"name": "The WenYan Programming Language",
+			"extensions": ["wy"]
 		},
 		"WGSL": {
 			"name": "WebGPU Shader Language",
@@ -853,14 +1158,6 @@
 			"name": "XSL",
 			"extensions": ["xsl", "xslt"]
 		},
-		"Matlab": {
-			"name": "Matlab",
-			"extensions": ["m"]
-		},
-		"MsBuild": {
-			"name": "MSBuild",
-			"extensions": ["csproj", "vbproj", "fsproj", "props", "targets"]
-		},
 		"Xtend": {
 			"extensions": ["xtend"]
 		},
@@ -868,11 +1165,26 @@
 			"name": "YAML",
 			"extensions": ["yaml", "yml"]
 		},
+		"ZenCode": {
+			"extensions": ["zs"]
+		},
 		"Zig": {
 			"extensions": ["zig"]
 		},
+		"Zokrates": {
+			"name": "ZoKrates",
+			"extensions": ["zok"]
+		},
 		"Zsh": {
 			"extensions": ["zsh"]
+		},
+		"GdShader": {
+			"name": "GDShader",
+			"extensions": ["gdshader"]
+		},
+		"GodotTextScene": {
+			"name": "Godot TextScene",
+			"extensions": ["tscn"]
 		}
 	}
 }

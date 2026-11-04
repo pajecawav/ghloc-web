@@ -8,6 +8,7 @@ import { Select } from "~/components/Select";
 import { Skeleton } from "~/components/Skeleton";
 import { useDebouncedValue } from "~/lib/debounce";
 import { formatNumber } from "~/lib/format";
+import type { Locs } from "~/lib/ghloc/api";
 import { cn } from "~/lib/utils";
 import { CommonSectionProps } from "../../types";
 import { Block } from "./components/Block";
@@ -20,6 +21,12 @@ import { isFolder, type SortOrder, useLocs } from "./hooks/useLocs";
 
 interface LocsSectionProps extends CommonSectionProps, IslandProps {
 	branch: string;
+	/**
+	 * Server-resolved LOC data (snapshot or a fast live fetch) for the
+	 * unfiltered default view. Lets the table render without waiting for the
+	 * client-side fetch.
+	 */
+	initialLocs?: Locs | null;
 }
 
 function parseLocsPath(value: string | null): string[] {
@@ -40,7 +47,7 @@ function parseLocsPath(value: string | null): string[] {
 	return [];
 }
 
-export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
+export default function LocsSection({ owner, repo, branch, initialLocs }: LocsSectionProps) {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const [sortOrder, setSortOrder] = useState<SortOrder>("type");
@@ -56,6 +63,7 @@ export default function LocsSection({ owner, repo, branch }: LocsSectionProps) {
 		owner,
 		repo,
 		branch,
+		initialLocs,
 	});
 
 	const setPath = (newPath: string[]) => {

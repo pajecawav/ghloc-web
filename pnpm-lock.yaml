@@ -198,8 +198,8 @@ importers:
         specifier: ^0.1.0
         version: 0.1.0(dotenv@17.3.1)(giget@3.2.0)(jiti@2.7.0)(magicast@0.5.2)(oxfmt@0.73.0)(oxlint@1.88.0(oxlint-tsgolint@7.0.2004))
       '@pajecawav/yamf':
-        specifier: ^0.0.11
-        version: 0.0.11(esbuild@0.28.1)(hono@4.13.13)(react@19.2.8)(rolldown@1.2.12)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.10)(yaml@2.9.1))
+        specifier: ^0.0.12
+        version: 0.0.12(esbuild@0.28.1)(hono@4.13.13)(react@19.2.8)(rolldown@1.2.12)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.10)(yaml@2.9.1))
       '@tailwindcss/vite':
         specifier: ^4.3.3
         version: 4.3.3(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.10)(yaml@2.9.1))
@@ -776,8 +776,8 @@ packages:
       typescript:
         optional: true
 
-  '@pajecawav/yamf@0.0.11':
-    resolution: {integrity: sha512-vSW7YE5IHa9/PWY7p4BUJui0pcBWBvWDAwMYqJkoYnJjyjHZwzP7utS2MggQkItgorDBP0cngMGDaaKGA6Xjpg==}
+  '@pajecawav/yamf@0.0.12':
+    resolution: {integrity: sha512-lDa1+5T5mZd0Z7nHw4N2zGwaq01eVyL9emnFw6d2p/9S2Ab/EewlO9HH7waMZquBYWS8DUIr/lxoSsvDBQb45A==}
     peerDependencies:
       hono: ^4.13.9
       vite: ^8.3.0
@@ -2370,7 +2370,7 @@ snapshots:
       - jiti
       - magicast
 
-  '@pajecawav/yamf@0.0.11(esbuild@0.28.1)(hono@4.13.13)(react@19.2.8)(rolldown@1.2.12)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.10)(yaml@2.9.1))':
+  '@pajecawav/yamf@0.0.12(esbuild@0.28.1)(hono@4.13.13)(react@19.2.8)(rolldown@1.2.12)(vite@8.3.4(@types/node@26.6.5)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.10)(yaml@2.9.1))':
     dependencies:
       '@hono/react-compat': 0.0.3(hono@4.13.13)
       '@standard-schema/spec': 1.1.0
