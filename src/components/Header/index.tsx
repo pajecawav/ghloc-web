@@ -1,3 +1,4 @@
+import { ChromeIcon } from "../icons/ChromeIcon";
 import { CodeIcon } from "../icons/CodeIcon";
 import { FirefoxIcon } from "../icons/FirefoxIcon";
 import { GitHubIcon } from "../icons/GitHubIcon";
@@ -23,6 +24,16 @@ export const Header = () => {
 				>
 					<HeaderItem>
 						<GitHubIcon />
+					</HeaderItem>
+				</a>
+				<a
+					href="https://chromewebstore.google.com/detail/ghloc/ledgeeppdkgofdcglggenjafdbinjpgj"
+					target="_blank"
+					rel="noopener"
+					title="Chrome extension"
+				>
+					<HeaderItem>
+						<ChromeIcon />
 					</HeaderItem>
 				</a>
 				<a

@@ -3,6 +3,7 @@
 ![build status](https://github.com/pajecawav/ghloc-web/actions/workflows/ci.yml/badge.svg)
 [![lines count](https://img.shields.io/endpoint?url=https://ghloc.dev/api/pajecawav/ghloc-web/badge?filter=.ts$,.tsx$)](https://ghloc.dev/pajecawav/ghloc-web?filter=.ts$,.tsx$)
 [![Firefox addon version](https://img.shields.io/amo/v/ghloc)](https://addons.mozilla.org/en-US/firefox/addon/ghloc/)
+[![Chrome extension version](https://img.shields.io/chrome-web-store/v/ledgeeppdkgofdcglggenjafdbinjpgj)](https://chromewebstore.google.com/detail/ghloc/ledgeeppdkgofdcglggenjafdbinjpgj)
 
 A [website](https://ghloc.dev/) to display GitHub repository info:
 
@@ -19,6 +20,8 @@ A [website](https://ghloc.dev/) to display GitHub repository info:
 You can use a [user script](https://gist.github.com/pajecawav/70ffe72bf4aa0968aa9f97318976138f) to add a direct link to repo's ghloc page. Can be installed with [Tampermonkey](https://www.tampermonkey.net/).
 
 Also [Firefox addon](https://addons.mozilla.org/en-US/firefox/addon/ghloc/) is available. It provides LOCs stats dropdown directly on project's GitHub page and a direct link to repo's ghloc page. Source code available [here](https://github.com/pajecawav/ghloc-extension/).
+
+There's also a [Chrome extension](https://chromewebstore.google.com/detail/ghloc/ledgeeppdkgofdcglggenjafdbinjpgj) that provides LOCs stats dropdown directly on project's GitHub page and a direct link to repo's ghloc page.
 
 ## Badges
 
