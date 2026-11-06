@@ -5,6 +5,7 @@ allowBuilds:
     "@vercel/speed-insights": true
     esbuild: true
     sharp: true
+    workerd: true
 patchedDependencies:
     "@takumi-rs/wasm@2.16.2": patches/@takumi-rs__wasm@2.16.2.patch
 minimumReleaseAgeExclude:

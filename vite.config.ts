@@ -17,6 +17,27 @@ export default defineConfig({
 				errorHandler: "./src/error.ts",
 				compatibilityDate: "2026-08-02",
 				preset: process.env.VERCEL ? "vercel" : undefined,
+				tracingChannel: true,
+				experimental: {
+					tracingLogger: true,
+				},
+				cloudflare: {
+					wrangler: {
+						upload_source_maps: true,
+						observability: {
+							enabled: true,
+							traces: {
+								enabled: true,
+								head_sampling_rate: 1,
+							},
+							logs: {
+								enabled: true,
+								head_sampling_rate: 1,
+								invocation_logs: true,
+							},
+						},
+					},
+				},
 			},
 		}),
 		tailwindcss(),
