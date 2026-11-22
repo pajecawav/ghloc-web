@@ -7,6 +7,6 @@ allowBuilds:
     sharp: true
     workerd: true
 patchedDependencies:
-    "@takumi-rs/wasm@2.19.0": patches/@takumi-rs__wasm@2.19.0.patch
+    "@takumi-rs/wasm": patches/@takumi-rs__wasm.patch
 minimumReleaseAgeExclude:
     - "@pajecawav/yamf@0.0.8 || 0.0.10 || 0.0.11 || 0.0.12"
