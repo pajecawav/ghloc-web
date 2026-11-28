@@ -21,10 +21,10 @@
 	"dependencies": {
 		"@arborium/arborium": "^2.18.2",
 		"@vercel/analytics": "^2.0.1",
-		"devalue": "^6.0.3",
+		"devalue": "^6.0.4",
 		"ofetch": "^1.5.1",
 		"swr": "^2.5.1",
-		"takumi-js": "^2.22.0"
+		"takumi-js": "^2.22.1"
 	},
 	"devDependencies": {
 		"@octokit/types": "^18.0.0",
@@ -32,22 +32,22 @@
 		"@pajecawav/yamf": "^0.0.12",
 		"@tailwindcss/vite": "^4.3.5",
 		"@types/js-cookie": "^3.0.6",
-		"@types/node": "^26.6.6",
+		"@types/node": "^26.6.11",
 		"@typescript/native-preview": "7.0.0-dev.20260707.2",
 		"cross-env": "^10.1.0",
-		"hono": "^4.13.19",
+		"hono": "^4.13.22",
 		"husky": "^9.1.7",
-		"lint-staged": "^17.6.1",
+		"lint-staged": "^17.6.2",
 		"miniflare": "^4.20260730.0",
 		"nitro": "3.0.260903-beta",
-		"npm-run-all2": "^9.0.4",
-		"oxfmt": "^0.79.0",
-		"oxlint": "^1.94.0",
-		"oxlint-tsgolint": "^7.0.2007",
+		"npm-run-all2": "^9.1.0",
+		"oxfmt": "^0.80.0",
+		"oxlint": "^1.95.0",
+		"oxlint-tsgolint": "^7.0.2009",
 		"rimraf": "^6.1.4",
-		"rollup-plugin-visualizer": "^7.1.3",
+		"rollup-plugin-visualizer": "^7.3.0",
 		"tailwindcss": "^4.3.5",
-		"vite": "^8.3.8"
+		"vite": "^8.4.0"
 	},
-	"packageManager": "pnpm@12.21.0"
+	"packageManager": "pnpm@12.23.0"
 }
